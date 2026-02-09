@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Squeeze It | Free Online Image Compressor - Privacy First</title>
+    <meta name="description" content="Professional-grade image compressor that works 100% locally in your browser. No server uploads, total privacy, and instant compression for JPG, PNG, and WebP.">
+    <meta name="keywords" content="image compressor, local image compression, privacy image tool, online photo resizer, compress jpg, compress png, webp compressor">
+    <meta name="author" content="Squeeze It">
+    
+    <meta property="og:title" content="Squeeze It - Fast & Private Image Compression">
+    <meta property="og:description" content="Squeeze your images without losing privacy. 100% browser-based processing.">
+    <meta property="og:type" content="website">
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🖼️</text></svg>">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+        body { font-family: 'Inter', -apple-system, sans-serif; background-color: #f8fafc; }
+        .gradient-text { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .feature-tag { background: rgba(59, 130, 246, 0.1); color: #2563eb; padding: 4px 12px; border-radius: 99px; font-size: 0.85rem; font-weight: 600; }
+        input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 18px; height: 18px; background: #2563eb; border-radius: 50%; cursor: pointer; border: 2px solid white; box-shadow: 0 0 5px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body class="min-h-screen py-12 px-4">
+
+    <div class="max-w-4xl mx-auto">
+        <header class="text-center mb-12">
+            <div class="inline-flex items-center gap-2 mb-4">
+                <span class="feature-tag">🛡️ 100% Client-Side</span>
+                <span class="feature-tag">⚡ Instant Result</span>
+            </div>
+            <h1 class="text-5xl font-extrabold text-gray-900 mb-4 tracking-tight">
+                Squeeze <span class="gradient-text">It.</span>
+            </h1>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                Your images **never leave your device**. Everything is processed in your browser for ultimate privacy and speed.
+            </p>
+            
+            <div class="mt-6 flex justify-center gap-4 text-sm font-medium text-gray-400">
+                <span class="px-3 py-1 border border-gray-200 rounded-md shadow-sm bg-white hover:text-blue-500 transition-colors">JPG</span>
+                <span class="px-3 py-1 border border-gray-200 rounded-md shadow-sm bg-white hover:text-blue-500 transition-colors">PNG</span>
+                <span class="px-3 py-1 border border-gray-200 rounded-md shadow-sm bg-white hover:text-blue-500 transition-colors">WebP</span>
+            </div>
+        </header>
+
+        <main class="bg-white rounded-[2rem] shadow-2xl shadow-blue-100/50 border border-gray-100 overflow-hidden">
+            <section id="dropZone" class="p-16 text-center cursor-pointer hover:bg-blue-50/30 transition-all group">
+                <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp" class="hidden">
+                <div class="w-20 h-20 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform shadow-inner">
+                    <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800">Drop your image here</h2>
+                <p class="text-gray-500 mt-2">or click to browse from files</p>
+            </section>
+
+            <section id="editorArea" class="hidden border-t border-gray-100 p-8 lg:p-12 animate-in fade-in duration-500">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                    <div class="space-y-4">
+                        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">Live Preview</p>
+                        <div class="rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 shadow-inner min-h-[200px] flex items-center justify-center">
+                            <img id="preview" class="w-full h-auto block">
+                        </div>
+                    </div>
+
+                    <div class="space-y-8">
+                        <div>
+                            <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Compression Settings</p>
+                            <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100">
+                                <div class="flex justify-between items-end mb-6">
+                                    <div>
+                                        <span class="text-gray-500 text-xs uppercase font-semibold tracking-wider">Quality</span>
+                                        <div id="qualityVal" class="text-3xl font-bold text-blue-600">80%</div>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="text-gray-500 text-xs uppercase font-semibold tracking-wider">Est. Size</span>
+                                        <div id="sizeInfo" class="text-3xl font-bold text-gray-800">0 KB</div>
+                                    </div>
+                                </div>
+                                <input type="range" id="quality" min="1" max="100" value="80" class="w-full h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col gap-3">
+                            <button id="downloadBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-2xl transition-all transform active:scale-[0.98] shadow-xl shadow-blue-200 flex items-center justify-center gap-2 text-lg">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                Download Now
+                            </button>
+                            <button onclick="location.reload()" class="py-3 text-gray-400 hover:text-gray-600 font-medium transition-colors text-sm">
+                                ← Compress another one
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <article class="mt-16 prose prose-slate max-w-none text-center">
+            <h3 class="text-gray-800 font-bold text-xl mb-4">Why use Squeeze It?</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left px-4">
+                <div>
+                    <h4 class="font-bold text-gray-700">🔒 Privacy First</h4>
+                    <p class="text-sm text-gray-500">No images are sent to a server. All processing happens right in your own browser.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-gray-700">🚀 Blazing Fast</h4>
+                    <p class="text-sm text-gray-500">Get your results in milliseconds without waiting for slow internet uploads.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-gray-700">📉 High Quality</h4>
+                    <p class="text-sm text-gray-500">Our algorithm uses smart Canvas rendering to keep the best quality at the lowest size.</p>
+                </div>
+            </div>
+        </article>
+
+        <footer class="mt-12 pt-8 border-t border-gray-200 text-center text-gray-400 text-sm">
+            <p>&copy; 2026 Squeeze It. No registration required. </p>
+        </footer>
+    </div>
+
+    <script>
+        /* ... JS Code stays same as previous version but ensures 'compressed_' prefix ... */
+        const fileInput = document.getElementById('fileInput');
+        const dropZone = document.getElementById('dropZone');
+        const editorArea = document.getElementById('editorArea');
+        const qualityInput = document.getElementById('quality');
+        const qualityVal = document.getElementById('qualityVal');
+        const preview = document.getElementById('preview');
+        const sizeInfo = document.getElementById('sizeInfo');
+        const downloadBtn = document.getElementById('downloadBtn');
+
+        let originalImage = new Image();
+        let fileName = "squeezed_image.jpg";
+
+        dropZone.onclick = () => fileInput.click();
+        dropZone.ondragover = (e) => { e.preventDefault(); dropZone.classList.add('bg-blue-50'); };
+        dropZone.ondragleave = () => dropZone.classList.remove('bg-blue-50');
+        dropZone.ondrop = (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('bg-blue-50');
+            handleFile(e.dataTransfer.files[0]);
+        };
+
+        fileInput.onchange = (e) => handleFile(e.target.files[0]);
+
+        function handleFile(file) {
+            if (!file || !file.type.startsWith('image/')) return;
+            fileName = `squeezed_${file.name.split('.')[0]}.jpg`;
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = (e) => {
+                originalImage.src = e.target.result;
+                originalImage.onload = () => {
+                    dropZone.classList.add('hidden');
+                    editorArea.classList.remove('hidden');
+                    compress();
+                };
+            };
+        }
+
+        qualityInput.oninput = () => {
+            qualityVal.innerText = `${qualityInput.value}%`;
+            compress();
+        };
+
+        function compress() {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = originalImage.width;
+            canvas.height = originalImage.height;
+            ctx.drawImage(originalImage, 0, 0);
+
+            const quality = qualityInput.value / 100;
+            const compressedDataUrl = canvas.toDataURL('image/jpeg', quality);
+            preview.src = compressedDataUrl;
+            
+            const sizeInBytes = Math.round((compressedDataUrl.length - 22) * 3 / 4);
+            sizeInfo.innerText = (sizeInBytes / 1024).toFixed(1) + ' KB';
+
+            downloadBtn.onclick = () => {
+                const link = document.createElement('a');
+                link.href = compressedDataUrl;
+                link.download = fileName;
+                link.click();
+            };
+        }
+    </script>
+</body>
+</html>
