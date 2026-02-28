@@ -4,16 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Squeeze It | Free Online Image Compressor - Privacy First</title>
-    <meta name="description" content="Professional-grade image compressor that works 100% locally in your browser. No server uploads, total privacy, and instant compression for JPG, PNG, and WebP.">
-    <meta name="keywords" content="image compressor, local image compression, privacy image tool, online photo resizer, compress jpg, compress png, webp compressor">
+    <title>Free Online Image Compressor | 100% Private & Client-Side | Squeeze It</title>
+    <meta name="description" content="A free, browser-only image compressor. Reduce JPG, PNG, and WebP file sizes instantly without server uploads. 100% private and secure.">
+    <meta name="keywords" content="client-side image compressor, browser-only photo resizer, private picture squeezer, compress jpg online, reduce png size, webp compressor">
     <meta name="author" content="Squeeze It">
     
     <meta property="og:title" content="Squeeze It - Fast & Private Image Compression">
     <meta property="og:description" content="Squeeze your images without losing privacy. 100% browser-based processing.">
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://squeeze.freetools.best/">
+    <meta property="og:image" content="https://squeeze.freetools.best/og-image.jpg"> 
     
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🖼️</text></svg>">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Squeeze It",
+      "url": "https://squeeze.freetools.best/",
+      "description": "A 100% client-side image compressor for JPG, PNG, and WebP formats.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -33,16 +52,16 @@
                 <span class="feature-tag">⚡ Instant Result</span>
             </div>
             <h1 class="text-5xl font-extrabold text-gray-900 mb-4 tracking-tight">
-                Squeeze <span class="gradient-text">It.</span>
+                Free Online Image Compressor:<br> <span class="gradient-text">Squeeze It.</span>
             </h1>
             <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                Your images **never leave your device**. Everything is processed in your browser for ultimate privacy and speed.
+                Reduce image file sizes instantly. Your photos **never leave your device**. Everything is processed locally in your browser for ultimate privacy.
             </p>
             
             <div class="mt-6 flex justify-center gap-4 text-sm font-medium text-gray-400">
-                <span class="px-3 py-1 border border-gray-200 rounded-md shadow-sm bg-white hover:text-blue-500 transition-colors">JPG</span>
-                <span class="px-3 py-1 border border-gray-200 rounded-md shadow-sm bg-white hover:text-blue-500 transition-colors">PNG</span>
-                <span class="px-3 py-1 border border-gray-200 rounded-md shadow-sm bg-white hover:text-blue-500 transition-colors">WebP</span>
+                <span class="px-3 py-1 border border-gray-200 rounded-md shadow-sm bg-white">JPG</span>
+                <span class="px-3 py-1 border border-gray-200 rounded-md shadow-sm bg-white">PNG</span>
+                <span class="px-3 py-1 border border-gray-200 rounded-md shadow-sm bg-white">WebP</span>
             </div>
         </header>
 
@@ -60,8 +79,8 @@
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
                     <div class="space-y-4">
                         <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">Live Preview</p>
-                        <div class="rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 shadow-inner min-h-[200px] flex items-center justify-center">
-                            <img id="preview" class="w-full h-auto block">
+                        <div class="rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 shadow-inner min-h-[200px] flex items-center justify-center pattern-checkerboard">
+                            <img id="preview" alt="Compressed image live preview" class="w-full h-auto block">
                         </div>
                     </div>
 
@@ -89,7 +108,7 @@
                                 Download Now
                             </button>
                             <button onclick="location.reload()" class="py-3 text-gray-400 hover:text-gray-600 font-medium transition-colors text-sm">
-                                ← Compress another one
+                                ← Compress another image
                             </button>
                         </div>
                     </div>
@@ -97,31 +116,47 @@
             </section>
         </main>
 
-        <article class="mt-16 prose prose-slate max-w-none text-center">
-            <h3 class="text-gray-800 font-bold text-xl mb-4">Why use Squeeze It?</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left px-4">
+        <article class="mt-16 bg-white p-8 rounded-[2rem] border border-gray-100 shadow-sm">
+            <h2 class="text-gray-800 font-extrabold text-2xl mb-8 text-center">Why use a Client-Side Image Compressor?</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left mb-12">
                 <div>
-                    <h4 class="font-bold text-gray-700">🔒 Privacy First</h4>
-                    <p class="text-sm text-gray-500">No images are sent to a server. All processing happens right in your own browser.</p>
+                    <h3 class="font-bold text-gray-800 mb-2">🔒 Total Privacy</h3>
+                    <p class="text-sm text-gray-500 leading-relaxed">Unlike other tools, no images are sent to a cloud server. Your sensitive photos remain strictly on your device.</p>
                 </div>
                 <div>
-                    <h4 class="font-bold text-gray-700">🚀 Blazing Fast</h4>
-                    <p class="text-sm text-gray-500">Get your results in milliseconds without waiting for slow internet uploads.</p>
+                    <h3 class="font-bold text-gray-800 mb-2">🚀 Blazing Fast</h3>
+                    <p class="text-sm text-gray-500 leading-relaxed">Skip the upload and download times. Get your compressed JPGs or PNGs in milliseconds via your browser's native engine.</p>
                 </div>
                 <div>
-                    <h4 class="font-bold text-gray-700">📉 High Quality</h4>
-                    <p class="text-sm text-gray-500">Our algorithm uses smart Canvas rendering to keep the best quality at the lowest size.</p>
+                    <h3 class="font-bold text-gray-800 mb-2">📉 Smart Format Handling</h3>
+                    <p class="text-sm text-gray-500 leading-relaxed">We automatically detect your file type (JPG, PNG, WebP) and preserve transparency while reducing the file size.</p>
+                </div>
+            </div>
+
+            <hr class="border-gray-100 mb-8">
+
+            <div class="max-w-2xl mx-auto">
+                <h2 class="text-gray-800 font-bold text-xl mb-6 text-center">Frequently Asked Questions</h2>
+                <div class="space-y-6">
+                    <div>
+                        <h4 class="font-semibold text-gray-700">Does Squeeze It keep my PNG transparency?</h4>
+                        <p class="text-sm text-gray-500 mt-1">Yes! Our updated algorithm detects PNG files and preserves their transparent backgrounds during compression.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-700">Are my files stored anywhere?</h4>
+                        <p class="text-sm text-gray-500 mt-1">No. The entire compression process happens within your web browser. We do not have servers to store your data.</p>
+                    </div>
                 </div>
             </div>
         </article>
 
-        <footer class="mt-12 pt-8 border-t border-gray-200 text-center text-gray-400 text-sm">
-            <p>&copy; 2026 Squeeze It. No registration required. </p>
+        <footer class="mt-12 pt-8 text-center text-gray-400 text-sm">
+            <p>&copy; 2026 Squeeze It. Free & Private Image Compression Tool.</p>
         </footer>
     </div>
 
     <script>
-        /* ... JS Code stays same as previous version but ensures 'compressed_' prefix ... */
         const fileInput = document.getElementById('fileInput');
         const dropZone = document.getElementById('dropZone');
         const editorArea = document.getElementById('editorArea');
@@ -132,7 +167,8 @@
         const downloadBtn = document.getElementById('downloadBtn');
 
         let originalImage = new Image();
-        let fileName = "squeezed_image.jpg";
+        let originalFileName = "squeezed_image.jpg";
+        let originalFileType = "image/jpeg"; // 默认格式
 
         dropZone.onclick = () => fileInput.click();
         dropZone.ondragover = (e) => { e.preventDefault(); dropZone.classList.add('bg-blue-50'); };
@@ -147,7 +183,11 @@
 
         function handleFile(file) {
             if (!file || !file.type.startsWith('image/')) return;
-            fileName = `squeezed_${file.name.split('.')[0]}.jpg`;
+            
+            // 核心修复 1：记录原始文件名和真实的文件类型 (MIME type)
+            originalFileName = file.name;
+            originalFileType = file.type; 
+
             const reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = (e) => {
@@ -170,10 +210,19 @@
             const ctx = canvas.getContext('2d');
             canvas.width = originalImage.width;
             canvas.height = originalImage.height;
+
+            // 核心修复 2：防止 JPG 变黑底。如果是 JPG，先铺一层白底；如果是 PNG/WebP，保留透明。
+            if (originalFileType === 'image/jpeg') {
+                ctx.fillStyle = '#FFFFFF';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            }
+            
             ctx.drawImage(originalImage, 0, 0);
 
             const quality = qualityInput.value / 100;
-            const compressedDataUrl = canvas.toDataURL('image/jpeg', quality);
+            
+            // 核心修复 3：使用原始文件类型进行压缩，不再强制写死为 image/jpeg
+            const compressedDataUrl = canvas.toDataURL(originalFileType, quality);
             preview.src = compressedDataUrl;
             
             const sizeInBytes = Math.round((compressedDataUrl.length - 22) * 3 / 4);
@@ -182,14 +231,11 @@
             downloadBtn.onclick = () => {
                 const link = document.createElement('a');
                 link.href = compressedDataUrl;
-                link.download = fileName;
+                // 核心修复 4：保留原文件的后缀名，而不是强行用 .jpg
+                link.download = `squeezed_${originalFileName}`; 
                 link.click();
             };
         }
     </script>
-    <script>
-  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-</script>
-<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
