@@ -7,33 +7,26 @@
     <title>Free Online Image Compressor | 100% Private & Client-Side | Squeeze It</title>
     <meta name="description" content="A free, browser-only image compressor. Reduce JPG, PNG, and WebP file sizes instantly without server uploads. 100% private and secure.">
     <meta name="keywords" content="client-side image compressor, browser-only photo resizer, private picture squeezer, compress jpg online, reduce png size, webp compressor">
-    <meta name="author" content="Squeeze It">
     
-    <meta property="og:title" content="Squeeze It - Fast & Private Image Compression">
-    <meta property="og:description" content="Squeeze your images without losing privacy. 100% browser-based processing.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://squeeze.freetools.best/">
-    <meta property="og:image" content="https://squeeze.freetools.best/og-image.jpg"> 
-    
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🖼️</text></svg>">
+    <link rel="alternate" hreflang="en" href="https://squeeze.freetools.best/" />
+    <link rel="alternate" hreflang="zh-Hans" href="https://squeeze.freetools.best/zh.html" />
+    <link rel="alternate" hreflang="x-default" href="https://squeeze.freetools.best/" />
 
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Squeeze It",
-      "url": "https://squeeze.freetools.best/",
-      "description": "A 100% client-side image compressor for JPG, PNG, and WebP formats.",
-      "applicationCategory": "MultimediaApplication",
-      "operatingSystem": "All",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      }
-    }
+    <script>
+        // 检查用户是否已经手动选择过语言
+        const userPrefers = localStorage.getItem('squeeze_lang');
+        if (userPrefers === 'zh') {
+            window.location.replace('/zh.html');
+        } else if (!userPrefers) {
+            // 如果没有手动选择过，按浏览器语言自动跳转
+            const browserLang = navigator.language || navigator.userLanguage; 
+            if (browserLang.toLowerCase().includes('zh')) {
+                window.location.replace('/zh.html'); 
+            }
+        }
     </script>
 
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🖼️</text></svg>">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
@@ -43,9 +36,15 @@
         input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 18px; height: 18px; background: #2563eb; border-radius: 50%; cursor: pointer; border: 2px solid white; box-shadow: 0 0 5px rgba(0,0,0,0.1); }
     </style>
 </head>
-<body class="min-h-screen py-12 px-4">
+<body class="min-h-screen py-12 px-4 relative">
 
-    <div class="max-w-4xl mx-auto">
+    <div class="absolute top-4 right-4 md:top-8 md:right-8">
+        <button onclick="switchLang('zh')" class="px-4 py-2 text-sm font-semibold text-gray-500 bg-white border border-gray-200 rounded-full shadow-sm hover:text-blue-600 hover:border-blue-200 transition-colors">
+            🌐 简体中文
+        </button>
+    </div>
+
+    <div class="max-w-4xl mx-auto pt-8">
         <header class="text-center mb-12">
             <div class="inline-flex items-center gap-2 mb-4">
                 <span class="feature-tag">🛡️ 100% Client-Side</span>
@@ -57,12 +56,6 @@
             <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
                 Reduce image file sizes instantly. Your photos **never leave your device**. Everything is processed locally in your browser for ultimate privacy.
             </p>
-            
-            <div class="mt-6 flex justify-center gap-4 text-sm font-medium text-gray-400">
-                <span class="px-3 py-1 border border-gray-200 rounded-md shadow-sm bg-white">JPG</span>
-                <span class="px-3 py-1 border border-gray-200 rounded-md shadow-sm bg-white">PNG</span>
-                <span class="px-3 py-1 border border-gray-200 rounded-md shadow-sm bg-white">WebP</span>
-            </div>
         </header>
 
         <main class="bg-white rounded-[2rem] shadow-2xl shadow-blue-100/50 border border-gray-100 overflow-hidden">
@@ -75,11 +68,11 @@
                 <p class="text-gray-500 mt-2">or click to browse from files</p>
             </section>
 
-            <section id="editorArea" class="hidden border-t border-gray-100 p-8 lg:p-12 animate-in fade-in duration-500">
+            <section id="editorArea" class="hidden border-t border-gray-100 p-8 lg:p-12">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
                     <div class="space-y-4">
                         <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">Live Preview</p>
-                        <div class="rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 shadow-inner min-h-[200px] flex items-center justify-center pattern-checkerboard">
+                        <div class="rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 shadow-inner min-h-[200px] flex items-center justify-center">
                             <img id="preview" alt="Compressed image live preview" class="w-full h-auto block">
                         </div>
                     </div>
@@ -104,7 +97,6 @@
 
                         <div class="flex flex-col gap-3">
                             <button id="downloadBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-2xl transition-all transform active:scale-[0.98] shadow-xl shadow-blue-200 flex items-center justify-center gap-2 text-lg">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                                 Download Now
                             </button>
                             <button onclick="location.reload()" class="py-3 text-gray-400 hover:text-gray-600 font-medium transition-colors text-sm">
@@ -116,47 +108,19 @@
             </section>
         </main>
 
-        <article class="mt-16 bg-white p-8 rounded-[2rem] border border-gray-100 shadow-sm">
-            <h2 class="text-gray-800 font-extrabold text-2xl mb-8 text-center">Why use a Client-Side Image Compressor?</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left mb-12">
-                <div>
-                    <h3 class="font-bold text-gray-800 mb-2">🔒 Total Privacy</h3>
-                    <p class="text-sm text-gray-500 leading-relaxed">Unlike other tools, no images are sent to a cloud server. Your sensitive photos remain strictly on your device.</p>
-                </div>
-                <div>
-                    <h3 class="font-bold text-gray-800 mb-2">🚀 Blazing Fast</h3>
-                    <p class="text-sm text-gray-500 leading-relaxed">Skip the upload and download times. Get your compressed JPGs or PNGs in milliseconds via your browser's native engine.</p>
-                </div>
-                <div>
-                    <h3 class="font-bold text-gray-800 mb-2">📉 Smart Format Handling</h3>
-                    <p class="text-sm text-gray-500 leading-relaxed">We automatically detect your file type (JPG, PNG, WebP) and preserve transparency while reducing the file size.</p>
-                </div>
-            </div>
-
-            <hr class="border-gray-100 mb-8">
-
-            <div class="max-w-2xl mx-auto">
-                <h2 class="text-gray-800 font-bold text-xl mb-6 text-center">Frequently Asked Questions</h2>
-                <div class="space-y-6">
-                    <div>
-                        <h4 class="font-semibold text-gray-700">Does Squeeze It keep my PNG transparency?</h4>
-                        <p class="text-sm text-gray-500 mt-1">Yes! Our updated algorithm detects PNG files and preserves their transparent backgrounds during compression.</p>
-                    </div>
-                    <div>
-                        <h4 class="font-semibold text-gray-700">Are my files stored anywhere?</h4>
-                        <p class="text-sm text-gray-500 mt-1">No. The entire compression process happens within your web browser. We do not have servers to store your data.</p>
-                    </div>
-                </div>
-            </div>
-        </article>
-
-        <footer class="mt-12 pt-8 text-center text-gray-400 text-sm">
+        <footer class="mt-12 pt-8 border-t border-gray-100 text-center text-gray-400 text-sm">
             <p>&copy; 2026 Squeeze It. Free & Private Image Compression Tool.</p>
         </footer>
     </div>
 
     <script>
+        // 语言切换逻辑
+        function switchLang(lang) {
+            localStorage.setItem('squeeze_lang', lang);
+            window.location.href = lang === 'zh' ? '/zh.html' : '/';
+        }
+
+        /* 以下为工具核心逻辑（已修复透明度与格式Bug） */
         const fileInput = document.getElementById('fileInput');
         const dropZone = document.getElementById('dropZone');
         const editorArea = document.getElementById('editorArea');
@@ -168,7 +132,7 @@
 
         let originalImage = new Image();
         let originalFileName = "squeezed_image.jpg";
-        let originalFileType = "image/jpeg"; // 默认格式
+        let originalFileType = "image/jpeg"; 
 
         dropZone.onclick = () => fileInput.click();
         dropZone.ondragover = (e) => { e.preventDefault(); dropZone.classList.add('bg-blue-50'); };
@@ -183,8 +147,6 @@
 
         function handleFile(file) {
             if (!file || !file.type.startsWith('image/')) return;
-            
-            // 核心修复 1：记录原始文件名和真实的文件类型 (MIME type)
             originalFileName = file.name;
             originalFileType = file.type; 
 
@@ -211,17 +173,13 @@
             canvas.width = originalImage.width;
             canvas.height = originalImage.height;
 
-            // 核心修复 2：防止 JPG 变黑底。如果是 JPG，先铺一层白底；如果是 PNG/WebP，保留透明。
             if (originalFileType === 'image/jpeg') {
                 ctx.fillStyle = '#FFFFFF';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
             }
             
             ctx.drawImage(originalImage, 0, 0);
-
             const quality = qualityInput.value / 100;
-            
-            // 核心修复 3：使用原始文件类型进行压缩，不再强制写死为 image/jpeg
             const compressedDataUrl = canvas.toDataURL(originalFileType, quality);
             preview.src = compressedDataUrl;
             
@@ -231,7 +189,6 @@
             downloadBtn.onclick = () => {
                 const link = document.createElement('a');
                 link.href = compressedDataUrl;
-                // 核心修复 4：保留原文件的后缀名，而不是强行用 .jpg
                 link.download = `squeezed_${originalFileName}`; 
                 link.click();
             };
