@@ -13,12 +13,10 @@
     <link rel="alternate" hreflang="x-default" href="https://squeeze.freetools.best/" />
 
     <script>
-        // 检查用户是否已经手动选择过语言
         const userPrefers = localStorage.getItem('squeeze_lang');
         if (userPrefers === 'zh') {
             window.location.replace('/zh.html');
         } else if (!userPrefers) {
-            // 如果没有手动选择过，按浏览器语言自动跳转
             const browserLang = navigator.language || navigator.userLanguage; 
             if (browserLang.toLowerCase().includes('zh')) {
                 window.location.replace('/zh.html'); 
@@ -34,6 +32,7 @@
         .gradient-text { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .feature-tag { background: rgba(59, 130, 246, 0.1); color: #2563eb; padding: 4px 12px; border-radius: 99px; font-size: 0.85rem; font-weight: 600; }
         input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 18px; height: 18px; background: #2563eb; border-radius: 50%; cursor: pointer; border: 2px solid white; box-shadow: 0 0 5px rgba(0,0,0,0.1); }
+        .pattern-checkerboard { background-image: linear-gradient(45deg, #e5e7eb 25%, transparent 25%), linear-gradient(-45deg, #e5e7eb 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #e5e7eb 75%), linear-gradient(-45deg, transparent 75%, #e5e7eb 75%); background-size: 20px 20px; background-position: 0 0, 0 10px, 10px -10px, -10px 0px; }
     </style>
 </head>
 <body class="min-h-screen py-12 px-4 relative">
@@ -54,7 +53,7 @@
                 Free Online Image Compressor:<br> <span class="gradient-text">Squeeze It.</span>
             </h1>
             <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                Reduce image file sizes instantly. Your photos **never leave your device**. Everything is processed locally in your browser for ultimate privacy.
+                Reduce image file sizes instantly. Convert and compress your photos to JPG or WebP entirely in your browser.
             </p>
         </header>
 
@@ -65,39 +64,53 @@
                     <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
                 </div>
                 <h2 class="text-2xl font-bold text-gray-800">Drop your image here</h2>
-                <p class="text-gray-500 mt-2">or click to browse from files</p>
+                <p class="text-gray-500 mt-2">or click to browse (JPG, PNG, WebP)</p>
             </section>
 
             <section id="editorArea" class="hidden border-t border-gray-100 p-8 lg:p-12">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
                     <div class="space-y-4">
                         <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">Live Preview</p>
-                        <div class="rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 shadow-inner min-h-[200px] flex items-center justify-center">
-                            <img id="preview" alt="Compressed image live preview" class="w-full h-auto block">
+                        <div class="rounded-2xl overflow-hidden bg-white border border-gray-200 shadow-inner min-h-[200px] flex items-center justify-center pattern-checkerboard">
+                            <img id="preview" alt="Compressed image live preview" class="max-w-full h-auto block">
                         </div>
                     </div>
 
-                    <div class="space-y-8">
-                        <div>
-                            <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Compression Settings</p>
-                            <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100">
-                                <div class="flex justify-between items-end mb-6">
+                    <div class="space-y-6">
+                        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">Settings</p>
+                        
+                        <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 space-y-6">
+                            
+                            <div>
+                                <div class="flex justify-between items-center mb-3">
+                                    <span class="text-gray-500 text-xs uppercase font-semibold tracking-wider">Output Format</span>
+                                </div>
+                                <div class="flex gap-2 p-1 bg-gray-200/80 rounded-lg w-full" id="formatSelector">
+                                    <button data-format="image/jpeg" class="format-btn active flex-1 py-2 text-sm font-bold rounded-md bg-white shadow-sm text-blue-600 transition-all">JPG (No Transparency)</button>
+                                    <button data-format="image/webp" class="format-btn flex-1 py-2 text-sm font-bold rounded-md text-gray-500 hover:text-gray-700 transition-all">WebP (Transparent)</button>
+                                </div>
+                            </div>
+
+                            <hr class="border-gray-200">
+
+                            <div>
+                                <div class="flex justify-between items-end mb-4">
                                     <div>
                                         <span class="text-gray-500 text-xs uppercase font-semibold tracking-wider">Quality</span>
-                                        <div id="qualityVal" class="text-3xl font-bold text-blue-600">80%</div>
+                                        <div id="qualityVal" class="text-2xl font-bold text-blue-600">80%</div>
                                     </div>
                                     <div class="text-right">
                                         <span class="text-gray-500 text-xs uppercase font-semibold tracking-wider">Est. Size</span>
-                                        <div id="sizeInfo" class="text-3xl font-bold text-gray-800">0 KB</div>
+                                        <div id="sizeInfo" class="text-2xl font-bold text-gray-800">0 KB</div>
                                     </div>
                                 </div>
                                 <input type="range" id="quality" min="1" max="100" value="80" class="w-full h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer">
                             </div>
                         </div>
 
-                        <div class="flex flex-col gap-3">
+                        <div class="flex flex-col gap-3 pt-2">
                             <button id="downloadBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-2xl transition-all transform active:scale-[0.98] shadow-xl shadow-blue-200 flex items-center justify-center gap-2 text-lg">
-                                Download Now
+                                Download Image
                             </button>
                             <button onclick="location.reload()" class="py-3 text-gray-400 hover:text-gray-600 font-medium transition-colors text-sm">
                                 ← Compress another image
@@ -107,20 +120,18 @@
                 </div>
             </section>
         </main>
-
-        <footer class="mt-12 pt-8 border-t border-gray-100 text-center text-gray-400 text-sm">
+        
+        <footer class="mt-12 pt-8 text-center text-gray-400 text-sm">
             <p>&copy; 2026 Squeeze It. Free & Private Image Compression Tool.</p>
         </footer>
     </div>
 
     <script>
-        // 语言切换逻辑
         function switchLang(lang) {
             localStorage.setItem('squeeze_lang', lang);
             window.location.href = lang === 'zh' ? '/zh.html' : '/';
         }
 
-        /* 以下为工具核心逻辑（已修复透明度与格式Bug） */
         const fileInput = document.getElementById('fileInput');
         const dropZone = document.getElementById('dropZone');
         const editorArea = document.getElementById('editorArea');
@@ -129,10 +140,28 @@
         const preview = document.getElementById('preview');
         const sizeInfo = document.getElementById('sizeInfo');
         const downloadBtn = document.getElementById('downloadBtn');
+        const formatBtns = document.querySelectorAll('.format-btn');
 
         let originalImage = new Image();
         let originalFileName = "squeezed_image.jpg";
-        let originalFileType = "image/jpeg"; 
+        let selectedFormat = "image/jpeg"; // Default to JPG
+
+        // Handle Format Selection
+        formatBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                // Update UI styles
+                formatBtns.forEach(b => {
+                    b.classList.remove('bg-white', 'shadow-sm', 'text-blue-600');
+                    b.classList.add('text-gray-500');
+                });
+                e.target.classList.add('bg-white', 'shadow-sm', 'text-blue-600');
+                e.target.classList.remove('text-gray-500');
+                
+                // Update format and re-compress
+                selectedFormat = e.target.getAttribute('data-format');
+                compress(); 
+            });
+        });
 
         dropZone.onclick = () => fileInput.click();
         dropZone.ondragover = (e) => { e.preventDefault(); dropZone.classList.add('bg-blue-50'); };
@@ -148,7 +177,12 @@
         function handleFile(file) {
             if (!file || !file.type.startsWith('image/')) return;
             originalFileName = file.name;
-            originalFileType = file.type; 
+
+            // Auto-select WebP if user uploads a PNG to preserve transparency by default
+            if (file.type === 'image/png') {
+                const webpBtn = document.querySelector('[data-format="image/webp"]');
+                webpBtn.click(); // This will update UI and state automatically
+            }
 
             const reader = new FileReader();
             reader.readAsDataURL(file);
@@ -173,23 +207,29 @@
             canvas.width = originalImage.width;
             canvas.height = originalImage.height;
 
-            if (originalFileType === 'image/jpeg') {
+            // If output is JPG, we MUST fill the background with white, otherwise transparent areas turn black
+            if (selectedFormat === 'image/jpeg') {
                 ctx.fillStyle = '#FFFFFF';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
             }
             
             ctx.drawImage(originalImage, 0, 0);
+            
             const quality = qualityInput.value / 100;
-            const compressedDataUrl = canvas.toDataURL(originalFileType, quality);
+            const compressedDataUrl = canvas.toDataURL(selectedFormat, quality);
             preview.src = compressedDataUrl;
             
             const sizeInBytes = Math.round((compressedDataUrl.length - 22) * 3 / 4);
             sizeInfo.innerText = (sizeInBytes / 1024).toFixed(1) + ' KB';
 
+            // Set correct extension
+            const ext = selectedFormat === 'image/jpeg' ? 'jpg' : 'webp';
+            let baseName = originalFileName.includes('.') ? originalFileName.substring(0, originalFileName.lastIndexOf('.')) : originalFileName;
+
             downloadBtn.onclick = () => {
                 const link = document.createElement('a');
                 link.href = compressedDataUrl;
-                link.download = `squeezed_${originalFileName}`; 
+                link.download = `squeezed_${baseName}.${ext}`; 
                 link.click();
             };
         }
