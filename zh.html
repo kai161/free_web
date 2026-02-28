@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>免费在线图片压缩 | 100%纯前端不传服务器 | Squeeze It</title>
-    <meta name="description" content="一款免费纯本地的图片压缩工具。支持JPG、PNG、WebP格式，瞬间缩小图片体积。所有处理均在您的浏览器本地完成，无需上传，绝不泄露隐私。">
-    <meta name="keywords" content="在线图片压缩, 免费图片压缩, 图片瘦身, 纯前端图片处理, 压缩JPG, 压缩PNG保留透明度, 本地图片压缩工具">
+    <title>免费在线图片压缩 | 支持JPG/WebP | 100%纯前端 | Squeeze It</title>
+    <meta name="description" content="一款免费纯本地的图片压缩工具。自由选择转换为JPG或保留透明度的WebP格式，瞬间缩小图片体积。所有处理均在您的浏览器本地完成，绝不泄露隐私。">
+    <meta name="keywords" content="在线图片压缩, 免费图片压缩, 图片转WebP, 纯前端图片处理, 压缩JPG, 压缩PNG保留透明度">
     
     <link rel="alternate" hreflang="en" href="https://squeeze.freetools.best/" />
     <link rel="alternate" hreflang="zh-Hans" href="https://squeeze.freetools.best/zh.html" />
@@ -20,6 +20,7 @@
         .gradient-text { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .feature-tag { background: rgba(59, 130, 246, 0.1); color: #2563eb; padding: 4px 12px; border-radius: 99px; font-size: 0.85rem; font-weight: 600; }
         input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 18px; height: 18px; background: #2563eb; border-radius: 50%; cursor: pointer; border: 2px solid white; box-shadow: 0 0 5px rgba(0,0,0,0.1); }
+        .pattern-checkerboard { background-image: linear-gradient(45deg, #e5e7eb 25%, transparent 25%), linear-gradient(-45deg, #e5e7eb 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #e5e7eb 75%), linear-gradient(-45deg, transparent 75%, #e5e7eb 75%); background-size: 20px 20px; background-position: 0 0, 0 10px, 10px -10px, -10px 0px; }
     </style>
 </head>
 <body class="min-h-screen py-12 px-4 relative">
@@ -40,7 +41,7 @@
                 免费在线图片压缩：<br> <span class="gradient-text">Squeeze It.</span>
             </h1>
             <p class="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                瞬间缩小图片体积。您的照片**绝对不会离开您的设备**。所有压缩过程都在浏览器本地完成，实现极致的隐私保护。
+                自由选择转换为高兼容的 JPG 或保留透明度的 WebP。照片**绝不离开您的设备**，安全保护隐私。
             </p>
         </header>
 
@@ -51,37 +52,51 @@
                     <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
                 </div>
                 <h2 class="text-2xl font-bold text-gray-800">将图片拖拽至此</h2>
-                <p class="text-gray-500 mt-2">或者点击此处选择文件</p>
+                <p class="text-gray-500 mt-2">或者点击此处选择文件 (支持 JPG, PNG, WebP)</p>
             </section>
 
             <section id="editorArea" class="hidden border-t border-gray-100 p-8 lg:p-12">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
                     <div class="space-y-4">
                         <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">实时预览</p>
-                        <div class="rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 shadow-inner min-h-[200px] flex items-center justify-center">
-                            <img id="preview" alt="压缩后图片预览" class="w-full h-auto block">
+                        <div class="rounded-2xl overflow-hidden bg-white border border-gray-200 shadow-inner min-h-[200px] flex items-center justify-center pattern-checkerboard">
+                            <img id="preview" alt="压缩后图片预览" class="max-w-full h-auto block">
                         </div>
                     </div>
 
-                    <div class="space-y-8">
-                        <div>
-                            <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">压缩设置</p>
-                            <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100">
-                                <div class="flex justify-between items-end mb-6">
+                    <div class="space-y-6">
+                        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">压缩设置</p>
+                        
+                        <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 space-y-6">
+                            
+                            <div>
+                                <div class="flex justify-between items-center mb-3">
+                                    <span class="text-gray-500 text-xs uppercase font-semibold tracking-wider">输出格式</span>
+                                </div>
+                                <div class="flex gap-2 p-1 bg-gray-200/80 rounded-lg w-full" id="formatSelector">
+                                    <button data-format="image/jpeg" class="format-btn active flex-1 py-2 text-sm font-bold rounded-md bg-white shadow-sm text-blue-600 transition-all">JPG (无透明背景)</button>
+                                    <button data-format="image/webp" class="format-btn flex-1 py-2 text-sm font-bold rounded-md text-gray-500 hover:text-gray-700 transition-all">WebP (保留透明度)</button>
+                                </div>
+                            </div>
+
+                            <hr class="border-gray-200">
+
+                            <div>
+                                <div class="flex justify-between items-end mb-4">
                                     <div>
                                         <span class="text-gray-500 text-xs uppercase font-semibold tracking-wider">画质 (Quality)</span>
-                                        <div id="qualityVal" class="text-3xl font-bold text-blue-600">80%</div>
+                                        <div id="qualityVal" class="text-2xl font-bold text-blue-600">80%</div>
                                     </div>
                                     <div class="text-right">
                                         <span class="text-gray-500 text-xs uppercase font-semibold tracking-wider">预估大小</span>
-                                        <div id="sizeInfo" class="text-3xl font-bold text-gray-800">0 KB</div>
+                                        <div id="sizeInfo" class="text-2xl font-bold text-gray-800">0 KB</div>
                                     </div>
                                 </div>
                                 <input type="range" id="quality" min="1" max="100" value="80" class="w-full h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer">
                             </div>
                         </div>
 
-                        <div class="flex flex-col gap-3">
+                        <div class="flex flex-col gap-3 pt-2">
                             <button id="downloadBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-2xl transition-all transform active:scale-[0.98] shadow-xl shadow-blue-200 flex items-center justify-center gap-2 text-lg">
                                 立即下载
                             </button>
@@ -93,20 +108,18 @@
                 </div>
             </section>
         </main>
-
-        <footer class="mt-12 pt-8 border-t border-gray-100 text-center text-gray-400 text-sm">
+        
+        <footer class="mt-12 pt-8 text-center text-gray-400 text-sm">
             <p>&copy; 2026 Squeeze It. 免费且保护隐私的图片压缩工具。</p>
         </footer>
     </div>
 
     <script>
-        // 语言切换逻辑
         function switchLang(lang) {
             localStorage.setItem('squeeze_lang', lang);
             window.location.href = lang === 'en' ? '/' : '/zh.html';
         }
 
-        /* 核心处理逻辑完全一致 */
         const fileInput = document.getElementById('fileInput');
         const dropZone = document.getElementById('dropZone');
         const editorArea = document.getElementById('editorArea');
@@ -115,10 +128,28 @@
         const preview = document.getElementById('preview');
         const sizeInfo = document.getElementById('sizeInfo');
         const downloadBtn = document.getElementById('downloadBtn');
+        const formatBtns = document.querySelectorAll('.format-btn');
 
         let originalImage = new Image();
         let originalFileName = "squeezed_image.jpg";
-        let originalFileType = "image/jpeg"; 
+        let selectedFormat = "image/jpeg"; // 默认转为 JPG
+
+        // 处理格式选择逻辑
+        formatBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                // 切换按钮样式
+                formatBtns.forEach(b => {
+                    b.classList.remove('bg-white', 'shadow-sm', 'text-blue-600');
+                    b.classList.add('text-gray-500');
+                });
+                e.target.classList.add('bg-white', 'shadow-sm', 'text-blue-600');
+                e.target.classList.remove('text-gray-500');
+                
+                // 更新格式并重新压缩
+                selectedFormat = e.target.getAttribute('data-format');
+                compress(); 
+            });
+        });
 
         dropZone.onclick = () => fileInput.click();
         dropZone.ondragover = (e) => { e.preventDefault(); dropZone.classList.add('bg-blue-50'); };
@@ -134,7 +165,12 @@
         function handleFile(file) {
             if (!file || !file.type.startsWith('image/')) return;
             originalFileName = file.name;
-            originalFileType = file.type; 
+
+            // 智能优化：如果用户上传的是PNG，自动帮他切换到WebP以保留透明度
+            if (file.type === 'image/png') {
+                const webpBtn = document.querySelector('[data-format="image/webp"]');
+                webpBtn.click(); // 自动触发点击事件，同步UI和状态
+            }
 
             const reader = new FileReader();
             reader.readAsDataURL(file);
@@ -159,23 +195,29 @@
             canvas.width = originalImage.width;
             canvas.height = originalImage.height;
 
-            if (originalFileType === 'image/jpeg') {
+            // 如果选择了JPG，必须铺一层白底，否则原图透明区域会变成黑色
+            if (selectedFormat === 'image/jpeg') {
                 ctx.fillStyle = '#FFFFFF';
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
             }
             
             ctx.drawImage(originalImage, 0, 0);
+            
             const quality = qualityInput.value / 100;
-            const compressedDataUrl = canvas.toDataURL(originalFileType, quality);
+            const compressedDataUrl = canvas.toDataURL(selectedFormat, quality);
             preview.src = compressedDataUrl;
             
             const sizeInBytes = Math.round((compressedDataUrl.length - 22) * 3 / 4);
             sizeInfo.innerText = (sizeInBytes / 1024).toFixed(1) + ' KB';
 
+            // 根据选择动态修改后缀名
+            const ext = selectedFormat === 'image/jpeg' ? 'jpg' : 'webp';
+            let baseName = originalFileName.includes('.') ? originalFileName.substring(0, originalFileName.lastIndexOf('.')) : originalFileName;
+
             downloadBtn.onclick = () => {
                 const link = document.createElement('a');
                 link.href = compressedDataUrl;
-                link.download = `squeezed_${originalFileName}`; 
+                link.download = `squeezed_${baseName}.${ext}`; 
                 link.click();
             };
         }
