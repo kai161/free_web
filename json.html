@@ -3,142 +3,241 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JSON 格式化校验工具 | 100%纯本地处理 | Free Tools</title>
-    <meta name="description" content="纯本地运行的 JSON 格式化与校验工具。所有数据均在浏览器端处理，绝不上传服务器，保护您的机密代码和数据。">
+
+    <title>实时 JSON 格式化与比对工具 | Free Tools</title>
+    <meta name="description" content="专业级 JSON 处理工具。支持双面板实时输入比对、美化与校验。100% 本地前端处理，保护机密数据。">
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsdiff/5.2.0/diff.min.js"></script>
+
     <style>
-        /* 隐藏滚动条但保留滚动功能 */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Fira+Code&display=swap');
-        body { font-family: 'Inter', -apple-system, sans-serif; background-color: #f8fafc; }
-        .gradient-text { background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        textarea { font-family: 'Fira Code', monospace; tab-size: 2; }
+
+        body { font-family: 'Inter', -apple-system, sans-serif; background-color: #f8fafc; overflow: hidden; }
+
+        /* 核心：保证底层的高亮层和顶层的输入框文字排版绝对一致 */
+        .sync-text {
+            font-family: 'Fira Code', ui-monospace, SFMono-Regular, Consolas, monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            tab-size: 4;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        /* 自定义滚动条 */
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; height: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
     </style>
 </head>
-<body class="min-h-screen py-12 px-4">
+<body class="min-h-screen">
 
 <div id="nav-placeholder"></div>
 <script src="nav.js"></script>
 
-<div class="max-w-6xl mx-auto">
-    <header class="text-center mb-10">
-        <div class="inline-flex items-center gap-2 mb-4 bg-purple-50 text-purple-600 px-4 py-1.5 rounded-full text-sm font-semibold">
-            🛡️ 纯本地解析，保护机密数据
-        </div>
-        <h1 class="text-4xl font-extrabold text-gray-900 mb-4 tracking-tight">
-            JSON 格式化与校验
+<div class="max-w-full mx-auto px-4 sm:px-6 pt-2" id="main-wrapper">
+
+    <header class="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
+        <h1 class="text-2xl font-extrabold text-gray-900 tracking-tight flex items-center gap-2">
+            <span class="text-2xl">⚖️</span> 实时 JSON 比对引擎
         </h1>
+        <div class="flex gap-4">
+            <span class="text-xs bg-red-100 text-red-700 px-3 py-1.5 rounded-full font-bold shadow-sm border border-red-200">左侧标红：缺失或删除项</span>
+            <span class="text-xs bg-green-100 text-green-700 px-3 py-1.5 rounded-full font-bold shadow-sm border border-green-200">右侧标绿：新增或修改项</span>
+        </div>
     </header>
 
-    <main class="bg-white rounded-[2rem] shadow-xl shadow-purple-100/50 border border-gray-100 p-6 lg:p-8 flex flex-col h-[70vh]">
+    <main class="grid grid-cols-1 xl:grid-cols-2 gap-4 h-[calc(100vh-140px)] min-h-[500px] pb-4">
 
-        <div class="flex flex-wrap items-center justify-between gap-4 mb-4 pb-4 border-b border-gray-100">
-            <div class="flex gap-2">
-                <button id="btnFormat" class="px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg shadow-md transition-colors">
-                    美化 (Format)
-                </button>
-                <button id="btnMinify" class="px-6 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-lg transition-colors">
-                    压缩 (Minify)
-                </button>
-                <button id="btnClear" class="px-6 py-2 text-gray-400 hover:text-red-500 font-semibold transition-colors">
-                    清空
-                </button>
-            </div>
-            <div id="statusMsg" class="font-medium text-sm px-4 py-2 rounded-lg bg-gray-50 text-gray-500">
-                等待输入...
-            </div>
-        </div>
-
-        <div class="flex-1 flex flex-col lg:flex-row gap-6">
-            <div class="flex-1 flex flex-col">
-                <label class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">输入原始 JSON</label>
-                <textarea id="jsonInput" class="flex-1 w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none resize-none" placeholder='{"hello": "world"}'></textarea>
-            </div>
-
-            <div class="flex-1 flex flex-col relative">
-                <div class="flex justify-between items-center mb-2">
-                    <label class="text-xs font-bold text-gray-400 uppercase tracking-widest">输出结果</label>
-                    <button id="btnCopy" class="text-xs text-purple-600 font-bold hover:text-purple-800 hidden">复制结果</button>
+        <section class="bg-white rounded-2xl shadow-lg border border-gray-200 flex flex-col overflow-hidden">
+            <div class="bg-gray-50 px-4 py-3 border-b border-gray-200 flex flex-wrap justify-between items-center gap-2">
+                <span class="font-extrabold text-gray-700">📄 JSON A (原数据)</span>
+                <div class="flex gap-2">
+                    <button onclick="formatJSON('A', false)" class="px-3 py-1 text-sm bg-white border border-gray-300 hover:border-purple-500 hover:text-purple-600 font-semibold rounded transition-colors shadow-sm">美化</button>
+                    <button onclick="formatJSON('A', true)" class="px-3 py-1 text-sm bg-white border border-gray-300 hover:border-purple-500 hover:text-purple-600 font-semibold rounded transition-colors shadow-sm">压缩</button>
+                    <button onclick="clearJSON('A')" class="px-3 py-1 text-sm text-gray-500 hover:text-red-500 font-semibold transition-colors">清空</button>
                 </div>
-                <textarea id="jsonOutput" class="flex-1 w-full p-4 bg-gray-800 text-green-400 border border-gray-700 rounded-xl outline-none resize-none" readonly placeholder="格式化后的 JSON 将显示在这里..."></textarea>
             </div>
-        </div>
+
+            <div class="relative flex-1 bg-white overflow-hidden group">
+                <pre id="diffA" class="sync-text absolute inset-0 w-full h-full p-4 m-0 overflow-hidden text-transparent pointer-events-none z-0"></pre>
+                <textarea id="jsonA" class="sync-text absolute inset-0 w-full h-full p-4 m-0 bg-transparent text-gray-800 caret-black outline-none resize-none custom-scrollbar z-10 border-none" spellcheck="false" placeholder="在此输入或粘贴 JSON A..."></textarea>
+            </div>
+
+            <div id="statusA" class="bg-gray-50 px-4 py-1.5 text-xs font-semibold text-gray-500 border-t border-gray-200">准备就绪</div>
+        </section>
+
+        <section class="bg-white rounded-2xl shadow-lg border border-gray-200 flex flex-col overflow-hidden">
+            <div class="bg-gray-50 px-4 py-3 border-b border-gray-200 flex flex-wrap justify-between items-center gap-2">
+                <span class="font-extrabold text-gray-700">📄 JSON B (新数据)</span>
+                <div class="flex gap-2">
+                    <button onclick="formatJSON('B', false)" class="px-3 py-1 text-sm bg-white border border-gray-300 hover:border-blue-500 hover:text-blue-600 font-semibold rounded transition-colors shadow-sm">美化</button>
+                    <button onclick="formatJSON('B', true)" class="px-3 py-1 text-sm bg-white border border-gray-300 hover:border-blue-500 hover:text-blue-600 font-semibold rounded transition-colors shadow-sm">压缩</button>
+                    <button onclick="clearJSON('B')" class="px-3 py-1 text-sm text-gray-500 hover:text-red-500 font-semibold transition-colors">清空</button>
+                </div>
+            </div>
+
+            <div class="relative flex-1 bg-white overflow-hidden group">
+                <pre id="diffB" class="sync-text absolute inset-0 w-full h-full p-4 m-0 overflow-hidden text-transparent pointer-events-none z-0"></pre>
+                <textarea id="jsonB" class="sync-text absolute inset-0 w-full h-full p-4 m-0 bg-transparent text-gray-800 caret-black outline-none resize-none custom-scrollbar z-10 border-none" spellcheck="false" placeholder="在此输入或粘贴 JSON B..."></textarea>
+            </div>
+
+            <div id="statusB" class="bg-gray-50 px-4 py-1.5 text-xs font-semibold text-gray-500 border-t border-gray-200">准备就绪</div>
+        </section>
+
     </main>
 </div>
 
 <script>
-    const input = document.getElementById('jsonInput');
-    const output = document.getElementById('jsonOutput');
-    const statusMsg = document.getElementById('statusMsg');
-    const btnCopy = document.getElementById('btnCopy');
+    const els = {
+        A: {
+            input: document.getElementById('jsonA'),
+            diff: document.getElementById('diffA'),
+            status: document.getElementById('statusA')
+        },
+        B: {
+            input: document.getElementById('jsonB'),
+            diff: document.getElementById('diffB'),
+            status: document.getElementById('statusB')
+        }
+    };
 
-    function processJSON(isMinify = false) {
-        const rawVal = input.value.trim();
-        if (!rawVal) {
-            showStatus('请输入 JSON 数据', 'gray');
-            output.value = '';
-            btnCopy.classList.add('hidden');
+    // 转义 HTML 实体
+    function escapeHtml(unsafe) {
+        return unsafe
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
+    // 更新状态栏
+    function updateStatus(panel, isSuccess, msg) {
+        const statusEl = els[panel].status;
+        statusEl.textContent = msg;
+        if (isSuccess === true) {
+            statusEl.className = 'bg-green-50 px-4 py-1.5 text-xs font-bold text-green-600 border-t border-green-200';
+        } else if (isSuccess === false) {
+            statusEl.className = 'bg-red-50 px-4 py-1.5 text-xs font-bold text-red-600 border-t border-red-200';
+        } else {
+            statusEl.className = 'bg-gray-50 px-4 py-1.5 text-xs font-semibold text-gray-500 border-t border-gray-200';
+        }
+    }
+
+    // 验证 JSON 合法性 (不改变内容)
+    function validateSilent(panel) {
+        const val = els[panel].input.value.trim();
+        if (!val) {
+            updateStatus(panel, null, '等待输入...');
+            return;
+        }
+        try {
+            JSON.parse(val);
+            updateStatus(panel, true, '✅ JSON 格式有效');
+        } catch (e) {
+            updateStatus(panel, false, `❌ 解析错误: ${e.message}`);
+        }
+    }
+
+    // 格式化当前框并触发比对
+    function formatJSON(panel, isMinify) {
+        const rawVal = els[panel].input.value.trim();
+        if (!rawVal) return;
+
+        try {
+            const parsed = JSON.parse(rawVal);
+            const result = isMinify ? JSON.stringify(parsed) : JSON.stringify(parsed, null, 4);
+            els[panel].input.value = result;
+            updateStatus(panel, true, `✅ JSON 格式有效 (${isMinify ? '已压缩' : '已美化'})`);
+            performDiff(); // 格式化后立即触发比对
+        } catch (err) {
+            updateStatus(panel, false, `❌ 解析错误: ${err.message}`);
+        }
+    }
+
+    function clearJSON(panel) {
+        els[panel].input.value = '';
+        performDiff(); // 清空后更新比对视图
+        els[panel].input.focus();
+    }
+
+    // 🌟 核心：实时比对逻辑
+    function performDiff() {
+        const valA = els.A.input.value;
+        const valB = els.B.input.value;
+
+        // 无论比对结果如何，先更新底部的语法状态
+        validateSilent('A');
+        validateSilent('B');
+
+        // 如果两个框都是空的，清空高亮层
+        if (!valA && !valB) {
+            els.A.diff.innerHTML = '';
+            els.B.diff.innerHTML = '';
             return;
         }
 
-        try {
-            // 核心：利用浏览器原生 JSON 对象解析和格式化
-            const parsed = JSON.parse(rawVal);
-            const result = isMinify ? JSON.stringify(parsed) : JSON.stringify(parsed, null, 4);
+        // 使用 diffWordsWithSpace 保留精准的空格和换行差异
+        const diffs = Diff.diffWordsWithSpace(valA, valB);
 
-            output.value = result;
-            output.classList.remove('text-red-400');
-            output.classList.add('text-green-400');
-            showStatus('✅ JSON 格式有效', 'green');
-            btnCopy.classList.remove('hidden');
-        } catch (err) {
-            output.value = `❌ 解析错误:\n\n${err.message}`;
-            output.classList.remove('text-green-400');
-            output.classList.add('text-red-400');
-            showStatus('❌ JSON 格式错误', 'red');
-            btnCopy.classList.add('hidden');
-        }
+        let htmlA = '';
+        let htmlB = '';
+
+        diffs.forEach((part) => {
+            const safeVal = escapeHtml(part.value);
+
+            if (part.added) {
+                // 新增的内容：B 框显示绿底，A 框不显示
+                htmlB += `<span class="bg-green-200/70 rounded-sm">${safeVal}</span>`;
+            } else if (part.removed) {
+                // 删除的内容：A 框显示红底，B 框不显示
+                htmlA += `<span class="bg-red-200/70 rounded-sm">${safeVal}</span>`;
+            } else {
+                // 相同的内容：两边都不加背景色
+                htmlA += `<span>${safeVal}</span>`;
+                htmlB += `<span>${safeVal}</span>`;
+            }
+        });
+
+        // 将渲染好的高亮标签塞入底层的 pre 标签中
+        els.A.diff.innerHTML = htmlA;
+        els.B.diff.innerHTML = htmlB;
     }
 
-    function showStatus(msg, color) {
-        statusMsg.textContent = msg;
-        statusMsg.className = `font-medium text-sm px-4 py-2 rounded-lg bg-${color}-50 text-${color}-600`;
-    }
+    // ====== 事件监听绑定 ======
+    ['A', 'B'].forEach(panel => {
+        const textarea = els[panel].input;
+        const pre = els[panel].diff;
 
-    document.getElementById('btnFormat').addEventListener('click', () => processJSON(false));
-    document.getElementById('btnMinify').addEventListener('click', () => processJSON(true));
+        // 1. 每次输入时实时比对
+        textarea.addEventListener('input', performDiff);
 
-    document.getElementById('btnClear').addEventListener('click', () => {
-        input.value = '';
-        output.value = '';
-        showStatus('等待输入...', 'gray');
-        btnCopy.classList.add('hidden');
+        // 2. 🌟 滚动同步：保证顶层输入框滚动时，底层的颜色高亮层完美跟随
+        textarea.addEventListener('scroll', function() {
+            pre.scrollTop = this.scrollTop;
+            pre.scrollLeft = this.scrollLeft;
+        });
+
+        // 3. 支持 Tab 键缩进
+        textarea.addEventListener('keydown', function(e) {
+            if (e.key == 'Tab') {
+                e.preventDefault();
+                const start = this.selectionStart;
+                const end = this.selectionEnd;
+                this.value = this.value.substring(0, start) + "    " + this.value.substring(end);
+                this.selectionStart = this.selectionEnd = start + 4;
+                performDiff(); // Tab 缩进后也触发比对
+            }
+        });
     });
 
-    btnCopy.addEventListener('click', async () => {
-        await navigator.clipboard.writeText(output.value);
-        const origText = btnCopy.textContent;
-        btnCopy.textContent = '已复制！';
-        setTimeout(() => btnCopy.textContent = origText, 2000);
-    });
-
-    // 支持输入框内直接按 Tab 键缩进
-    input.addEventListener('keydown', function(e) {
-        if (e.key == 'Tab') {
-            e.preventDefault();
-            const start = this.selectionStart;
-            const end = this.selectionEnd;
-            this.value = this.value.substring(0, start) + "  " + this.value.substring(end);
-            this.selectionStart = this.selectionEnd = start + 2;
-        }
-    });
+    // 初始页面加载时跑一次比对清空状态
+    performDiff();
 </script>
 </body>
 </html>
