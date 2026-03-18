@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>在线全屏倒计时器 | 番茄钟与专注工具 | Free Tools</title>
+    <meta name="description" content="免费、免安装的在线倒计时器。支持全屏显示、番茄工作法（25分钟）、自定义时间与声音提示。纯本地运行，保护隐私，适合考试、演讲与专注学习。">
+    <meta name="keywords" content="在线倒计时, 全屏倒计时, 番茄钟, 专注计时器, 网页倒计时, 倒数计时器, 考试倒计时">
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "在线全屏倒计时器",
+            "applicationCategory": "ProductivityApplication",
+            "description": "免费、免安装的在线倒计时器，支持全屏显示和番茄钟模式，无广告且保护隐私。",
+            "operatingSystem": "All",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            }
+        }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@700&display=swap');
+        body { font-family: 'Inter', -apple-system, sans-serif; background-color: #f8fafc; }
+        .timer-font { font-family: 'JetBrains Mono', monospace; font-variant-numeric: tabular-nums; }
+        .gradient-text { background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        /* 🥇 修复后的绝对全屏样式 */
+        body.is-fullscreen {
+            background-color: #ffffff !important; /* 强制纯白背景 */
+            overflow: hidden; /* 防止出现滚动条 */
+        }
+
+        /* 全屏时隐藏无关元素 */
+        body.is-fullscreen #nav-placeholder,
+        body.is-fullscreen header,
+        body.is-fullscreen .seo-content {
+            display: none !important;
+        }
+
+        /* 重塑容器布局，确保居中不变形 */
+        body.is-fullscreen #main-wrapper {
+            max-width: 100% !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        body.is-fullscreen .timer-container {
+            box-shadow: none !important;
+            border: none !important;
+            border-radius: 0 !important;
+            margin: 0 !important;
+            height: 100vh !important; /* 占满整个屏幕高度 */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent !important;
+        }
+
+        /* 动态缩放时钟字体，并设置为纯黑 */
+        body.is-fullscreen .timer-text {
+            color: #000000 !important; /* 纯黑字体 */
+            font-size: clamp(6rem, 18vw, 20rem) !important; /* 根据屏幕宽度自动缩放，不再用 transform */
+            margin-top: 2rem;
+            margin-bottom: 4rem;
+        }
+    </style>
+</head>
+<body class="min-h-screen pb-12 transition-colors duration-300">
+
+<div id="nav-placeholder"></div>
+<script src="nav.js"></script>
+
+<div class="max-w-4xl mx-auto px-4 pt-8" id="main-wrapper">
+    <header class="text-center mb-10">
+        <div class="inline-flex items-center gap-2 mb-4 bg-red-50 text-red-600 px-4 py-1.5 rounded-full text-sm font-semibold">
+            ⏳ 极简专注 · 支持全屏
+        </div>
+        <h1 class="text-4xl font-extrabold text-gray-900 mb-4 tracking-tight">
+            在线全屏倒计时器
+        </h1>
+    </header>
+
+    <main class="timer-container bg-white rounded-[2rem] shadow-xl shadow-red-100/50 border border-gray-100 p-8 lg:p-12 mb-16">
+
+        <div class="flex flex-wrap justify-center gap-3 mb-8">
+            <button class="preset-btn px-5 py-2 rounded-full font-semibold text-sm bg-gray-100 text-gray-700 hover:bg-red-100 hover:text-red-600 transition-colors" data-time="300">🍵 休息 5 分钟</button>
+            <button class="preset-btn px-5 py-2 rounded-full font-semibold text-sm bg-gray-100 text-gray-700 hover:bg-red-100 hover:text-red-600 transition-colors" data-time="600">🎤 演讲 10 分钟</button>
+            <button class="preset-btn px-5 py-2 rounded-full font-semibold text-sm bg-red-100 text-red-600 border border-red-200 shadow-sm transition-colors" data-time="1500">🍅 番茄钟 (25分)</button>
+            <button class="preset-btn px-5 py-2 rounded-full font-semibold text-sm bg-gray-100 text-gray-700 hover:bg-red-100 hover:text-red-600 transition-colors" data-time="3600">📝 考试 60 分钟</button>
+        </div>
+
+        <div class="text-center mb-8">
+            <div class="timer-text timer-font text-8xl md:text-[8rem] leading-none font-bold text-gray-800 cursor-pointer hover:text-red-600 transition-colors" id="timeDisplay" title="点击自定义时间">
+                25:00
+            </div>
+        </div>
+
+        <div class="flex justify-center items-center gap-6">
+            <button id="btnReset" class="w-14 h-14 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 transition-colors" title="重置">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+            </button>
+            <button id="btnToggle" class="w-20 h-20 flex items-center justify-center rounded-full bg-red-600 hover:bg-red-700 text-white shadow-xl shadow-red-200 transition-transform active:scale-95" title="开始/暂停">
+                <svg id="iconPlay" class="w-10 h-10 ml-1" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" fill-rule="evenodd"></path></svg>
+                <svg id="iconPause" class="w-10 h-10 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+            </button>
+            <button id="btnFullscreen" class="w-14 h-14 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 transition-colors" title="全屏显示">
+                <svg id="iconEnterFS" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+                <svg id="iconExitFS" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h4V4M4 8l5-5m11 5h-4V4m4 4l-5-5M4 16h4v4m-4-4l5 5m11-5h-4v4m4-4l-5 5"></path></svg>
+            </button>
+        </div>
+    </main>
+
+    <article class="seo-content bg-white p-8 rounded-[2rem] border border-gray-100 shadow-sm text-gray-600">
+        <h2 class="text-gray-900 font-bold text-2xl mb-6 text-center">为什么选择这款在线倒计时器？</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+            <div>
+                <h3 class="font-bold text-gray-800 text-lg mb-2">🍅 内置番茄工作法 (Pomodoro)</h3>
+                <p class="text-sm leading-relaxed">科学证明，25分钟专注配合5分钟休息的“番茄钟”模式能极大提升工作和学习效率。只需一键点击即可开启您的专注时间。</p>
+            </div>
+            <div>
+                <h3 class="font-bold text-gray-800 text-lg mb-2">🖥️ 沉浸式全屏倒计时</h3>
+                <p class="text-sm leading-relaxed">点击全屏按钮，页面会自动进入无干扰模式。非常适合用于考场投影、模拟考试计时、或是年会演讲提示。</p>
+            </div>
+            <div>
+                <h3 class="font-bold text-gray-800 text-lg mb-2">🔔 无损提示音 (Web Audio)</h3>
+                <p class="text-sm leading-relaxed">无需下载庞大的 mp3 音频文件，我们的网页采用纯原生代码生成清脆的到点提示音，即使在弱网环境下也能精准提醒。</p>
+            </div>
+            <div>
+                <h3 class="font-bold text-gray-800 text-lg mb-2">🔒 纯净免安装，保护隐私</h3>
+                <p class="text-sm leading-relaxed">这是一款纯前端运行的网页倒数计时器，没有任何弹窗广告，不收集任何用户使用数据，即用即走，干净清爽。</p>
+            </div>
+        </div>
+    </article>
+</div>
+
+<script>
+    let initialTime = 1500;
+    let timeLeft = initialTime;
+    let timerId = null;
+    let isRunning = false;
+    let audioCtx = null;
+
+    const timeDisplay = document.getElementById('timeDisplay');
+    const btnToggle = document.getElementById('btnToggle');
+    const iconPlay = document.getElementById('iconPlay');
+    const iconPause = document.getElementById('iconPause');
+    const btnReset = document.getElementById('btnReset');
+    const btnFullscreen = document.getElementById('btnFullscreen');
+    const iconEnterFS = document.getElementById('iconEnterFS');
+    const iconExitFS = document.getElementById('iconExitFS');
+    const presetBtns = document.querySelectorAll('.preset-btn');
+
+    function formatTime(seconds) {
+        const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+        const s = (seconds % 60).toString().padStart(2, '0');
+        return `${m}:${s}`;
+    }
+
+    function updateDisplay() {
+        timeDisplay.textContent = formatTime(timeLeft);
+        document.title = `${formatTime(timeLeft)} - 在线倒计时 | Free Tools`;
+
+        if (timeLeft === 0) {
+            timeDisplay.classList.add('!text-red-600');
+        } else {
+            timeDisplay.classList.remove('!text-red-600');
+        }
+    }
+
+    function playAlarm() {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(880, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(440, audioCtx.currentTime + 0.5);
+        gain.gain.setValueAtTime(1, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 1.5);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 1.5);
+    }
+
+    function toggleTimer() {
+        if (timeLeft === 0) resetTimer();
+
+        if (isRunning) {
+            clearInterval(timerId);
+            isRunning = false;
+            iconPlay.classList.remove('hidden');
+            iconPause.classList.add('hidden');
+        } else {
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            isRunning = true;
+            iconPlay.classList.add('hidden');
+            iconPause.classList.remove('hidden');
+
+            timerId = setInterval(() => {
+                timeLeft--;
+                updateDisplay();
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerId);
+                    isRunning = false;
+                    iconPlay.classList.remove('hidden');
+                    iconPause.classList.add('hidden');
+                    playAlarm();
+
+                    // 倒计时结束时的视觉警报
+                    document.body.classList.add('bg-red-100');
+                    setTimeout(() => document.body.classList.remove('bg-red-100'), 800);
+                }
+            }, 1000);
+        }
+    }
+
+    function resetTimer() {
+        clearInterval(timerId);
+        isRunning = false;
+        timeLeft = initialTime;
+        iconPlay.classList.remove('hidden');
+        iconPause.classList.add('hidden');
+        document.body.classList.remove('bg-red-100');
+        updateDisplay();
+    }
+
+    btnToggle.addEventListener('click', toggleTimer);
+    btnReset.addEventListener('click', resetTimer);
+
+    presetBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            presetBtns.forEach(b => {
+                b.classList.remove('bg-red-100', 'text-red-600', 'border', 'border-red-200', 'shadow-sm');
+                b.classList.add('bg-gray-100', 'text-gray-700');
+            });
+            e.target.classList.remove('bg-gray-100', 'text-gray-700');
+            e.target.classList.add('bg-red-100', 'text-red-600', 'border', 'border-red-200', 'shadow-sm');
+
+            initialTime = parseInt(e.target.getAttribute('data-time'));
+            resetTimer();
+        });
+    });
+
+    timeDisplay.addEventListener('click', () => {
+        if (isRunning) return;
+        const userInput = prompt("请输入倒计时分钟数 (例如输入 10 表示 10分钟):", Math.floor(initialTime / 60));
+        if (userInput !== null && !isNaN(userInput) && userInput > 0) {
+            initialTime = Math.floor(userInput * 60);
+            presetBtns.forEach(b => {
+                b.classList.remove('bg-red-100', 'text-red-600', 'border', 'border-red-200', 'shadow-sm');
+                b.classList.add('bg-gray-100', 'text-gray-700');
+            });
+            resetTimer();
+        }
+    });
+
+    // 🥇 核心修复：更完美的 Javascript 全屏控制与 Class 绑定
+    btnFullscreen.addEventListener('click', () => {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen().catch(err => {
+                console.error(`开启全屏失败: ${err.message}`);
+            });
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+        }
+    });
+
+    // 🥇 核心修复：监听浏览器底层的全屏状态变化（哪怕用户按 Esc 退出，也能完美触发 UI 恢复）
+    document.addEventListener('fullscreenchange', () => {
+        if (document.fullscreenElement) {
+            document.body.classList.add('is-fullscreen');
+            iconEnterFS.classList.add('hidden');
+            iconExitFS.classList.remove('hidden');
+        } else {
+            document.body.classList.remove('is-fullscreen');
+            iconEnterFS.classList.remove('hidden');
+            iconExitFS.classList.add('hidden');
+        }
+    });
+
+    updateDisplay();
+</script>
+</body>
+</html>
