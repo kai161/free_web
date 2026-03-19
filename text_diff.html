@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>在线实时文本比对工具 | 纯本地不传服务器 | Free Tools</title>
+    <meta name="description" content="专业级在线文本比对与差异检查工具。支持双面板实时高亮比对、原文本保护。纯前端运行，无需上传服务器，绝对保护您的代码与合同隐私。">
+    <meta name="keywords" content="文本比对, 在线Diff, 文本差异, 代码比对, 合同查重, text compare, diff tool">
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "纯本地实时文本比对工具",
+            "applicationCategory": "UtilitiesApplication",
+            "description": "纯本地运行的双栏文本差异比对工具，输入即实时高亮差异。",
+            "operatingSystem": "All"
+        }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsdiff/5.2.0/diff.min.js"></script>
+
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono&display=swap');
+
+        body { font-family: 'Inter', -apple-system, sans-serif; background-color: #f8fafc; overflow: hidden; }
+
+        /* 核心：保证底层的高亮层和顶层的输入框文字排版绝对一致 */
+        .sync-text {
+            font-family: 'JetBrains Mono', 'Courier New', Courier, monospace;
+            font-size: 15px;
+            line-height: 1.6;
+            tab-size: 4;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        /* 自定义滚动条 */
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; height: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="min-h-screen">
+
+<div id="nav-placeholder"></div>
+<script src="nav.js"></script>
+
+<div class="max-w-full mx-auto px-4 sm:px-6 pt-2" id="main-wrapper">
+
+    <header class="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
+        <div class="flex items-center gap-4">
+            <h1 class="text-2xl font-extrabold text-gray-900 tracking-tight flex items-center gap-2">
+                <span class="text-2xl">📝</span> 实时文本比对
+            </h1>
+            <button onclick="swapText()" class="px-4 py-1.5 bg-indigo-100 text-indigo-700 hover:bg-indigo-200 hover:text-indigo-800 font-bold rounded-lg transition-colors flex items-center gap-2 shadow-sm text-sm" title="交换两边文本">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
+                左右交换
+            </button>
+        </div>
+        <div class="flex gap-4">
+            <span class="text-xs bg-red-100 text-red-700 px-3 py-1.5 rounded-full font-bold shadow-sm border border-red-200">左侧标红：缺失或删除项</span>
+            <span class="text-xs bg-green-100 text-green-700 px-3 py-1.5 rounded-full font-bold shadow-sm border border-green-200">右侧标绿：新增或修改项</span>
+        </div>
+    </header>
+
+    <main class="grid grid-cols-1 xl:grid-cols-2 gap-4 h-[calc(100vh-140px)] min-h-[500px] pb-4">
+
+        <section class="bg-white rounded-2xl shadow-lg border border-gray-200 flex flex-col overflow-hidden">
+            <div class="bg-gray-50 px-4 py-3 border-b border-gray-200 flex flex-wrap justify-between items-center gap-2">
+                <span class="font-extrabold text-gray-700">📄 文本 A (原版本)</span>
+                <button onclick="clearText('A')" class="px-3 py-1 text-sm text-gray-500 hover:bg-red-50 hover:text-red-600 font-semibold rounded transition-colors">清空</button>
+            </div>
+
+            <div class="relative flex-1 bg-white overflow-hidden group">
+                <pre id="diffA" class="sync-text absolute inset-0 w-full h-full p-4 m-0 overflow-hidden text-transparent pointer-events-none z-0"></pre>
+                <textarea id="textA" class="sync-text absolute inset-0 w-full h-full p-4 m-0 bg-transparent text-gray-800 caret-black outline-none resize-none custom-scrollbar z-10 border-none" spellcheck="false" placeholder="在此输入或粘贴原始文本..."></textarea>
+            </div>
+
+            <div class="bg-gray-50 px-4 py-1.5 text-xs font-semibold text-gray-400 border-t border-gray-200 flex justify-between">
+                <span id="charCountA">0 字符</span>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-2xl shadow-lg border border-gray-200 flex flex-col overflow-hidden">
+            <div class="bg-gray-50 px-4 py-3 border-b border-gray-200 flex flex-wrap justify-between items-center gap-2">
+                <span class="font-extrabold text-gray-700">📄 文本 B (新版本)</span>
+                <button onclick="clearText('B')" class="px-3 py-1 text-sm text-gray-500 hover:bg-red-50 hover:text-red-600 font-semibold rounded transition-colors">清空</button>
+            </div>
+
+            <div class="relative flex-1 bg-white overflow-hidden group">
+                <pre id="diffB" class="sync-text absolute inset-0 w-full h-full p-4 m-0 overflow-hidden text-transparent pointer-events-none z-0"></pre>
+                <textarea id="textB" class="sync-text absolute inset-0 w-full h-full p-4 m-0 bg-transparent text-gray-800 caret-black outline-none resize-none custom-scrollbar z-10 border-none" spellcheck="false" placeholder="在此输入或粘贴修改后的文本..."></textarea>
+            </div>
+
+            <div class="bg-gray-50 px-4 py-1.5 text-xs font-semibold text-gray-400 border-t border-gray-200 flex justify-between">
+                <span id="charCountB">0 字符</span>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<script>
+    const els = {
+        A: {
+            input: document.getElementById('textA'),
+            diff: document.getElementById('diffA'),
+            count: document.getElementById('charCountA')
+        },
+        B: {
+            input: document.getElementById('textB'),
+            diff: document.getElementById('diffB'),
+            count: document.getElementById('charCountB')
+        }
+    };
+
+    // 转义 HTML 实体防止 XSS 和渲染错误
+    function escapeHtml(unsafe) {
+        return unsafe
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
+    // 清空文本
+    function clearText(panel) {
+        els[panel].input.value = '';
+        performDiff();
+        els[panel].input.focus();
+    }
+
+    // 一键交换左右文本
+    function swapText() {
+        const temp = els.A.input.value;
+        els.A.input.value = els.B.input.value;
+        els.B.input.value = temp;
+        performDiff();
+    }
+
+    // 🌟 核心：实时比对逻辑
+    function performDiff() {
+        const valA = els.A.input.value;
+        const valB = els.B.input.value;
+
+        // 更新字符数统计
+        els.A.count.textContent = `${valA.length} 字符`;
+        els.B.count.textContent = `${valB.length} 字符`;
+
+        // 如果两个框都是空的，清空高亮层
+        if (!valA && !valB) {
+            els.A.diff.innerHTML = '';
+            els.B.diff.innerHTML = '';
+            return;
+        }
+
+        // 对普通文本使用 diffWordsWithSpace (按单词和空格比对)，如果是纯代码可以改为 diffLines
+        const diffs = Diff.diffWordsWithSpace(valA, valB);
+
+        let htmlA = '';
+        let htmlB = '';
+
+        diffs.forEach((part) => {
+            const safeVal = escapeHtml(part.value);
+
+            if (part.added) {
+                // 新增的内容：B 框显示绿底，A 框不显示
+                htmlB += `<span class="bg-green-200/80 rounded-sm">${safeVal}</span>`;
+            } else if (part.removed) {
+                // 删除的内容：A 框显示红底，B 框不显示
+                htmlA += `<span class="bg-red-200/80 rounded-sm">${safeVal}</span>`;
+            } else {
+                // 相同的内容：两边都不加背景色
+                htmlA += `<span>${safeVal}</span>`;
+                htmlB += `<span>${safeVal}</span>`;
+            }
+        });
+
+        // 将渲染好的高亮标签塞入底层的 pre 标签中
+        els.A.diff.innerHTML = htmlA;
+        els.B.diff.innerHTML = htmlB;
+    }
+
+    // ====== 事件监听绑定 ======
+    ['A', 'B'].forEach(panel => {
+        const textarea = els[panel].input;
+        const pre = els[panel].diff;
+
+        // 1. 每次输入时实时比对
+        textarea.addEventListener('input', performDiff);
+
+        // 2. 🌟 滚动同步：保证顶层输入框滚动时，底层的颜色高亮层完美跟随
+        textarea.addEventListener('scroll', function() {
+            pre.scrollTop = this.scrollTop;
+            pre.scrollLeft = this.scrollLeft;
+        });
+
+        // 3. 支持 Tab 键缩进
+        textarea.addEventListener('keydown', function(e) {
+            if (e.key == 'Tab') {
+                e.preventDefault();
+                const start = this.selectionStart;
+                const end = this.selectionEnd;
+                this.value = this.value.substring(0, start) + "    " + this.value.substring(end);
+                this.selectionStart = this.selectionEnd = start + 4;
+                performDiff();
+            }
+        });
+    });
+
+    // 初始页面加载时跑一次
+    performDiff();
+</script>
+</body>
+</html>

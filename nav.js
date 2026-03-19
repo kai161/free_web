@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     <div class="flex space-x-2 py-1" id="nav-links">
                         <a href="zh.html" class="nav-item px-4 py-2 text-sm font-semibold rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors whitespace-nowrap">🖼️ 图片压缩</a>
                         <a href="password.html" class="nav-item px-4 py-2 text-sm font-semibold rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors whitespace-nowrap">🔑 密码生成</a>
+                        <a href="text-diff.html" class="nav-item px-4 py-2 text-sm font-semibold rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors whitespace-nowrap">📝 文本比对</a>
                         <a href="json.html" class="nav-item px-4 py-2 text-sm font-semibold rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors whitespace-nowrap">{ } JSON 工具</a>
                         <a href="qrcode.html" class="nav-item px-4 py-2 text-sm font-semibold rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors whitespace-nowrap">📱 二维码生成</a>
                         <a href="audio.html" class="nav-item px-4 py-2 text-sm font-semibold rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors whitespace-nowrap">🎵 音感训练</a>
