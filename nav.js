@@ -1,4 +1,16 @@
 // nav.js
+// nav.js 补充代码：动态加载 Vercel Insights 脚本
+(function() {
+    // 1. 初始化 va 函数
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+
+    // 2. 动态创建并插入外部 JS 文件
+    const script = document.createElement('script');
+    script.src = '/_vercel/insights/script.js';
+    script.defer = true;
+    document.head.appendChild(script);
+})();
+
 document.addEventListener("DOMContentLoaded", function() {
     // 1. 定义公共导航栏的 HTML 结构 (注意这里用反引号 ` 括起来)
     const navHTML = `
