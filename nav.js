@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function() {
         <div class="flex items-center h-16">
             
             <div class="flex-shrink-0 flex items-center mr-4">
-                <a href="zh.html" class="flex items-center gap-1 hover:opacity-80 transition-opacity">
+                <a href="index.html" class="flex items-center gap-1 hover:opacity-80 transition-opacity">
                     <span class="text-xl">🧰</span>
                     <span class="font-extrabold text-gray-900 text-base sm:text-lg tracking-tighter uppercase">FreeTools</span>
                 </a>
