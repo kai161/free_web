@@ -10,8 +10,14 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+            -webkit-overflow-scrolling: touch; /* 核心：开启 iOS 的弹性滚动 */
+        }
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
         body { font-family: 'Inter', -apple-system, sans-serif; background-color: #f8fafc; }
         .gradient-text { background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -96,8 +102,17 @@
                 </div>
             </div>
         </div>
-
     </main>
+    <article class="max-w-4xl mx-auto mt-16 p-8 bg-white rounded-[2rem] border border-gray-100 shadow-sm text-gray-600 leading-relaxed">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">如何通过科学训练获得绝对音感？</h2>
+        <div class="space-y-4">
+            <p>音感（Pitch Perception）是音乐素养的核心。<strong>绝对音感</strong>是指在没有参考音的情况下，能准确辨认出所听到的音高。虽然传统观点认为这是儿时的天赋，但通过系统的视唱练耳（Ear Training），成年人也能显著提升对音准的敏感度。</p>
+            <h3 class="font-bold text-gray-800">本工具的训练逻辑</h3>
+            <p>我们模拟了标准钢琴音色，为您提供随机的音高测试。建议每天进行 5-10 分钟的专注练习。从辨认单个白键音开始，逐渐过渡到黑键（半音）。通过反复的“听觉-反馈-校正”循环，您的脑海中会建立起稳固的频率记忆。</p>
+            <h3 class="font-bold text-gray-800">音乐人的必备功课</h3>
+            <p>无论是作曲、扒谱还是声乐练习，出众的音感都能让您事半功倍。本工具无需下载大型插件，基于 Web Audio API 还原纯正音准，是您免费的在线音乐教师。</p>
+        </div>
+    </article>
 </div>
 
 <script>

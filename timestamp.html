@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unix 时间戳转换工具 | 实时双向转换 | Free Tools</title>
+    <meta name="description" content="在线 Unix 时间戳转换工具。支持秒(10位)与毫秒(13位)实时双向转换，提供当前时间获取及常用编程语言时间戳获取代码，纯前端运行，极速响应。">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+            -webkit-overflow-scrolling: touch; /* 核心：开启 iOS 的弹性滚动 */
+        }
+    </style>
+</head>
+<body class="min-h-screen pb-12">
+
+<div id="nav-placeholder"></div>
+<script src="nav.js"></script>
+
+<div class="max-w-4xl mx-auto px-4 pt-8">
+    <header class="text-center mb-10">
+        <h1 class="text-4xl font-extrabold text-gray-900 mb-4">Unix 时间戳转换</h1>
+        <p class="text-gray-500">当前北京时间：<span id="curClock" class="mono font-bold text-blue-600">加载中...</span></p>
+    </header>
+
+    <main class="space-y-6">
+        <div class="bg-white rounded-[2rem] shadow-xl border border-gray-100 p-8">
+            <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-6 items-center">
+                <div class="space-y-2">
+                    <label class="text-xs font-bold text-gray-400 uppercase tracking-widest">Unix 时间戳 (秒/毫秒)</label>
+                    <div class="flex gap-2">
+                        <input type="number" id="tsInput" class="flex-1 p-4 bg-gray-50 border border-gray-200 rounded-xl mono focus:ring-2 focus:ring-blue-500 outline-none" placeholder="例如: 1716200000">
+                        <button onclick="useCurrentTs()" class="px-4 py-2 bg-blue-50 text-blue-600 font-bold rounded-xl hover:bg-blue-100 transition-colors text-sm">现在</button>
+                    </div>
+                </div>
+
+                <div class="flex justify-center text-gray-300">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-xs font-bold text-gray-400 uppercase tracking-widest">北京时间 (YYYY-MM-DD HH:mm:ss)</label>
+                    <input type="text" id="dateInput" class="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl mono focus:ring-2 focus:ring-blue-500 outline-none" placeholder="2024-05-20 18:00:00">
+                </div>
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-gray-50 flex flex-wrap gap-4 justify-center">
+                <button id="btnTsToDate" class="px-8 py-3 bg-blue-600 text-white font-bold rounded-xl shadow-lg shadow-blue-100 active:scale-95 transition-all">转换成时间</button>
+                <button id="btnDateToTs" class="px-8 py-3 bg-gray-800 text-white font-bold rounded-xl shadow-lg shadow-gray-200 active:scale-95 transition-all">转换成时间戳</button>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-[2rem] p-8 border border-gray-100 shadow-sm overflow-x-auto">
+            <h2 class="text-xl font-bold mb-6">各编程语言获取当前时间戳</h2>
+            <table class="w-full text-left text-sm">
+                <thead><tr class="text-gray-400 border-b border-gray-100"><th class="pb-3">语言</th><th class="pb-3">代码片段</th></tr></thead>
+                <tbody class="mono text-gray-600">
+                <tr class="border-b border-gray-50"><td class="py-4 font-bold text-gray-800">JavaScript</td><td class="py-4">Math.round(Date.now() / 1000)</td></tr>
+                <tr class="border-b border-gray-50"><td class="py-4 font-bold text-gray-800">Python</td><td class="py-4">import time; int(time.time())</td></tr>
+                <tr class="border-b border-gray-50"><td class="py-4 font-bold text-gray-800">PHP</td><td class="py-4">time()</td></tr>
+                <tr class="border-b border-gray-50"><td class="py-4 font-bold text-gray-800">Java</td><td class="py-4">System.currentTimeMillis() / 1000</td></tr>
+                <tr><td class="py-4 font-bold text-gray-800">Go</td><td class="py-4">time.Now().Unix()</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <article class="max-w-4xl mx-auto mt-16 p-8 bg-white rounded-[2rem] border border-gray-100 shadow-sm text-gray-600 leading-relaxed">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">Unix 时间戳：程序员的必备手册</h2>
+        <div class="space-y-4">
+            <p>Unix 时间戳（Unix Epoch）定义为从 1970 年 1 月 1 日 00:00:00 UTC 起至现在的总秒数。它是全球计算机系统进行时间同步的基础。作为开发者，我们经常需要处理 10 位（秒级）和 13 位（毫秒级）时间戳的互相转换，本工具为您提供了一站式的<strong>双向实时转换</strong>服务。</p>
+            <h3 class="font-bold text-gray-800">2038 年问题科普</h3>
+            <p>许多旧系统使用 32 位有符号整数存储时间戳，其上限是 2,147,483,647，这对应于北京时间 2038 年 1 月 19 日。届时这些系统可能会因为数据溢出而崩溃。了解时间戳的工作原理，有助于我们在系统设计时提前规避此类风险。</p>
+            <h3 class="font-bold text-gray-800">多语言获取方式</h3>
+            <p>无论您使用的是 Python、JavaScript、Java 还是 PHP，我们在页面下方为您整理了获取当前时间戳的常用函数。实时转换、本地处理，无需频繁翻阅文档。</p>
+        </div>
+    </article>
+</div>
+
+<script>
+    const tsInput = document.getElementById('tsInput');
+    const dateInput = document.getElementById('dateInput');
+    const curClock = document.getElementById('curClock');
+
+    // 实时时钟
+    setInterval(() => {
+        const now = new Date();
+        curClock.textContent = `${Math.round(now.getTime()/1000)} | ${now.toLocaleString()}`;
+    }, 1000);
+
+    function useCurrentTs() {
+        tsInput.value = Math.round(Date.now() / 1000);
+        tsToDate();
+    }
+
+    function tsToDate() {
+        let val = parseInt(tsInput.value);
+        if (!val) return;
+        // 识别 10 位还是 13 位
+        if (val.toString().length === 10) val *= 1000;
+        const d = new Date(val);
+        dateInput.value = d.getFullYear() + '-' +
+            String(d.getMonth()+1).padStart(2,'0') + '-' +
+            String(d.getDate()).padStart(2,'0') + ' ' +
+            String(d.getHours()).padStart(2,'0') + ':' +
+            String(d.getMinutes()).padStart(2,'0') + ':' +
+            String(d.getSeconds()).padStart(2,'0');
+    }
+
+    function dateToTs() {
+        const val = dateInput.value;
+        if (!val) return;
+        const d = new Date(val.replace(/-/g, '/'));
+        tsInput.value = Math.round(d.getTime() / 1000);
+    }
+
+    document.getElementById('btnTsToDate').addEventListener('click', tsToDate);
+    document.getElementById('btnDateToTs').addEventListener('click', dateToTs);
+
+    // 初始化
+    useCurrentTs();
+</script>
+</body>
+</html>

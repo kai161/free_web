@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# 告诉搜索引擎 Sitemap 的绝对路径
+Sitemap: https://freetools.best/sitemap.xml

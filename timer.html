@@ -28,8 +28,14 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+            -webkit-overflow-scrolling: touch; /* 核心：开启 iOS 的弹性滚动 */
+        }
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@700&display=swap');
         body { font-family: 'Inter', -apple-system, sans-serif; background-color: #f8fafc; }
         .timer-font { font-family: 'JetBrains Mono', monospace; font-variant-numeric: tabular-nums; }

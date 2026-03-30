@@ -13,8 +13,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsdiff/5.2.0/diff.min.js"></script>
 
     <style>
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+            -webkit-overflow-scrolling: touch; /* 核心：开启 iOS 的弹性滚动 */
+        }
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Fira+Code&display=swap');
 
         body { font-family: 'Inter', -apple-system, sans-serif; background-color: #f8fafc; overflow: hidden; }
@@ -92,6 +98,16 @@
         </section>
 
     </main>
+    <article class="max-w-4xl mx-auto mt-16 p-8 bg-white rounded-[2rem] border border-gray-100 shadow-sm text-gray-600 leading-relaxed">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">JSON 实时校验与 Diff 比对指南</h2>
+        <div class="space-y-4">
+            <p>对于后端开发和前端工程师来说，调试 API 接口时最痛苦的就是遇到<strong>格式错误的 JSON</strong>。本工具不仅支持一键美化（Prettify）和压缩（Minify），更重要的是它提供了实时语法校验功能。一旦您的代码缺少逗号、引号不匹配或括号未闭合，系统会立即高亮指出错误位置，极大提升 Debug 效率。</p>
+            <h3 class="font-bold text-gray-800">双栏比对：找出接口差异</h3>
+            <p>当您需要对比两个版本的 JSON 数据结构（例如：测试环境与生产环境的返回结果）时，原地 Diff 功能会为您标注出所有的新增、修改和删除项。绿色代表新增，红色代表缺失，让数据变化一目了然。</p>
+            <h3 class="font-bold text-gray-800">隐私保护：拒绝敏感数据上传</h3>
+            <p>JSON 往往包含用户信息、Token 或私密配置。使用在线解析器存在极大的泄露风险。我们的工具 100% 离线运行，是您处理生产环境数据的安全选择。</p>
+        </div>
+    </article>
 </div>
 
 <script>

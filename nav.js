@@ -14,33 +14,38 @@
 document.addEventListener("DOMContentLoaded", function() {
     // 1. 定义公共导航栏的 HTML 结构 (注意这里用反引号 ` 括起来)
     const navHTML = `
-    <nav class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm mb-8">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                
-                <div class="flex-shrink-0 flex items-center">
-                    <a href="zh.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
-                        <span class="text-2xl">🧰</span>
-                        <span class="font-extrabold text-gray-900 text-xl tracking-tight">FreeTools<span class="text-blue-600">.best</span></span>
-                    </a>
-                </div>
-
-                <div class="flex-1 flex justify-end overflow-x-auto no-scrollbar ml-4">
-                    <div class="flex space-x-2 py-1" id="nav-links">
-                        <a href="zh.html" class="nav-item px-4 py-2 text-sm font-semibold rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors whitespace-nowrap">🖼️ 图片压缩</a>
-                        <a href="password.html" class="nav-item px-4 py-2 text-sm font-semibold rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors whitespace-nowrap">🔑 密码生成</a>
-                        <a href="text_diff.html" class="nav-item px-4 py-2 text-sm font-semibold rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors whitespace-nowrap">📝 文本比对</a>
-                        <a href="json.html" class="nav-item px-4 py-2 text-sm font-semibold rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors whitespace-nowrap">{ } JSON 工具</a>
-                        <a href="qrcode.html" class="nav-item px-4 py-2 text-sm font-semibold rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors whitespace-nowrap">📱 二维码生成</a>
-                        <a href="audio.html" class="nav-item px-4 py-2 text-sm font-semibold rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors whitespace-nowrap">🎵 音感训练</a>
-                        <a href="timer.html" class="nav-item px-4 py-2 text-sm font-semibold rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors whitespace-nowrap">⏳ 倒计时</a>
-                    </div>
-                </div>
-
+<nav class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm mb-8">
+    <div class="max-w-6xl mx-auto px-4">
+        <div class="flex items-center h-16">
+            
+            <div class="flex-shrink-0 flex items-center mr-4">
+                <a href="zh.html" class="flex items-center gap-1 hover:opacity-80 transition-opacity">
+                    <span class="text-xl">🧰</span>
+                    <span class="font-extrabold text-gray-900 text-base sm:text-lg tracking-tighter uppercase">FreeTools</span>
+                </a>
             </div>
+
+            <div class="relative flex-1 h-full flex items-center overflow-hidden">
+                <div class="flex flex-nowrap items-center overflow-x-auto overscroll-x-contain touch-pan-x no-scrollbar gap-1 py-2 w-full" id="nav-links">
+                    <a href="index.html" class="nav-item px-3 py-1.5 text-sm font-semibold rounded-lg text-gray-600 hover:bg-gray-100 whitespace-nowrap"> 首页</a>
+                    <a href="zh.html" class="nav-item px-3 py-1.5 text-sm font-semibold rounded-lg text-gray-600 hover:bg-gray-100 whitespace-nowrap">🖼️ 压缩</a>
+                    <a href="password.html" class="nav-item px-3 py-1.5 text-sm font-semibold rounded-lg text-gray-600 hover:bg-gray-100 whitespace-nowrap">🔑 密码</a>
+                    <a href="json.html" class="nav-item px-3 py-1.5 text-sm font-semibold rounded-lg text-gray-600 hover:bg-gray-100 whitespace-nowrap">{ } JSON格式化&比对</a>
+                    <a href="qrcode.html" class="nav-item px-3 py-1.5 text-sm font-semibold rounded-lg text-gray-600 hover:bg-gray-100 whitespace-nowrap">📱 二维码</a>
+                    <a href="audio.html" class="nav-item px-3 py-1.5 text-sm font-semibold rounded-lg text-gray-600 hover:bg-gray-100 whitespace-nowrap">🎵 音感</a>
+                    <a href="timer.html" class="nav-item px-3 py-1.5 text-sm font-semibold rounded-lg text-gray-600 hover:bg-gray-100 whitespace-nowrap">⏳ 倒计时</a>
+                    <a href="text_diff.html" class="nav-item px-3 py-1.5 text-sm font-semibold rounded-lg text-gray-600 hover:bg-gray-100 whitespace-nowrap">📝 文本比对</a>
+                    <a href="timestamp.html" class="nav-item px-3 py-1.5 text-sm font-semibold rounded-lg text-gray-600 hover:bg-gray-100 whitespace-nowrap">🕒 时间戳</a>
+                    <a href="base64.html" class="nav-item px-3 py-1.5 text-sm font-semibold rounded-lg text-gray-600 hover:bg-gray-100 whitespace-nowrap">🖼️ Base64</a>
+                </div>
+                
+                <div class="absolute right-0 top-0 bottom-0 w-6 bg-gradient-to-l from-white to-transparent pointer-events-none"></div>
+            </div>
+
         </div>
-    </nav>
-    `;
+    </div>
+</nav>
+`;
 
     // 2. 将导航栏注入到页面的 <div id="nav-placeholder"></div> 中
     const placeholder = document.getElementById('nav-placeholder');
@@ -68,4 +73,30 @@ document.addEventListener("DOMContentLoaded", function() {
             item.classList.add('font-bold', 'text-gray-900', 'bg-gray-100', 'hover:bg-gray-200');
         }
     });
+
+    // 在 nav.js 逻辑中加入分享功能
+    function shareSite() {
+        if (navigator.share) {
+            navigator.share({
+                title: 'FreeTools.best - 隐私优先的极速工具箱',
+                text: '发现一个超好用的纯前端工具站，100%本地处理，保护隐私！',
+                url: window.location.href,
+            });
+        } else {
+            // 退而求其次：复制链接
+            navigator.clipboard.writeText(window.location.href);
+            alert('链接已复制到剪贴板，快发给小伙伴吧！');
+        }
+    }
+
+    // 在 nav.js 注入 HTML 后执行
+    setTimeout(() => {
+        const container = document.getElementById('nav-links');
+        const activeItem = container.querySelector('.bg-gray-100'); // 获取当前高亮的按钮
+        if (activeItem) {
+            // 将高亮项滚动到视野中心
+            const offset = activeItem.offsetLeft - (container.offsetWidth / 2) + (activeItem.offsetWidth / 2);
+            container.scrollTo({ left: offset, behavior: 'smooth' });
+        }
+    }, 100);
 });

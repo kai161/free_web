@@ -11,13 +11,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
-        /* 隐藏滚动条但保留滚动功能 */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
         .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+            -webkit-overflow-scrolling: touch; /* 核心：开启 iOS 的弹性滚动 */
         }
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
         body { font-family: 'Inter', -apple-system, sans-serif; background-color: #f8fafc; }
@@ -85,6 +85,16 @@
             </div>
         </div>
     </main>
+    <article class="max-w-4xl mx-auto mt-16 p-8 bg-white rounded-[2rem] border border-gray-100 shadow-sm text-gray-600 leading-relaxed">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">在线制作安全、高清的二维码</h2>
+        <div class="space-y-4">
+            <p>二维码（QR Code）已成为连接线上线下的重要桥梁。无论是网址跳转、文本传输还是电子名片，您都可以在这里一键生成。相比传统工具，我们支持<strong>实时生成</strong>，您每输入一个字符，二维码都会即时更新，无需等待。</p>
+            <h3 class="font-bold text-gray-800">纠错级别与扫描成功率</h3>
+            <p>二维码具备一定的纠错能力（Error Correction）。即使表面有部分污损或遮挡，依然可以被准确扫描。本工具采用标准纠错算法，确保生成的码在各种光线和角度下都能被快速识别。</p>
+            <h3 class="font-bold text-gray-800">隐私二维码的重要性</h3>
+            <p>许多在线工具会通过“短链接”中转您的二维码，从而统计您的点击数据。这意味着您的跳转目标被第三方记录。使用本页面的本地生成功能，链接直接编码进图片，无中转、无追踪，保护您的流量隐私。</p>
+        </div>
+    </article>
 </div>
 
 <script>

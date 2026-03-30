@@ -22,8 +22,9 @@
             display: none;
         }
         .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+            -webkit-overflow-scrolling: touch; /* 核心：开启 iOS 的弹性滚动 */
         }
 
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
@@ -116,7 +117,16 @@
                 </div>
             </section>
         </main>
-        
+        <article class="max-w-4xl mx-auto mt-16 p-8 bg-white rounded-[2rem] border border-gray-100 shadow-sm text-gray-600 leading-relaxed">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">为什么选择离线图片压缩工具？</h2>
+            <div class="space-y-4">
+                <p>在互联网高度发达的今天，隐私安全成为了首要考虑因素。传统的在线图片压缩工具通常需要将您的照片上传到远程服务器进行处理，这不仅存在隐私泄露的风险，还会受到网络带宽的限制。我们的<strong>纯前端图片压缩工具</strong>采用 WebAssembly 技术，所有压缩逻辑均在您的浏览器本地完成，数据绝不离机。</p>
+                <h3 class="font-bold text-gray-800">如何平衡图片体积与画质？</h3>
+                <p>图片体积过大会直接影响网站的加载速度（LCP 评分）。通过调节压缩质量（Quality），您可以有效地移除图片中肉眼难以察觉的冗余数据。通常建议将质量设为 70%-80%，这可以在保持视觉清晰度的同时，减少 50% 以上的文件体积，非常适合用于网页开发、社交媒体分享和存储空间优化。</p>
+                <h3 class="font-bold text-gray-800">支持哪些格式？</h3>
+                <p>本工具支持主流的 JPG、PNG、WebP 及 GIF 格式。对于摄影师、前端开发者和办公族来说，这是一款无需安装、即开即用的高效生产力辅助工具。</p>
+            </div>
+        </article>
         <footer class="mt-12 pt-8 text-center text-gray-400 text-sm">
             <p>&copy; 2026 Squeeze It. 免费且保护隐私的图片压缩工具。</p>
         </footer>

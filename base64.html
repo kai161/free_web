@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片转 Base64 工具 | 纯本地离线转换 | Free Tools</title>
+    <meta name="description" content="在线将图片转换为 Base64 编码字符串。支持拖拽上传、实时预览、生成 HTML/CSS 代码片段，纯本地运行，保护图片隐私不泄露。">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+            -webkit-overflow-scrolling: touch; /* 核心：开启 iOS 的弹性滚动 */
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Fira+Code&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .mono { font-family: 'Fira Code', monospace; }
+    </style>
+</head>
+<body class="min-h-screen pb-12">
+
+<div id="nav-placeholder"></div>
+<script src="nav.js"></script>
+
+<div class="max-w-5xl mx-auto px-4 pt-8">
+    <header class="text-center mb-10">
+        <h1 class="text-4xl font-extrabold text-gray-900 mb-4 tracking-tight">图片转 Base64</h1>
+        <p class="text-gray-500">减少 HTTP 请求，将小图片直接嵌入 HTML/CSS 代码中</p>
+    </header>
+
+    <main class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="space-y-6">
+            <div id="dropZone" class="h-64 border-4 border-dashed border-gray-200 rounded-[2rem] bg-white hover:border-emerald-500 transition-all flex flex-col items-center justify-center cursor-pointer group">
+                <svg class="w-16 h-16 text-gray-300 group-hover:text-emerald-500 mb-4 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                <p class="text-gray-500 font-bold">点击选择图片 或 拖拽至此处</p>
+                <input type="file" id="fileInput" class="hidden" accept="image/*">
+            </div>
+
+            <div id="previewBox" class="hidden bg-white p-6 rounded-[2rem] border border-gray-100 shadow-sm">
+                <label class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4 block">实时预览</label>
+                <img id="imgPreview" class="max-h-48 mx-auto rounded-lg shadow-md">
+                <p id="imgInfo" class="text-center mt-4 text-xs font-bold text-emerald-600"></p>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-[2rem] p-8 border border-gray-100 shadow-xl space-y-6">
+            <div>
+                <div class="flex justify-between items-end mb-2">
+                    <label class="text-xs font-bold text-gray-400 uppercase">Base64 字符串</label>
+                    <button onclick="copyContent('base64Output')" class="text-xs text-emerald-600 font-bold hover:underline">复制全部</button>
+                </div>
+                <textarea id="base64Output" class="w-full h-24 p-4 bg-gray-50 border rounded-xl mono text-xs outline-none focus:ring-2 focus:ring-emerald-500" readonly></textarea>
+            </div>
+
+            <div>
+                <div class="flex justify-between items-end mb-2">
+                    <label class="text-xs font-bold text-gray-400 uppercase">HTML 标签</label>
+                    <button onclick="copyContent('htmlOutput')" class="text-xs text-emerald-600 font-bold hover:underline">复制</button>
+                </div>
+                <textarea id="htmlOutput" class="w-full h-20 p-4 bg-gray-50 border rounded-xl mono text-xs outline-none focus:ring-2 focus:ring-emerald-500" readonly></textarea>
+            </div>
+
+            <div>
+                <div class="flex justify-between items-end mb-2">
+                    <label class="text-xs font-bold text-gray-400 uppercase">CSS 背景</label>
+                    <button onclick="copyContent('cssOutput')" class="text-xs text-emerald-600 font-bold hover:underline">复制</button>
+                </div>
+                <textarea id="cssOutput" class="w-full h-20 p-4 bg-gray-50 border rounded-xl mono text-xs outline-none focus:ring-2 focus:ring-emerald-500" readonly></textarea>
+            </div>
+        </div>
+    </main>
+    <article class="max-w-4xl mx-auto mt-16 p-8 bg-white rounded-[2rem] border border-gray-100 shadow-sm text-gray-600 leading-relaxed">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">Image to Base64：前端性能优化利器</h2>
+        <div class="space-y-4">
+            <p>Base64 编码是一种将二进制图片数据转换为文本字符串的方法。在前端开发中，将小图标（Icons）转换为 <strong>Base64 DataURI</strong> 并直接嵌入 HTML 或 CSS 文件中，可以有效地减少浏览器的 HTTP 请求次数，从而显著提升页面的加载速度和性能评分。</p>
+            <h3 class="font-bold text-gray-800">适用场景与局限性</h3>
+            <p>Base64 编码后的字符串通常会比原始二进制文件体积增大约 33%。因此，它最适合用于体积小于 10KB 的小图、矢量图标或装饰性元素。对于大尺寸照片，建议依然采用传统的 WebP 或 JPG 引用方式，以保持 HTML 文件的轻量化。</p>
+            <h3 class="font-bold text-gray-800">本地转换，隐私无忧</h3>
+            <p>很多设计师需要将未公开的产品图或 Logo 进行转换。本工具支持拖拽上传，所有转换逻辑均在本地完成，不会将您的图片存储到任何服务器，是您安全开发流程中的理想助手。</p>
+        </div>
+    </article>
+</div>
+
+<script>
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('fileInput');
+    const imgPreview = document.getElementById('imgPreview');
+    const previewBox = document.getElementById('previewBox');
+    const imgInfo = document.getElementById('imgInfo');
+
+    dropZone.onclick = () => fileInput.click();
+
+    fileInput.onchange = (e) => handleFile(e.target.files[0]);
+
+    dropZone.ondragover = (e) => { e.preventDefault(); dropZone.classList.add('border-emerald-500'); };
+    dropZone.ondragleave = () => dropZone.classList.remove('border-emerald-500');
+    dropZone.ondrop = (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('border-emerald-500');
+        handleFile(e.dataTransfer.files[0]);
+    };
+
+    function handleFile(file) {
+        if (!file || !file.type.startsWith('image/')) return;
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const b64 = e.target.result;
+            imgPreview.src = b64;
+            previewBox.classList.remove('hidden');
+            imgInfo.textContent = `${file.name} | ${(file.size/1024).toFixed(2)} KB`;
+
+            document.getElementById('base64Output').value = b64;
+            document.getElementById('htmlOutput').value = `<img src="${b64}" alt="${file.name}">`;
+            document.getElementById('cssOutput').value = `background-image: url("${b64}");`;
+        };
+        reader.readAsDataURL(file);
+    }
+
+    async function copyContent(id) {
+        const val = document.getElementById(id).value;
+        if(!val) return;
+        await navigator.clipboard.writeText(val);
+        alert('已复制到剪贴板');
+    }
+</script>
+</body>
+</html>
