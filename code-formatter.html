@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>纯本地代码美化与压缩工具 | HTML/CSS/JS | Free Tools</title>
+    <meta name="description" content="程序员必备工具。纯离线运行的代码美化（Format）与混淆压缩（Minify）工具，支持HTML、CSS、JavaScript。拒绝数据上传，保障代码隐私。">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Fira+Code&display=swap');
+        body { font-family: 'Inter', -apple-system, sans-serif; background-color: #f8fafc; }
+        .code-font { font-family: 'Fira Code', monospace; tab-size: 2; }
+    </style>
+</head>
+<body class="min-h-screen">
+
+<div id="nav-placeholder"></div>
+<script src="nav.js"></script>
+
+<div class="max-w-6xl mx-auto px-4 pt-8 pb-12">
+    <header class="text-center mb-10">
+        <h1 class="text-4xl font-extrabold text-gray-900 mb-4 tracking-tight">代码美化 & 压缩</h1>
+        <p class="text-gray-500">HTML / CSS / JavaScript | 纯本地处理，拒绝代码泄露</p>
+    </header>
+
+    <main class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+        <div class="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/50 flex flex-col h-[60vh]">
+            <div class="flex justify-between items-center mb-4">
+                <label class="text-xs font-bold text-gray-400 uppercase tracking-widest">在这里粘贴您的原始代码</label>
+                <button onclick="clearAll()" class="text-xs text-red-500 font-bold hover:underline">清空</button>
+            </div>
+            <textarea id="codeInput" class="code-font flex-1 w-full p-4 bg-gray-50 border border-gray-100 rounded-xl outline-none resize-none custom-scrollbar" spellcheck="false" placeholder="粘贴 HTML、CSS 或 JS 代码..."></textarea>
+            <div class="mt-6 flex flex-wrap gap-3 justify-center">
+                <button onclick="processCode('A', false)" class="px-5 py-2.5 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition-colors shadow-sm">HTML 美化</button>
+                <button onclick="processCode('C', false)" class="px-5 py-2.5 bg-emerald-600 text-white font-bold rounded-xl hover:bg-emerald-700 transition-colors shadow-sm">CSS 美化</button>
+                <button onclick="processCode('J', false)" class="px-5 py-2.5 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition-colors shadow-sm">JS 美化</button>
+            </div>
+        </div>
+
+        <div class="bg-white p-8 rounded-[2rem] border border-gray-100 shadow-xl shadow-gray-200/50 flex flex-col h-[60vh]">
+            <div class="flex justify-between items-center mb-4">
+                <label class="text-xs font-bold text-gray-400 uppercase tracking-widest">处理后的代码</label>
+                <button onclick="copyContent('codeOutput')" class="text-xs text-indigo-600 font-bold hover:underline">📋 复制</button>
+            </div>
+            <textarea id="codeOutput" class="code-font flex-1 w-full p-4 bg-gray-900 text-green-400 border border-gray-800 rounded-xl outline-none resize-none custom-scrollbar" readonly spellcheck="false" placeholder="格式化或压缩后的代码将显示在此处..."></textarea>
+            <div class="mt-6 flex flex-wrap gap-3 justify-center">
+                <button onclick="processCode('A', true)" class="px-5 py-2.5 text-sm bg-gray-100 text-gray-700 hover:bg-gray-200 font-semibold rounded-lg transition-colors">HTML 压缩</button>
+                <button onclick="processCode('C', true)" class="px-5 py-2.5 text-sm bg-gray-100 text-gray-700 hover:bg-gray-200 font-semibold rounded-lg transition-colors">CSS 压缩</button>
+                <button onclick="processCode('J', true)" class="px-5 py-2.5 text-sm bg-gray-100 text-gray-700 hover:bg-gray-200 font-semibold rounded-lg transition-colors">JS 压缩</button>
+            </div>
+        </div>
+    </main>
+    <article class="max-w-4xl mx-auto mt-16 p-8 bg-white rounded-[2rem] border border-gray-100 shadow-sm text-gray-600 leading-relaxed">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">为什么开发者需要本地代码处理工具？</h2>
+        <div class="space-y-4">
+            <p>在日常开发中，我们经常需要处理来自压缩包、压缩过的第三方库或是混乱的旧代码。<strong>代码美化（Code Format）</strong>不仅是为了视觉上的整洁，更是为了提高代码的可读性和可维护性。传统的在线美化工具可能会记录您提交的逻辑代码，这对包含商业秘密或 API 密钥的项目来说是巨大的安全隐患。</p>
+            <h3 class="font-bold text-gray-800">美化 (Format) 与压缩 (Minify) 的区别</h3>
+            <p>美化是通过增加缩进、换行和空格，让代码符合人类的阅读习惯；而压缩则是通过移除所有不必要的字符（如空格、注释、换行）来减小文件体积。在生产环境中，压缩后的 CSS 和 JS 文件可以显著提升网页的加载速度。我们的工具支持 <strong>HTML、CSS 和 JavaScript</strong> 的一键处理，且所有操作均在本地完成，确保代码隐私。</p>
+            <h3 class="font-bold text-gray-800">关于代码混淆的建议</h3>
+            <p>虽然压缩可以起到一定的保护作用，但对于核心业务逻辑，建议配合专业的混淆加密方案。本工具提供的压缩功能主要侧重于极致的性能优化（Payload Reduction），是前端性能优化流程中不可或缺的一环。</p>
+        </div>
+    </article>
+</div>
+
+<script>
+    const input = document.getElementById('codeInput');
+    const output = document.getElementById('codeOutput');
+
+    // 使用简单、原生的正则表达式逻辑进行压缩和美化
+    // 而不是加载庞大的专业编辑器
+    function processCode(type, isMinify) {
+        const rawVal = input.value;
+        if (!rawVal.trim()) return;
+
+        try {
+            if (isMinify) {
+                // --- 压缩逻辑 ---
+                if (type === 'A') {
+                    // 移除 HTML 注释、多余空格
+                    output.value = rawVal.replace(//g, '').replace(/\s+/g, ' ');
+                } else if (type === 'C') {
+                    // 移除 CSS 注释、多余空格和换行
+                    output.value = rawVal.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\s+/g, ' ').replace(/\s?\{\s?/g, '{').replace(/\s?\}\s?/g, '}').replace(/\s?;\s?/g, ';');
+                } else if (type === 'J') {
+                    // JS 压缩：简单移除注释和空格 (这不是严格混淆)
+                    output.value = rawVal.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/[^\n]*\n/g, '').replace(/\s+/g, ' ');
+                }
+            } else {
+                // --- 极轻量级美化逻辑 (不引入第三方库) ---
+                if (type === 'J') {
+                    // 利用浏览器原生的 JSON.stringify 美化 JS 对象 (简单格式化)
+                    // 对于完整的代码，这只能起到缩进和换行作用
+                    output.value = rawVal.split(';').map(line => line.trim()).join(';\n').split('{').join('{\n\t').split('}').join('\n}\n');
+                } else if (type === 'C') {
+                    output.value = rawVal.split('}').map(rule => rule.trim()).join('}\n\n').split('{').join(' {\n\t').split(';').map(line => line.trim()).join(';\n\t').replace(/\n\t}/g, '\n}');
+                } else if (type === 'A') {
+                    // 简单 HTML 美化：在标签之间换行并缩进
+                    output.value = rawVal.replace(/(<[^>]+>)/g, '$1\n').split('\n').map(line => line.trim()).join('\n');
+                }
+            }
+        } catch (err) {
+            output.value = `❌ 处理错误:\n\n${err.message}`;
+        }
+    }
+
+    async function copyContent(id) {
+        const val = document.getElementById(id).value;
+        if(!val) return;
+        await navigator.clipboard.writeText(val);
+        alert('代码已复制到剪贴板');
+    }
+
+    function clearAll() {
+        input.value = '';
+        output.value = '';
+        input.focus();
+    }
+</script>
+</body>
+</html>
