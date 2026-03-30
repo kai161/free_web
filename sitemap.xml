@@ -16,6 +16,13 @@
     </url>
 
     <url>
+        <loc>https://freetools.best/pdf-to-image.html</loc>
+        <lastmod>2026-03-30</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
         <loc>https://freetools.best/timestamp.html</loc>
         <lastmod>2026-03-30</lastmod>
         <changefreq>monthly</changefreq>
@@ -52,6 +59,13 @@
 
     <url>
         <loc>https://freetools.best/text_diff.html</loc>
+        <lastmod>2026-03-30</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://freetools.best/code-formatter.html</loc>
         <lastmod>2026-03-30</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
