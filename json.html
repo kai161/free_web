@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>实时 JSON 格式化与比对工具 | Free Tools</title>
-    <meta name="description" content="专业级 JSON 处理工具。支持双面板实时输入比对、美化与校验。100% 本地前端处理，保护机密数据。">
+    <title>JSON 格式化与实时校验工具 | 离线 Diff 比对 | Free Tools</title>
+    <meta name="description" content="专业的 JSON 实时校验与格式化工具。支持边输入边比对、语法错误精准定位。100% 纯本地运行，保护隐私，拒绝数据上传。">
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 
@@ -132,17 +132,36 @@
     }
 
     // 验证 JSON 合法性 (不改变内容)
+    // 验证 JSON 合法性并给出详细反馈
     function validateSilent(panel) {
         const val = els[panel].input.value.trim();
+
+        // 1. 如果是空的
         if (!val) {
             updateStatus(panel, null, '等待输入...');
             return;
         }
+
         try {
+            // 2. 尝试解析
             JSON.parse(val);
-            updateStatus(panel, true, '✅ JSON 格式有效');
+
+            // 3. 校验成功
+            updateStatus(panel, true, '✅ JSON 格式合法');
         } catch (e) {
-            updateStatus(panel, false, `❌ 解析错误: ${e.message}`);
+            // 4. 校验失败：提取报错信息
+            // 浏览器的 JSON.parse 报错通常包含位置信息，如 "Unexpected token n in JSON at position 42"
+            const errorMsg = e.message;
+
+            // 尝试从错误信息中提取位置数字（position）
+            const posMatch = errorMsg.match(/at position (\d+)/);
+            let detailedMsg = `❌ 格式错误: ${errorMsg}`;
+
+            if (posMatch) {
+                detailedMsg = `❌ 格式错误 (位置 ${posMatch[1]}): 检查此处附近的标点`;
+            }
+
+            updateStatus(panel, false, detailedMsg);
         }
     }
 
