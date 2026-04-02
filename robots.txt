@@ -1,5 +1,10 @@
 User-agent: *
 Allow: /
 
+# 屏蔽 Vercel 自动生成的预览路径（防止权重分散和内容重复）
+Disallow: /_next/
+# 屏蔽 Vercel 的 Insights 脚本路径（不需要抓取）
+Disallow: /_vercel/
+
 # 告诉搜索引擎 Sitemap 的绝对路径
 Sitemap: https://freetools.best/sitemap.xml
