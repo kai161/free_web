@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人民币大写转换器 | 财务金额规范转换 | FreeTools</title>
+    <meta name="description" content="专业的财务金额大写转换工具。支持数字实时转中文大写（壹贰叁肆），符合会计书写规范。100% 本地运行，保护企业财务隐私。">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Zhi+Mang+Xing&display=swap');
+        body { font-family: 'Inter', -apple-system, sans-serif; background-color: #f8fafc; }
+        .font-kai { font-family: 'Zhi+Mang+Xing', serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="min-h-screen pb-12">
+
+<div id="nav-placeholder"></div>
+<script src="nav.js"></script>
+
+<div class="max-w-4xl mx-auto px-4 pt-8">
+    <header class="text-center mb-10">
+        <h1 class="text-4xl font-extrabold text-gray-900 mb-4 tracking-tight">人民币大写转换</h1>
+        <p class="text-gray-500">规范财务书写，规避金额风险</p>
+    </header>
+
+    <main class="space-y-6">
+        <div class="bg-white rounded-[2.5rem] shadow-xl shadow-gray-200/50 border border-gray-100 p-8 md:p-12">
+            <div class="space-y-8">
+                <div class="relative">
+                    <label class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 block">输入阿拉伯数字金额 (¥)</label>
+                    <input type="text" id="numInput"
+                           class="w-full text-4xl font-bold text-amber-600 bg-transparent border-b-2 border-gray-100 focus:border-amber-400 outline-none pb-4 transition-colors placeholder:text-gray-200"
+                           placeholder="0.00" autocomplete="off">
+                    <div id="formattedHint" class="absolute right-0 bottom-6 text-sm text-gray-400 font-mono italic"></div>
+                </div>
+
+                <div class="bg-amber-50/50 rounded-3xl p-8 border border-amber-100/50 relative group">
+                    <label class="text-xs font-bold text-amber-400 uppercase tracking-widest mb-4 block">中文大写结果</label>
+                    <div id="resultText" class="text-2xl md:text-3xl font-bold text-gray-800 break-all leading-relaxed min-h-[3rem]">
+                        零元整
+                    </div>
+                    <button onclick="copyResult()" class="mt-6 flex items-center gap-2 px-6 py-2.5 bg-white text-amber-600 border border-amber-200 rounded-xl font-bold hover:bg-amber-600 hover:text-white transition-all active:scale-95 shadow-sm">
+                        📋 复制结果
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm">
+                <h4 class="text-gray-400 text-xs font-bold mb-4 uppercase">数字对应</h4>
+                <div class="grid grid-cols-5 gap-2 text-center text-sm font-bold text-gray-600">
+                    <div class="p-2 bg-gray-50 rounded-lg">1<br><span class="text-amber-600">壹</span></div>
+                    <div class="p-2 bg-gray-50 rounded-lg">2<br><span class="text-amber-600">贰</span></div>
+                    <div class="p-2 bg-gray-50 rounded-lg">3<br><span class="text-amber-600">叁</span></div>
+                    <div class="p-2 bg-gray-50 rounded-lg">4<br><span class="text-amber-600">肆</span></div>
+                    <div class="p-2 bg-gray-50 rounded-lg">5<br><span class="text-amber-600">伍</span></div>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm">
+                <h4 class="text-gray-400 text-xs font-bold mb-4 uppercase">单位对应</h4>
+                <div class="grid grid-cols-4 gap-2 text-center text-sm font-bold text-gray-600">
+                    <div class="p-2 bg-gray-50 rounded-lg">十<br><span class="text-blue-600">拾</span></div>
+                    <div class="p-2 bg-gray-50 rounded-lg">百<br><span class="text-blue-600">佰</span></div>
+                    <div class="p-2 bg-gray-50 rounded-lg">千<br><span class="text-blue-600">仟</span></div>
+                    <div class="p-2 bg-gray-50 rounded-lg">万<br><span class="text-blue-600">万</span></div>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm flex items-center justify-center">
+                <div class="text-center">
+                    <div class="text-3xl mb-1">🏦</div>
+                    <p class="text-xs text-gray-400 font-bold">符合中国人民银行<br>支付结算规范</p>
+                </div>
+            </div>
+        </div>
+
+        <article class="bg-white rounded-[2.5rem] p-10 border border-gray-100 shadow-sm text-gray-600 leading-relaxed">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">为什么财务金额必须使用中文大写？</h2>
+            <div class="space-y-4">
+                <p>在财务报销、银行转账及合同签署中，使用<strong>中文大写数字</strong>（壹、贰、叁、肆等）是一项延续数百年的制度。这种写法起源于明朝，朱元璋为了惩治贪污，下令将账簿中的数字由简单线条改为结构复杂的汉字，从而极大增加了篡改数字的难度。</p>
+                <h3 class="font-bold text-gray-800">书写规范要点：</h3>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><strong>“整”的使用：</strong> 凡金额以“元”或“角”结尾的，应当在后面加“整”或“正”字。</li>
+                    <li><strong>“分”的规则：</strong> 如果金额有“分”，则分后面不加“整”。</li>
+                    <li><strong>零的填充：</strong> 多个连续的零在转换中需要按照会计准则进行科学缩减，确保唯一性。</li>
+                </ul>
+                <h3 class="font-bold text-gray-800">隐私承诺：您的财务数据很安全</h3>
+                <p>FreeTools 承诺：本工具的所有转换逻辑均在您的浏览器本地完成。您的流水金额、报销额度<strong>绝不会上传至任何服务器</strong>，是企业财务人员处理机密数据的理想选择。</p>
+            </div>
+        </article>
+    </main>
+</div>
+
+<script>
+    const input = document.getElementById('numInput');
+    const result = document.getElementById('resultText');
+    const hint = document.getElementById('formattedHint');
+
+    input.addEventListener('input', (e) => {
+        // 仅允许数字和小数点
+        let val = e.target.value.replace(/[^\d.]/g, "");
+
+        // 处理多个小数点
+        const parts = val.split(".");
+        if (parts.length > 2) val = parts[0] + "." + parts.slice(1).join("");
+
+        input.value = val;
+
+        if (val) {
+            // 显示千分符提示
+            hint.textContent = "¥ " + parseFloat(val).toLocaleString('en-US', {minimumFractionDigits: 2});
+            result.textContent = numberToChinese(val);
+        } else {
+            hint.textContent = "";
+            result.textContent = "零元整";
+        }
+    });
+
+    function numberToChinese(n) {
+        if (parseFloat(n) === 0) return "零元整";
+        let fraction = ['角', '分'];
+        let digit = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖'];
+        let unit = [['元', '万', '亿'], ['', '拾', '佰', '仟']];
+        let n_num = parseFloat(n);
+        let head = n_num < 0 ? '欠' : '';
+        n_num = Math.abs(n_num);
+        let s = '';
+        for (let i = 0; i < fraction.length; i++) {
+            s += (digit[Math.floor(Math.round(n_num * 100) / 10 * Math.pow(10, i)) % 10] + fraction[i]).replace(/零./, '');
+        }
+        s = s || '整';
+        n_num = Math.floor(n_num);
+        for (let i = 0; i < unit[0].length && n_num > 0; i++) {
+            let p = '';
+            for (let j = 0; j < unit[1].length && n_num > 0; j++) {
+                p = digit[n_num % 10] + unit[1][j] + p;
+                n_num = Math.floor(n_num / 10);
+            }
+            s = p.replace(/(零.)*零$/, '').replace(/^$/, '零') + unit[0][i] + s;
+        }
+        return head + s.replace(/(零.)*零元/, '元').replace(/(零.)+/g, '零').replace(/^整$/, '零元整');
+    }
+
+    async function copyResult() {
+        const text = result.textContent.trim();
+        await navigator.clipboard.writeText(text);
+        alert("已复制大写金额！");
+    }
+</script>
+</body>
+</html>

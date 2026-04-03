@@ -38,7 +38,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     <a href="timestamp.html" class="nav-item px-3 py-1.5 text-sm font-semibold rounded-lg text-gray-600 hover:bg-gray-100 whitespace-nowrap">🕒 时间戳</a>
                     <a href="base64.html" class="nav-item px-3 py-1.5 text-sm font-semibold rounded-lg text-gray-600 hover:bg-gray-100 whitespace-nowrap">🖼️ Base64</a>
                     <a href="code-formatter.html" class="nav-item px-3 py-1.5 text-sm font-semibold rounded-lg text-gray-600 hover:bg-gray-100 whitespace-nowrap">{ } 代码处理</a>
-<a href="pdf-to-image.html" class="nav-item px-3 py-1.5 text-sm font-semibold rounded-lg text-gray-600 hover:bg-gray-100 whitespace-nowrap">📄 PDF转图片</a>
+                    <a href="pdf-to-image.html" class="nav-item px-3 py-1.5 text-sm font-semibold rounded-lg text-gray-600 hover:bg-gray-100 whitespace-nowrap">📄 PDF转图片</a>
+                    <a href="amount-to-chinese.html" class="nav-item px-3 py-1.5 text-sm font-semibold rounded-lg text-gray-600 hover:bg-gray-100 whitespace-nowrap">💰 人民币大写转换器</a>
                 </div>
                 
                 <div class="absolute right-0 top-0 bottom-0 w-6 bg-gradient-to-l from-white to-transparent pointer-events-none"></div>
