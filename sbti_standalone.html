@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SBTI | 发现你的硬核人格 - FreeTools</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/pixelarticons@1.8.1/css/pixelarticons.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;900&display=swap');
+        body { font-family: 'Noto Sans SC', sans-serif; background-color: #f0f2f5; }
+        .brutalist-card { background: white; border: 4px solid black; box-shadow: 8px 8px 0px black; }
+        .brutalist-btn { border: 3px solid black; box-shadow: 4px 4px 0px black; transition: 0.1s; }
+        .brutalist-btn:active { box-shadow: 0px 0px 0px black; transform: translate(4px, 4px); }
+        .fade-in { animation: fadeIn 0.3s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="min-h-screen">
+<main class="max-w-6xl mx-auto px-4 py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+
+        <section id="app" class="brutalist-card p-8 md:p-10 min-h-[550px] flex flex-col relative overflow-hidden">
+            <div id="quiz-container" class="h-full flex flex-col justify-center">
+                <div class="text-center fade-in">
+                    <div class="text-7xl mb-6">🎭</div>
+                    <h1 class="text-5xl font-black mb-4 italic tracking-tighter">SBTI</h1>
+                    <p class="text-lg font-bold mb-10 text-gray-600 uppercase">Simplified Brute-force<br>Type Indicator</p>
+                    <button onclick="startQuiz()" class="px-12 py-5 bg-yellow-300 brutalist-btn font-black text-2xl uppercase italic">开始测试</button>
+                </div>
+            </div>
+        </section>
+
+        <aside class="space-y-8">
+            <article class="brutalist-card p-8 bg-blue-50">
+                <h2 class="text-3xl font-black mb-6 italic underline uppercase">什么是 SBTI？</h2>
+                <div class="prose font-medium text-gray-700 space-y-4">
+                    <p><strong>SBTI</strong> 是一种基于现代互联网情绪和俚语的“暴力简化”人格指标。不同于严谨的 MBTI，SBTI 更倾向于解构社交面具下的真实情绪。</p>
+                    <h3 class="font-black text-xl text-black">25 种核心人格维度</h3>
+                    <p>我们通过 5 个维度的加权算法，从 <strong>OJBK</strong> 到 <strong>IMFW</strong> 寻找你的定位。这不是职业建议，而是自嘲的镜子。</p>
+                    <h3 class="font-black text-xl text-black">隐私承诺</h3>
+                    <p>本测试 100% 在<strong>浏览器本地</strong>运行。您的选项绝不上传服务器。在隐私泛滥的时代，我们守护您最后的性格净土。</p>
+                </div>
+            </article>
+            <div class="brutalist-card p-6 bg-yellow-50 text-sm font-bold">
+                💡 提示：测试结果支持一键生成分享文案。
+            </div>
+        </aside>
+    </div>
+</main>
+
+<script>
+    // 数据配置
+    const quizData = [
+        { q: "面对高压，你更倾向于？", options: [{t:"在人群中狂欢", s:{So:3, St:-2}}, {t:"独自看日落", s:{So:-3, St:2}}] },
+        { q: "朋友失恋了，你的反应是？", options: [{t:"分析原因并支招", s:{Lo:3, St:1}}, {t:"陪他一起骂", s:{Lo:-3, St:-1}}] },
+        { q: "你更愿意活在？", options: [{t:"脑补的星辰大海", s:{In:3}}, {t:"现实的柴米油盐", s:{In:-3}}] },
+        { q: "做事情前，你通常是？", options: [{t:"乱中有序", s:{Ac:3, Lo:-1}}, {t:"计划缜密", s:{Ac:-3, Lo:1}}] },
+        { q: "对于冲突，你的态度是？", options: [{t:"迎难而上", s:{St:1, So:1}}, {t:"随缘躺平", s:{St:-1, So:-1}}] },
+        { q: "独处时，你最喜欢干？", options: [{t:"发呆沉思", s:{So:-3, In:2}}, {t:"做手工、看电影", s:{So:-3, In:-2}}] },
+        { q: "你最受不了哪种？", options: [{t:"混乱和无序", s:{Lo:2, Ac:-2}}, {t:"束缚和一成不变", s:{Lo:-2, Ac:2}}] },
+        { q: "决策时，你最看重？", options: [{t:"客观数据和逻辑", s:{Lo:3, So:-1}}, {t:"直觉和情感共鸣", s:{Lo:-3, So:1}}] },
+        { q: "你更喜欢哪种？", options: [{t:"刺激的未知体验", s:{In:2, St:-1}}, {t:"稳定的重复生活", s:{In:-2, St:1}}] },
+        { q: "做完一件大事，你会？", options: [{t:"和朋友大吃一顿", s:{So:3}}, {t:"独自睡个好觉", s:{So:-3}}] },
+        { q: "对于规则，你的看法是？", options: [{t:"用来打破的", s:{Lo:-1, Ac:2}}, {t:"用来遵守的", s:{Lo:1, Ac:-2}}] },
+        { q: "对于未来，你经常？", options: [{t:"充满焦虑", s:{St:-3}}, {t:"满怀希望", s:{St:3}}] },
+        { q: "工作环境，你更喜欢哪种？", options: [{t:"人多热闹的开放式", s:{So:3}}, {t:"安静独立的格子间", s:{So:-3}}] },
+        { q: "你对自己的直觉？", options: [{t:"非常信任", s:{In:3}}, {t:"往往持怀疑态度", s:{In:-3}}] },
+        { q: "处理麻烦，你通常是？", options: [{t:"马上行动解决", s:{Ac:3}}, {t:"拖到最后一刻", s:{Ac:-3}}] },
+        { q: "你眼中的世界？", options: [{t:"逻辑可以解释一切", s:{Lo:3}}, {t:"情绪和感觉主宰一切", s:{Lo:-3}}] },
+        { q: "对于朋友，你倾向于？", options: [{t:"很多点头之交", s:{So:3}}, {t:"几个知心朋友", s:{So:-3}}] },
+        { q: "做计划，你最看重哪种？", options: [{t:"长远的愿景", s:{In:2, Lo:1}}, {t:"眼下的执行步骤", s:{In:-2, Lo:-1}}] },
+        { q: "遇到挑战，你倾向于？", options: [{t:"寻找新的解决方案", s:{In:2, Ac:1}}, {t:"采用已被证明的方法", s:{In:-2, Ac:-1}}] },
+        { q: "你如何看待“忙碌”？", options: [{t:"生活充实的证明", s:{Ac:3, So:-1}}, {t:"逃避思考的手段", s:{Ac:-3, So:1}}] },
+        { q: "对于金钱，你倾向于？", options: [{t:"用来购买体验和快乐", s:{Ac:2, In:1}}, {t:"稳健的投资和储蓄", s:{Ac:-2, In:-1}}] },
+        { q: "你更擅长哪种？", options: [{t:"逻辑清晰的表达", s:{Lo:3}}, {t:"富有感染力的叙事", s:{Lo:-3}}] },
+        { q: "对于新想法，你倾向于？", options: [{t:"先怀疑其可行性", s:{Lo:2, In:-1}}, {t:"先兴奋并尝试", s:{Lo:-2, In:1}}] },
+        { q: "你如何看待“独处”？", options: [{t:"一种精力的消耗", s:{So:3}}, {t:"一种精力的恢复", s:{So:-3}}] },
+        { q: "做决定，你更倾向于？", options: [{t:"凭瞬间的直觉", s:{In:3}}, {t:"通过漫长的分析", s:{In:-3}}] }
+    ];
+
+    const codes = [
+        {code: "OJBK", s: [-3,-3,-3,-3,3], icon: "pi-check-double"},
+        {code: "THAN-K", s: [-2,-2,-2,-2,2], icon: "pi-heart"},
+        {code: "Dior-s", s: [-3,-1,3,-1,-3], icon: "pi-Meow"},
+        {code: "MUM", s: [-2,-1,1,2,2], icon: "pi-home"},
+        {code: "FAKE", s: [3,1,3,2,-1], icon: "pi-mask"},
+        {code: "GOGO", s: [3,-2,-3,3,-1], icon: "pi-wind"},
+        {code: "MALO", s: [-2,-1,-3,-1,-3], icon: "pi-cloud-rain"},
+        {code: "ZZZZ", s: [-3,-3,-3,-3,-3], icon: "pi-bed"},
+        {code: "SEXY", s: [2,1,3,1,1], icon: "pi-eye"},
+        {code: "IMSB", s: [-2,3,3,2,3], icon: "pi-script"},
+        {code: "CTRL", s: [-3,3,-3,3,1], icon: "pi-command"},
+        {code: "LOVE-R", s: [3,-3,3,-3,-3], icon: "pi-user-plus"},
+        {code: "WOC!", s: [2,-2,-1,3,-3], icon: "pi-zap"},
+        {code: "THIN-K", s: [-3,3,3,-3,-1], icon: "pi-clock"},
+        {code: "MONK", s: [-3,-3,3,-3,3], icon: "pi-sun"},
+        {code: "ATM-er", s: [3,-3,2,-3,-1], icon: "pi-credit-card"},
+        {code: "BOSS", s: [-1,3,-3,3,3], icon: "pi-briefcase"},
+        {code: "JOKE-R", s: [3,-3,3,3,-2], icon: "pi-Styles"},
+        {code: "SHIT", s: [-2,-1,-3,-1,-3], icon: "pi-trash"},
+        {code: "SOLO", s: [-3,3,-1,-3,2], icon: "pi-user"},
+        {code: "FUCK", s: [2,-1,-1,3,-3], icon: "pi-close"},
+        {code: "DEAD", s: [-3,-3,-3,-3,-3], icon: "pi-skull"},
+        {code: "OH-NO", s: [-2,-1,3,-1,-3], icon: "pi-alert"},
+        {code: "POOR", s: [-2,-1,-3,-1,-3], icon: "pi-coin"},
+        {code: "IMFW", s: [-3,-3,-3,-3,-3], icon: "pi-coffee"}
+    ];
+
+    //const codes = [{code:"OJBK",s:[-3,-3,-3,-3,3]},{code:"THAN-K",s:[-2,-2,-2,-2,2]},{code:"Dior-s",s:[-3,-1,3,-1,-3]},{code:"MUM",s:[-2,-1,1,2,2]},{code:"FAKE",s:[3,1,3,2,-1]},{code:"GOGO",s:[3,-2,-3,3,-1]},{code:"MALO",s:[-2,-1,-3,-1,-3]},{code:"ZZZZ",s:[-3,-3,-3,-3,-3]},{code:"SEXY",s:[2,1,3,1,1]},{code:"IMSB",s:[-2,3,3,2,3]},{code:"CTRL",s:[-3,3,-3,3,1]},{code:"LOVE-R",s:[3,-3,3,-3,-3]},{code:"WOC!",s:[2,-2,-1,3,-3]},{code:"THIN-K",s:[-3,3,3,-3,-1]},{code:"MONK",s:[-3,-3,3,-3,3]},{code:"ATM-er",s:[3,-3,2,-3,-1]},{code:"BOSS",s:[-1,3,-3,3,3]},{code:"JOKE-R",s:[3,-3,3,3,-2]},{code:"SHIT",s:[-2,-1,-3,-1,-3]},{code:"SOLO",s:[-3,3,-1,-3,2]},{code:"FUCK",s:[2,-1,-1,3,-3]},{code:"DEAD",s:[-3,-3,-3,-3,-3]},{code:"OH-NO",s:[-2,-1,3,-1,-3]},{code:"POOR",s:[-2,-1,-3,-1,-3]},{code:"IMFW",s:[-3,-3,-3,-3,-3]}];
+
+    const descriptions = {"OJBK":"随缘型逻辑主义者。你的座右铭是“没关系，我无所谓”。这通常意味着你太懒了，不想去争取更好的结果。","THAN-K":"被动型感恩者。你并不真的感激任何人，你只是害怕如果不随时准备说“谢谢”，世界就会发现你只是一个没有想法的空壳。","Dior-s":"直觉型自嘲者。你是自嘲界的王者，通过主动把尊严踩在脚下来获得一种虚幻的免责权。","MUM":"守护型控制狂。你把对身边人的细致照顾伪装成一种天赋，实际上这是你通过建立情感依赖来实施控制。","FAKE":"表演型社交家。你的整个生活就是一场永不落幕的表演。你擅长根据观众的口味实时调整面具。","GOGO":"行动型多动症。你是一个停不下来的永动机，把“忙碌”本身视为成功。你跑得很快，但不知道终点在哪里。","MALO":"情绪型抱怨家。你是一个行走的负能量发射塔。你并不想要解决方案，你只是想要别人和你一起陷入痛苦。","ZZZZ":"沉睡型哲学家。你通过睡眠和发呆来逃避现实。你把极致的懒惰美化为“看透世界的虚无”。","SEXY":"直觉型诱惑者。你擅长捕捉人群中的潜台词，享受通过微妙的互动来操纵别人的注意力。","IMSB":"直觉型自负者。你是一个活在自己脑补世界里的国王，认为自己的直觉永远是对的。","CTRL":"逻辑型控制狂。你是秩序和权力的绝对信徒，你需要掌控生活中的每一个细节。","LOVE-R":"直觉型讨好者。你是情感上的寄生虫，通过迎合别人的情绪来获取存在感。","WOC!":"情绪型易爆者。你是一个行走的情绪地雷，一点火星就能让你瞬间爆炸。","THIN-K":"逻辑型拖延家。你擅长通过过度的分析和思考来逃避行动。你的生活是一场永恒的彩排。","MONK":"沉睡型冥想家。你通过降低欲望来获得和平。你不是看破红尘，你只是太害怕受伤。","ATM-er":"守护型付出者。你通过物质和体力的无底线付出来换取微弱的情感反馈。典型的“舔”到最后。","BOSS":"逻辑型领导者。你是一个天生的组织者，通过达成目标来获得掌控感。你擅长命令，不擅长理解。","JOKE-R":"表演型滑稽家。你在人群中扮演小丑。你把生活变成段子，用笑声掩盖孤独。","SHIT":"情绪型绝望家。你擅长从任何事情中找出最糟糕的一面。你并不想要变好，你只想沉沦。","SOLO":"守护型流浪者。你通过自我封闭获得安全感。你害怕连接，把冷漠伪装成“独立”。","FUCK":"情绪型愤怒家。你对世界充满毫无逻辑的愤怒。你成功把自己活成了一座孤岛。","DEAD":"沉睡型厌世者。你长期处于精神上的死机状态。你丧失了面对任何挑战的勇气。","OH-NO":"被动型焦虑家。你是一个行走的焦虑机器，每天都在为还没发生的事情担忧。","POOR":"情绪型乞讨家。你擅长扮演弱者来规避冲突。你通过示弱来操纵别人。","IMFW":"情绪型废物型。你不仅懒惰，而且以此为荣。你的人生是一场对社会潮流的无声（且无力）的抗议。"};
+
+    let step = 0;
+    let userScores = {So:0, Lo:0, In:0, Ac:0, St:0};
+
+    function startQuiz() {
+        step = 0;
+        userScores = {So:0, Lo:0, In:0, Ac:0, St:0};
+        renderQuestion();
+    }
+
+    function renderQuestion() {
+        const q = quizData[step];
+        const progress = ((step + 1) / quizData.length) * 100;
+        const container = document.getElementById('quiz-container');
+
+        container.innerHTML = `
+                <div class="fade-in">
+                    <div class="absolute top-0 left-0 w-full px-8 pt-6">
+                        <div class="flex justify-between text-xs font-black italic mb-2">
+                            <span>STEP ${String(step+1).padStart(2,'0')}/25</span>
+                            <span>${Math.round(progress)}%</span>
+                        </div>
+                        <div class="h-3 bg-gray-100 border-2 border-black rounded-full overflow-hidden">
+                            <div class="h-full bg-black transition-all duration-300" style="width: ${progress}%"></div>
+                        </div>
+                    </div>
+                    <div class="mt-16">
+                        <h2 class="text-3xl font-black mb-10 text-center leading-tight">${q.q}</h2>
+                        <div class="grid gap-4">
+                            ${q.options.map((opt, i) => `
+                                <button onclick="handleAnswer(${i})" class="w-full py-5 px-6 brutalist-btn bg-white hover:bg-black hover:text-white font-bold text-lg text-left transition-all">
+                                    ${opt.t}
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+    }
+
+    function handleAnswer(idx) {
+        const weights = quizData[step].options[idx].s;
+        for(let k in weights) userScores[k] += weights[k];
+        step++;
+        if(step < quizData.length) renderQuestion(); else showResult();
+    }
+
+    function showResult() {
+        let min = Infinity, match = "";
+        codes.forEach(c => {
+            let dist = 0;
+            ['So','Lo','In','Ac','St'].forEach((k, i) => dist += Math.pow(userScores[k] - c.s[i], 2));
+            dist = Math.sqrt(dist);
+            if(dist < min) { min = dist; match = c.code; }
+        });
+
+        const container = document.getElementById('quiz-container');
+        container.innerHTML = `
+        <div class="fade-in">
+            <div class="relative brutalist-card p-6 bg-white mb-8 overflow-hidden text-left" id="result-card">
+                <div class="absolute -top-2 -right-8 bg-black text-white px-10 py-1 rotate-12 font-black text-[10px] uppercase">
+                    Official SBTI
+                </div>
+
+                <i class="pixelarticons ${matchIcon} absolute -bottom-10 -right-10 text-[18rem] text-gray-100/60 pointer-events-none"></i>
+                <p class="text-[10px] font-black text-gray-400 uppercase tracking-tighter mb-1">Character Analysis Report</p>
+                <h2 class="text-7xl font-black italic underline mb-4 tracking-tighter">${match}</h2>
+                <div class="h-1.5 bg-black w-16 mb-6"></div>
+
+                <p class="font-bold text-gray-800 leading-snug mb-8 text-lg">
+                    ${descriptions[match]}
+                </p>
+
+                <div class="pt-4 border-t-2 border-dashed border-gray-200 flex justify-between items-end">
+                    <div>
+                        <p class="text-[10px] font-black text-gray-400 uppercase">Test Source</p>
+                        <p class="text-xs font-black italic">sbti.FreeTools.best</p>
+                    </div>
+                    <div class="text-[10px] font-bold text-gray-300 text-right">
+                        #SBTI #人格测试
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-4">
+                <button onclick="copyShare('${match}')" class="w-full py-5 brutalist-btn bg-green-400 font-black uppercase italic text-xl">
+                    一键分享结果
+                </button>
+                <button onclick="location.reload()" class="w-full py-3 brutalist-btn bg-white text-gray-400 font-bold uppercase text-xs shadow-none border-gray-200">
+                    重新测试
+                </button>
+            </div>
+        </div>
+    `;
+    }
+
+    async function copyShare(code) {
+        // 动态获取当前页面的描述文字，取前35个字作为悬念
+        const descSnippet = descriptions[code].substring(0, 35);
+        const shareUrl = window.location.href; // 获取当前页面链接
+
+        const text = `
+我是 SBTI 性格中的【${code}】！
+系统评价我：“${descSnippet}...”
+
+这个测试太毒舌了，看完有点扎心 😂
+👇 你的性格底色是什么？来这里自测（100%隐私安全）：
+${shareUrl}
+    `.trim();
+
+        try {
+            await navigator.clipboard.writeText(text);
+            alert("✨ 分享文案已复制！\n\n💡 建议：配合刚才的结果页面【截屏】一起发朋友圈，吸引力翻倍哦！");
+        } catch (err) {
+            // 兜底方案
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            alert("分享文案已复制！快去朋友圈秀一下吧 ✨");
+        }
+    }
+</script>
+</body>
+</html>
