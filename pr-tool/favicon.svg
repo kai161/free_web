@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#f7c948"/>
+  <path fill="#1f8f54" d="M10 40 32 8l22 32H10Z"/>
+  <rect x="14" y="34" width="36" height="16" rx="4" fill="#fff"/>
+  <text x="32" y="46" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#17211b">BR</text>
+</svg>

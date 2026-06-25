@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Racha Conta Pix: Dividir Conta com Amigos</title>
+    <meta name="description" content="Calcule quem deve pagar quem no Pix em churrasco, viagem, rolê ou almoço. Divisor de conta grátis com dados salvos no navegador.">
+    <meta name="keywords" content="racha conta Pix, dividir conta Pix, calculadora Pix, dividir churrasco, dividir viagem, quem paga quem Pix, chave Pix">
+    <meta name="robots" content="index,follow,max-image-preview:large">
+    <meta name="theme-color" content="#1f8f54">
+    <link rel="canonical" href="https://freetools.best/pr-tool/pix.html">
+    <link rel="alternate" hreflang="pt-BR" href="https://freetools.best/pr-tool/pix.html">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="manifest" href="site.webmanifest">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Brasil Tools">
+    <meta property="og:title" content="Racha Conta Pix: Dividir Conta com Amigos">
+    <meta property="og:description" content="Divida contas e gere acertos Pix entre amigos direto no navegador.">
+    <meta property="og:url" content="https://freetools.best/pr-tool/pix.html">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Racha Conta Pix: Dividir Conta com Amigos">
+    <meta name="twitter:description" content="Calculadora grátis para saber quem deve pagar quem via Pix.">
+    <link rel="stylesheet" href="styles.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Racha Conta Pix",
+        "url": "https://freetools.best/pr-tool/pix.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "inLanguage": "pt-BR",
+        "description": "Calculadora para dividir contas entre amigos e gerar acertos com chave Pix.",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "BRL"
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Como dividir uma conta com Pix?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Adicione os participantes, informe quem pagou cada despesa e a ferramenta calcula os menores acertos entre as pessoas."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Os dados do grupo ficam online?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Não. Os nomes, despesas e chaves Pix ficam salvos apenas no LocalStorage do navegador."
+                }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <header class="site-header">
+        <nav class="nav" aria-label="Navegação principal">
+            <a class="brand" href="index.html"><span class="brand-mark">BR</span><span>Brasil Tools</span></a>
+            <div class="nav-links">
+                <a class="nav-link" href="index.html">Início</a>
+                <a class="nav-link" href="frases.html">Frases</a>
+                <a class="nav-link" href="imagem.html">Fotos</a>
+                <a class="nav-link active" href="pix.html">Pix</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="wrap section">
+        <div class="panel-header">
+            <div>
+                <p class="eyebrow">LocalStorage</p>
+                <h1>Racha Pix</h1>
+                <p class="lead">Participantes, despesas e acerto mínimo sem servidor.</p>
+            </div>
+            <button class="btn coral" id="clearBtn" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M6 6l1 16h10l1-16"/></svg>
+                Limpar
+            </button>
+        </div>
+
+        <div class="tool-layout">
+            <aside class="tool-panel">
+                <h3>Participante</h3>
+                <div class="field">
+                    <label for="personName">Nome</label>
+                    <input id="personName" placeholder="Ana">
+                </div>
+                <div class="field">
+                    <label for="pixKey">Chave Pix</label>
+                    <input id="pixKey" placeholder="email, CPF, telefone ou aleatória">
+                </div>
+                <button class="btn" id="addPersonBtn" type="button">Adicionar</button>
+
+                <hr>
+
+                <h3>Despesa</h3>
+                <div class="field">
+                    <label for="expenseDesc">Descrição</label>
+                    <input id="expenseDesc" placeholder="Mercado, Uber, churrasco">
+                </div>
+                <div class="field">
+                    <label for="expenseAmount">Valor</label>
+                    <input id="expenseAmount" inputmode="decimal" placeholder="120,50">
+                </div>
+                <div class="field">
+                    <label for="expensePayer">Quem pagou</label>
+                    <select id="expensePayer"></select>
+                </div>
+                <button class="btn blue" id="addExpenseBtn" type="button">Lançar gasto</button>
+
+                <div class="ad-slot">Anúncio durante conferência</div>
+            </aside>
+
+            <section class="tool-panel">
+                <div class="stats">
+                    <div class="stat"><strong id="totalAmount">R$ 0,00</strong><span>Total</span></div>
+                    <div class="stat"><strong id="perPerson">R$ 0,00</strong><span>Por pessoa</span></div>
+                    <div class="stat"><strong id="peopleCount">0</strong><span>Pessoas</span></div>
+                </div>
+
+                <h2>Grupo</h2>
+                <table class="table" aria-label="Participantes">
+                    <thead><tr><th>Nome</th><th>Pix</th><th>Pago</th><th>Saldo</th><th></th></tr></thead>
+                    <tbody id="peopleTable"></tbody>
+                </table>
+
+                <h2>Gastos</h2>
+                <table class="table" aria-label="Despesas">
+                    <thead><tr><th>Descrição</th><th>Valor</th><th>Pagador</th><th></th></tr></thead>
+                    <tbody id="expenseTable"></tbody>
+                </table>
+
+                <div class="panel-header">
+                    <h2>Acertos</h2>
+                    <button class="btn secondary" id="shareAllBtn" type="button">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg>
+                        WhatsApp
+                    </button>
+                </div>
+                <div class="settlement" id="settlementList"></div>
+            </section>
+        </div>
+
+        <article class="seo-content">
+            <h2>Calculadora Pix para dividir conta</h2>
+            <p>Use o Racha Pix para dividir churrasco, viagem, almoço, mercado ou rolê. A ferramenta calcula o total, a parte de cada pessoa e os acertos mínimos.</p>
+            <h3>Como dividir uma conta com Pix?</h3>
+            <p>Adicione os participantes, informe quem pagou cada despesa e a ferramenta calcula os menores acertos entre as pessoas.</p>
+            <h3>Os dados do grupo ficam online?</h3>
+            <p>Não. Os nomes, despesas e chaves Pix ficam salvos apenas no LocalStorage do navegador.</p>
+        </article>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="index.html">Brasil Tools</a>
+            <a href="frases.html">Frases para WhatsApp</a>
+            <a href="imagem.html">Fotos sociais</a>
+        </div>
+        Os dados ficam neste navegador.
+    </footer>
+
+    <script>
+        const storageKey = "brasil-tools-pix-v1";
+        const state = loadState();
+        const personName = document.getElementById("personName");
+        const pixKey = document.getElementById("pixKey");
+        const expenseDesc = document.getElementById("expenseDesc");
+        const expenseAmount = document.getElementById("expenseAmount");
+        const expensePayer = document.getElementById("expensePayer");
+        const peopleTable = document.getElementById("peopleTable");
+        const expenseTable = document.getElementById("expenseTable");
+        const settlementList = document.getElementById("settlementList");
+
+        function loadState() {
+            try {
+                const saved = JSON.parse(localStorage.getItem(storageKey));
+                if (saved && Array.isArray(saved.people) && Array.isArray(saved.expenses)) return saved;
+            } catch (error) {
+                console.warn(error);
+            }
+            return { people: [], expenses: [] };
+        }
+
+        function saveState() {
+            localStorage.setItem(storageKey, JSON.stringify(state));
+        }
+
+        function parseMoney(value) {
+            return Math.round(Number(String(value).replace(/\./g, "").replace(",", ".")) * 100) || 0;
+        }
+
+        function formatMoney(cents) {
+            return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(cents / 100);
+        }
+
+        function escapeHtml(value) {
+            return String(value).replace(/[&<>"']/g, char => ({
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#39;"
+            })[char]);
+        }
+
+        function newId(prefix) {
+            return `${prefix}-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+        }
+
+        function getPaidByPerson() {
+            const paid = new Map(state.people.map(person => [person.id, 0]));
+            state.expenses.forEach(expense => {
+                paid.set(expense.payerId, (paid.get(expense.payerId) || 0) + expense.amount);
+            });
+            return paid;
+        }
+
+        function calculateSettlements() {
+            const total = state.expenses.reduce((sum, expense) => sum + expense.amount, 0);
+            const share = state.people.length ? Math.round(total / state.people.length) : 0;
+            const paid = getPaidByPerson();
+            const debtors = [];
+            const creditors = [];
+
+            state.people.forEach(person => {
+                const balance = (paid.get(person.id) || 0) - share;
+                const entry = { person, amount: Math.abs(balance) };
+                if (balance < -1) debtors.push(entry);
+                if (balance > 1) creditors.push(entry);
+            });
+
+            debtors.sort((a, b) => b.amount - a.amount);
+            creditors.sort((a, b) => b.amount - a.amount);
+
+            const settlements = [];
+            let i = 0;
+            let j = 0;
+            while (i < debtors.length && j < creditors.length) {
+                const amount = Math.min(debtors[i].amount, creditors[j].amount);
+                if (amount > 0) {
+                    settlements.push({ from: debtors[i].person, to: creditors[j].person, amount });
+                }
+                debtors[i].amount -= amount;
+                creditors[j].amount -= amount;
+                if (debtors[i].amount <= 1) i += 1;
+                if (creditors[j].amount <= 1) j += 1;
+            }
+            return { total, share, paid, settlements };
+        }
+
+        async function copyText(text, button) {
+            if (navigator.clipboard && window.isSecureContext) {
+                await navigator.clipboard.writeText(text);
+            } else {
+                const area = document.createElement("textarea");
+                area.value = text;
+                area.style.position = "fixed";
+                area.style.opacity = "0";
+                document.body.appendChild(area);
+                area.select();
+                document.execCommand("copy");
+                area.remove();
+            }
+            const previous = button.textContent;
+            button.textContent = "Copiado";
+            setTimeout(() => { button.textContent = previous; }, 1000);
+        }
+
+        function settlementText(item) {
+            return `${item.from.name} deve pagar ${formatMoney(item.amount)} para ${item.to.name}. Pix: ${item.to.pix || "chave não informada"}`;
+        }
+
+        function render() {
+            const result = calculateSettlements();
+            document.getElementById("totalAmount").textContent = formatMoney(result.total);
+            document.getElementById("perPerson").textContent = formatMoney(result.share);
+            document.getElementById("peopleCount").textContent = state.people.length;
+
+            expensePayer.innerHTML = state.people.map(person => `<option value="${person.id}">${escapeHtml(person.name)}</option>`).join("");
+            peopleTable.innerHTML = state.people.map(person => {
+                const paid = result.paid.get(person.id) || 0;
+                const balance = paid - result.share;
+                return `
+                    <tr>
+                        <td>${escapeHtml(person.name)}</td>
+                        <td>${escapeHtml(person.pix || "--")}</td>
+                        <td>${formatMoney(paid)}</td>
+                        <td class="money">${formatMoney(balance)}</td>
+                        <td><button class="icon-button" type="button" title="Remover" data-remove-person="${person.id}">x</button></td>
+                    </tr>
+                `;
+            }).join("");
+
+            expenseTable.innerHTML = state.expenses.map(expense => {
+                const payer = state.people.find(person => person.id === expense.payerId);
+                return `
+                    <tr>
+                        <td>${escapeHtml(expense.description)}</td>
+                        <td>${formatMoney(expense.amount)}</td>
+                        <td>${escapeHtml(payer ? payer.name : "--")}</td>
+                        <td><button class="icon-button" type="button" title="Remover" data-remove-expense="${expense.id}">x</button></td>
+                    </tr>
+                `;
+            }).join("");
+
+            settlementList.innerHTML = result.settlements.length
+                ? result.settlements.map((item, index) => `
+                    <article class="settlement-card">
+                        <strong>${escapeHtml(item.from.name)} → ${escapeHtml(item.to.name)}: <span class="money">${formatMoney(item.amount)}</span></strong>
+                        <span>${escapeHtml(item.to.pix || "Chave Pix não informada")}</span>
+                        <div class="phrase-actions">
+                            <button class="btn secondary" type="button" data-copy-settlement="${index}">Copiar Pix</button>
+                            <button class="btn" type="button" data-share-settlement="${index}">WhatsApp</button>
+                        </div>
+                    </article>
+                `).join("")
+                : '<div class="ad-slot">Sem acertos pendentes</div>';
+
+            saveState();
+        }
+
+        document.getElementById("addPersonBtn").addEventListener("click", () => {
+            const name = personName.value.trim();
+            if (!name) return;
+            state.people.push({ id: newId("person"), name, pix: pixKey.value.trim() });
+            personName.value = "";
+            pixKey.value = "";
+            render();
+        });
+
+        document.getElementById("addExpenseBtn").addEventListener("click", () => {
+            const amount = parseMoney(expenseAmount.value);
+            if (!amount || !expensePayer.value) return;
+            state.expenses.push({
+                id: newId("expense"),
+                description: expenseDesc.value.trim() || "Despesa",
+                amount,
+                payerId: expensePayer.value
+            });
+            expenseDesc.value = "";
+            expenseAmount.value = "";
+            render();
+        });
+
+        peopleTable.addEventListener("click", event => {
+            const id = event.target.dataset.removePerson;
+            if (!id) return;
+            state.people = state.people.filter(person => person.id !== id);
+            state.expenses = state.expenses.filter(expense => expense.payerId !== id);
+            render();
+        });
+
+        expenseTable.addEventListener("click", event => {
+            const id = event.target.dataset.removeExpense;
+            if (!id) return;
+            state.expenses = state.expenses.filter(expense => expense.id !== id);
+            render();
+        });
+
+        settlementList.addEventListener("click", event => {
+            const result = calculateSettlements();
+            const copyIndex = event.target.dataset.copySettlement;
+            const shareIndex = event.target.dataset.shareSettlement;
+            if (copyIndex !== undefined) {
+                copyText(settlementText(result.settlements[Number(copyIndex)]), event.target);
+            }
+            if (shareIndex !== undefined) {
+                window.open(`https://wa.me/?text=${encodeURIComponent(settlementText(result.settlements[Number(shareIndex)]))}`, "_blank", "noopener,noreferrer");
+            }
+        });
+
+        document.getElementById("shareAllBtn").addEventListener("click", () => {
+            const text = calculateSettlements().settlements.map(settlementText).join("\n");
+            if (text) window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, "_blank", "noopener,noreferrer");
+        });
+
+        document.getElementById("clearBtn").addEventListener("click", () => {
+            state.people = [];
+            state.expenses = [];
+            render();
+        });
+
+        render();
+    </script>
+</body>
+</html>

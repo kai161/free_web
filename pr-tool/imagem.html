@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprimir Imagem e Cortar Foto para Instagram</title>
+    <meta name="description" content="Comprima imagens, recorte avatar e gere grade 3x3 para Instagram no navegador. Sem upload obrigatório e sem gastar dados móveis.">
+    <meta name="keywords" content="comprimir imagem, reduzir tamanho da foto, cortar foto Instagram, avatar redondo, grade 3x3 Instagram, foto para status">
+    <meta name="robots" content="index,follow,max-image-preview:large">
+    <meta name="theme-color" content="#1f8f54">
+    <link rel="canonical" href="https://freetools.best/pr-tool/imagem.html">
+    <link rel="alternate" hreflang="pt-BR" href="https://freetools.best/pr-tool/imagem.html">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="manifest" href="site.webmanifest">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Brasil Tools">
+    <meta property="og:title" content="Comprimir Imagem e Cortar Foto para Instagram">
+    <meta property="og:description" content="Compressor de imagem, recorte de avatar e grade 3x3 para Instagram direto no navegador.">
+    <meta property="og:url" content="https://freetools.best/pr-tool/imagem.html">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Comprimir Imagem e Cortar Foto para Instagram">
+    <meta name="twitter:description" content="Prepare fotos sociais no navegador, sem upload obrigatório.">
+    <link rel="stylesheet" href="styles.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Compressor e Cortador de Foto Social",
+        "url": "https://freetools.best/pr-tool/imagem.html",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Any",
+        "inLanguage": "pt-BR",
+        "description": "Ferramenta para comprimir imagem, cortar avatar e gerar grade 3x3 para Instagram usando Canvas no navegador.",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "BRL"
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "A foto é enviada para algum servidor?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Não. A imagem é lida e processada pelo navegador com Canvas."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Posso reduzir o tamanho da imagem para economizar dados?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Sim. Ajuste a qualidade e baixe uma versão menor em JPG, WebP ou PNG."
+                }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+    <header class="site-header">
+        <nav class="nav" aria-label="Navegação principal">
+            <a class="brand" href="index.html"><span class="brand-mark">BR</span><span>Brasil Tools</span></a>
+            <div class="nav-links">
+                <a class="nav-link" href="index.html">Início</a>
+                <a class="nav-link" href="frases.html">Frases</a>
+                <a class="nav-link active" href="imagem.html">Fotos</a>
+                <a class="nav-link" href="pix.html">Pix</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="wrap section">
+        <div class="panel-header">
+            <div>
+                <p class="eyebrow">Salva seus dados móveis</p>
+                <h1>Fotos sociais</h1>
+                <p class="lead">Compressão, avatar e grade 3x3 rodam com Canvas no próprio navegador.</p>
+            </div>
+            <a class="btn secondary" id="downloadBtn" href="#" download="foto-social.jpg">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+                Baixar
+            </a>
+        </div>
+
+        <div class="tool-layout">
+            <aside class="tool-panel">
+                <label class="drop-zone" id="dropZone">
+                    <span>
+                        <strong>Selecionar imagem</strong><br>
+                        JPG, PNG ou WebP
+                    </span>
+                    <input class="hidden" id="fileInput" type="file" accept="image/*">
+                </label>
+
+                <div class="toolbar" id="modeTabs" aria-label="Modo">
+                    <button class="chip active" type="button" data-mode="compress">Comprimir</button>
+                    <button class="chip" type="button" data-mode="avatar">Avatar</button>
+                    <button class="chip" type="button" data-mode="grid">Grade 3x3</button>
+                </div>
+
+                <div class="field">
+                    <label for="presetSelect">Formato</label>
+                    <select id="presetSelect">
+                        <option value="1080x1080">Feed 1:1</option>
+                        <option value="1080x1350">Instagram 4:5</option>
+                        <option value="1080x1920">Stories 9:16</option>
+                        <option value="512x512">Avatar 1:1</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="qualityRange">Qualidade <span id="qualityLabel">78%</span></label>
+                    <input id="qualityRange" type="range" min="35" max="95" value="78">
+                </div>
+
+                <div class="field">
+                    <label for="formatSelect">Arquivo</label>
+                    <select id="formatSelect">
+                        <option value="image/jpeg">JPG</option>
+                        <option value="image/webp">WebP</option>
+                        <option value="image/png">PNG</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="memoryMode">Desempenho</label>
+                    <select id="memoryMode">
+                        <option value="auto">Automático para celular</option>
+                        <option value="eco">Modo leve</option>
+                        <option value="full">Alta resolução</option>
+                    </select>
+                </div>
+                <p class="card-copy" id="memoryHint">O modo automático reduz o tamanho de saída em celulares modestos.</p>
+
+                <div class="stats">
+                    <div class="stat"><strong id="beforeSize">--</strong><span>Original</span></div>
+                    <div class="stat"><strong id="afterSize">--</strong><span>Final</span></div>
+                    <div class="stat"><strong id="savedSize">--</strong><span>Economia</span></div>
+                </div>
+                <div class="ad-slot">Anúncio lateral</div>
+            </aside>
+
+            <section class="tool-panel">
+                <div class="canvas-shell">
+                    <canvas id="previewCanvas" width="1080" height="1080" aria-label="Prévia da imagem"></canvas>
+                </div>
+                <div class="result-grid hidden" id="gridResult"></div>
+            </section>
+        </div>
+
+        <article class="seo-content">
+            <h2>Compressor de imagem para celular</h2>
+            <p>Esta ferramenta ajuda a reduzir tamanho de fotos, cortar avatar quadrado e preparar imagens para Instagram, status e redes sociais.</p>
+            <h3>A foto é enviada para algum servidor?</h3>
+            <p>Não. A imagem é lida e processada pelo navegador com Canvas.</p>
+            <h3>Posso reduzir o tamanho da imagem para economizar dados?</h3>
+            <p>Sim. Ajuste a qualidade e use o modo automático para gerar uma versão menor em celulares com menos memória.</p>
+        </article>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="index.html">Brasil Tools</a>
+            <a href="frases.html">Frases para WhatsApp</a>
+            <a href="pix.html">Racha Pix</a>
+        </div>
+        Nenhuma imagem precisa sair do aparelho.
+    </footer>
+
+    <script>
+        const fileInput = document.getElementById("fileInput");
+        const dropZone = document.getElementById("dropZone");
+        const modeTabs = document.getElementById("modeTabs");
+        const presetSelect = document.getElementById("presetSelect");
+        const qualityRange = document.getElementById("qualityRange");
+        const qualityLabel = document.getElementById("qualityLabel");
+        const formatSelect = document.getElementById("formatSelect");
+        const memoryMode = document.getElementById("memoryMode");
+        const memoryHint = document.getElementById("memoryHint");
+        const canvas = document.getElementById("previewCanvas");
+        const ctx = canvas.getContext("2d");
+        const downloadBtn = document.getElementById("downloadBtn");
+        const beforeSize = document.getElementById("beforeSize");
+        const afterSize = document.getElementById("afterSize");
+        const savedSize = document.getElementById("savedSize");
+        const gridResult = document.getElementById("gridResult");
+        let image = null;
+        let originalBytes = 0;
+        let mode = "compress";
+
+        function formatBytes(bytes) {
+            if (!bytes) return "--";
+            const units = ["B", "KB", "MB"];
+            let size = bytes;
+            let unit = 0;
+            while (size >= 1024 && unit < units.length - 1) {
+                size /= 1024;
+                unit += 1;
+            }
+            return `${size.toFixed(size >= 10 ? 0 : 1)} ${units[unit]}`;
+        }
+
+        function parsePreset() {
+            const [width, height] = presetSelect.value.split("x").map(Number);
+            return { width, height };
+        }
+
+        function shouldUseEcoMode() {
+            if (memoryMode.value === "eco") return true;
+            if (memoryMode.value === "full") return false;
+            const memory = Number(navigator.deviceMemory || 0);
+            const cores = Number(navigator.hardwareConcurrency || 0);
+            return window.innerWidth <= 480 || (memory > 0 && memory <= 4) || (cores > 0 && cores <= 4);
+        }
+
+        function constrainDimensions(dimensions, maxLongEdge) {
+            const longEdge = Math.max(dimensions.width, dimensions.height);
+            if (longEdge <= maxLongEdge) return dimensions;
+            const scale = maxLongEdge / longEdge;
+            return {
+                width: Math.max(1, Math.round(dimensions.width * scale)),
+                height: Math.max(1, Math.round(dimensions.height * scale))
+            };
+        }
+
+        function getOutputPreset() {
+            const eco = shouldUseEcoMode();
+            if (mode === "grid") {
+                return eco ? { width: 2160, height: 2160, tile: 720 } : { width: 3240, height: 3240, tile: 1080 };
+            }
+            const preset = parsePreset();
+            if (!eco || mode === "avatar") return { ...preset, tile: Math.min(preset.width, preset.height) };
+            return { ...constrainDimensions(preset, 1600), tile: 0 };
+        }
+
+        function updateMemoryHint() {
+            const eco = shouldUseEcoMode();
+            if (mode === "grid") {
+                memoryHint.textContent = eco
+                    ? "Modo leve ativo: cada parte da grade sai com 720 px para evitar travamento."
+                    : "Alta resolução ativa: cada parte da grade sai com 1080 px.";
+                return;
+            }
+            memoryHint.textContent = eco
+                ? "Modo leve ativo: saída limitada para economizar memória e dados."
+                : "Alta resolução ativa para melhor qualidade final.";
+        }
+
+        function drawCover(source, targetCanvas, circular) {
+            const context = targetCanvas.getContext("2d");
+            const { width, height } = targetCanvas;
+            context.clearRect(0, 0, width, height);
+            context.fillStyle = "#ffffff";
+            context.fillRect(0, 0, width, height);
+
+            const sourceRatio = source.width / source.height;
+            const targetRatio = width / height;
+            let sx = 0;
+            let sy = 0;
+            let sw = source.width;
+            let sh = source.height;
+
+            if (sourceRatio > targetRatio) {
+                sw = source.height * targetRatio;
+                sx = (source.width - sw) / 2;
+            } else {
+                sh = source.width / targetRatio;
+                sy = (source.height - sh) / 2;
+            }
+
+            if (circular) {
+                context.save();
+                context.beginPath();
+                context.arc(width / 2, height / 2, Math.min(width, height) / 2, 0, Math.PI * 2);
+                context.clip();
+            }
+
+            context.drawImage(source, sx, sy, sw, sh, 0, 0, width, height);
+
+            if (circular) {
+                context.restore();
+            }
+        }
+
+        function updateStats(dataUrl) {
+            fetch(dataUrl)
+                .then(response => response.blob())
+                .then(blob => {
+                    const saved = Math.max(0, originalBytes - blob.size);
+                    beforeSize.textContent = formatBytes(originalBytes);
+                    afterSize.textContent = formatBytes(blob.size);
+                    savedSize.textContent = originalBytes ? `${Math.round(saved / originalBytes * 100)}%` : "--";
+                });
+        }
+
+        function renderGrid() {
+            gridResult.innerHTML = "";
+            gridResult.classList.remove("hidden");
+            const size = Math.min(canvas.width, canvas.height) / 3;
+            const outputSize = Math.round(size);
+            for (let row = 0; row < 3; row += 1) {
+                for (let col = 0; col < 3; col += 1) {
+                    const tileCanvas = document.createElement("canvas");
+                    tileCanvas.width = outputSize;
+                    tileCanvas.height = outputSize;
+                    tileCanvas.getContext("2d").drawImage(canvas, col * size, row * size, size, size, 0, 0, outputSize, outputSize);
+                    const dataUrl = tileCanvas.toDataURL(formatSelect.value, Number(qualityRange.value) / 100);
+                    const tile = document.createElement("div");
+                    tile.className = "tile";
+                    tile.innerHTML = `<img src="${dataUrl}" alt="Parte ${row * 3 + col + 1}"><a class="btn secondary" download="grade-${row * 3 + col + 1}-${outputSize}.jpg" href="${dataUrl}">Baixar ${row * 3 + col + 1}</a>`;
+                    gridResult.appendChild(tile);
+                }
+            }
+        }
+
+        function render() {
+            qualityLabel.textContent = `${qualityRange.value}%`;
+            updateMemoryHint();
+            if (!image) {
+                ctx.fillStyle = "#fbfcfa";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = "#5f6d65";
+                ctx.font = "42px system-ui";
+                ctx.textAlign = "center";
+                ctx.fillText("Selecione uma imagem", canvas.width / 2, canvas.height / 2);
+                return;
+            }
+
+            const preset = getOutputPreset();
+            canvas.width = preset.width;
+            canvas.height = preset.height;
+            drawCover(image, canvas, mode === "avatar");
+            const dataUrl = canvas.toDataURL(formatSelect.value, Number(qualityRange.value) / 100);
+            downloadBtn.href = dataUrl;
+            downloadBtn.download = mode === "avatar" ? "avatar-social.jpg" : mode === "grid" ? "grade-instagram.jpg" : "foto-social.jpg";
+            updateStats(dataUrl);
+
+            if (mode === "grid") {
+                renderGrid();
+            } else {
+                gridResult.classList.add("hidden");
+                gridResult.innerHTML = "";
+            }
+        }
+
+        function loadFile(file) {
+            if (!file) return;
+            originalBytes = file.size;
+            const reader = new FileReader();
+            reader.onload = () => {
+                const nextImage = new Image();
+                nextImage.onload = () => {
+                    image = nextImage;
+                    render();
+                };
+                nextImage.src = reader.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        fileInput.addEventListener("change", event => loadFile(event.target.files[0]));
+        ["dragenter", "dragover"].forEach(name => {
+            dropZone.addEventListener(name, event => {
+                event.preventDefault();
+                dropZone.classList.add("dragover");
+            });
+        });
+        ["dragleave", "drop"].forEach(name => {
+            dropZone.addEventListener(name, event => {
+                event.preventDefault();
+                dropZone.classList.remove("dragover");
+            });
+        });
+        dropZone.addEventListener("drop", event => loadFile(event.dataTransfer.files[0]));
+        modeTabs.addEventListener("click", event => {
+            const button = event.target.closest("[data-mode]");
+            if (!button) return;
+            mode = button.dataset.mode;
+            modeTabs.querySelectorAll(".chip").forEach(item => item.classList.toggle("active", item === button));
+            if (mode === "avatar") presetSelect.value = "512x512";
+            render();
+        });
+        [presetSelect, qualityRange, formatSelect, memoryMode].forEach(element => element.addEventListener("input", render));
+        window.addEventListener("resize", render);
+        render();
+    </script>
+</body>
+</html>
