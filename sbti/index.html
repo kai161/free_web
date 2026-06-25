@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name='description' content='SBTI 现代互联网情绪和俚语的“暴力简化”人格指标。不同于严谨的 MBTI，SBTI 更倾向于解构社交面具下的真实情绪 '>
+    <meta id="meta-description" name='description' content='SBTI 现代互联网情绪和俚语的“暴力简化”人格指标。不同于严谨的 MBTI，SBTI 更倾向于解构社交面具下的真实情绪 '>
     <title>SBTI | 发现你的硬核人格 - FreeTools</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/pixelarticons@1.8.1/css/pixelarticons.css" rel="stylesheet">
@@ -19,32 +19,27 @@
 </head>
 <body class="min-h-screen">
 <main class="max-w-6xl mx-auto px-4 py-12">
+    <div class="flex justify-end mb-6" aria-label="Language selector">
+        <div class="inline-flex brutalist-card p-1 bg-white gap-1">
+            <button id="lang-zh" onclick="setLanguage('zh', true)" class="px-4 py-2 font-black text-xs uppercase">中文</button>
+            <button id="lang-en" onclick="setLanguage('en', true)" class="px-4 py-2 font-black text-xs uppercase">EN</button>
+            <button id="lang-pt" onclick="setLanguage('pt', true)" class="px-4 py-2 font-black text-xs uppercase">PT-BR</button>
+        </div>
+    </div>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
 
         <section id="app" class="brutalist-card p-8 md:p-10 min-h-[550px] flex flex-col relative overflow-hidden">
             <div id="quiz-container" class="h-full flex flex-col justify-center">
-                <div class="text-center fade-in">
-                    <div class="text-7xl mb-6">🎭</div>
-                    <h1 class="text-5xl font-black mb-4 italic tracking-tighter">SBTI</h1>
-                    <p class="text-lg font-bold mb-10 text-gray-600 uppercase">Simplified Brute-force<br>Type Indicator</p>
-                    <button onclick="startQuiz()" class="px-12 py-5 bg-yellow-300 brutalist-btn font-black text-2xl uppercase italic">开始测试</button>
-                </div>
             </div>
         </section>
 
         <aside class="space-y-8">
             <article class="brutalist-card p-8 bg-blue-50">
-                <h2 class="text-3xl font-black mb-6 italic underline uppercase">什么是 SBTI？</h2>
-                <div class="prose font-medium text-gray-700 space-y-4">
-                    <p><strong>SBTI</strong> 是一种基于现代互联网情绪和俚语的“暴力简化”人格指标。不同于严谨的 MBTI，SBTI 更倾向于解构社交面具下的真实情绪。</p>
-                    <h3 class="font-black text-xl text-black">25 种核心人格维度</h3>
-                    <p>我们通过 5 个维度的加权算法，从 <strong>OJBK</strong> 到 <strong>IMFW</strong> 寻找你的定位。这不是职业建议，而是自嘲的镜子。</p>
-                    <h3 class="font-black text-xl text-black">隐私承诺</h3>
-                    <p>本测试 100% 在<strong>浏览器本地</strong>运行。您的选项绝不上传服务器。在隐私泛滥的时代，我们守护您最后的性格净土。</p>
+                <h2 id="about-title" class="text-3xl font-black mb-6 italic underline uppercase"></h2>
+                <div id="about-content" class="prose font-medium text-gray-700 space-y-4">
                 </div>
             </article>
-            <div class="brutalist-card p-6 bg-yellow-50 text-sm font-bold">
-                💡 提示：测试结果支持一键生成分享文案。
+            <div id="tip-card" class="brutalist-card p-6 bg-yellow-50 text-sm font-bold">
             </div>
         </aside>
     </div>
@@ -80,56 +75,287 @@
         {code: "IMFW", s: [-3,-3,-3,-3,-3], icon: "pi-coffee"}
     ];
 
-    // 25 种毒舌描述（已整合）
-    const descriptions = {"OJBK":"随缘型逻辑主义者。你的座右铭是“没关系，我无所谓”。这通常意味着你太懒了，不想去争取更好的结果。","THAN-K":"被动型感恩者。你并不真的感激任何人，你只是害怕如果不随时准备说“谢谢”，世界就会发现你只是一个没有想法的空壳。","Dior-s":"直觉型自嘲者。你是自嘲界的王者，通过主动把尊严踩在脚下来获得一种虚幻的免责权。","MUM":"守护型控制狂。你把对身边人的细致照顾伪装成一种天赋，实际上这是你通过建立情感依赖来实施控制。","FAKE":"表演型社交家。你的整个生活就是一场永不落幕的表演。你擅长根据观众的口味实时调整面具。","GOGO":"行动型多动症。你是一个停不下来的永动机，把“忙碌”本身视为成功。你跑得很快，但不知道终点在哪里。","MALO":"情绪型抱怨家。你是一个行走的负能量发射塔。你并不想要解决方案，你只是想要别人和你一起陷入痛苦。","ZZZZ":"沉睡型哲学家。你通过睡眠和发呆来逃避现实。你把极致的懒惰美化为“看透世界的虚无”。","SEXY":"直觉型诱惑者。你擅长捕捉人群中的潜台词，享受通过微妙的互动来操纵别人的注意力。","IMSB":"直觉型自负者。你是一个活在自己脑补世界里的国王，认为自己的直觉永远是对的。","CTRL":"逻辑型控制狂。你是秩序和权力的绝对信徒，你需要掌控生活中的每一个细节。","LOVE-R":"直觉型讨好者。你是情感上的寄生虫，通过迎合别人的情绪来获取存在感。","WOC!":"情绪型易爆者。你是一个行走的情绪地雷，一点火星就能让你瞬间爆炸。","THIN-K":"逻辑型拖延家。你擅长通过过度的分析和思考来逃避行动。你的生活是一场永恒的彩排。","MONK":"沉睡型冥想家。你通过降低欲望来获得和平。你不是看破红尘，你只是太害怕受伤。","ATM-er":"守护型付出者。你通过物质和体力的无底线付出来换取微弱的情感反馈。典型的“舔”到最后。","BOSS":"逻辑型领导者。你是一个天生的组织者，通过达成目标来获得掌控感。你擅长命令，不擅长理解。","JOKE-R":"表演型滑稽家。你在人群中扮演小丑。你把生活变成段子，用笑声掩盖孤独。","SHIT":"情绪型绝望家。你擅长从任何事情中找出最糟糕的一面。你并不想要变好，你只想沉沦。","SOLO":"守护型流浪者。你通过自我封闭获得安全感。你害怕连接，把冷漠伪装成“独立”。","FUCK":"情绪型愤怒家。你对世界充满毫无逻辑的愤怒。你成功把自己活成了一座孤岛。","DEAD":"沉睡型厌世者。你长期处于精神上的死机状态。你丧失了面对任何挑战的勇气。","OH-NO":"被动型焦虑家。你是一个行走的焦虑机器，每天都在为还没发生的事情担忧。","POOR":"情绪型乞讨家。你擅长扮演弱者来规避冲突。你通过示弱来操纵别人。","IMFW":"情绪型废物型。你不仅懒惰，而且以此为荣。你的人生是一场对社会潮流的无声（且无力）的抗议。"};
-
-    const quizData = [
-        { q: "面对高压，你更倾向于？", options: [{t:"在人群中狂欢", s:{So:3, St:-2}}, {t:"独自看日落", s:{So:-3, St:2}}] },
-        { q: "朋友失恋了，你的反应是？", options: [{t:"分析原因并支招", s:{Lo:3, St:1}}, {t:"陪他一起骂", s:{Lo:-3, St:-1}}] },
-        { q: "你更愿意活在？", options: [{t:"脑补的星辰大海", s:{In:3}}, {t:"现实的柴米油盐", s:{In:-3}}] },
-        { q: "做事情前，你通常是？", options: [{t:"乱中有序", s:{Ac:3, Lo:-1}}, {t:"计划缜密", s:{Ac:-3, Lo:1}}] },
-        { q: "对于冲突，你的态度是？", options: [{t:"迎难而上", s:{St:1, So:1}}, {t:"随缘躺平", s:{St:-1, So:-1}}] },
-        { q: "独处时，你最喜欢干？", options: [{t:"发呆沉思", s:{So:-3, In:2}}, {t:"做手工、看电影", s:{So:-3, In:-2}}] },
-        { q: "你最受不了哪种？", options: [{t:"混乱和无序", s:{Lo:2, Ac:-2}}, {t:"束缚和一成不变", s:{Lo:-2, Ac:2}}] },
-        { q: "决策时，你最看重？", options: [{t:"客观数据和逻辑", s:{Lo:3, So:-1}}, {t:"直觉和情感共鸣", s:{Lo:-3, So:1}}] },
-        { q: "你更喜欢哪种？", options: [{t:"刺激的未知体验", s:{In:2, St:-1}}, {t:"稳定的重复生活", s:{In:-2, St:1}}] },
-        { q: "做完一件大事，你会？", options: [{t:"和朋友大吃一顿", s:{So:3}}, {t:"独自睡个好觉", s:{So:-3}}] },
-        { q: "对于规则，你的看法是？", options: [{t:"用来打破的", s:{Lo:-1, Ac:2}}, {t:"用来遵守的", s:{Lo:1, Ac:-2}}] },
-        { q: "对于未来，你经常？", options: [{t:"充满焦虑", s:{St:-3}}, {t:"满怀希望", s:{St:3}}] },
-        { q: "工作环境，你更喜欢哪种？", options: [{t:"人多热闹的开放式", s:{So:3}}, {t:"安静独立的格子间", s:{So:-3}}] },
-        { q: "你对自己的直觉？", options: [{t:"非常信任", s:{In:3}}, {t:"往往持怀疑态度", s:{In:-3}}] },
-        { q: "处理麻烦，你通常是？", options: [{t:"马上行动解决", s:{Ac:3}}, {t:"拖到最后一刻", s:{Ac:-3}}] },
-        { q: "你眼中的世界？", options: [{t:"逻辑可以解释一切", s:{Lo:3}}, {t:"情绪和感觉主宰一切", s:{Lo:-3}}] },
-        { q: "对于朋友，你倾向于？", options: [{t:"很多点头之交", s:{So:3}}, {t:"几个知心朋友", s:{So:-3}}] },
-        { q: "做计划，你最看重哪种？", options: [{t:"长远的愿景", s:{In:2, Lo:1}}, {t:"眼下的执行步骤", s:{In:-2, Lo:-1}}] },
-        { q: "遇到挑战，你倾向于？", options: [{t:"寻找新的解决方案", s:{In:2, Ac:1}}, {t:"采用已被证明的方法", s:{In:-2, Ac:-1}}] },
-        { q: "你如何看待“忙碌”？", options: [{t:"生活充实的证明", s:{Ac:3, So:-1}}, {t:"逃避思考的手段", s:{Ac:-3, So:1}}] },
-        { q: "对于金钱，你倾向于？", options: [{t:"用来购买体验和快乐", s:{Ac:2, In:1}}, {t:"稳健的投资和储蓄", s:{Ac:-2, In:-1}}] },
-        { q: "你更擅长哪种？", options: [{t:"逻辑清晰的表达", s:{Lo:3}}, {t:"富有感染力的叙事", s:{Lo:-3}}] },
-        { q: "对于新想法，你倾向于？", options: [{t:"先怀疑其可行性", s:{Lo:2, In:-1}}, {t:"先兴奋并尝试", s:{Lo:-2, In:1}}] },
-        { q: "你如何看待“独处”？", options: [{t:"一种精力的消耗", s:{So:3}}, {t:"一种精力的恢复", s:{So:-3}}] },
-        { q: "做决定，你更倾向于？", options: [{t:"凭瞬间的直觉", s:{In:3}}, {t:"通过漫长的分析", s:{In:-3}}] }
-    ];
+    const content = {
+        zh: {
+            langAttr: "zh-CN",
+            title: "SBTI | 发现你的硬核人格 - FreeTools",
+            metaDescription: "SBTI 现代互联网情绪和俚语的“暴力简化”人格指标。不同于严谨的 MBTI，SBTI 更倾向于解构社交面具下的真实情绪。",
+            homeSubtitle: "Simplified Brute-force<br>Type Indicator",
+            startButton: "开始测试",
+            aboutTitle: "什么是 SBTI？",
+            aboutHtml: `
+                <p><strong>SBTI</strong> 是一种基于现代互联网情绪和俚语的“暴力简化”人格指标。不同于严谨的 MBTI，SBTI 更倾向于解构社交面具下的真实情绪。</p>
+                <h3 class="font-black text-xl text-black">25 种核心人格维度</h3>
+                <p>我们通过 5 个维度的加权算法，从 <strong>OJBK</strong> 到 <strong>IMFW</strong> 寻找你的定位。这不是职业建议，而是自嘲的镜子。</p>
+                <h3 class="font-black text-xl text-black">隐私承诺</h3>
+                <p>本测试 100% 在<strong>浏览器本地</strong>运行。您的选项绝不上传服务器。在隐私泛滥的时代，我们守护您最后的性格净土。</p>
+            `,
+            tip: "💡 提示：测试结果支持一键生成分享文案。",
+            ui: {
+                step: "STEP",
+                verified: "Verified",
+                report: "SBTI Report",
+                testSource: "Test Source",
+                share: "一键分享结果",
+                retry: "重新测试",
+                copied: "✨ 分享文案已复制！配合【截图】发朋友圈效果更棒哦！",
+                copiedFallback: "分享文案已复制！快去朋友圈秀一下吧 ✨",
+                shareText: (code, desc) => `我的 SBTI 是【${code}】！\n“${desc}...”\n有点准到离谱，来测测你的毒舌人格：${window.location.href}`
+            },
+            descriptions: {"OJBK":"随缘型逻辑主义者。你的座右铭是“没关系，我无所谓”。这通常意味着你太懒了，不想去争取更好的结果。","THAN-K":"被动型感恩者。你并不真的感激任何人，你只是害怕如果不随时准备说“谢谢”，世界就会发现你只是一个没有想法的空壳。","Dior-s":"直觉型自嘲者。你是自嘲界的王者，通过主动把尊严踩在脚下来获得一种虚幻的免责权。","MUM":"守护型控制狂。你把对身边人的细致照顾伪装成一种天赋，实际上这是你通过建立情感依赖来实施控制。","FAKE":"表演型社交家。你的整个生活就是一场永不落幕的表演。你擅长根据观众的口味实时调整面具。","GOGO":"行动型多动症。你是一个停不下来的永动机，把“忙碌”本身视为成功。你跑得很快，但不知道终点在哪里。","MALO":"情绪型抱怨家。你是一个行走的负能量发射塔。你并不想要解决方案，你只是想要别人和你一起陷入痛苦。","ZZZZ":"沉睡型哲学家。你通过睡眠和发呆来逃避现实。你把极致的懒惰美化为“看透世界的虚无”。","SEXY":"直觉型诱惑者。你擅长捕捉人群中的潜台词，享受通过微妙的互动来操纵别人的注意力。","IMSB":"直觉型自负者。你是一个活在自己脑补世界里的国王，认为自己的直觉永远是对的。","CTRL":"逻辑型控制狂。你是秩序和权力的绝对信徒，你需要掌控生活中的每一个细节。","LOVE-R":"直觉型讨好者。你是情感上的寄生虫，通过迎合别人的情绪来获取存在感。","WOC!":"情绪型易爆者。你是一个行走的情绪地雷，一点火星就能让你瞬间爆炸。","THIN-K":"逻辑型拖延家。你擅长通过过度的分析和思考来逃避行动。你的生活是一场永恒的彩排。","MONK":"沉睡型冥想家。你通过降低欲望来获得和平。你不是看破红尘，你只是太害怕受伤。","ATM-er":"守护型付出者。你通过物质和体力的无底线付出来换取微弱的情感反馈。典型的“舔”到最后。","BOSS":"逻辑型领导者。你是一个天生的组织者，通过达成目标来获得掌控感。你擅长命令，不擅长理解。","JOKE-R":"表演型滑稽家。你在人群中扮演小丑。你把生活变成段子，用笑声掩盖孤独。","SHIT":"情绪型绝望家。你擅长从任何事情中找出最糟糕的一面。你并不想要变好，你只想沉沦。","SOLO":"守护型流浪者。你通过自我封闭获得安全感。你害怕连接，把冷漠伪装成“独立”。","FUCK":"情绪型愤怒家。你对世界充满毫无逻辑的愤怒。你成功把自己活成了一座孤岛。","DEAD":"沉睡型厌世者。你长期处于精神上的死机状态。你丧失了面对任何挑战的勇气。","OH-NO":"被动型焦虑家。你是一个行走的焦虑机器，每天都在为还没发生的事情担忧。","POOR":"情绪型乞讨家。你擅长扮演弱者来规避冲突。你通过示弱来操纵别人。","IMFW":"情绪型废物型。你不仅懒惰，而且以此为荣。你的人生是一场对社会潮流的无声（且无力）的抗议。"},
+            quizData: [
+                { q: "面对高压，你更倾向于？", options: [{t:"在人群中狂欢", s:{So:3, St:-2}}, {t:"独自看日落", s:{So:-3, St:2}}] },
+                { q: "朋友失恋了，你的反应是？", options: [{t:"分析原因并支招", s:{Lo:3, St:1}}, {t:"陪他一起骂", s:{Lo:-3, St:-1}}] },
+                { q: "你更愿意活在？", options: [{t:"脑补的星辰大海", s:{In:3}}, {t:"现实的柴米油盐", s:{In:-3}}] },
+                { q: "做事情前，你通常是？", options: [{t:"乱中有序", s:{Ac:3, Lo:-1}}, {t:"计划缜密", s:{Ac:-3, Lo:1}}] },
+                { q: "对于冲突，你的态度是？", options: [{t:"迎难而上", s:{St:1, So:1}}, {t:"随缘躺平", s:{St:-1, So:-1}}] },
+                { q: "独处时，你最喜欢干？", options: [{t:"发呆沉思", s:{So:-3, In:2}}, {t:"做手工、看电影", s:{So:-3, In:-2}}] },
+                { q: "你最受不了哪种？", options: [{t:"混乱和无序", s:{Lo:2, Ac:-2}}, {t:"束缚和一成不变", s:{Lo:-2, Ac:2}}] },
+                { q: "决策时，你最看重？", options: [{t:"客观数据和逻辑", s:{Lo:3, So:-1}}, {t:"直觉和情感共鸣", s:{Lo:-3, So:1}}] },
+                { q: "你更喜欢哪种？", options: [{t:"刺激的未知体验", s:{In:2, St:-1}}, {t:"稳定的重复生活", s:{In:-2, St:1}}] },
+                { q: "做完一件大事，你会？", options: [{t:"和朋友大吃一顿", s:{So:3}}, {t:"独自睡个好觉", s:{So:-3}}] },
+                { q: "对于规则，你的看法是？", options: [{t:"用来打破的", s:{Lo:-1, Ac:2}}, {t:"用来遵守的", s:{Lo:1, Ac:-2}}] },
+                { q: "对于未来，你经常？", options: [{t:"充满焦虑", s:{St:-3}}, {t:"满怀希望", s:{St:3}}] },
+                { q: "工作环境，你更喜欢哪种？", options: [{t:"人多热闹的开放式", s:{So:3}}, {t:"安静独立的格子间", s:{So:-3}}] },
+                { q: "你对自己的直觉？", options: [{t:"非常信任", s:{In:3}}, {t:"往往持怀疑态度", s:{In:-3}}] },
+                { q: "处理麻烦，你通常是？", options: [{t:"马上行动解决", s:{Ac:3}}, {t:"拖到最后一刻", s:{Ac:-3}}] },
+                { q: "你眼中的世界？", options: [{t:"逻辑可以解释一切", s:{Lo:3}}, {t:"情绪和感觉主宰一切", s:{Lo:-3}}] },
+                { q: "对于朋友，你倾向于？", options: [{t:"很多点头之交", s:{So:3}}, {t:"几个知心朋友", s:{So:-3}}] },
+                { q: "做计划，你最看重哪种？", options: [{t:"长远的愿景", s:{In:2, Lo:1}}, {t:"眼下的执行步骤", s:{In:-2, Lo:-1}}] },
+                { q: "遇到挑战，你倾向于？", options: [{t:"寻找新的解决方案", s:{In:2, Ac:1}}, {t:"采用已被证明的方法", s:{In:-2, Ac:-1}}] },
+                { q: "你如何看待“忙碌”？", options: [{t:"生活充实的证明", s:{Ac:3, So:-1}}, {t:"逃避思考的手段", s:{Ac:-3, So:1}}] },
+                { q: "对于金钱，你倾向于？", options: [{t:"用来购买体验和快乐", s:{Ac:2, In:1}}, {t:"稳健的投资和储蓄", s:{Ac:-2, In:-1}}] },
+                { q: "你更擅长哪种？", options: [{t:"逻辑清晰的表达", s:{Lo:3}}, {t:"富有感染力的叙事", s:{Lo:-3}}] },
+                { q: "对于新想法，你倾向于？", options: [{t:"先怀疑其可行性", s:{Lo:2, In:-1}}, {t:"先兴奋并尝试", s:{Lo:-2, In:1}}] },
+                { q: "你如何看待“独处”？", options: [{t:"一种精力的消耗", s:{So:3}}, {t:"一种精力的恢复", s:{So:-3}}] },
+                { q: "做决定，你更倾向于？", options: [{t:"凭瞬间的直觉", s:{In:3}}, {t:"通过漫长的分析", s:{In:-3}}] }
+            ]
+        },
+        en: {
+            langAttr: "en",
+            title: "SBTI | Discover Your Hard-core Personality - FreeTools",
+            metaDescription: "SBTI is a brutally simplified personality test built from modern internet moods and slang. It is less formal than MBTI and more interested in what hides under the social mask.",
+            homeSubtitle: "Simplified Brute-force<br>Type Indicator",
+            startButton: "Start Test",
+            aboutTitle: "What is SBTI?",
+            aboutHtml: `
+                <p><strong>SBTI</strong> is a brutally simplified personality indicator built from modern internet moods and slang. Unlike the stricter MBTI, SBTI is more interested in the raw feelings hiding under your social mask.</p>
+                <h3 class="font-black text-xl text-black">25 Core Personality Types</h3>
+                <p>A weighted algorithm across 5 dimensions places you somewhere from <strong>OJBK</strong> to <strong>IMFW</strong>. This is not career advice. It is a mirror with sharper edges.</p>
+                <h3 class="font-black text-xl text-black">Privacy Promise</h3>
+                <p>This test runs <strong>100% locally in your browser</strong>. Your answers are never uploaded. In an age of casual data leakage, we protect your last private personality swamp.</p>
+            `,
+            tip: "💡 Tip: Your result can be copied as a shareable text in one click.",
+            ui: {
+                step: "STEP",
+                verified: "Verified",
+                report: "SBTI Report",
+                testSource: "Test Source",
+                share: "Copy Result",
+                retry: "Restart Test",
+                copied: "✨ Share text copied. Add a screenshot for maximum effect.",
+                copiedFallback: "Share text copied. Go show it off ✨",
+                shareText: (code, desc) => `My SBTI is [${code}]!\n"${desc}..."\nPainfully accurate. Try your own savage personality test: ${window.location.href}`
+            },
+            descriptions: {"OJBK":"Go-with-the-flow logical type. Your motto is “it’s fine, whatever.” Usually that means you are too lazy to fight for a better outcome.","THAN-K":"Passive gratitude type. You are not truly grateful. You are just afraid the world will notice your empty shell if you ever stop saying thanks.","Dior-s":"Intuitive self-roaster. You dominate the art of insulting yourself first, trading dignity for the illusion of immunity.","MUM":"Protective control type. You disguise intense control as thoughtful care, creating emotional dependence one favor at a time.","FAKE":"Performative social type. Your life is an endless show, and you adjust the mask in real time for whoever is watching.","GOGO":"Action-addicted type. You are a machine that cannot stop. You call movement success, even when you have no idea where the finish line is.","MALO":"Emotional complainer. You are a walking transmitter of bad vibes. You do not want solutions. You want witnesses.","ZZZZ":"Sleeping philosopher. You use sleep and blank staring to dodge reality, then rebrand extreme laziness as cosmic nihilism.","SEXY":"Intuitive charmer. You read subtext well and enjoy quietly bending other people’s attention toward you.","IMSB":"Intuitive ego type. You live as the ruler of your own imagined kingdom and assume your gut is always right.","CTRL":"Logical control type. You worship order and power, and need every detail of life within reach.","LOVE-R":"Intuitive pleaser. You feed on emotional approval by tuning yourself to other people’s moods.","WOC!":"Emotional explosion type. You are a walking tripwire. One spark and the whole room gets a demonstration.","THIN-K":"Logical procrastinator. You use analysis as a hiding place. Your life is one endless rehearsal.","MONK":"Sleeping meditator. You lower desire to find peace. It is not enlightenment. It is fear with better posture.","ATM-er":"Protective giver. You spend money, time, and energy with no bottom line, hoping for tiny scraps of affection.","BOSS":"Logical leader. You organize naturally and gain control through goals. You are good at commands, less good at understanding.","JOKE-R":"Performative clown. You turn life into jokes and use laughter to keep loneliness out of frame.","SHIT":"Emotional doom type. You can find the worst angle in anything. You do not want to get better. You want to sink stylishly.","SOLO":"Protective wanderer. You build safety through isolation. You fear connection and call the wall independence.","FUCK":"Emotional anger type. Your rage is not particularly logical, but it is committed. You have made yourself an island.","DEAD":"Sleeping nihilist. Your mind has been frozen for a while, and your courage to face new challenges is currently offline.","OH-NO":"Passive anxiety type. You are a walking anxiety engine, rehearsing disasters that have not even applied for existence yet.","POOR":"Emotional beggar type. You play the weak side to avoid conflict, and weakness becomes your favorite remote control.","IMFW":"Emotional trash-fire type. You are not only lazy; you are proud of it. Your life is a weak but sincere protest against social momentum."},
+            quizData: [
+                { q: "Under pressure, what do you lean toward?", options: [{t:"Party in the crowd", s:{So:3, St:-2}}, {t:"Watch the sunset alone", s:{So:-3, St:2}}] },
+                { q: "A friend goes through a breakup. You:", options: [{t:"Analyze the cause and give advice", s:{Lo:3, St:1}}, {t:"Trash-talk with them", s:{Lo:-3, St:-1}}] },
+                { q: "Where would you rather live?", options: [{t:"In an imagined galaxy", s:{In:3}}, {t:"In practical everyday reality", s:{In:-3}}] },
+                { q: "Before doing something, you usually:", options: [{t:"Create order inside chaos", s:{Ac:3, Lo:-1}}, {t:"Plan every detail", s:{Ac:-3, Lo:1}}] },
+                { q: "Your attitude toward conflict is:", options: [{t:"Face it head-on", s:{St:1, So:1}}, {t:"Let it pass and lie flat", s:{St:-1, So:-1}}] },
+                { q: "When alone, what do you prefer?", options: [{t:"Zone out and think", s:{So:-3, In:2}}, {t:"Make things or watch movies", s:{So:-3, In:-2}}] },
+                { q: "Which bothers you more?", options: [{t:"Chaos and disorder", s:{Lo:2, Ac:-2}}, {t:"Restriction and sameness", s:{Lo:-2, Ac:2}}] },
+                { q: "When deciding, you value:", options: [{t:"Objective data and logic", s:{Lo:3, So:-1}}, {t:"Gut feeling and emotional resonance", s:{Lo:-3, So:1}}] },
+                { q: "Which do you prefer?", options: [{t:"Exciting unknown experiences", s:{In:2, St:-1}}, {t:"Stable repeated routines", s:{In:-2, St:1}}] },
+                { q: "After finishing something big, you:", options: [{t:"Eat out with friends", s:{So:3}}, {t:"Sleep well alone", s:{So:-3}}] },
+                { q: "Rules are made to be:", options: [{t:"Broken", s:{Lo:-1, Ac:2}}, {t:"Followed", s:{Lo:1, Ac:-2}}] },
+                { q: "About the future, you often feel:", options: [{t:"Full of anxiety", s:{St:-3}}, {t:"Full of hope", s:{St:3}}] },
+                { q: "Your preferred work environment:", options: [{t:"A lively open office", s:{So:3}}, {t:"A quiet independent cubicle", s:{So:-3}}] },
+                { q: "How much do you trust your intuition?", options: [{t:"A lot", s:{In:3}}, {t:"I usually doubt it", s:{In:-3}}] },
+                { q: "When trouble shows up, you usually:", options: [{t:"Act immediately", s:{Ac:3}}, {t:"Wait until the last second", s:{Ac:-3}}] },
+                { q: "In your eyes, the world is ruled by:", options: [{t:"Logic that can explain everything", s:{Lo:3}}, {t:"Emotion and feeling", s:{Lo:-3}}] },
+                { q: "With friends, you prefer:", options: [{t:"Many casual contacts", s:{So:3}}, {t:"A few close friends", s:{So:-3}}] },
+                { q: "When planning, you value:", options: [{t:"The long-term vision", s:{In:2, Lo:1}}, {t:"The next executable steps", s:{In:-2, Lo:-1}}] },
+                { q: "When facing a challenge, you tend to:", options: [{t:"Find a new solution", s:{In:2, Ac:1}}, {t:"Use a proven method", s:{In:-2, Ac:-1}}] },
+                { q: "How do you see being busy?", options: [{t:"Proof that life is full", s:{Ac:3, So:-1}}, {t:"A way to avoid thinking", s:{Ac:-3, So:1}}] },
+                { q: "With money, you tend to:", options: [{t:"Buy experiences and joy", s:{Ac:2, In:1}}, {t:"Save and invest steadily", s:{Ac:-2, In:-1}}] },
+                { q: "Which are you better at?", options: [{t:"Clear logical expression", s:{Lo:3}}, {t:"Emotionally engaging storytelling", s:{Lo:-3}}] },
+                { q: "With a new idea, you tend to:", options: [{t:"Question feasibility first", s:{Lo:2, In:-1}}, {t:"Get excited and try it first", s:{Lo:-2, In:1}}] },
+                { q: "How do you see alone time?", options: [{t:"An energy drain", s:{So:3}}, {t:"An energy recharge", s:{So:-3}}] },
+                { q: "When making decisions, you lean toward:", options: [{t:"Instant intuition", s:{In:3}}, {t:"Long analysis", s:{In:-3}}] }
+            ]
+        },
+        pt: {
+            langAttr: "pt-BR",
+            title: "SBTI | Descubra sua personalidade hardcore - FreeTools",
+            metaDescription: "SBTI e um teste de personalidade brutalmente simplificado, inspirado em humores e girias da internet. Menos formal que MBTI, mais interessado no que existe por baixo da mascara social.",
+            homeSubtitle: "Simplified Brute-force<br>Type Indicator",
+            startButton: "Começar teste",
+            aboutTitle: "O que e SBTI?",
+            aboutHtml: `
+                <p><strong>SBTI</strong> e um indicador de personalidade brutalmente simplificado, inspirado em humores e girias da internet. Diferente do MBTI mais formal, o SBTI olha para as sensacoes cruas escondidas por baixo da sua mascara social.</p>
+                <h3 class="font-black text-xl text-black">25 tipos centrais de personalidade</h3>
+                <p>Um algoritmo ponderado em 5 dimensoes posiciona voce em algum lugar entre <strong>OJBK</strong> e <strong>IMFW</strong>. Isto nao e conselho de carreira. E um espelho com bordas mais afiadas.</p>
+                <h3 class="font-black text-xl text-black">Promessa de privacidade</h3>
+                <p>Este teste roda <strong>100% localmente no seu navegador</strong>. Suas respostas nunca sao enviadas para servidor. Em uma era de vazamento casual de dados, protegemos seu ultimo pantano privado de personalidade.</p>
+            `,
+            tip: "💡 Dica: seu resultado pode ser copiado como texto para compartilhar em um clique.",
+            ui: {
+                step: "ETAPA",
+                verified: "Verificado",
+                report: "Relatorio SBTI",
+                testSource: "Fonte do teste",
+                share: "Copiar resultado",
+                retry: "Refazer teste",
+                copied: "✨ Texto para compartilhar copiado. Junte um print para dar mais impacto.",
+                copiedFallback: "Texto para compartilhar copiado. Agora vai mostrar por ai ✨",
+                shareText: (code, desc) => `Meu SBTI e [${code}]!\n"${desc}..."\nPrecisao desconfortavel. Faça seu teste de personalidade acido aqui: ${window.location.href}`
+            },
+            descriptions: {"OJBK":"Tipo logico do deixa rolar. Seu lema e “tudo bem, tanto faz”. Normalmente isso so quer dizer que voce tem preguiça demais para lutar por um resultado melhor.","THAN-K":"Tipo gratidao passiva. Voce nao e realmente grato. Voce so tem medo de que o mundo perceba seu vazio se parar de agradecer por dois segundos.","Dior-s":"Tipo intuitivo que se zoa primeiro. Voce domina a arte de se atacar antes dos outros, trocando dignidade por uma falsa imunidade.","MUM":"Tipo protetor controlador. Voce disfarça controle intenso como cuidado carinhoso, criando dependencia emocional favor por favor.","FAKE":"Tipo social performatico. Sua vida e um show sem intervalo, e voce ajusta a mascara em tempo real para cada plateia.","GOGO":"Tipo viciado em açao. Voce e uma maquina que nao para. Chama movimento de sucesso, mesmo sem saber onde fica a linha de chegada.","MALO":"Tipo reclamador emocional. Voce e uma antena ambulante de energia ruim. Nao quer solucoes. Quer testemunhas.","ZZZZ":"Tipo filosofo adormecido. Voce usa sono e olhar perdido para fugir da realidade, depois chama preguiça extrema de niilismo cosmico.","SEXY":"Tipo sedutor intuitivo. Voce le subtexto bem demais e gosta de dobrar discretamente a atencao dos outros para voce.","IMSB":"Tipo ego intuitivo. Voce vive como rei de um reino imaginario e presume que seu instinto esta sempre certo.","CTRL":"Tipo controlador logico. Voce cultua ordem e poder, e precisa ter cada detalhe da vida ao alcance da mao.","LOVE-R":"Tipo agradador intuitivo. Voce se alimenta de aprovacao emocional ajustando sua personalidade ao humor dos outros.","WOC!":"Tipo explosao emocional. Voce e um gatilho ambulante. Uma faisca e a sala inteira ganha uma demonstracao.","THIN-K":"Tipo procrastinador logico. Voce usa analise como esconderijo. Sua vida e um ensaio infinito.","MONK":"Tipo meditador adormecido. Voce reduz desejos para encontrar paz. Nao e iluminacao. E medo com postura melhor.","ATM-er":"Tipo doador protetor. Voce gasta dinheiro, tempo e energia sem limite, esperando migalhas minusculas de afeto.","BOSS":"Tipo lider logico. Voce organiza naturalmente e ganha controle por meio de metas. E bom em mandar, menos bom em entender.","JOKE-R":"Tipo palhaço performatico. Voce transforma a vida em piadas e usa risada para manter a solidao fora do enquadramento.","SHIT":"Tipo desgraça emocional. Voce consegue achar o pior angulo de qualquer coisa. Nao quer melhorar. Quer afundar com estilo.","SOLO":"Tipo andarilho protetor. Voce constroi seguranca por isolamento. Tem medo de conexao e chama o muro de independencia.","FUCK":"Tipo raiva emocional. Sua raiva nao e muito logica, mas e dedicada. Voce conseguiu se transformar numa ilha.","DEAD":"Tipo niilista adormecido. Sua mente esta congelada ha um tempo, e sua coragem para encarar desafios esta offline.","OH-NO":"Tipo ansiedade passiva. Voce e uma usina ambulante de ansiedade, ensaiando desastres que ainda nem pediram para existir.","POOR":"Tipo mendigo emocional. Voce interpreta o lado fraco para evitar conflito, e a fraqueza vira seu controle remoto favorito.","IMFW":"Tipo incendio emocional. Voce nao e apenas preguiçoso; tem orgulho disso. Sua vida e um protesto fraco, porem sincero, contra o ritmo social."},
+            quizData: [
+                { q: "Sob pressao, voce tende a:", options: [{t:"Festejar no meio da galera", s:{So:3, St:-2}}, {t:"Ver o por do sol sozinho", s:{So:-3, St:2}}] },
+                { q: "Um amigo terminou o relacionamento. Voce:", options: [{t:"Analisa a causa e da conselho", s:{Lo:3, St:1}}, {t:"Xinga junto com ele", s:{Lo:-3, St:-1}}] },
+                { q: "Onde voce preferiria viver?", options: [{t:"Numa galaxia imaginada", s:{In:3}}, {t:"Na realidade pratica do dia a dia", s:{In:-3}}] },
+                { q: "Antes de fazer algo, voce geralmente:", options: [{t:"Cria ordem dentro do caos", s:{Ac:3, Lo:-1}}, {t:"Planeja cada detalhe", s:{Ac:-3, Lo:1}}] },
+                { q: "Sua atitude diante de conflito e:", options: [{t:"Encarar de frente", s:{St:1, So:1}}, {t:"Deixar passar e deitar", s:{St:-1, So:-1}}] },
+                { q: "Quando esta sozinho, voce prefere:", options: [{t:"Viajar e pensar", s:{So:-3, In:2}}, {t:"Fazer coisas ou ver filmes", s:{So:-3, In:-2}}] },
+                { q: "O que te incomoda mais?", options: [{t:"Caos e desordem", s:{Lo:2, Ac:-2}}, {t:"Restricao e mesmice", s:{Lo:-2, Ac:2}}] },
+                { q: "Ao decidir, voce valoriza:", options: [{t:"Dados objetivos e logica", s:{Lo:3, So:-1}}, {t:"Instinto e ressonancia emocional", s:{Lo:-3, So:1}}] },
+                { q: "Qual voce prefere?", options: [{t:"Experiencias desconhecidas e intensas", s:{In:2, St:-1}}, {t:"Rotinas estaveis e repetidas", s:{In:-2, St:1}}] },
+                { q: "Depois de terminar algo grande, voce:", options: [{t:"Sai para comer com amigos", s:{So:3}}, {t:"Dorme bem sozinho", s:{So:-3}}] },
+                { q: "Regras existem para serem:", options: [{t:"Quebradas", s:{Lo:-1, Ac:2}}, {t:"Seguidas", s:{Lo:1, Ac:-2}}] },
+                { q: "Sobre o futuro, voce costuma se sentir:", options: [{t:"Cheio de ansiedade", s:{St:-3}}, {t:"Cheio de esperança", s:{St:3}}] },
+                { q: "Seu ambiente de trabalho ideal:", options: [{t:"Um escritorio aberto e animado", s:{So:3}}, {t:"Um canto quieto e independente", s:{So:-3}}] },
+                { q: "Quanto voce confia na sua intuicao?", options: [{t:"Muito", s:{In:3}}, {t:"Eu normalmente duvido dela", s:{In:-3}}] },
+                { q: "Quando aparece problema, voce geralmente:", options: [{t:"Age imediatamente", s:{Ac:3}}, {t:"Espera ate o ultimo segundo", s:{Ac:-3}}] },
+                { q: "Na sua visao, o mundo e regido por:", options: [{t:"Logica que explica tudo", s:{Lo:3}}, {t:"Emocao e sensacao", s:{Lo:-3}}] },
+                { q: "Com amigos, voce prefere:", options: [{t:"Muitos contatos casuais", s:{So:3}}, {t:"Poucos amigos proximos", s:{So:-3}}] },
+                { q: "Ao planejar, voce valoriza:", options: [{t:"A visao de longo prazo", s:{In:2, Lo:1}}, {t:"Os proximos passos executaveis", s:{In:-2, Lo:-1}}] },
+                { q: "Diante de um desafio, voce tende a:", options: [{t:"Encontrar uma solucao nova", s:{In:2, Ac:1}}, {t:"Usar um metodo comprovado", s:{In:-2, Ac:-1}}] },
+                { q: "Como voce enxerga estar ocupado?", options: [{t:"Prova de que a vida esta cheia", s:{Ac:3, So:-1}}, {t:"Um jeito de evitar pensar", s:{Ac:-3, So:1}}] },
+                { q: "Com dinheiro, voce tende a:", options: [{t:"Comprar experiencias e alegria", s:{Ac:2, In:1}}, {t:"Poupar e investir com calma", s:{Ac:-2, In:-1}}] },
+                { q: "No que voce e melhor?", options: [{t:"Expressao logica e clara", s:{Lo:3}}, {t:"Narrativa emocionalmente envolvente", s:{Lo:-3}}] },
+                { q: "Com uma ideia nova, voce tende a:", options: [{t:"Questionar a viabilidade primeiro", s:{Lo:2, In:-1}}, {t:"Se empolgar e tentar primeiro", s:{Lo:-2, In:1}}] },
+                { q: "Como voce ve o tempo sozinho?", options: [{t:"Gasto de energia", s:{So:3}}, {t:"Recarga de energia", s:{So:-3}}] },
+                { q: "Ao tomar decisoes, voce tende a:", options: [{t:"Intuicao instantanea", s:{In:3}}, {t:"Analise longa", s:{In:-3}}] }
+            ]
+        }
+    };
 
     let step = 0;
+    let currentLang = "zh";
+    let currentView = "home";
     let userScores = {So:0, Lo:0, In:0, Ac:0, St:0};
 
+    function getCopy() {
+        return content[currentLang];
+    }
+
+    function getQuizData() {
+        return getCopy().quizData;
+    }
+
+    function getDescriptions() {
+        return getCopy().descriptions;
+    }
+
+    function renderHome() {
+        currentView = "home";
+        const copy = getCopy();
+        document.getElementById('quiz-container').innerHTML = `
+            <div class="text-center fade-in">
+                <div class="text-7xl mb-6">🎭</div>
+                <h1 class="text-5xl font-black mb-4 italic tracking-tighter">SBTI</h1>
+                <p class="text-lg font-bold mb-10 text-gray-600 uppercase">${copy.homeSubtitle}</p>
+                <button onclick="startQuiz()" class="px-12 py-5 bg-yellow-300 brutalist-btn font-black text-2xl uppercase italic">${copy.startButton}</button>
+            </div>
+        `;
+    }
+
+    function renderStaticContent() {
+        const copy = getCopy();
+        document.documentElement.lang = copy.langAttr;
+        document.title = copy.title;
+        document.getElementById('meta-description').setAttribute('content', copy.metaDescription);
+        document.getElementById('about-title').textContent = copy.aboutTitle;
+        document.getElementById('about-content').innerHTML = copy.aboutHtml;
+        document.getElementById('tip-card').textContent = copy.tip;
+
+        ['zh', 'en', 'pt'].forEach(lang => {
+            document.getElementById(`lang-${lang}`).className = currentLang === lang
+                ? 'px-4 py-2 font-black text-xs uppercase bg-black text-white'
+                : 'px-4 py-2 font-black text-xs uppercase bg-white text-black';
+        });
+    }
+
+    function setLanguage(lang, manual = false) {
+        currentLang = content[lang] ? lang : 'en';
+        if (manual) {
+            try {
+                localStorage.setItem('sbti-lang', currentLang);
+            } catch (e) {}
+        }
+        renderStaticContent();
+        if (currentView === 'quiz') {
+            renderQuestion();
+        } else if (currentView === 'result') {
+            showResult();
+        } else {
+            renderHome();
+        }
+    }
+
+    function detectLanguage() {
+        try {
+            const saved = localStorage.getItem('sbti-lang');
+            if (saved && content[saved]) return saved;
+        } catch (e) {}
+
+        const englishRegions = new Set(['US','GB','UK','CA','AU','NZ','IE','ZA','SG','PH','IN','MY']);
+        const zhTimezones = new Set(['Asia/Shanghai','Asia/Chongqing','Asia/Harbin','Asia/Urumqi','Asia/Hong_Kong','Asia/Macau','Asia/Taipei']);
+        const brazilTimezones = new Set(['America/Sao_Paulo','America/Noronha','America/Belem','America/Fortaleza','America/Recife','America/Araguaina','America/Maceio','America/Bahia','America/Campo_Grande','America/Cuiaba','America/Santarem','America/Porto_Velho','America/Boa_Vista','America/Manaus','America/Eirunepe','America/Rio_Branco']);
+        const candidates = navigator.languages && navigator.languages.length
+            ? navigator.languages
+            : [navigator.language || navigator.userLanguage || ''];
+
+        for (const locale of candidates) {
+            if (String(locale).toLowerCase().startsWith('zh')) return 'zh';
+            const parts = String(locale).replace('_', '-').split('-');
+            const primary = (parts[0] || '').toLowerCase();
+            const region = (parts.slice(1).find(part => /^[a-z]{2}$/i.test(part)) || '').toUpperCase();
+            if (primary === 'pt' || region === 'BR') return 'pt';
+            if (primary === 'en' || englishRegions.has(region)) return 'en';
+        }
+
+        try {
+            const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            if (zhTimezones.has(timezone)) return 'zh';
+            if (brazilTimezones.has(timezone)) return 'pt';
+        } catch (e) {}
+
+        return 'en';
+    }
+
     function startQuiz() {
+        currentView = "quiz";
         step = 0;
         userScores = {So:0, Lo:0, In:0, Ac:0, St:0};
         renderQuestion();
     }
 
     function renderQuestion() {
+        const quizData = getQuizData();
         const q = quizData[step];
         const progress = ((step + 1) / quizData.length) * 100;
+        const copy = getCopy();
         const container = document.getElementById('quiz-container');
 
         container.innerHTML = `
         <div class="fade-in">
             <div class="absolute top-0 left-0 w-full px-8 pt-6">
                 <div class="flex justify-between text-xs font-black italic mb-2">
-                    <span>STEP ${String(step+1).padStart(2,'0')}/25</span>
+                    <span>${copy.ui.step} ${String(step+1).padStart(2,'0')}/${quizData.length}</span>
                     <span>${Math.round(progress)}%</span>
                 </div>
                 <div class="h-3 bg-gray-100 border-2 border-black rounded-full overflow-hidden">
@@ -151,6 +377,7 @@
     }
 
     function handleAnswer(idx) {
+        const quizData = getQuizData();
         const weights = quizData[step].options[idx].s;
         for(let k in weights) userScores[k] += weights[k];
         step++;
@@ -158,6 +385,9 @@
     }
 
     function showResult() {
+        currentView = "result";
+        const copy = getCopy();
+        const descriptions = getDescriptions();
         // 核心匹配算法
         let min = Infinity, matchObj = null;
         codes.forEach(c => {
@@ -178,10 +408,10 @@
         <div class="fade-in">
             <div class="relative brutalist-card p-8 bg-white mb-8 overflow-hidden text-left min-h-[350px]">
                 <i class="pixelarticons ${matchIcon} absolute -bottom-4 -right-4 text-[12rem] text-gray-200 opacity-40 pointer-events-none z-0"></i>
-                <div class="absolute -top-2 -right-10 bg-black text-white px-12 py-1 rotate-12 font-black text-[10px] uppercase z-20">Verified</div>
+                <div class="absolute -top-2 -right-10 bg-black text-white px-12 py-1 rotate-12 font-black text-[10px] uppercase z-20">${copy.ui.verified}</div>
 
                 <div class="relative z-10">
-                    <p class="text-[10px] font-black text-gray-400 uppercase mb-1">SBTI Report</p>
+                    <p class="text-[10px] font-black text-gray-400 uppercase mb-1">${copy.ui.report}</p>
                     <h2 class="text-8xl font-black italic underline mb-4 tracking-tighter">${matchCode}</h2>
                     <div class="h-2 bg-black w-20 mb-6"></div>
                     <p class="font-black text-xl text-gray-900 leading-tight mb-8">
@@ -191,26 +421,28 @@
 
                 <div class="pt-4 border-t-2 border-dashed border-gray-200 flex justify-between items-end relative z-10">
                     <div>
-                        <p class="text-[10px] font-black text-gray-400 uppercase">Test Source</p>
+                        <p class="text-[10px] font-black text-gray-400 uppercase">${copy.ui.testSource}</p>
                         <p class="text-xs font-black italic">sbti.freeTools.best</p>
                     </div>
                 </div>
             </div>
 
             <div class="flex flex-col gap-4">
-                <button onclick="copyShare('${matchCode}')" class="w-full py-5 brutalist-btn bg-green-400 font-black uppercase italic text-xl">一键分享结果</button>
-                <button onclick="location.reload()" class="w-full py-3 brutalist-btn bg-white text-gray-400 font-bold uppercase text-xs">重新测试</button>
+                <button onclick="copyShare('${matchCode}')" class="w-full py-5 brutalist-btn bg-green-400 font-black uppercase italic text-xl">${copy.ui.share}</button>
+                <button onclick="startQuiz()" class="w-full py-3 brutalist-btn bg-white text-gray-400 font-bold uppercase text-xs">${copy.ui.retry}</button>
             </div>
         </div>
     `;
     }
 
     async function copyShare(code) {
+        const copy = getCopy();
+        const descriptions = getDescriptions();
         const desc = descriptions[code].substring(0, 30);
-        const text = `我的 SBTI 是【${code}】！\n“${desc}...”\n有点准到离谱，来测测你的毒舌人格：${window.location.href}`;
+        const text = copy.ui.shareText(code, desc);
         try {
             await navigator.clipboard.writeText(text);
-            alert("✨ 分享文案已复制！配合【截图】发朋友圈效果更棒哦！");
+            alert(copy.ui.copied);
         } catch (e) {
             // 兜底方案
             const textArea = document.createElement("textarea");
@@ -219,9 +451,11 @@
             textArea.select();
             document.execCommand('copy');
             document.body.removeChild(textArea);
-            alert("分享文案已复制！快去朋友圈秀一下吧 ✨");
+            alert(copy.ui.copiedFallback);
         }
     }
+
+    setLanguage(detectLanguage());
 
     (function() {
         // 1. 初始化 va 函数
