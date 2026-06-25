@@ -110,7 +110,7 @@ button {
 .nav-link {
     display: inline-flex;
     align-items: center;
-    min-height: 2.35rem;
+    min-height: 2.75rem;
     padding: 0.5rem 0.85rem;
     border: 1px solid transparent;
     border-radius: 0.5rem;
@@ -739,10 +739,16 @@ canvas {
     }
 
     .table {
-        display: block;
-        overflow-x: auto;
+        table-layout: fixed;
+        overflow-x: visible;
         white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
+    }
+
+    .table th,
+    .table td {
+        padding: 0.6rem 0.45rem;
+        white-space: normal;
+        overflow-wrap: anywhere;
     }
 
     .toolbar {
