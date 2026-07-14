@@ -342,6 +342,9 @@ p {
 }
 
 .chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     min-height: 2.75rem;
     padding: 0.5rem 0.8rem;
     border: 1px solid var(--line);
@@ -546,6 +549,60 @@ p {
 .footer-links a {
     color: var(--green-dark);
     font-weight: 850;
+}
+
+.breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    align-items: center;
+    margin-bottom: 1rem;
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-weight: 800;
+}
+
+.breadcrumb a {
+    color: var(--green-dark);
+}
+
+.category-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+}
+
+.static-phrase-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.related-card {
+    display: grid;
+    gap: 0.45rem;
+    min-height: 7.5rem;
+    padding: 0.95rem;
+    border: 1px solid var(--line);
+    border-radius: 0.5rem;
+    background: var(--surface);
+}
+
+.related-card strong {
+    color: var(--ink);
+    font-weight: 950;
+}
+
+.related-card span {
+    color: var(--muted);
+    font-size: 0.92rem;
+    line-height: 1.45;
 }
 
 .drop-zone {
@@ -757,6 +814,18 @@ canvas {
 
     .toolbar .chip {
         flex: 1 1 calc(50% - 0.5rem);
+    }
+
+    .category-nav .chip {
+        flex: 1 1 calc(50% - 0.5rem);
+    }
+
+    .static-phrase-list {
+        grid-template-columns: 1fr;
+    }
+
+    .related-grid {
+        grid-template-columns: 1fr;
     }
 
     .btn {
