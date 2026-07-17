@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Texto Grátis: Maiúsculas e Minúsculas</title>
+    <meta name="description" content="Converta texto para maiúsculas, minúsculas, título, frase, sem acentos e slug. Ferramenta grátis para WhatsApp, Instagram e SEO.">
+    <meta name="keywords" content="conversor de texto, maiúsculas minúsculas, remover acentos, gerar slug, texto para WhatsApp">
+    <meta name="robots" content="index,follow,max-image-preview:large">
+    <meta name="theme-color" content="#1f8f54">
+    <link rel="canonical" href="https://br.freetools.best/conversor-texto.html">
+    <link rel="alternate" hreflang="pt-BR" href="https://br.freetools.best/conversor-texto.html">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="manifest" href="site.webmanifest">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Brasil Tools">
+    <meta property="og:title" content="Conversor de Texto Grátis">
+    <meta property="og:description" content="Maiúsculas, minúsculas, título, sem acentos e slug no navegador.">
+    <meta property="og:url" content="https://br.freetools.best/conversor-texto.html">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Conversor de Texto Grátis">
+    <meta name="twitter:description" content="Ajuste textos para WhatsApp, Instagram e SEO.">
+    <link rel="stylesheet" href="styles.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Conversor de Texto",
+        "url": "https://br.freetools.best/conversor-texto.html",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "inLanguage": "pt-BR",
+        "description": "Conversor gratuito de texto para maiúsculas, minúsculas, título, sem acentos e slug.",
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "BRL"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Brasil Tools", "item": "https://br.freetools.best/"},
+            {"@type": "ListItem", "position": 2, "name": "Conversor de Texto", "item": "https://br.freetools.best/conversor-texto.html"}
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "O texto é enviado para servidor?",
+                "acceptedAnswer": {"@type": "Answer", "text": "Não. Todas as conversões acontecem no navegador."}
+            },
+            {
+                "@type": "Question",
+                "name": "Dá para remover acentos?",
+                "acceptedAnswer": {"@type": "Answer", "text": "Sim. Use a opção sem acentos ou slug para gerar texto simples."}
+            }
+        ]
+    }
+    </script>
+    <script>
+        (function() {
+            window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+            const script = document.createElement('script');
+            script.src = '/_vercel/insights/script.js';
+            script.defer = true;
+            document.head.appendChild(script);
+        })();
+    </script>
+</head>
+<body>
+    <header class="site-header">
+        <nav class="nav" aria-label="Navegação principal">
+            <a class="brand" href="index.html"><span class="brand-mark">BR</span><span>Brasil Tools</span></a>
+            <div class="nav-links">
+                <a class="nav-link" href="index.html">Início</a>
+                <a class="nav-link" href="frases.html">Frases</a>
+                <a class="nav-link active" href="conversor-texto.html">Texto</a>
+                <a class="nav-link" href="contador-caracteres.html">Contador</a>
+                <a class="nav-link" href="link-whatsapp.html">WhatsApp</a>
+                <a class="nav-link" href="sorteador.html">Sorteador</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="wrap section">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html">Início</a>
+            <span>/</span>
+            <span>Conversor de texto</span>
+        </nav>
+
+        <div class="panel-header">
+            <div>
+                <p class="eyebrow">Texto pronto para copiar</p>
+                <h1>Conversor de texto</h1>
+                <p class="lead">Transforme texto em maiúsculas, minúsculas, título, frase, sem acentos ou slug para WhatsApp, Instagram e SEO.</p>
+            </div>
+            <button class="btn secondary" id="clearText" type="button">Limpar</button>
+        </div>
+
+        <div class="tool-layout">
+            <aside class="tool-panel">
+                <div class="field">
+                    <label for="sourceText">Texto original</label>
+                    <textarea id="sourceText" placeholder="Cole seu texto aqui..."></textarea>
+                </div>
+                <div class="toolbar">
+                    <button class="chip active" type="button" data-action="upper">MAIÚSCULAS</button>
+                    <button class="chip" type="button" data-action="lower">minúsculas</button>
+                    <button class="chip" type="button" data-action="title">Título</button>
+                    <button class="chip" type="button" data-action="sentence">Frase</button>
+                    <button class="chip" type="button" data-action="accentless">Sem acentos</button>
+                    <button class="chip" type="button" data-action="slug">slug</button>
+                </div>
+                <div class="ad-slot">Anúncio lateral</div>
+            </aside>
+
+            <section class="tool-panel">
+                <div class="panel-header">
+                    <h2>Resultado</h2>
+                    <span class="chip" id="modeLabel">MAIÚSCULAS</span>
+                </div>
+                <div class="field">
+                    <label for="resultText">Texto convertido</label>
+                    <textarea id="resultText" readonly></textarea>
+                </div>
+                <div class="stats">
+                    <div class="stat"><strong id="charCount">0</strong><span>Caracteres</span></div>
+                    <div class="stat"><strong id="wordCount">0</strong><span>Palavras</span></div>
+                    <div class="stat"><strong id="lineCount">0</strong><span>Linhas</span></div>
+                </div>
+                <div class="toolbar">
+                    <button class="btn" id="copyResult" type="button">Copiar resultado</button>
+                    <button class="btn secondary" id="swapText" type="button">Usar resultado</button>
+                </div>
+            </section>
+        </div>
+
+        <article class="seo-content">
+            <h2>Conversor para redes sociais e SEO</h2>
+            <p>Use para arrumar legenda, bio, nome de arquivo, título de página, mensagem de WhatsApp ou slug simples. Tudo roda no navegador.</p>
+            <h3>Como deixar tudo em maiúsculas?</h3>
+            <p>Cole o texto e escolha a opção MAIÚSCULAS.</p>
+            <h3>Como gerar slug?</h3>
+            <p>Escolha slug para remover acentos, trocar espaços por hífen e deixar o texto em minúsculas.</p>
+        </article>
+
+        <section class="seo-content" aria-labelledby="texto-relacionadas">
+            <h2 id="texto-relacionadas">Ferramentas relacionadas</h2>
+            <div class="related-grid">
+                <a class="related-card" href="contador-caracteres.html"><strong>Contador de caracteres</strong><span>Confira tamanho antes de publicar.</span></a>
+                <a class="related-card" href="frases.html"><strong>Frases para WhatsApp</strong><span>Busque ideias para converter e copiar.</span></a>
+                <a class="related-card" href="link-whatsapp.html"><strong>Link WhatsApp</strong><span>Use o texto convertido em uma mensagem pronta.</span></a>
+                <a class="related-card" href="mapa-do-site.html"><strong>Mapa do site</strong><span>Veja todas as ferramentas gratuitas.</span></a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="index.html">Brasil Tools</a>
+            <a href="contador-caracteres.html">Contador</a>
+            <a href="frases.html">Frases</a>
+            <a href="mapa-do-site.html">Mapa do site</a>
+        </div>
+        Conversão local, rápida e sem cadastro.
+    </footer>
+
+    <script>
+        const sourceText = document.getElementById("sourceText");
+        const resultText = document.getElementById("resultText");
+        const modeLabel = document.getElementById("modeLabel");
+        let currentAction = "upper";
+
+        function removeAccents(value) {
+            return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        }
+
+        function toTitle(value) {
+            return value.toLocaleLowerCase("pt-BR").replace(/\b([\p{L}])/gu, letter => letter.toLocaleUpperCase("pt-BR"));
+        }
+
+        function toSentence(value) {
+            const lower = value.toLocaleLowerCase("pt-BR");
+            return lower.replace(/(^\s*\p{L}|[.!?]\s*\p{L})/gu, match => match.toLocaleUpperCase("pt-BR"));
+        }
+
+        function toSlug(value) {
+            return removeAccents(value).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+        }
+
+        function convert(value) {
+            if (currentAction === "upper") return value.toLocaleUpperCase("pt-BR");
+            if (currentAction === "lower") return value.toLocaleLowerCase("pt-BR");
+            if (currentAction === "title") return toTitle(value);
+            if (currentAction === "sentence") return toSentence(value);
+            if (currentAction === "accentless") return removeAccents(value);
+            return toSlug(value);
+        }
+
+        function render() {
+            const text = sourceText.value;
+            const result = convert(text);
+            resultText.value = result;
+            document.getElementById("charCount").textContent = Array.from(result).length;
+            document.getElementById("wordCount").textContent = result.trim() ? result.trim().split(/\s+/).length : 0;
+            document.getElementById("lineCount").textContent = result ? result.split(/\n/).length : 0;
+        }
+
+        async function copyText(text, button) {
+            if (!text) return;
+            if (navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(text);
+            else {
+                const area = document.createElement("textarea");
+                area.value = text;
+                area.style.position = "fixed";
+                area.style.opacity = "0";
+                document.body.appendChild(area);
+                area.select();
+                document.execCommand("copy");
+                area.remove();
+            }
+            const previous = button.textContent;
+            button.textContent = "Copiado";
+            setTimeout(() => { button.textContent = previous; }, 1000);
+        }
+
+        document.querySelectorAll("[data-action]").forEach(button => {
+            button.addEventListener("click", () => {
+                currentAction = button.dataset.action;
+                modeLabel.textContent = button.textContent;
+                document.querySelectorAll("[data-action]").forEach(item => item.classList.toggle("active", item === button));
+                render();
+            });
+        });
+        sourceText.addEventListener("input", render);
+        document.getElementById("copyResult").addEventListener("click", event => copyText(resultText.value, event.target));
+        document.getElementById("swapText").addEventListener("click", () => {
+            sourceText.value = resultText.value;
+            render();
+        });
+        document.getElementById("clearText").addEventListener("click", () => {
+            sourceText.value = "";
+            render();
+            sourceText.focus();
+        });
+        render();
+    </script>
+</body>
+</html>

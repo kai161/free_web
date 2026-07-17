@@ -1,0 +1,11 @@
+﻿market_code,country_name_en,country_name_zh,locale,language_code,currency_code,user_recommendation,market_priority,research_wave,search_engine,status,rationale
+BR,Brazil,巴西,pt-BR,pt,BRL,5,5,1,Google,active,Existing pt-BR site and strong localization fit
+ID,Indonesia,印度尼西亚,id-ID,id,IDR,5,5,1,Google,active,Large mobile-first audience and localization leverage
+JP,Japan,日本,ja-JP,ja,JPY,5,5,1,Google,active,High-value local-language search market
+KR,South Korea,韩国,ko-KR,ko,KRW,5,5,1,Google,active,Digital-first market with strong local-language intent
+VN,Vietnam,越南,vi-VN,vi,VND,5,5,1,Google,active,Fast-growing digital market and local-language opportunity
+DE,Germany,德国,de-DE,de,EUR,5,4,2,Google,backlog,High commercial value; stronger competition and compliance needs
+ES,Spain,西班牙,es-ES,es,EUR,4,4,2,Google,backlog,Reusable Spanish assets with regional caveats
+FR,France,法国,fr-FR,fr,EUR,4,4,2,Google,backlog,Large local-language market
+TH,Thailand,泰国,th-TH,th,THB,5,4,2,Google,backlog,Distinct script and local search behavior
+TR,Turkey,土耳其,tr-TR,tr,TRY,4,4,2,Google,backlog,Large local-language audience and currency-sensitive monetization

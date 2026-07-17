@@ -1,0 +1,33 @@
+{
+  "name": "Global Tool Opportunities Database v1",
+  "built_at": "2026-07-17T10:01:53Z",
+  "database": "global-tool-opportunities-v1.sqlite3",
+  "database_sha256": "6c037275332a2047bd639cde3aa5d0d75bc1e7a529cd11f3c3c473aabd42defb",
+  "schema": "data/keyword-factory/schema.sql",
+  "validation": {
+    "integrity_check": "ok",
+    "foreign_key_errors": 0,
+    "counts": {
+      "tools": 200,
+      "markets": 10,
+      "tool_market_localizations": 2000,
+      "keyword_patterns": 100,
+      "keyword_candidates": 1000,
+      "keyword_metric_snapshots": 0,
+      "competitors": 0,
+      "serp_assessments": 50
+    },
+    "metric_without_source_violations": 0,
+    "keyword_on_pending_localization_violations": 0
+  },
+  "exports": {
+    "tools.csv": 200,
+    "markets.csv": 10,
+    "localizations.csv": 2000,
+    "keywords.csv": 1000,
+    "priority-shortlist.csv": 200,
+    "sources.csv": 6,
+    "serp-audit.csv": 50
+  },
+  "completion_note": "200 tools and 10 markets are cataloged; 1,000 MVP keyword candidates are generated; 50 core queries have public SERP assessments; real SEO metrics remain uncollected."
+}

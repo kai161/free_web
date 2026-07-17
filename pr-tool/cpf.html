@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validador de CPF Grátis Online</title>
+    <meta name="description" content="Valide e formate CPF online no navegador. Ferramenta grátis para conferir dígitos, remover pontuação e copiar CPF formatado.">
+    <meta name="keywords" content="validador de CPF, validar CPF, formatar CPF, CPF grátis, conferir CPF, CPF online Brasil">
+    <meta name="robots" content="index,follow,max-image-preview:large">
+    <meta name="theme-color" content="#1f8f54">
+    <link rel="canonical" href="https://br.freetools.best/cpf.html">
+    <link rel="alternate" hreflang="pt-BR" href="https://br.freetools.best/cpf.html">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="manifest" href="site.webmanifest">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Brasil Tools">
+    <meta property="og:title" content="Validador de CPF Grátis Online">
+    <meta property="og:description" content="Confira se um CPF tem dígitos válidos e copie o número formatado. Tudo no navegador.">
+    <meta property="og:url" content="https://br.freetools.best/cpf.html">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Validador de CPF Grátis Online">
+    <meta name="twitter:description" content="Valide e formate CPF sem cadastro e sem API.">
+    <link rel="stylesheet" href="styles.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Validador de CPF",
+        "url": "https://br.freetools.best/cpf.html",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "inLanguage": "pt-BR",
+        "description": "Ferramenta gratuita para validar e formatar CPF no navegador.",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "BRL"
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Brasil Tools",
+                "item": "https://br.freetools.best/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Validador de CPF",
+                "item": "https://br.freetools.best/cpf.html"
+            }
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "O CPF digitado é enviado para algum servidor?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Não. A validação acontece no navegador e o site não precisa enviar o CPF para servidor."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Um CPF válido significa que pertence a uma pessoa real?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Não. A ferramenta confere apenas o cálculo dos dígitos verificadores, não consulta bases oficiais."
+                }
+            }
+        ]
+    }
+    </script>
+    <script>
+        (function() {
+            window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+            const script = document.createElement('script');
+            script.src = '/_vercel/insights/script.js';
+            script.defer = true;
+            document.head.appendChild(script);
+        })();
+    </script>
+</head>
+<body>
+    <header class="site-header">
+        <nav class="nav" aria-label="Navegação principal">
+            <a class="brand" href="index.html"><span class="brand-mark">BR</span><span>Brasil Tools</span></a>
+            <div class="nav-links">
+                <a class="nav-link" href="index.html">Início</a>
+                <a class="nav-link" href="frases.html">Frases</a>
+                <a class="nav-link" href="link-whatsapp.html">WhatsApp</a>
+                <a class="nav-link" href="contador-caracteres.html">Contador</a>
+                <a class="nav-link" href="imagem.html">Fotos</a>
+                <a class="nav-link" href="pix.html">Pix</a>
+                <a class="nav-link active" href="cpf.html">CPF</a>
+                <a class="nav-link" href="cnpj.html">CNPJ</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="wrap section">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html">Início</a>
+            <span>/</span>
+            <span>Validador de CPF</span>
+        </nav>
+
+        <div class="panel-header">
+            <div>
+                <p class="eyebrow">Conferência local</p>
+                <h1>Validador de CPF</h1>
+                <p class="lead">Digite um CPF com ou sem pontuação para conferir os dígitos verificadores, formatar e copiar.</p>
+            </div>
+            <button class="btn secondary" id="clearCpf" type="button">Limpar</button>
+        </div>
+
+        <div class="tool-layout">
+            <aside class="tool-panel">
+                <div class="field">
+                    <label for="cpfInput">CPF</label>
+                    <input id="cpfInput" inputmode="numeric" autocomplete="off" placeholder="000.000.000-00">
+                </div>
+                <div class="toolbar">
+                    <button class="btn" id="copyFormatted" type="button">Copiar formatado</button>
+                    <button class="btn secondary" id="copyDigits" type="button">Copiar números</button>
+                </div>
+                <div class="ad-slot">Anúncio lateral</div>
+            </aside>
+
+            <section class="tool-panel">
+                <div class="panel-header">
+                    <h2>Resultado</h2>
+                    <span class="chip" id="cpfStatus">Aguardando CPF</span>
+                </div>
+                <div class="stats">
+                    <div class="stat"><strong id="digitCount">0</strong><span>Dígitos</span></div>
+                    <div class="stat"><strong id="firstDigit">--</strong><span>1º verificador</span></div>
+                    <div class="stat"><strong id="secondDigit">--</strong><span>2º verificador</span></div>
+                </div>
+                <div class="field">
+                    <label for="formattedCpf">CPF formatado</label>
+                    <input id="formattedCpf" readonly>
+                </div>
+                <article class="seo-content">
+                    <h2>Como interpretar</h2>
+                    <p id="cpfHelp">Cole um CPF para validar o tamanho e os dígitos verificadores.</p>
+                </article>
+            </section>
+        </div>
+
+        <article class="seo-content">
+            <h2>Validador e formatador de CPF</h2>
+            <p>Use o validador para conferir se a sequência tem 11 dígitos e se os dois dígitos finais batem com o cálculo oficial do CPF. A ferramenta também remove pontuação e mostra o CPF no formato brasileiro.</p>
+            <h3>O CPF digitado fica salvo?</h3>
+            <p>Não. A verificação acontece no navegador e não depende de API, banco de dados ou cadastro.</p>
+            <h3>CPF válido confirma identidade?</h3>
+            <p>Não. Um CPF matematicamente válido não garante que o número pertence a uma pessoa real ou que está regular em bases oficiais.</p>
+        </article>
+
+        <section class="seo-content" aria-labelledby="cpf-relacionadas">
+            <h2 id="cpf-relacionadas">Ferramentas relacionadas</h2>
+            <div class="related-grid">
+                <a class="related-card" href="pix-copia-e-cola.html">
+                    <strong>Pix Copia e Cola</strong>
+                    <span>Gere um código Pix estático para copiar no app do banco.</span>
+                </a>
+                <a class="related-card" href="cnpj.html">
+                    <strong>Validador de CNPJ</strong>
+                    <span>Confira CNPJ para loja, serviço e cadastro.</span>
+                </a>
+                <a class="related-card" href="contador-caracteres.html">
+                    <strong>Contador de caracteres</strong>
+                    <span>Conte texto para formulário, anúncio, bio e mensagem.</span>
+                </a>
+                <a class="related-card" href="link-whatsapp.html">
+                    <strong>Link WhatsApp</strong>
+                    <span>Crie um link de atendimento com mensagem pronta.</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="index.html">Brasil Tools</a>
+            <a href="pix-copia-e-cola.html">Pix Copia e Cola</a>
+            <a href="link-whatsapp.html">Link WhatsApp</a>
+            <a href="contador-caracteres.html">Contador</a>
+            <a href="cnpj.html">Validador CNPJ</a>
+            <a href="mapa-do-site.html">Mapa do site</a>
+        </div>
+        Validação local, grátis e sem cadastro.
+    </footer>
+
+    <script>
+        const cpfInput = document.getElementById("cpfInput");
+        const formattedCpf = document.getElementById("formattedCpf");
+        const cpfStatus = document.getElementById("cpfStatus");
+        const cpfHelp = document.getElementById("cpfHelp");
+        const digitCount = document.getElementById("digitCount");
+        const firstDigit = document.getElementById("firstDigit");
+        const secondDigit = document.getElementById("secondDigit");
+        const copyFormatted = document.getElementById("copyFormatted");
+        const copyDigits = document.getElementById("copyDigits");
+        const clearCpf = document.getElementById("clearCpf");
+
+        function onlyDigits(value) {
+            return value.replace(/\D/g, "").slice(0, 11);
+        }
+
+        function formatCpf(digits) {
+            return digits
+                .replace(/^(\d{3})(\d)/, "$1.$2")
+                .replace(/^(\d{3})\.(\d{3})(\d)/, "$1.$2.$3")
+                .replace(/\.(\d{3})(\d)/, ".$1-$2");
+        }
+
+        function verifierDigit(digits, factorStart) {
+            let sum = 0;
+            for (let index = 0; index < digits.length; index += 1) {
+                sum += Number(digits[index]) * (factorStart - index);
+            }
+            const rest = (sum * 10) % 11;
+            return rest === 10 ? 0 : rest;
+        }
+
+        function validateCpf(digits) {
+            if (digits.length !== 11) return { valid: false, reason: "O CPF precisa ter 11 dígitos." };
+            if (/^(\d)\1+$/.test(digits)) return { valid: false, reason: "Sequências repetidas não são CPFs válidos." };
+            const expectedFirst = verifierDigit(digits.slice(0, 9), 10);
+            const expectedSecond = verifierDigit(digits.slice(0, 10), 11);
+            const valid = expectedFirst === Number(digits[9]) && expectedSecond === Number(digits[10]);
+            return { valid, expectedFirst, expectedSecond, reason: valid ? "CPF com dígitos verificadores válidos." : "Os dígitos verificadores não batem com o cálculo do CPF." };
+        }
+
+        async function copyText(text, button) {
+            if (!text) return;
+            if (navigator.clipboard && window.isSecureContext) {
+                await navigator.clipboard.writeText(text);
+            } else {
+                const area = document.createElement("textarea");
+                area.value = text;
+                area.style.position = "fixed";
+                area.style.opacity = "0";
+                document.body.appendChild(area);
+                area.select();
+                document.execCommand("copy");
+                area.remove();
+            }
+            const previous = button.textContent;
+            button.textContent = "Copiado";
+            setTimeout(() => { button.textContent = previous; }, 1000);
+        }
+
+        function renderCpf() {
+            const digits = onlyDigits(cpfInput.value);
+            if (cpfInput.value !== formatCpf(digits)) cpfInput.value = formatCpf(digits);
+            const result = validateCpf(digits);
+            digitCount.textContent = digits.length;
+            firstDigit.textContent = result.expectedFirst ?? "--";
+            secondDigit.textContent = result.expectedSecond ?? "--";
+            formattedCpf.value = digits.length ? formatCpf(digits) : "";
+            cpfStatus.textContent = digits.length === 0 ? "Aguardando CPF" : (result.valid ? "CPF válido" : "CPF inválido");
+            cpfStatus.classList.toggle("active", result.valid);
+            cpfHelp.textContent = result.reason;
+        }
+
+        cpfInput.addEventListener("input", renderCpf);
+        copyFormatted.addEventListener("click", () => copyText(formattedCpf.value, copyFormatted));
+        copyDigits.addEventListener("click", () => copyText(onlyDigits(cpfInput.value), copyDigits));
+        clearCpf.addEventListener("click", () => {
+            cpfInput.value = "";
+            renderCpf();
+            cpfInput.focus();
+        });
+        renderCpf();
+    </script>
+</body>
+</html>

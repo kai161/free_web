@@ -206,8 +206,15 @@ def build_page(category_id, phrases):
                 </a>"""
         for related in [
             {"href": "frases.html", "title": "Todas as frases", "text": "Busque entre todas as categorias em uma página só."},
+            {"href": "link-whatsapp.html", "title": "Link WhatsApp", "text": "Use a frase como mensagem pronta em um link wa.me."},
+            {"href": "contador-caracteres.html", "title": "Contador de caracteres", "text": "Ajuste o tamanho da frase antes de publicar."},
             {"href": "imagem.html", "title": "Fotos para status", "text": "Comprima e corte imagens para postar junto com a frase."},
             {"href": "pix.html", "title": "Racha Pix", "text": "Divida churrasco, rolê e viagem com acertos via Pix."},
+            {"href": "pix-copia-e-cola.html", "title": "Pix Copia e Cola", "text": "Gere um código Pix estático para copiar no app do banco."},
+            {"href": "cpf.html", "title": "Validador de CPF", "text": "Confira e formate CPF direto no navegador."},
+            {"href": "cnpj.html", "title": "Validador de CNPJ", "text": "Valide e formate CNPJ para loja, serviço e cadastro."},
+            {"href": "conversor-texto.html", "title": "Conversor de texto", "text": "Transforme a frase em maiúsculas, minúsculas ou sem acentos."},
+            {"href": "sorteador.html", "title": "Sorteador", "text": "Sorteie nomes e números para grupos e brincadeiras."},
         ]
     )
     return f"""<!DOCTYPE html>
@@ -246,9 +253,12 @@ def build_page(category_id, phrases):
             <a class="brand" href="index.html"><span class="brand-mark">BR</span><span>Brasil Tools</span></a>
             <div class="nav-links">
                 <a class="nav-link" href="index.html">Início</a>
-                <a class="nav-link active" href="frases.html">Frases</a>
-                <a class="nav-link" href="imagem.html">Fotos</a>
-                <a class="nav-link" href="pix.html">Pix</a>
+            <a class="nav-link active" href="frases.html">Frases</a>
+            <a class="nav-link" href="imagem.html">Fotos</a>
+            <a class="nav-link" href="pix.html">Pix</a>
+            <a class="nav-link" href="cpf.html">CPF</a>
+            <a class="nav-link" href="cnpj.html">CNPJ</a>
+            <a class="nav-link" href="conversor-texto.html">Texto</a>
             </div>
         </nav>
     </header>
@@ -304,6 +314,9 @@ def build_page(category_id, phrases):
             <a href="frases.html">Todas as frases</a>
             <a href="imagem.html">Fotos sociais</a>
             <a href="pix.html">Racha Pix</a>
+            <a href="mapa-do-site.html">Mapa do site</a>
+            <a href="conversor-texto.html">Texto</a>
+            <a href="sorteador.html">Sorteador</a>
         </div>
         Conteúdo local em HTML e JavaScript.
     </footer>

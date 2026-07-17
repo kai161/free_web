@@ -1,7 +1,7 @@
 {
   "name": "Brasil Tools",
   "short_name": "BR Tools",
-  "description": "Ferramentas gratuitas para WhatsApp, fotos sociais e Racha Pix.",
+  "description": "Ferramentas gratuitas para WhatsApp, Pix, CPF, CNPJ, porcentagem, sorteio, senhas, textos e fotos sociais.",
   "lang": "pt-BR",
   "start_url": "https://br.freetools.best/",
   "display": "standalone",

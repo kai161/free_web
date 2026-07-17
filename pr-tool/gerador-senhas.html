@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Senhas Fortes Grátis</title>
+    <meta name="description" content="Gere senhas fortes no navegador com letras, números e símbolos. Ferramenta grátis, local e sem cadastro.">
+    <meta name="keywords" content="gerador de senhas, senha forte, gerar senha grátis, senha segura, gerador senha online">
+    <meta name="robots" content="index,follow,max-image-preview:large">
+    <meta name="theme-color" content="#1f8f54">
+    <link rel="canonical" href="https://br.freetools.best/gerador-senhas.html">
+    <link rel="alternate" hreflang="pt-BR" href="https://br.freetools.best/gerador-senhas.html">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="manifest" href="site.webmanifest">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Brasil Tools">
+    <meta property="og:title" content="Gerador de Senhas Fortes Grátis">
+    <meta property="og:description" content="Crie senha forte localmente no navegador, sem enviar dados.">
+    <meta property="og:url" content="https://br.freetools.best/gerador-senhas.html">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Gerador de Senhas Fortes Grátis">
+    <meta name="twitter:description" content="Senhas fortes com letras, números e símbolos.">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .field input[type="checkbox"] {
+            width: 1rem !important;
+            min-width: 1rem !important;
+            max-width: 1rem !important;
+            height: 1rem !important;
+            min-height: 1rem !important;
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Gerador de Senhas Fortes",
+        "url": "https://br.freetools.best/gerador-senhas.html",
+        "applicationCategory": "SecurityApplication",
+        "operatingSystem": "Any",
+        "inLanguage": "pt-BR",
+        "description": "Gerador gratuito de senhas fortes no navegador.",
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "BRL"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Brasil Tools", "item": "https://br.freetools.best/"},
+            {"@type": "ListItem", "position": 2, "name": "Gerador de Senhas", "item": "https://br.freetools.best/gerador-senhas.html"}
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "A senha gerada é enviada para servidor?",
+                "acceptedAnswer": {"@type": "Answer", "text": "Não. A senha é gerada no navegador e não precisa ser enviada para servidor."}
+            },
+            {
+                "@type": "Question",
+                "name": "O gerador usa números aleatórios seguros?",
+                "acceptedAnswer": {"@type": "Answer", "text": "Quando disponível, a ferramenta usa crypto.getRandomValues do navegador para gerar aleatoriedade."}
+            }
+        ]
+    }
+    </script>
+    <script>
+        (function() {
+            window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+            const script = document.createElement('script');
+            script.src = '/_vercel/insights/script.js';
+            script.defer = true;
+            document.head.appendChild(script);
+        })();
+    </script>
+</head>
+<body>
+    <header class="site-header">
+        <nav class="nav" aria-label="Navegação principal">
+            <a class="brand" href="index.html"><span class="brand-mark">BR</span><span>Brasil Tools</span></a>
+            <div class="nav-links">
+                <a class="nav-link" href="index.html">Início</a>
+                <a class="nav-link" href="cpf.html">CPF</a>
+                <a class="nav-link" href="cnpj.html">CNPJ</a>
+                <a class="nav-link active" href="gerador-senhas.html">Senhas</a>
+                <a class="nav-link" href="conversor-texto.html">Texto</a>
+                <a class="nav-link" href="sorteador.html">Sorteador</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="wrap section">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html">Início</a>
+            <span>/</span>
+            <span>Gerador de senhas</span>
+        </nav>
+
+        <div class="panel-header">
+            <div>
+                <p class="eyebrow">Conta, loja e app</p>
+                <h1>Gerador de senhas fortes</h1>
+                <p class="lead">Crie senhas com letras, números e símbolos no próprio navegador. Nada precisa sair do seu aparelho.</p>
+            </div>
+            <button class="btn" id="generateBtn" type="button">Gerar senha</button>
+        </div>
+
+        <div class="tool-layout">
+            <aside class="tool-panel">
+                <div class="field">
+                    <label for="lengthRange">Tamanho <span id="lengthLabel">16</span></label>
+                    <input id="lengthRange" type="range" min="8" max="64" value="16">
+                </div>
+                <div class="field">
+                    <label><input id="upperCheck" type="checkbox" checked> Letras maiúsculas</label>
+                    <label><input id="lowerCheck" type="checkbox" checked> Letras minúsculas</label>
+                    <label><input id="numberCheck" type="checkbox" checked> Números</label>
+                    <label><input id="symbolCheck" type="checkbox" checked> Símbolos</label>
+                </div>
+                <div class="ad-slot">Anúncio lateral</div>
+            </aside>
+
+            <section class="tool-panel">
+                <div class="panel-header">
+                    <h2>Senha gerada</h2>
+                    <span class="chip active" id="strengthLabel">Forte</span>
+                </div>
+                <div class="field">
+                    <label for="passwordOutput">Senha</label>
+                    <textarea id="passwordOutput" readonly></textarea>
+                </div>
+                <div class="toolbar">
+                    <button class="btn" id="copyPassword" type="button">Copiar senha</button>
+                    <button class="btn secondary" id="generateList" type="button">Gerar 5 opções</button>
+                </div>
+                <div class="phrase-list" id="passwordList"></div>
+            </section>
+        </div>
+
+        <article class="seo-content">
+            <h2>Gerador de senha local</h2>
+            <p>Use para criar senhas de e-mail, loja, rede social, app de banco ou cadastro. Evite reutilizar a mesma senha em vários serviços.</p>
+            <h3>A senha fica salva?</h3>
+            <p>Não. A ferramenta gera o texto no navegador e não usa banco de dados.</p>
+            <h3>Posso copiar no celular?</h3>
+            <p>Sim. Toque no botão copiar senha e cole no aplicativo desejado.</p>
+        </article>
+
+        <section class="seo-content" aria-labelledby="senhas-relacionadas">
+            <h2 id="senhas-relacionadas">Ferramentas relacionadas</h2>
+            <div class="related-grid">
+                <a class="related-card" href="cpf.html"><strong>Validador de CPF</strong><span>Confira CPF para cadastro rápido.</span></a>
+                <a class="related-card" href="cnpj.html"><strong>Validador de CNPJ</strong><span>Valide CNPJ de loja ou serviço.</span></a>
+                <a class="related-card" href="conversor-texto.html"><strong>Conversor de texto</strong><span>Ajuste nomes, slugs e textos antes de copiar.</span></a>
+                <a class="related-card" href="mapa-do-site.html"><strong>Mapa do site</strong><span>Veja todas as ferramentas gratuitas.</span></a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="index.html">Brasil Tools</a>
+            <a href="cpf.html">CPF</a>
+            <a href="cnpj.html">CNPJ</a>
+            <a href="mapa-do-site.html">Mapa do site</a>
+        </div>
+        Senhas geradas localmente no navegador.
+    </footer>
+
+    <script>
+        const upperChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const lowerChars = "abcdefghijklmnopqrstuvwxyz";
+        const numberChars = "0123456789";
+        const symbolChars = "!@#$%&*?+-_=.";
+        const lengthRange = document.getElementById("lengthRange");
+        const lengthLabel = document.getElementById("lengthLabel");
+        const passwordOutput = document.getElementById("passwordOutput");
+        const passwordList = document.getElementById("passwordList");
+        const strengthLabel = document.getElementById("strengthLabel");
+        const upperCheck = document.getElementById("upperCheck");
+        const lowerCheck = document.getElementById("lowerCheck");
+        const numberCheck = document.getElementById("numberCheck");
+        const symbolCheck = document.getElementById("symbolCheck");
+
+        function randomIndex(max) {
+            if (window.crypto && crypto.getRandomValues) {
+                const array = new Uint32Array(1);
+                crypto.getRandomValues(array);
+                return array[0] % max;
+            }
+            return Math.floor(Math.random() * max);
+        }
+
+        function selectedSets() {
+            const sets = [];
+            if (upperCheck.checked) sets.push(upperChars);
+            if (lowerCheck.checked) sets.push(lowerChars);
+            if (numberCheck.checked) sets.push(numberChars);
+            if (symbolCheck.checked) sets.push(symbolChars);
+            return sets.length ? sets : [lowerChars, numberChars];
+        }
+
+        function generatePassword() {
+            const length = Number(lengthRange.value);
+            const sets = selectedSets();
+            const pool = sets.join("");
+            const chars = [];
+            sets.forEach(set => chars.push(set[randomIndex(set.length)]));
+            while (chars.length < length) chars.push(pool[randomIndex(pool.length)]);
+            for (let index = chars.length - 1; index > 0; index -= 1) {
+                const swap = randomIndex(index + 1);
+                [chars[index], chars[swap]] = [chars[swap], chars[index]];
+            }
+            return chars.join("");
+        }
+
+        function renderStrength(password) {
+            const score = Number(/[A-Z]/.test(password)) + Number(/[a-z]/.test(password)) + Number(/\d/.test(password)) + Number(/[!@#$%&*?+\-_=\.]/.test(password)) + (password.length >= 16 ? 1 : 0);
+            strengthLabel.textContent = score >= 5 ? "Muito forte" : score >= 4 ? "Forte" : "Média";
+            strengthLabel.classList.toggle("active", score >= 4);
+        }
+
+        async function copyText(text, button) {
+            if (!text) return;
+            if (navigator.clipboard && window.isSecureContext) {
+                await navigator.clipboard.writeText(text);
+            } else {
+                const area = document.createElement("textarea");
+                area.value = text;
+                area.style.position = "fixed";
+                area.style.opacity = "0";
+                document.body.appendChild(area);
+                area.select();
+                document.execCommand("copy");
+                area.remove();
+            }
+            const previous = button.textContent;
+            button.textContent = "Copiado";
+            setTimeout(() => { button.textContent = previous; }, 1000);
+        }
+
+        function renderOne() {
+            lengthLabel.textContent = lengthRange.value;
+            const password = generatePassword();
+            passwordOutput.value = password;
+            renderStrength(password);
+        }
+
+        document.getElementById("generateBtn").addEventListener("click", renderOne);
+        document.getElementById("copyPassword").addEventListener("click", event => copyText(passwordOutput.value, event.target));
+        document.getElementById("generateList").addEventListener("click", () => {
+            passwordList.innerHTML = Array.from({ length: 5 }, generatePassword).map(password => `<article class="phrase-card"><p class="phrase-text">${password}</p><button class="btn secondary" type="button" data-copy="${password}">Copiar</button></article>`).join("");
+        });
+        passwordList.addEventListener("click", event => {
+            if (event.target.dataset.copy) copyText(event.target.dataset.copy, event.target);
+        });
+        [lengthRange, upperCheck, lowerCheck, numberCheck, symbolCheck].forEach(input => input.addEventListener("input", renderOne));
+        renderOne();
+    </script>
+</body>
+</html>

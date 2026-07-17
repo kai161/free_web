@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorteador de Nomes e Números Grátis</title>
+    <meta name="description" content="Sorteie nomes, números e ganhadores para WhatsApp, Instagram e grupos. Ferramenta grátis, local e sem cadastro.">
+    <meta name="keywords" content="sorteador, sorteador de nomes, sorteio Instagram, sortear número, sorteio WhatsApp, ganhador aleatório">
+    <meta name="robots" content="index,follow,max-image-preview:large">
+    <meta name="theme-color" content="#1f8f54">
+    <link rel="canonical" href="https://br.freetools.best/sorteador.html">
+    <link rel="alternate" hreflang="pt-BR" href="https://br.freetools.best/sorteador.html">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="manifest" href="site.webmanifest">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Brasil Tools">
+    <meta property="og:title" content="Sorteador de Nomes e Números Grátis">
+    <meta property="og:description" content="Sorteie ganhadores para grupos, status e Instagram no navegador.">
+    <meta property="og:url" content="https://br.freetools.best/sorteador.html">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Sorteador de Nomes e Números Grátis">
+    <meta name="twitter:description" content="Sorteio local para nomes, números e grupos.">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .field input[type="checkbox"] {
+            width: 1rem !important;
+            min-width: 1rem !important;
+            max-width: 1rem !important;
+            height: 1rem !important;
+            min-height: 1rem !important;
+        }
+    </style>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Sorteador de Nomes e Números",
+        "url": "https://br.freetools.best/sorteador.html",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "inLanguage": "pt-BR",
+        "description": "Ferramenta gratuita para sortear nomes e números no navegador.",
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "BRL"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Brasil Tools", "item": "https://br.freetools.best/"},
+            {"@type": "ListItem", "position": 2, "name": "Sorteador", "item": "https://br.freetools.best/sorteador.html"}
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "O sorteio envia a lista para servidor?",
+                "acceptedAnswer": {"@type": "Answer", "text": "Não. A lista é processada no navegador."}
+            },
+            {
+                "@type": "Question",
+                "name": "Posso sortear mais de um ganhador?",
+                "acceptedAnswer": {"@type": "Answer", "text": "Sim. Informe a quantidade de ganhadores antes de sortear."}
+            }
+        ]
+    }
+    </script>
+    <script>
+        (function() {
+            window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+            const script = document.createElement('script');
+            script.src = '/_vercel/insights/script.js';
+            script.defer = true;
+            document.head.appendChild(script);
+        })();
+    </script>
+</head>
+<body>
+    <header class="site-header">
+        <nav class="nav" aria-label="Navegação principal">
+            <a class="brand" href="index.html"><span class="brand-mark">BR</span><span>Brasil Tools</span></a>
+            <div class="nav-links">
+                <a class="nav-link" href="index.html">Início</a>
+                <a class="nav-link" href="frases.html">Frases</a>
+                <a class="nav-link" href="link-whatsapp.html">WhatsApp</a>
+                <a class="nav-link active" href="sorteador.html">Sorteador</a>
+                <a class="nav-link" href="conversor-texto.html">Texto</a>
+                <a class="nav-link" href="contador-caracteres.html">Contador</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="wrap section">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html">Início</a>
+            <span>/</span>
+            <span>Sorteador</span>
+        </nav>
+
+        <div class="panel-header">
+            <div>
+                <p class="eyebrow">Sorteio de grupo</p>
+                <h1>Sorteador de nomes</h1>
+                <p class="lead">Cole nomes, números ou participantes e sorteie ganhadores para WhatsApp, Instagram, rifa e grupos.</p>
+            </div>
+            <button class="btn" id="drawBtn" type="button">Sortear</button>
+        </div>
+
+        <div class="tool-layout">
+            <aside class="tool-panel">
+                <div class="field">
+                    <label for="itemsInput">Participantes</label>
+                    <textarea id="itemsInput" placeholder="Ana&#10;Bruno&#10;Carla&#10;Diego"></textarea>
+                </div>
+                <div class="field">
+                    <label for="winnerCount">Quantidade de ganhadores</label>
+                    <input id="winnerCount" inputmode="numeric" value="1">
+                </div>
+                <div class="field">
+                    <label><input id="uniqueCheck" type="checkbox" checked> Remover nomes repetidos</label>
+                </div>
+                <div class="toolbar">
+                    <button class="btn secondary" id="numbersBtn" type="button">Usar 1 a 100</button>
+                    <button class="btn secondary" id="clearBtn" type="button">Limpar</button>
+                </div>
+                <div class="ad-slot">Anúncio lateral</div>
+            </aside>
+
+            <section class="tool-panel">
+                <div class="panel-header">
+                    <h2>Resultado</h2>
+                    <span class="chip" id="countLabel">0 participantes</span>
+                </div>
+                <div class="settlement" id="winnerList">
+                    <div class="ad-slot">Adicione participantes e toque em sortear</div>
+                </div>
+                <div class="toolbar">
+                    <button class="btn" id="copyResult" type="button">Copiar resultado</button>
+                    <button class="btn secondary" id="shareWhatsApp" type="button">WhatsApp</button>
+                </div>
+            </section>
+        </div>
+
+        <article class="seo-content">
+            <h2>Sorteador para WhatsApp e Instagram</h2>
+            <p>Use para sorteio simples em grupo, rifa, lista de presença, amigo secreto ou brincadeira. A lista fica no navegador e o resultado pode ser copiado.</p>
+            <h3>Como sortear nomes?</h3>
+            <p>Cole um nome por linha, escolha a quantidade de ganhadores e toque em sortear.</p>
+            <h3>Posso sortear números?</h3>
+            <p>Sim. Use o botão de exemplo com números de 1 a 100 ou cole qualquer sequência numérica.</p>
+        </article>
+
+        <section class="seo-content" aria-labelledby="sorteador-relacionadas">
+            <h2 id="sorteador-relacionadas">Ferramentas relacionadas</h2>
+            <div class="related-grid">
+                <a class="related-card" href="frases.html"><strong>Frases para WhatsApp</strong><span>Avise o grupo sobre o sorteio.</span></a>
+                <a class="related-card" href="link-whatsapp.html"><strong>Link WhatsApp</strong><span>Compartilhe o resultado em uma mensagem pronta.</span></a>
+                <a class="related-card" href="contador-caracteres.html"><strong>Contador de caracteres</strong><span>Ajuste a legenda do sorteio.</span></a>
+                <a class="related-card" href="mapa-do-site.html"><strong>Mapa do site</strong><span>Veja todas as ferramentas gratuitas.</span></a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="index.html">Brasil Tools</a>
+            <a href="frases.html">Frases</a>
+            <a href="link-whatsapp.html">Link WhatsApp</a>
+            <a href="mapa-do-site.html">Mapa do site</a>
+        </div>
+        Sorteio local, simples e sem cadastro.
+    </footer>
+
+    <script>
+        const itemsInput = document.getElementById("itemsInput");
+        const winnerCount = document.getElementById("winnerCount");
+        const uniqueCheck = document.getElementById("uniqueCheck");
+        const winnerList = document.getElementById("winnerList");
+        const countLabel = document.getElementById("countLabel");
+        let lastWinners = [];
+
+        function escapeHtml(value) {
+            return String(value).replace(/[&<>"']/g, char => ({
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#39;"
+            })[char]);
+        }
+
+        function parseItems() {
+            const items = itemsInput.value.split(/\n|,|;/).map(item => item.trim()).filter(Boolean);
+            return uniqueCheck.checked ? [...new Set(items)] : items;
+        }
+
+        function randomIndex(max) {
+            const array = new Uint32Array(1);
+            if (window.crypto && crypto.getRandomValues) {
+                crypto.getRandomValues(array);
+                return array[0] % max;
+            }
+            return Math.floor(Math.random() * max);
+        }
+
+        function renderCount() {
+            const total = parseItems().length;
+            countLabel.textContent = `${total} participante${total === 1 ? "" : "s"}`;
+        }
+
+        function draw() {
+            const pool = parseItems();
+            const count = Math.max(1, Math.min(pool.length, Number(winnerCount.value.replace(/\D/g, "")) || 1));
+            const winners = [];
+            while (pool.length && winners.length < count) {
+                winners.push(pool.splice(randomIndex(pool.length), 1)[0]);
+            }
+            lastWinners = winners;
+            winnerList.innerHTML = winners.length
+                ? winners.map((winner, index) => `<article class="settlement-card"><strong>${index + 1}. ${escapeHtml(winner)}</strong><span>Ganhador sorteado</span></article>`).join("")
+                : '<div class="ad-slot">Adicione participantes e toque em sortear</div>';
+            renderCount();
+        }
+
+        async function copyText(text, button) {
+            if (!text) return;
+            if (navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(text);
+            else {
+                const area = document.createElement("textarea");
+                area.value = text;
+                area.style.position = "fixed";
+                area.style.opacity = "0";
+                document.body.appendChild(area);
+                area.select();
+                document.execCommand("copy");
+                area.remove();
+            }
+            const previous = button.textContent;
+            button.textContent = "Copiado";
+            setTimeout(() => { button.textContent = previous; }, 1000);
+        }
+
+        function resultText() {
+            return lastWinners.length ? `Resultado do sorteio:\n${lastWinners.map((winner, index) => `${index + 1}. ${winner}`).join("\n")}` : "";
+        }
+
+        document.getElementById("drawBtn").addEventListener("click", draw);
+        document.getElementById("numbersBtn").addEventListener("click", () => {
+            itemsInput.value = Array.from({ length: 100 }, (_, index) => index + 1).join("\n");
+            renderCount();
+        });
+        document.getElementById("clearBtn").addEventListener("click", () => {
+            itemsInput.value = "";
+            lastWinners = [];
+            winnerList.innerHTML = '<div class="ad-slot">Adicione participantes e toque em sortear</div>';
+            renderCount();
+        });
+        document.getElementById("copyResult").addEventListener("click", event => copyText(resultText(), event.target));
+        document.getElementById("shareWhatsApp").addEventListener("click", () => {
+            const text = resultText();
+            if (text) window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, "_blank", "noopener,noreferrer");
+        });
+        [itemsInput, uniqueCheck].forEach(element => element.addEventListener("input", renderCount));
+        renderCount();
+    </script>
+</body>
+</html>

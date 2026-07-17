@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Porcentagem Grátis</title>
+    <meta name="description" content="Calcule porcentagem, desconto, aumento e variação percentual no navegador. Ferramenta grátis para compras, Pix, vendas e contas.">
+    <meta name="keywords" content="calculadora de porcentagem, calcular desconto, aumento percentual, variação percentual, porcentagem grátis">
+    <meta name="robots" content="index,follow,max-image-preview:large">
+    <meta name="theme-color" content="#1f8f54">
+    <link rel="canonical" href="https://br.freetools.best/calculadora-porcentagem.html">
+    <link rel="alternate" hreflang="pt-BR" href="https://br.freetools.best/calculadora-porcentagem.html">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="manifest" href="site.webmanifest">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Brasil Tools">
+    <meta property="og:title" content="Calculadora de Porcentagem Grátis">
+    <meta property="og:description" content="Porcentagem, desconto e aumento direto no navegador, sem cadastro.">
+    <meta property="og:url" content="https://br.freetools.best/calculadora-porcentagem.html">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Calculadora de Porcentagem Grátis">
+    <meta name="twitter:description" content="Calcule desconto, aumento e variação percentual no celular.">
+    <link rel="stylesheet" href="styles.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Calculadora de Porcentagem",
+        "url": "https://br.freetools.best/calculadora-porcentagem.html",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "inLanguage": "pt-BR",
+        "description": "Calculadora gratuita de porcentagem, desconto, aumento e variação percentual.",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "BRL"
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Brasil Tools", "item": "https://br.freetools.best/"},
+            {"@type": "ListItem", "position": 2, "name": "Calculadora de Porcentagem", "item": "https://br.freetools.best/calculadora-porcentagem.html"}
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "A calculadora funciona sem internet depois de carregar?",
+                "acceptedAnswer": {"@type": "Answer", "text": "Sim. Os cálculos rodam em JavaScript no navegador."}
+            },
+            {
+                "@type": "Question",
+                "name": "Posso usar para desconto de loja?",
+                "acceptedAnswer": {"@type": "Answer", "text": "Sim. A ferramenta calcula desconto, aumento e variação percentual para compras e vendas."}
+            }
+        ]
+    }
+    </script>
+    <script>
+        (function() {
+            window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+            const script = document.createElement('script');
+            script.src = '/_vercel/insights/script.js';
+            script.defer = true;
+            document.head.appendChild(script);
+        })();
+    </script>
+</head>
+<body>
+    <header class="site-header">
+        <nav class="nav" aria-label="Navegação principal">
+            <a class="brand" href="index.html"><span class="brand-mark">BR</span><span>Brasil Tools</span></a>
+            <div class="nav-links">
+                <a class="nav-link" href="index.html">Início</a>
+                <a class="nav-link" href="pix.html">Pix</a>
+                <a class="nav-link active" href="calculadora-porcentagem.html">Porcentagem</a>
+                <a class="nav-link" href="conversor-texto.html">Texto</a>
+                <a class="nav-link" href="gerador-senhas.html">Senhas</a>
+                <a class="nav-link" href="sorteador.html">Sorteador</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="wrap section">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html">Início</a>
+            <span>/</span>
+            <span>Calculadora de porcentagem</span>
+        </nav>
+
+        <div class="panel-header">
+            <div>
+                <p class="eyebrow">Compra, venda e Pix</p>
+                <h1>Calculadora de porcentagem</h1>
+                <p class="lead">Calcule porcentagem, desconto, aumento e variação percentual para compras, vendas e contas do dia a dia.</p>
+            </div>
+            <button class="btn secondary" id="clearAll" type="button">Limpar</button>
+        </div>
+
+        <div class="tool-layout">
+            <aside class="tool-panel">
+                <h3>Quanto é X% de Y?</h3>
+                <div class="field">
+                    <label for="percentA">Porcentagem</label>
+                    <input id="percentA" inputmode="decimal" placeholder="15">
+                </div>
+                <div class="field">
+                    <label for="valueA">Valor</label>
+                    <input id="valueA" inputmode="decimal" placeholder="200">
+                </div>
+
+                <h3>Desconto ou aumento</h3>
+                <div class="field">
+                    <label for="baseB">Preço base</label>
+                    <input id="baseB" inputmode="decimal" placeholder="120,00">
+                </div>
+                <div class="field">
+                    <label for="percentB">Percentual</label>
+                    <input id="percentB" inputmode="decimal" placeholder="10">
+                </div>
+                <div class="toolbar">
+                    <button class="chip active" type="button" data-mode="discount">Desconto</button>
+                    <button class="chip" type="button" data-mode="increase">Aumento</button>
+                </div>
+                <div class="ad-slot">Anúncio lateral</div>
+            </aside>
+
+            <section class="tool-panel">
+                <div class="stats">
+                    <div class="stat"><strong id="resultA">R$ 0,00</strong><span>Resultado</span></div>
+                    <div class="stat"><strong id="resultB">R$ 0,00</strong><span>Preço final</span></div>
+                    <div class="stat"><strong id="differenceB">R$ 0,00</strong><span>Diferença</span></div>
+                </div>
+
+                <article class="seo-content">
+                    <h2>Variação percentual</h2>
+                    <p>Compare um valor antigo e um valor novo para saber quantos por cento subiu ou caiu.</p>
+                    <div class="field">
+                        <label for="oldValue">Valor antigo</label>
+                        <input id="oldValue" inputmode="decimal" placeholder="80">
+                    </div>
+                    <div class="field">
+                        <label for="newValue">Valor novo</label>
+                        <input id="newValue" inputmode="decimal" placeholder="100">
+                    </div>
+                    <div class="stats">
+                        <div class="stat"><strong id="variationResult">0%</strong><span>Variação</span></div>
+                        <div class="stat"><strong id="variationDiff">R$ 0,00</strong><span>Diferença</span></div>
+                        <div class="stat"><strong id="variationLabel">Neutro</strong><span>Movimento</span></div>
+                    </div>
+                </article>
+            </section>
+        </div>
+
+        <article class="seo-content">
+            <h2>Calculadora para desconto e aumento</h2>
+            <p>Use para conferir promoção, comissão, taxa, gorjeta, reajuste, cashback ou divisão de gasto. Os números são calculados no navegador e não são enviados para servidor.</p>
+            <h3>Como calcular 15% de 200?</h3>
+            <p>Digite 15 no campo de porcentagem e 200 no campo de valor. O resultado será mostrado automaticamente.</p>
+            <h3>Como calcular preço com desconto?</h3>
+            <p>Digite o preço base, o percentual e mantenha a opção desconto selecionada.</p>
+        </article>
+
+        <section class="seo-content" aria-labelledby="porcentagem-relacionadas">
+            <h2 id="porcentagem-relacionadas">Ferramentas relacionadas</h2>
+            <div class="related-grid">
+                <a class="related-card" href="pix.html"><strong>Racha Pix</strong><span>Divida conta depois de calcular desconto ou taxa.</span></a>
+                <a class="related-card" href="pix-copia-e-cola.html"><strong>Pix Copia e Cola</strong><span>Gere código Pix com valor definido.</span></a>
+                <a class="related-card" href="contador-caracteres.html"><strong>Contador de caracteres</strong><span>Ajuste texto de anúncio ou promoção.</span></a>
+                <a class="related-card" href="mapa-do-site.html"><strong>Mapa do site</strong><span>Veja todas as ferramentas gratuitas.</span></a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="index.html">Brasil Tools</a>
+            <a href="pix.html">Racha Pix</a>
+            <a href="pix-copia-e-cola.html">Pix Copia e Cola</a>
+            <a href="mapa-do-site.html">Mapa do site</a>
+        </div>
+        Cálculos locais, rápidos e sem cadastro.
+    </footer>
+
+    <script>
+        const moneyFormatter = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
+        const percentA = document.getElementById("percentA");
+        const valueA = document.getElementById("valueA");
+        const baseB = document.getElementById("baseB");
+        const percentB = document.getElementById("percentB");
+        const oldValue = document.getElementById("oldValue");
+        const newValue = document.getElementById("newValue");
+        let calcMode = "discount";
+
+        function parseNumber(value) {
+            return Number(String(value).replace(/\./g, "").replace(",", ".")) || 0;
+        }
+
+        function formatMoney(value) {
+            return moneyFormatter.format(value);
+        }
+
+        function render() {
+            const firstResult = parseNumber(percentA.value) / 100 * parseNumber(valueA.value);
+            const base = parseNumber(baseB.value);
+            const rate = parseNumber(percentB.value) / 100;
+            const difference = base * rate;
+            const finalValue = calcMode === "discount" ? base - difference : base + difference;
+            const oldNumber = parseNumber(oldValue.value);
+            const newNumber = parseNumber(newValue.value);
+            const variation = oldNumber ? (newNumber - oldNumber) / oldNumber * 100 : 0;
+
+            document.getElementById("resultA").textContent = formatMoney(firstResult);
+            document.getElementById("resultB").textContent = formatMoney(finalValue);
+            document.getElementById("differenceB").textContent = formatMoney(difference);
+            document.getElementById("variationResult").textContent = `${variation.toFixed(2).replace(".", ",")}%`;
+            document.getElementById("variationDiff").textContent = formatMoney(newNumber - oldNumber);
+            document.getElementById("variationLabel").textContent = variation > 0 ? "Subiu" : variation < 0 ? "Caiu" : "Neutro";
+        }
+
+        document.querySelectorAll("[data-mode]").forEach(button => {
+            button.addEventListener("click", () => {
+                calcMode = button.dataset.mode;
+                document.querySelectorAll("[data-mode]").forEach(item => item.classList.toggle("active", item === button));
+                render();
+            });
+        });
+        [percentA, valueA, baseB, percentB, oldValue, newValue].forEach(input => input.addEventListener("input", render));
+        document.getElementById("clearAll").addEventListener("click", () => {
+            [percentA, valueA, baseB, percentB, oldValue, newValue].forEach(input => { input.value = ""; });
+            render();
+        });
+        render();
+    </script>
+</body>
+</html>

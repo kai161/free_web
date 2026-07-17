@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validador de CNPJ Grátis Online</title>
+    <meta name="description" content="Valide e formate CNPJ online no navegador. Confira dígitos verificadores, remova pontuação e copie o CNPJ formatado.">
+    <meta name="keywords" content="validador de CNPJ, validar CNPJ, formatar CNPJ, CNPJ grátis, conferir CNPJ, CNPJ online Brasil">
+    <meta name="robots" content="index,follow,max-image-preview:large">
+    <meta name="theme-color" content="#1f8f54">
+    <link rel="canonical" href="https://br.freetools.best/cnpj.html">
+    <link rel="alternate" hreflang="pt-BR" href="https://br.freetools.best/cnpj.html">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="manifest" href="site.webmanifest">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Brasil Tools">
+    <meta property="og:title" content="Validador de CNPJ Grátis Online">
+    <meta property="og:description" content="Confira se um CNPJ tem dígitos válidos e copie o número formatado. Tudo no navegador.">
+    <meta property="og:url" content="https://br.freetools.best/cnpj.html">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Validador de CNPJ Grátis Online">
+    <meta name="twitter:description" content="Valide e formate CNPJ sem cadastro e sem API.">
+    <link rel="stylesheet" href="styles.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Validador de CNPJ",
+        "url": "https://br.freetools.best/cnpj.html",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "inLanguage": "pt-BR",
+        "description": "Ferramenta gratuita para validar e formatar CNPJ no navegador.",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "BRL"
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Brasil Tools",
+                "item": "https://br.freetools.best/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Validador de CNPJ",
+                "item": "https://br.freetools.best/cnpj.html"
+            }
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "O CNPJ digitado é enviado para algum servidor?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Não. A validação acontece no navegador e o site não precisa enviar o CNPJ para servidor."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Um CNPJ válido significa que a empresa está ativa?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Não. A ferramenta confere apenas o cálculo dos dígitos verificadores, não consulta a Receita Federal."
+                }
+            }
+        ]
+    }
+    </script>
+    <script>
+        (function() {
+            window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+            const script = document.createElement('script');
+            script.src = '/_vercel/insights/script.js';
+            script.defer = true;
+            document.head.appendChild(script);
+        })();
+    </script>
+</head>
+<body>
+    <header class="site-header">
+        <nav class="nav" aria-label="Navegação principal">
+            <a class="brand" href="index.html"><span class="brand-mark">BR</span><span>Brasil Tools</span></a>
+            <div class="nav-links">
+                <a class="nav-link" href="index.html">Início</a>
+                <a class="nav-link" href="frases.html">Frases</a>
+                <a class="nav-link" href="link-whatsapp.html">WhatsApp</a>
+                <a class="nav-link" href="contador-caracteres.html">Contador</a>
+                <a class="nav-link" href="imagem.html">Fotos</a>
+                <a class="nav-link" href="pix.html">Pix</a>
+                <a class="nav-link" href="cpf.html">CPF</a>
+                <a class="nav-link active" href="cnpj.html">CNPJ</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="wrap section">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html">Início</a>
+            <span>/</span>
+            <span>Validador de CNPJ</span>
+        </nav>
+
+        <div class="panel-header">
+            <div>
+                <p class="eyebrow">Empresa e loja</p>
+                <h1>Validador de CNPJ</h1>
+                <p class="lead">Digite um CNPJ com ou sem pontuação para conferir os dígitos verificadores, formatar e copiar.</p>
+            </div>
+            <button class="btn secondary" id="clearCnpj" type="button">Limpar</button>
+        </div>
+
+        <div class="tool-layout">
+            <aside class="tool-panel">
+                <div class="field">
+                    <label for="cnpjInput">CNPJ</label>
+                    <input id="cnpjInput" inputmode="numeric" autocomplete="off" placeholder="00.000.000/0000-00">
+                </div>
+                <div class="toolbar">
+                    <button class="btn" id="copyFormatted" type="button">Copiar formatado</button>
+                    <button class="btn secondary" id="copyDigits" type="button">Copiar números</button>
+                </div>
+                <div class="ad-slot">Anúncio lateral</div>
+            </aside>
+
+            <section class="tool-panel">
+                <div class="panel-header">
+                    <h2>Resultado</h2>
+                    <span class="chip" id="cnpjStatus">Aguardando CNPJ</span>
+                </div>
+                <div class="stats">
+                    <div class="stat"><strong id="digitCount">0</strong><span>Dígitos</span></div>
+                    <div class="stat"><strong id="firstDigit">--</strong><span>1º verificador</span></div>
+                    <div class="stat"><strong id="secondDigit">--</strong><span>2º verificador</span></div>
+                </div>
+                <div class="field">
+                    <label for="formattedCnpj">CNPJ formatado</label>
+                    <input id="formattedCnpj" readonly>
+                </div>
+                <article class="seo-content">
+                    <h2>Como interpretar</h2>
+                    <p id="cnpjHelp">Cole um CNPJ para validar o tamanho e os dígitos verificadores.</p>
+                </article>
+            </section>
+        </div>
+
+        <article class="seo-content">
+            <h2>Validador e formatador de CNPJ</h2>
+            <p>Use o validador para conferir se a sequência tem 14 dígitos e se os dois dígitos finais batem com o cálculo do CNPJ. A ferramenta também remove pontuação e mostra o CNPJ no formato brasileiro.</p>
+            <h3>O CNPJ digitado fica salvo?</h3>
+            <p>Não. A verificação acontece no navegador e não depende de API, banco de dados ou cadastro.</p>
+            <h3>CNPJ válido confirma empresa ativa?</h3>
+            <p>Não. Um CNPJ matematicamente válido não garante que a empresa existe, está ativa ou regular em bases oficiais.</p>
+        </article>
+
+        <section class="seo-content" aria-labelledby="cnpj-relacionadas">
+            <h2 id="cnpj-relacionadas">Ferramentas relacionadas</h2>
+            <div class="related-grid">
+                <a class="related-card" href="cpf.html">
+                    <strong>Validador de CPF</strong>
+                    <span>Confira CPF com o mesmo fluxo local e sem cadastro.</span>
+                </a>
+                <a class="related-card" href="pix-copia-e-cola.html">
+                    <strong>Pix Copia e Cola</strong>
+                    <span>Gere código Pix para loja, serviço ou cobrança simples.</span>
+                </a>
+                <a class="related-card" href="link-whatsapp.html">
+                    <strong>Link WhatsApp</strong>
+                    <span>Crie um link de atendimento para clientes.</span>
+                </a>
+                <a class="related-card" href="mapa-do-site.html">
+                    <strong>Mapa do site</strong>
+                    <span>Veja todas as ferramentas disponíveis no Brasil Tools.</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="index.html">Brasil Tools</a>
+            <a href="cpf.html">Validador CPF</a>
+            <a href="pix-copia-e-cola.html">Pix Copia e Cola</a>
+            <a href="link-whatsapp.html">Link WhatsApp</a>
+            <a href="mapa-do-site.html">Mapa do site</a>
+        </div>
+        Validação local, grátis e sem cadastro.
+    </footer>
+
+    <script>
+        const cnpjInput = document.getElementById("cnpjInput");
+        const formattedCnpj = document.getElementById("formattedCnpj");
+        const cnpjStatus = document.getElementById("cnpjStatus");
+        const cnpjHelp = document.getElementById("cnpjHelp");
+        const digitCount = document.getElementById("digitCount");
+        const firstDigit = document.getElementById("firstDigit");
+        const secondDigit = document.getElementById("secondDigit");
+        const copyFormatted = document.getElementById("copyFormatted");
+        const copyDigits = document.getElementById("copyDigits");
+        const clearCnpj = document.getElementById("clearCnpj");
+
+        function onlyDigits(value) {
+            return value.replace(/\D/g, "").slice(0, 14);
+        }
+
+        function formatCnpj(digits) {
+            return digits
+                .replace(/^(\d{2})(\d)/, "$1.$2")
+                .replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3")
+                .replace(/\.(\d{3})(\d)/, ".$1/$2")
+                .replace(/(\d{4})(\d)/, "$1-$2");
+        }
+
+        function verifierDigit(digits, weights) {
+            const sum = digits.reduce((total, digit, index) => total + Number(digit) * weights[index], 0);
+            const rest = sum % 11;
+            return rest < 2 ? 0 : 11 - rest;
+        }
+
+        function validateCnpj(digits) {
+            if (digits.length !== 14) return { valid: false, reason: "O CNPJ precisa ter 14 dígitos." };
+            if (/^(\d)\1+$/.test(digits)) return { valid: false, reason: "Sequências repetidas não são CNPJs válidos." };
+            const numbers = Array.from(digits);
+            const expectedFirst = verifierDigit(numbers.slice(0, 12), [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]);
+            const expectedSecond = verifierDigit(numbers.slice(0, 13), [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]);
+            const valid = expectedFirst === Number(digits[12]) && expectedSecond === Number(digits[13]);
+            return { valid, expectedFirst, expectedSecond, reason: valid ? "CNPJ com dígitos verificadores válidos." : "Os dígitos verificadores não batem com o cálculo do CNPJ." };
+        }
+
+        async function copyText(text, button) {
+            if (!text) return;
+            if (navigator.clipboard && window.isSecureContext) {
+                await navigator.clipboard.writeText(text);
+            } else {
+                const area = document.createElement("textarea");
+                area.value = text;
+                area.style.position = "fixed";
+                area.style.opacity = "0";
+                document.body.appendChild(area);
+                area.select();
+                document.execCommand("copy");
+                area.remove();
+            }
+            const previous = button.textContent;
+            button.textContent = "Copiado";
+            setTimeout(() => { button.textContent = previous; }, 1000);
+        }
+
+        function renderCnpj() {
+            const digits = onlyDigits(cnpjInput.value);
+            if (cnpjInput.value !== formatCnpj(digits)) cnpjInput.value = formatCnpj(digits);
+            const result = validateCnpj(digits);
+            digitCount.textContent = digits.length;
+            firstDigit.textContent = result.expectedFirst ?? "--";
+            secondDigit.textContent = result.expectedSecond ?? "--";
+            formattedCnpj.value = digits.length ? formatCnpj(digits) : "";
+            cnpjStatus.textContent = digits.length === 0 ? "Aguardando CNPJ" : (result.valid ? "CNPJ válido" : "CNPJ inválido");
+            cnpjStatus.classList.toggle("active", result.valid);
+            cnpjHelp.textContent = result.reason;
+        }
+
+        cnpjInput.addEventListener("input", renderCnpj);
+        copyFormatted.addEventListener("click", () => copyText(formattedCnpj.value, copyFormatted));
+        copyDigits.addEventListener("click", () => copyText(onlyDigits(cnpjInput.value), copyDigits));
+        clearCnpj.addEventListener("click", () => {
+            cnpjInput.value = "";
+            renderCnpj();
+            cnpjInput.focus();
+        });
+        renderCnpj();
+    </script>
+</body>
+</html>

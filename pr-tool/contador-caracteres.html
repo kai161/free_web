@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador de Caracteres para Instagram e WhatsApp</title>
+    <meta name="description" content="Conte caracteres, palavras, linhas e ajuste textos para Instagram, WhatsApp, bio e anúncios. Ferramenta grátis no navegador.">
+    <meta name="keywords" content="contador de caracteres, contar palavras, caracteres Instagram, texto WhatsApp, contador de legenda, bio Instagram">
+    <meta name="robots" content="index,follow,max-image-preview:large">
+    <meta name="theme-color" content="#1f8f54">
+    <link rel="canonical" href="https://br.freetools.best/contador-caracteres.html">
+    <link rel="alternate" hreflang="pt-BR" href="https://br.freetools.best/contador-caracteres.html">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="manifest" href="site.webmanifest">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Brasil Tools">
+    <meta property="og:title" content="Contador de Caracteres para Instagram e WhatsApp">
+    <meta property="og:description" content="Conte caracteres, palavras e linhas antes de publicar sua legenda ou mensagem.">
+    <meta property="og:url" content="https://br.freetools.best/contador-caracteres.html">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Contador de Caracteres para Instagram e WhatsApp">
+    <meta name="twitter:description" content="Ajuste textos para redes sociais direto no navegador.">
+    <link rel="stylesheet" href="styles.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Contador de Caracteres",
+        "url": "https://br.freetools.best/contador-caracteres.html",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "inLanguage": "pt-BR",
+        "description": "Contador gratuito de caracteres, palavras e linhas para redes sociais.",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "BRL"
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Brasil Tools",
+                "item": "https://br.freetools.best/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Contador de Caracteres",
+                "item": "https://br.freetools.best/contador-caracteres.html"
+            }
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "O contador envia meu texto para algum servidor?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Não. A contagem acontece no navegador, sem upload do texto."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Posso usar para legenda do Instagram?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Sim. A ferramenta mostra caracteres, palavras e permite acompanhar um limite personalizado."
+                }
+            }
+        ]
+    }
+    </script>
+    <script>
+        (function() {
+            window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+            const script = document.createElement('script');
+            script.src = '/_vercel/insights/script.js';
+            script.defer = true;
+            document.head.appendChild(script);
+        })();
+    </script>
+</head>
+<body>
+    <header class="site-header">
+        <nav class="nav" aria-label="Navegação principal">
+            <a class="brand" href="index.html"><span class="brand-mark">BR</span><span>Brasil Tools</span></a>
+            <div class="nav-links">
+                <a class="nav-link" href="index.html">Início</a>
+                <a class="nav-link" href="frases.html">Frases</a>
+                <a class="nav-link active" href="contador-caracteres.html">Contador</a>
+                <a class="nav-link" href="imagem.html">Fotos</a>
+                <a class="nav-link" href="pix.html">Pix</a>
+                <a class="nav-link" href="cpf.html">CPF</a>
+                <a class="nav-link" href="cnpj.html">CNPJ</a>
+                <a class="nav-link" href="conversor-texto.html">Texto</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="wrap section">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html">Início</a>
+            <span>/</span>
+            <span>Contador de caracteres</span>
+        </nav>
+
+        <div class="panel-header">
+            <div>
+                <p class="eyebrow">Texto pronto para postar</p>
+                <h1>Contador de caracteres</h1>
+                <p class="lead">Conte caracteres, palavras, linhas e acompanhe um limite personalizado antes de publicar no WhatsApp, Instagram ou anúncio.</p>
+            </div>
+            <button class="btn secondary" id="clearText" type="button">Limpar</button>
+        </div>
+
+        <div class="tool-layout">
+            <aside class="tool-panel">
+                <div class="field">
+                    <label for="limitInput">Limite personalizado</label>
+                    <input id="limitInput" inputmode="numeric" value="2200">
+                </div>
+                <div class="toolbar">
+                    <button class="chip active" type="button" data-limit="2200">Legenda</button>
+                    <button class="chip" type="button" data-limit="150">Bio</button>
+                    <button class="chip" type="button" data-limit="500">Mensagem curta</button>
+                </div>
+                <div class="stats">
+                    <div class="stat"><strong id="charCount">0</strong><span>Caracteres</span></div>
+                    <div class="stat"><strong id="wordCount">0</strong><span>Palavras</span></div>
+                    <div class="stat"><strong id="lineCount">0</strong><span>Linhas</span></div>
+                </div>
+                <div class="ad-slot">Anúncio lateral</div>
+            </aside>
+
+            <section class="tool-panel">
+                <div class="field">
+                    <label for="textInput">Texto</label>
+                    <textarea id="textInput" placeholder="Cole sua legenda, mensagem ou bio aqui..."></textarea>
+                </div>
+                <div class="stats">
+                    <div class="stat"><strong id="noSpaceCount">0</strong><span>Sem espaços</span></div>
+                    <div class="stat"><strong id="remainingCount">2200</strong><span>Restantes</span></div>
+                    <div class="stat"><strong id="limitStatus">0%</strong><span>Uso do limite</span></div>
+                </div>
+            </section>
+        </div>
+
+        <article class="seo-content">
+            <h2>Contador para legenda, bio e mensagem</h2>
+            <p>Use o contador para ajustar textos de Instagram, WhatsApp, anúncios e descrições. A ferramenta mostra tamanho, palavras, linhas e quanto falta para o limite escolhido.</p>
+            <h3>O texto é enviado para servidor?</h3>
+            <p>Não. Tudo é calculado no navegador.</p>
+            <h3>Posso escolher outro limite?</h3>
+            <p>Sim. Digite qualquer número no campo de limite personalizado.</p>
+        </article>
+
+        <section class="seo-content" aria-labelledby="contador-relacionadas">
+            <h2 id="contador-relacionadas">Ferramentas relacionadas</h2>
+            <div class="related-grid">
+                <a class="related-card" href="link-whatsapp.html">
+                    <strong>Gerador de link WhatsApp</strong>
+                    <span>Transforme a mensagem ajustada em um link com texto pronto.</span>
+                </a>
+                <a class="related-card" href="frases-status-whatsapp.html">
+                    <strong>Frases para status</strong>
+                    <span>Encontre textos curtos para copiar e adaptar.</span>
+                </a>
+                <a class="related-card" href="frases.html">
+                    <strong>Todas as frases</strong>
+                    <span>Busque ideias de bom dia, sextou, aniversário e indiretas.</span>
+                </a>
+                <a class="related-card" href="cpf.html">
+                    <strong>Validador de CPF</strong>
+                    <span>Outra ferramenta local para conferência rápida.</span>
+                </a>
+                <a class="related-card" href="cnpj.html">
+                    <strong>Validador de CNPJ</strong>
+                    <span>Confira cadastro de empresa no navegador.</span>
+                </a>
+                <a class="related-card" href="conversor-texto.html">
+                    <strong>Conversor de texto</strong>
+                    <span>Converta o texto antes de contar e publicar.</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="link-whatsapp.html">Link WhatsApp</a>
+            <a href="frases.html">Frases</a>
+            <a href="imagem.html">Fotos sociais</a>
+            <a href="pix.html">Racha Pix</a>
+            <a href="cpf.html">Validador CPF</a>
+            <a href="mapa-do-site.html">Mapa do site</a>
+            <a href="conversor-texto.html">Texto</a>
+        </div>
+        Contador local, gratuito e sem cadastro.
+    </footer>
+
+    <script>
+        const textInput = document.getElementById("textInput");
+        const limitInput = document.getElementById("limitInput");
+        const charCount = document.getElementById("charCount");
+        const noSpaceCount = document.getElementById("noSpaceCount");
+        const wordCount = document.getElementById("wordCount");
+        const lineCount = document.getElementById("lineCount");
+        const remainingCount = document.getElementById("remainingCount");
+        const limitStatus = document.getElementById("limitStatus");
+        const clearText = document.getElementById("clearText");
+
+        function renderCount() {
+            const text = textInput.value;
+            const chars = Array.from(text).length;
+            const noSpaces = Array.from(text.replace(/\s/g, "")).length;
+            const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+            const lines = text ? text.split(/\n/).length : 0;
+            const limit = Math.max(1, Number(limitInput.value.replace(/\D/g, "")) || 1);
+            const remaining = limit - chars;
+            const percent = Math.min(999, Math.round(chars / limit * 100));
+
+            charCount.textContent = chars;
+            noSpaceCount.textContent = noSpaces;
+            wordCount.textContent = words;
+            lineCount.textContent = lines;
+            remainingCount.textContent = remaining;
+            limitStatus.textContent = `${percent}%`;
+            remainingCount.style.color = remaining < 0 ? "var(--coral)" : "var(--green-dark)";
+        }
+
+        document.querySelectorAll("[data-limit]").forEach(button => {
+            button.addEventListener("click", () => {
+                document.querySelectorAll("[data-limit]").forEach(item => item.classList.toggle("active", item === button));
+                limitInput.value = button.dataset.limit;
+                renderCount();
+            });
+        });
+
+        textInput.addEventListener("input", renderCount);
+        limitInput.addEventListener("input", renderCount);
+        clearText.addEventListener("click", () => {
+            textInput.value = "";
+            renderCount();
+            textInput.focus();
+        });
+        renderCount();
+    </script>
+</body>
+</html>

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador Pix Copia e Cola Grátis</title>
+    <meta name="description" content="Gere código Pix Copia e Cola estático no navegador com chave Pix, valor, nome e cidade. Ferramenta grátis, sem cadastro e sem API.">
+    <meta name="keywords" content="Pix copia e cola, gerador Pix, código Pix, gerar Pix grátis, chave Pix, Pix estático Brasil">
+    <meta name="robots" content="index,follow,max-image-preview:large">
+    <meta name="theme-color" content="#1f8f54">
+    <link rel="canonical" href="https://br.freetools.best/pix-copia-e-cola.html">
+    <link rel="alternate" hreflang="pt-BR" href="https://br.freetools.best/pix-copia-e-cola.html">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="manifest" href="site.webmanifest">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Brasil Tools">
+    <meta property="og:title" content="Gerador Pix Copia e Cola Grátis">
+    <meta property="og:description" content="Monte um código Pix Copia e Cola no navegador, sem upload e sem API.">
+    <meta property="og:url" content="https://br.freetools.best/pix-copia-e-cola.html">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Gerador Pix Copia e Cola Grátis">
+    <meta name="twitter:description" content="Código Pix estático com chave, valor, nome e cidade.">
+    <link rel="stylesheet" href="styles.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Gerador Pix Copia e Cola",
+        "url": "https://br.freetools.best/pix-copia-e-cola.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "inLanguage": "pt-BR",
+        "description": "Ferramenta gratuita para gerar código Pix Copia e Cola estático no navegador.",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "BRL"
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Brasil Tools",
+                "item": "https://br.freetools.best/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Pix Copia e Cola",
+                "item": "https://br.freetools.best/pix-copia-e-cola.html"
+            }
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "O código Pix é gerado no servidor?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Não. O código Copia e Cola é montado no navegador com os dados digitados."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Preciso conferir o Pix no aplicativo do banco?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Sim. Sempre confira recebedor, chave e valor no app do banco antes de pagar ou compartilhar."
+                }
+            }
+        ]
+    }
+    </script>
+    <script>
+        (function() {
+            window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+            const script = document.createElement('script');
+            script.src = '/_vercel/insights/script.js';
+            script.defer = true;
+            document.head.appendChild(script);
+        })();
+    </script>
+</head>
+<body>
+    <header class="site-header">
+        <nav class="nav" aria-label="Navegação principal">
+            <a class="brand" href="index.html"><span class="brand-mark">BR</span><span>Brasil Tools</span></a>
+            <div class="nav-links">
+                <a class="nav-link" href="index.html">Início</a>
+                <a class="nav-link" href="frases.html">Frases</a>
+                <a class="nav-link" href="link-whatsapp.html">WhatsApp</a>
+                <a class="nav-link" href="imagem.html">Fotos</a>
+                <a class="nav-link active" href="pix-copia-e-cola.html">Pix Cola</a>
+                <a class="nav-link" href="pix.html">Racha Pix</a>
+                <a class="nav-link" href="cpf.html">CPF</a>
+                <a class="nav-link" href="cnpj.html">CNPJ</a>
+                <a class="nav-link" href="calculadora-porcentagem.html">Porcentagem</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="wrap section">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html">Início</a>
+            <span>/</span>
+            <span>Pix Copia e Cola</span>
+        </nav>
+
+        <div class="panel-header">
+            <div>
+                <p class="eyebrow">Pix estático local</p>
+                <h1>Pix Copia e Cola</h1>
+                <p class="lead">Gere um código Pix com chave, valor opcional, nome e cidade. Tudo roda no navegador.</p>
+            </div>
+            <button class="btn secondary" id="clearPix" type="button">Limpar</button>
+        </div>
+
+        <div class="tool-layout">
+            <aside class="tool-panel">
+                <div class="field">
+                    <label for="pixKeyInput">Chave Pix</label>
+                    <input id="pixKeyInput" autocomplete="off" placeholder="email, CPF, telefone ou chave aleatória">
+                </div>
+                <div class="field">
+                    <label for="merchantName">Nome do recebedor</label>
+                    <input id="merchantName" maxlength="40" placeholder="Loja Teste">
+                </div>
+                <div class="field">
+                    <label for="merchantCity">Cidade</label>
+                    <input id="merchantCity" maxlength="30" placeholder="São Paulo">
+                </div>
+                <div class="field">
+                    <label for="amountInput">Valor opcional</label>
+                    <input id="amountInput" inputmode="decimal" placeholder="12,50">
+                </div>
+                <div class="field">
+                    <label for="descriptionInput">Descrição opcional</label>
+                    <input id="descriptionInput" maxlength="50" placeholder="Pedido 123">
+                </div>
+                <div class="field">
+                    <label for="txidInput">TXID opcional</label>
+                    <input id="txidInput" maxlength="25" placeholder="PEDIDO123">
+                </div>
+                <div class="ad-slot">Anúncio lateral</div>
+            </aside>
+
+            <section class="tool-panel">
+                <div class="panel-header">
+                    <h2>Código gerado</h2>
+                    <span class="chip" id="pixStatus">Aguardando dados</span>
+                </div>
+                <div class="field">
+                    <label for="pixPayload">Pix Copia e Cola</label>
+                    <textarea id="pixPayload" readonly></textarea>
+                </div>
+                <div class="toolbar">
+                    <button class="btn" id="copyPayload" type="button">Copiar código Pix</button>
+                    <button class="btn secondary" id="copySummary" type="button">Copiar resumo</button>
+                </div>
+                <article class="seo-content">
+                    <h2>Conferência</h2>
+                    <p id="pixSummary">Preencha chave Pix, nome e cidade para gerar o código.</p>
+                </article>
+            </section>
+        </div>
+
+        <article class="seo-content">
+            <h2>Gerador Pix Copia e Cola sem API</h2>
+            <p>O Pix Copia e Cola é um texto no padrão BR Code que pode ser colado no aplicativo do banco. Esta página monta um Pix estático com chave, valor opcional, descrição e TXID.</p>
+            <h3>Os dados são enviados para servidor?</h3>
+            <p>Não. A montagem do código e o cálculo do CRC acontecem no navegador.</p>
+            <h3>Preciso conferir antes de compartilhar?</h3>
+            <p>Sim. Sempre confira chave, nome, cidade e valor no app do banco antes de pagar ou enviar para clientes.</p>
+        </article>
+
+        <section class="seo-content" aria-labelledby="pixcola-relacionadas">
+            <h2 id="pixcola-relacionadas">Ferramentas relacionadas</h2>
+            <div class="related-grid">
+                <a class="related-card" href="pix.html">
+                    <strong>Racha Pix</strong>
+                    <span>Divida uma conta e veja quem deve pagar quem.</span>
+                </a>
+                <a class="related-card" href="cpf.html">
+                    <strong>Validador de CPF</strong>
+                    <span>Confira e formate CPF direto no navegador.</span>
+                </a>
+                <a class="related-card" href="cnpj.html">
+                    <strong>Validador de CNPJ</strong>
+                    <span>Confira CNPJ antes de montar cobranças de loja.</span>
+                </a>
+                <a class="related-card" href="link-whatsapp.html">
+                    <strong>Link WhatsApp</strong>
+                    <span>Compartilhe o código Pix em uma mensagem pronta.</span>
+                </a>
+                <a class="related-card" href="calculadora-porcentagem.html">
+                    <strong>Calculadora de porcentagem</strong>
+                    <span>Defina desconto, taxa ou valor final antes do Pix.</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="index.html">Brasil Tools</a>
+            <a href="pix.html">Racha Pix</a>
+            <a href="cpf.html">Validador CPF</a>
+            <a href="cnpj.html">Validador CNPJ</a>
+            <a href="link-whatsapp.html">Link WhatsApp</a>
+            <a href="mapa-do-site.html">Mapa do site</a>
+            <a href="calculadora-porcentagem.html">Porcentagem</a>
+        </div>
+        Código Pix gerado localmente no navegador.
+    </footer>
+
+    <script>
+        const pixKeyInput = document.getElementById("pixKeyInput");
+        const merchantName = document.getElementById("merchantName");
+        const merchantCity = document.getElementById("merchantCity");
+        const amountInput = document.getElementById("amountInput");
+        const descriptionInput = document.getElementById("descriptionInput");
+        const txidInput = document.getElementById("txidInput");
+        const pixPayload = document.getElementById("pixPayload");
+        const pixStatus = document.getElementById("pixStatus");
+        const pixSummary = document.getElementById("pixSummary");
+        const copyPayload = document.getElementById("copyPayload");
+        const copySummary = document.getElementById("copySummary");
+        const clearPix = document.getElementById("clearPix");
+
+        function removeAccents(value) {
+            return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        }
+
+        function cleanEmv(value, maxLength) {
+            return removeAccents(String(value || ""))
+                .replace(/[^\w@.+\-* ]/g, "")
+                .trim()
+                .toUpperCase()
+                .slice(0, maxLength);
+        }
+
+        function tlv(id, value) {
+            const stringValue = String(value);
+            return `${id}${String(stringValue.length).padStart(2, "0")}${stringValue}`;
+        }
+
+        function parseAmount(value) {
+            const number = Number(String(value).replace(/\./g, "").replace(",", "."));
+            if (!Number.isFinite(number) || number <= 0) return "";
+            return number.toFixed(2);
+        }
+
+        function crc16(payload) {
+            let crc = 0xffff;
+            for (let index = 0; index < payload.length; index += 1) {
+                crc ^= payload.charCodeAt(index) << 8;
+                for (let bit = 0; bit < 8; bit += 1) {
+                    crc = (crc & 0x8000) ? (crc << 1) ^ 0x1021 : crc << 1;
+                    crc &= 0xffff;
+                }
+            }
+            return crc.toString(16).toUpperCase().padStart(4, "0");
+        }
+
+        function buildMerchantInfo(key, description) {
+            const gui = tlv("00", "br.gov.bcb.pix");
+            const keyField = tlv("01", key.slice(0, 77));
+            const available = Math.max(0, 99 - gui.length - keyField.length - 4);
+            const desc = cleanEmv(description, Math.min(available, 25));
+            return gui + keyField + (desc ? tlv("02", desc) : "");
+        }
+
+        function buildPixPayload() {
+            const key = pixKeyInput.value.trim().slice(0, 77);
+            const name = cleanEmv(merchantName.value || "RECEBEDOR", 25);
+            const city = cleanEmv(merchantCity.value || "BRASIL", 15);
+            const amount = parseAmount(amountInput.value);
+            const txid = cleanEmv(txidInput.value || "***", 25) || "***";
+            if (!key || !name || !city) return "";
+
+            const merchantInfo = buildMerchantInfo(key, descriptionInput.value);
+            let payload = "";
+            payload += tlv("00", "01");
+            payload += tlv("01", "12");
+            payload += tlv("26", merchantInfo);
+            payload += tlv("52", "0000");
+            payload += tlv("53", "986");
+            if (amount) payload += tlv("54", amount);
+            payload += tlv("58", "BR");
+            payload += tlv("59", name);
+            payload += tlv("60", city);
+            payload += tlv("62", tlv("05", txid));
+            payload += "6304";
+            return payload + crc16(payload);
+        }
+
+        async function copyText(text, button) {
+            if (!text) return;
+            if (navigator.clipboard && window.isSecureContext) {
+                await navigator.clipboard.writeText(text);
+            } else {
+                const area = document.createElement("textarea");
+                area.value = text;
+                area.style.position = "fixed";
+                area.style.opacity = "0";
+                document.body.appendChild(area);
+                area.select();
+                document.execCommand("copy");
+                area.remove();
+            }
+            const previous = button.textContent;
+            button.textContent = "Copiado";
+            setTimeout(() => { button.textContent = previous; }, 1000);
+        }
+
+        function renderPix() {
+            const payload = buildPixPayload();
+            const amount = parseAmount(amountInput.value);
+            pixPayload.value = payload;
+            pixStatus.textContent = payload ? "Pronto para copiar" : "Aguardando dados";
+            pixStatus.classList.toggle("active", Boolean(payload));
+            pixSummary.textContent = payload
+                ? `Pix para ${merchantName.value || "recebedor"} em ${merchantCity.value || "Brasil"}${amount ? ` no valor de R$ ${amount.replace(".", ",")}` : ""}. Confira no app do banco antes de usar.`
+                : "Preencha chave Pix, nome e cidade para gerar o código.";
+        }
+
+        [pixKeyInput, merchantName, merchantCity, amountInput, descriptionInput, txidInput].forEach(element => {
+            element.addEventListener("input", renderPix);
+        });
+        copyPayload.addEventListener("click", () => copyText(pixPayload.value, copyPayload));
+        copySummary.addEventListener("click", () => copyText(pixSummary.textContent, copySummary));
+        clearPix.addEventListener("click", () => {
+            [pixKeyInput, merchantName, merchantCity, amountInput, descriptionInput, txidInput].forEach(element => { element.value = ""; });
+            renderPix();
+            pixKeyInput.focus();
+        });
+        renderPix();
+    </script>
+</body>
+</html>

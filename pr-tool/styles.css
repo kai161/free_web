@@ -439,6 +439,23 @@ p {
     outline: none;
 }
 
+.field input[type="checkbox"] {
+    width: 1rem;
+    min-width: 1rem;
+    max-width: 1rem;
+    height: 1rem;
+    min-height: 1rem;
+    margin-right: 0.45rem;
+    padding: 0;
+    accent-color: var(--green);
+    appearance: auto;
+    -webkit-appearance: checkbox;
+}
+
+.field label input[type="checkbox"] {
+    vertical-align: middle;
+}
+
 .field textarea {
     min-height: 8rem;
     resize: vertical;

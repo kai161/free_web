@@ -1,0 +1,201 @@
+﻿tool_slug,tool_name_en,category_code,implementation_mode,monetization_model,build_complexity,commercial_intent,localization_leverage,recurring_use,ai_fit,paid_fit,baseline_competition,static_delivery_fit,mvp_wave,status,source_id,notes
+break-even-calculator,Break Even Calculator,business_finance,hybrid,freemium,3,5,5,4,3,5,4,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+business-card-maker,Business Card Maker,business_finance,hybrid,freemium,3,5,5,4,3,5,4,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+compound-interest-calculator,Compound Interest Calculator,business_finance,hybrid,freemium,3,5,5,4,3,5,4,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+currency-converter,Currency Converter,business_finance,hybrid,freemium,3,5,5,4,3,5,4,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+freelance-rate-calculator,Freelance Rate Calculator,business_finance,hybrid,freemium,3,5,5,4,3,5,4,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+iban-validator,IBAN Validator,business_finance,hybrid,freemium,3,5,5,4,3,5,4,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+invoice-generator,Invoice Generator,business_finance,static_client,freemium,2,5,5,4,3,5,4,5,1,mvp,editorial_seed_20260717,Initial opportunity catalog
+invoice-template-maker,Invoice Template Maker,business_finance,hybrid,freemium,3,5,5,4,3,5,4,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+loan-payment-calculator,Loan Payment Calculator,business_finance,hybrid,freemium,3,5,5,4,3,5,4,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+paypal-fee-calculator,PayPal Fee Calculator,business_finance,hybrid,freemium,3,5,5,4,3,5,4,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+profit-margin-calculator,Profit Margin Calculator,business_finance,hybrid,freemium,3,5,5,4,3,5,4,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+purchase-order-generator,Purchase Order Generator,business_finance,hybrid,freemium,3,5,5,4,3,5,4,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+quote-generator,Quote Generator,business_finance,hybrid,freemium,3,5,5,4,3,5,4,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+roi-calculator,ROI Calculator,business_finance,hybrid,freemium,3,5,5,4,3,5,4,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+receipt-generator,Receipt Generator,business_finance,hybrid,freemium,3,5,5,4,3,5,4,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+swift-code-checker,SWIFT Code Checker,business_finance,hybrid,freemium,3,5,5,4,3,5,4,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+sales-tax-calculator,Sales Tax Calculator,business_finance,hybrid,freemium,3,5,5,4,3,5,4,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+stripe-fee-calculator,Stripe Fee Calculator,business_finance,hybrid,freemium,3,5,5,4,3,5,4,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+timesheet-calculator,Timesheet Calculator,business_finance,hybrid,freemium,3,5,5,4,3,5,4,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+vat-calculator,VAT Calculator,business_finance,hybrid,freemium,3,5,5,4,3,5,4,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+age-calculator,Age Calculator,calculators_converters,static_client,ads,2,3,4,3,1,2,3,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+area-converter,Area Converter,calculators_converters,static_client,ads,2,3,4,3,1,2,3,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+average-calculator,Average Calculator,calculators_converters,static_client,ads,2,3,4,3,1,2,3,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+bmi-calculator,BMI Calculator,calculators_converters,static_client,ads,2,3,4,3,1,2,3,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+calorie-calculator,Calorie Calculator,calculators_converters,static_client,ads,2,3,4,3,1,2,3,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+data-storage-converter,Data Storage Converter,calculators_converters,static_client,ads,2,3,4,3,1,2,3,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+date-difference-calculator,Date Difference Calculator,calculators_converters,static_client,ads,2,3,4,3,1,2,3,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+fraction-calculator,Fraction Calculator,calculators_converters,static_client,ads,2,3,4,3,1,2,3,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+length-converter,Length Converter,calculators_converters,static_client,ads,2,3,4,3,1,2,3,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+password-generator,Password Generator,calculators_converters,static_client,ads,1,3,4,4,1,2,5,5,1,mvp,editorial_seed_20260717,Initial opportunity catalog
+percentage-calculator,Percentage Calculator,calculators_converters,static_client,ads,2,3,4,3,1,2,3,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+random-number-generator,Random Number Generator,calculators_converters,static_client,ads,2,3,4,3,1,2,3,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+ratio-calculator,Ratio Calculator,calculators_converters,static_client,ads,2,3,4,3,1,2,3,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+speed-converter,Speed Converter,calculators_converters,static_client,ads,2,3,4,3,1,2,3,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+temperature-converter,Temperature Converter,calculators_converters,static_client,ads,2,3,4,3,1,2,3,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+time-zone-converter,Time Zone Converter,calculators_converters,static_client,ads,2,3,4,3,1,2,3,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+tip-calculator,Tip Calculator,calculators_converters,static_client,ads,2,3,4,3,1,2,3,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+unit-converter,Unit Converter,calculators_converters,static_client,ads,2,3,4,3,1,2,3,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+volume-converter,Volume Converter,calculators_converters,static_client,ads,2,3,4,3,1,2,3,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+weight-converter,Weight Converter,calculators_converters,static_client,ads,2,3,4,3,1,2,3,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+attendance-calculator,Attendance Calculator,career_hr,hybrid,freemium,3,5,5,3,4,4,4,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+cv-builder,CV Builder,career_hr,hybrid,freemium,3,5,5,3,4,4,4,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+cover-letter-generator,Cover Letter Generator,career_hr,hybrid,freemium,3,5,5,3,4,4,4,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+employee-cost-calculator,Employee Cost Calculator,career_hr,hybrid,freemium,3,5,5,3,4,4,4,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+hourly-to-salary-calculator,Hourly to Salary Calculator,career_hr,hybrid,freemium,3,5,5,3,4,4,4,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+interview-question-generator,Interview Question Generator,career_hr,hybrid,freemium,3,5,5,3,4,4,4,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+job-description-generator,Job Description Generator,career_hr,hybrid,freemium,3,5,5,3,4,4,4,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+linkedin-headline-generator,LinkedIn Headline Generator,career_hr,hybrid,freemium,3,5,5,3,4,4,4,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+notice-period-calculator,Notice Period Calculator,career_hr,hybrid,freemium,3,5,5,3,4,4,4,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+offer-letter-generator,Offer Letter Generator,career_hr,hybrid,freemium,3,5,5,3,4,4,4,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+overtime-calculator,Overtime Calculator,career_hr,hybrid,freemium,3,5,5,3,4,4,4,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+pto-calculator,PTO Calculator,career_hr,hybrid,freemium,3,5,5,3,4,4,4,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+professional-bio-generator,Professional Bio Generator,career_hr,hybrid,freemium,3,5,5,3,4,4,4,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+reference-letter-generator,Reference Letter Generator,career_hr,hybrid,freemium,3,5,5,3,4,4,4,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+resignation-letter-generator,Resignation Letter Generator,career_hr,hybrid,freemium,3,5,5,3,4,4,4,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+resume-builder,Resume Builder,career_hr,hybrid,freemium,3,5,5,3,4,5,4,3,1,mvp,editorial_seed_20260717,Initial opportunity catalog
+resume-bullet-generator,Resume Bullet Generator,career_hr,hybrid,freemium,3,5,5,3,4,4,4,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+resume-summary-generator,Resume Summary Generator,career_hr,hybrid,freemium,3,5,5,3,4,4,4,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+salary-calculator,Salary Calculator,career_hr,hybrid,freemium,3,5,5,3,4,4,4,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+working-days-calculator,Working Days Calculator,career_hr,hybrid,freemium,3,5,5,3,4,4,4,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+base64-encoder-decoder,Base64 Encoder Decoder,developer,static_client,ads,2,3,3,4,2,2,4,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+css-minifier,CSS Minifier,developer,static_client,ads,2,3,3,4,2,2,4,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+code-diff-checker,Code Diff Checker,developer,static_client,ads,2,3,3,4,2,2,4,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+cron-expression-parser,Cron Expression Parser,developer,static_client,ads,2,3,3,4,2,2,4,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+cron-generator,Cron Generator,developer,static_client,ads,2,3,3,4,2,2,4,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+hmac-generator,HMAC Generator,developer,static_client,ads,2,3,3,4,2,2,4,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+html-formatter,HTML Formatter,developer,static_client,ads,2,3,3,4,2,2,4,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+hash-generator,Hash Generator,developer,static_client,ads,2,3,3,4,2,2,4,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+json-formatter,JSON Formatter,developer,static_client,ads,1,3,3,5,2,2,5,5,1,mvp,editorial_seed_20260717,Initial opportunity catalog
+json-validator,JSON Validator,developer,static_client,ads,2,3,3,4,2,2,4,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+jwt-decoder,JWT Decoder,developer,static_client,ads,2,3,3,4,2,2,4,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+javascript-minifier,JavaScript Minifier,developer,static_client,ads,2,3,3,4,2,2,4,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+lorem-ipsum-generator,Lorem Ipsum Generator,developer,static_client,ads,2,3,3,4,2,2,4,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+regex-tester,Regex Tester,developer,static_client,ads,2,3,3,4,2,2,4,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+sql-formatter,SQL Formatter,developer,static_client,ads,2,3,3,4,2,2,4,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+timestamp-converter,Timestamp Converter,developer,static_client,ads,2,3,3,4,2,2,4,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+url-encoder-decoder,URL Encoder Decoder,developer,static_client,ads,2,3,3,4,2,2,4,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+uuid-generator,UUID Generator,developer,static_client,ads,2,3,3,4,2,2,4,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+xml-formatter,XML Formatter,developer,static_client,ads,2,3,3,4,2,2,4,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+yaml-formatter,YAML Formatter,developer,static_client,ads,2,3,3,4,2,2,4,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+document-scanner,Document Scanner,document_pdf,static_client,freemium,3,4,4,3,2,4,5,4,,candidate,editorial_seed_20260717,Initial opportunity catalog
+epub-to-pdf-converter,EPUB to PDF Converter,document_pdf,static_client,freemium,3,4,4,3,2,4,5,4,,candidate,editorial_seed_20260717,Initial opportunity catalog
+html-to-pdf-converter,HTML to PDF Converter,document_pdf,static_client,freemium,3,4,4,3,2,4,5,4,,candidate,editorial_seed_20260717,Initial opportunity catalog
+image-to-pdf-converter,Image to PDF Converter,document_pdf,static_client,freemium,3,4,4,3,2,4,5,4,,candidate,editorial_seed_20260717,Initial opportunity catalog
+markdown-to-pdf-converter,Markdown to PDF Converter,document_pdf,static_client,freemium,3,4,4,3,2,4,5,4,,candidate,editorial_seed_20260717,Initial opportunity catalog
+ocr-text-extractor,OCR Text Extractor,document_pdf,static_client,freemium,3,4,4,3,2,4,5,4,,candidate,editorial_seed_20260717,Initial opportunity catalog
+pdf-compressor,PDF Compressor,document_pdf,static_client,freemium,3,4,4,3,2,4,5,4,1,mvp,editorial_seed_20260717,Initial opportunity catalog
+pdf-form-filler,PDF Form Filler,document_pdf,static_client,freemium,3,4,4,3,2,4,5,4,,candidate,editorial_seed_20260717,Initial opportunity catalog
+pdf-merger,PDF Merger,document_pdf,static_client,freemium,3,4,4,3,2,4,5,4,,candidate,editorial_seed_20260717,Initial opportunity catalog
+pdf-metadata-editor,PDF Metadata Editor,document_pdf,static_client,freemium,3,4,4,3,2,4,5,4,,candidate,editorial_seed_20260717,Initial opportunity catalog
+pdf-page-numbering-tool,PDF Page Numbering Tool,document_pdf,static_client,freemium,3,4,4,3,2,4,5,4,,candidate,editorial_seed_20260717,Initial opportunity catalog
+pdf-page-remover,PDF Page Remover,document_pdf,static_client,freemium,3,4,4,3,2,4,5,4,,candidate,editorial_seed_20260717,Initial opportunity catalog
+pdf-page-rotator,PDF Page Rotator,document_pdf,static_client,freemium,3,4,4,3,2,4,5,4,,candidate,editorial_seed_20260717,Initial opportunity catalog
+pdf-password-protector,PDF Password Protector,document_pdf,static_client,freemium,3,4,4,3,2,4,5,4,,candidate,editorial_seed_20260717,Initial opportunity catalog
+pdf-password-remover,PDF Password Remover,document_pdf,static_client,freemium,3,4,4,3,2,4,5,4,,candidate,editorial_seed_20260717,Initial opportunity catalog
+pdf-splitter,PDF Splitter,document_pdf,static_client,freemium,3,4,4,3,2,4,5,4,,candidate,editorial_seed_20260717,Initial opportunity catalog
+pdf-watermark-tool,PDF Watermark Tool,document_pdf,static_client,freemium,3,4,4,3,2,4,5,4,,candidate,editorial_seed_20260717,Initial opportunity catalog
+pdf-to-image-converter,PDF to Image Converter,document_pdf,static_client,freemium,3,4,4,3,2,4,5,4,,candidate,editorial_seed_20260717,Initial opportunity catalog
+pdf-to-word-converter,PDF to Word Converter,document_pdf,static_client,freemium,3,4,4,3,2,4,5,4,,candidate,editorial_seed_20260717,Initial opportunity catalog
+word-to-pdf-converter,Word to PDF Converter,document_pdf,static_client,freemium,3,4,4,3,2,4,5,4,,candidate,editorial_seed_20260717,Initial opportunity catalog
+app-icon-generator,App Icon Generator,image_design,static_client,freemium,3,4,4,3,3,3,5,4,,candidate,editorial_seed_20260717,Initial opportunity catalog
+background-remover,Background Remover,image_design,static_client,freemium,3,4,4,3,3,3,5,4,,candidate,editorial_seed_20260717,Initial opportunity catalog
+color-palette-generator,Color Palette Generator,image_design,static_client,freemium,3,4,4,3,3,3,5,4,,candidate,editorial_seed_20260717,Initial opportunity catalog
+exif-metadata-remover,EXIF Metadata Remover,image_design,static_client,freemium,3,4,4,3,3,3,5,4,,candidate,editorial_seed_20260717,Initial opportunity catalog
+favicon-generator,Favicon Generator,image_design,static_client,freemium,3,4,4,3,3,3,5,4,,candidate,editorial_seed_20260717,Initial opportunity catalog
+gradient-generator,Gradient Generator,image_design,static_client,freemium,3,4,4,3,3,3,5,4,,candidate,editorial_seed_20260717,Initial opportunity catalog
+heic-to-jpg-converter,HEIC to JPG Converter,image_design,static_client,freemium,3,4,4,3,3,3,5,4,,candidate,editorial_seed_20260717,Initial opportunity catalog
+image-compressor,Image Compressor,image_design,static_client,freemium,2,4,4,3,3,3,5,5,1,mvp,editorial_seed_20260717,Initial opportunity catalog
+image-converter,Image Converter,image_design,static_client,freemium,3,4,4,3,3,3,5,4,,candidate,editorial_seed_20260717,Initial opportunity catalog
+image-cropper,Image Cropper,image_design,static_client,freemium,3,4,4,3,3,3,5,4,,candidate,editorial_seed_20260717,Initial opportunity catalog
+image-resizer,Image Resizer,image_design,static_client,freemium,1,4,4,3,3,3,4,5,1,mvp,editorial_seed_20260717,Initial opportunity catalog
+image-watermark-tool,Image Watermark Tool,image_design,static_client,freemium,3,4,4,3,3,3,5,4,,candidate,editorial_seed_20260717,Initial opportunity catalog
+jpg-to-png-converter,JPG to PNG Converter,image_design,static_client,freemium,3,4,4,3,3,3,5,4,,candidate,editorial_seed_20260717,Initial opportunity catalog
+meme-generator,Meme Generator,image_design,static_client,freemium,3,4,4,3,3,3,5,4,,candidate,editorial_seed_20260717,Initial opportunity catalog
+png-to-jpg-converter,PNG to JPG Converter,image_design,static_client,freemium,3,4,4,3,3,3,5,4,,candidate,editorial_seed_20260717,Initial opportunity catalog
+passport-photo-maker,Passport Photo Maker,image_design,static_client,freemium,3,4,4,3,3,3,5,4,,candidate,editorial_seed_20260717,Initial opportunity catalog
+photo-collage-maker,Photo Collage Maker,image_design,static_client,freemium,3,4,4,3,3,3,5,4,,candidate,editorial_seed_20260717,Initial opportunity catalog
+svg-converter,SVG Converter,image_design,static_client,freemium,3,4,4,3,3,3,5,4,,candidate,editorial_seed_20260717,Initial opportunity catalog
+screenshot-beautifier,Screenshot Beautifier,image_design,static_client,freemium,3,4,4,3,3,3,5,4,,candidate,editorial_seed_20260717,Initial opportunity catalog
+webp-converter,WebP Converter,image_design,static_client,freemium,3,4,4,3,3,3,5,4,,candidate,editorial_seed_20260717,Initial opportunity catalog
+ad-copy-generator,Ad Copy Generator,marketing_seo,hybrid,subscription,3,5,4,4,4,5,5,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+broken-link-checker,Broken Link Checker,marketing_seo,hybrid,subscription,3,5,4,4,4,5,5,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+dns-lookup-tool,DNS Lookup Tool,marketing_seo,hybrid,subscription,3,5,4,4,4,5,5,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+domain-age-checker,Domain Age Checker,marketing_seo,hybrid,subscription,3,5,4,4,4,5,5,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+email-subject-line-tester,Email Subject Line Tester,marketing_seo,hybrid,subscription,3,5,4,4,4,5,5,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+headline-analyzer,Headline Analyzer,marketing_seo,hybrid,subscription,3,5,4,4,4,5,5,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+keyword-density-checker,Keyword Density Checker,marketing_seo,hybrid,subscription,3,5,4,4,4,5,5,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+meta-tag-generator,Meta Tag Generator,marketing_seo,hybrid,subscription,3,5,4,4,4,5,5,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+open-graph-generator,Open Graph Generator,marketing_seo,hybrid,subscription,3,5,4,4,4,5,5,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+product-description-generator,Product Description Generator,marketing_seo,hybrid,subscription,3,5,4,4,4,5,5,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+qr-code-generator,QR Code Generator,marketing_seo,hybrid,subscription,1,5,4,4,4,5,5,5,1,mvp,editorial_seed_20260717,Initial opportunity catalog
+redirect-checker,Redirect Checker,marketing_seo,hybrid,subscription,3,5,4,4,4,5,5,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+robots-txt-generator,Robots.txt Generator,marketing_seo,hybrid,subscription,3,5,4,4,4,5,5,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+serp-preview-tool,SERP Preview Tool,marketing_seo,hybrid,subscription,3,5,4,4,4,5,5,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+schema-markup-generator,Schema Markup Generator,marketing_seo,hybrid,subscription,3,5,4,4,4,5,5,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+sitemap-generator,Sitemap Generator,marketing_seo,hybrid,subscription,3,5,4,4,4,5,5,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+twitter-card-generator,Twitter Card Generator,marketing_seo,hybrid,subscription,3,5,4,4,4,5,5,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+utm-builder,UTM Builder,marketing_seo,hybrid,subscription,3,5,4,4,4,5,5,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+whois-lookup-tool,Whois Lookup Tool,marketing_seo,hybrid,subscription,3,5,4,4,4,5,5,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+word-counter,Word Counter,marketing_seo,hybrid,subscription,3,5,4,4,4,5,5,3,,candidate,editorial_seed_20260717,Initial opportunity catalog
+audio-compressor,Audio Compressor,media,server_processing,freemium,4,4,3,3,3,4,5,2,,candidate,editorial_seed_20260717,Initial opportunity catalog
+audio-merger,Audio Merger,media,server_processing,freemium,4,4,3,3,3,4,5,2,,candidate,editorial_seed_20260717,Initial opportunity catalog
+audio-trimmer,Audio Trimmer,media,server_processing,freemium,4,4,3,3,3,4,5,2,,candidate,editorial_seed_20260717,Initial opportunity catalog
+bpm-tap-counter,BPM Tap Counter,media,server_processing,freemium,4,4,3,3,3,4,5,2,,candidate,editorial_seed_20260717,Initial opportunity catalog
+gif-to-video-converter,GIF to Video Converter,media,server_processing,freemium,4,4,3,3,3,4,5,2,,candidate,editorial_seed_20260717,Initial opportunity catalog
+mp3-converter,MP3 Converter,media,server_processing,freemium,4,4,3,3,3,4,5,2,,candidate,editorial_seed_20260717,Initial opportunity catalog
+podcast-description-generator,Podcast Description Generator,media,server_processing,freemium,4,4,3,3,3,4,5,2,,candidate,editorial_seed_20260717,Initial opportunity catalog
+podcast-name-generator,Podcast Name Generator,media,server_processing,freemium,4,4,3,3,3,4,5,2,,candidate,editorial_seed_20260717,Initial opportunity catalog
+screen-recorder,Screen Recorder,media,server_processing,freemium,4,4,3,3,3,4,5,2,,candidate,editorial_seed_20260717,Initial opportunity catalog
+subtitle-converter,Subtitle Converter,media,server_processing,freemium,4,4,3,3,3,4,5,2,,candidate,editorial_seed_20260717,Initial opportunity catalog
+subtitle-generator,Subtitle Generator,media,server_processing,freemium,4,4,3,3,3,4,5,2,,candidate,editorial_seed_20260717,Initial opportunity catalog
+teleprompter,Teleprompter,media,server_processing,freemium,4,4,3,3,3,4,5,2,,candidate,editorial_seed_20260717,Initial opportunity catalog
+video-compressor,Video Compressor,media,server_processing,freemium,4,4,3,3,3,4,5,2,,candidate,editorial_seed_20260717,Initial opportunity catalog
+video-merger,Video Merger,media,server_processing,freemium,4,4,3,3,3,4,5,2,,candidate,editorial_seed_20260717,Initial opportunity catalog
+video-trimmer,Video Trimmer,media,server_processing,freemium,4,4,3,3,3,4,5,2,,candidate,editorial_seed_20260717,Initial opportunity catalog
+video-to-gif-converter,Video to GIF Converter,media,server_processing,freemium,4,4,3,3,3,4,5,2,,candidate,editorial_seed_20260717,Initial opportunity catalog
+video-to-mp3-converter,Video to MP3 Converter,media,server_processing,freemium,4,4,3,3,3,4,5,2,,candidate,editorial_seed_20260717,Initial opportunity catalog
+voice-recorder,Voice Recorder,media,server_processing,freemium,4,4,3,3,3,4,5,2,,candidate,editorial_seed_20260717,Initial opportunity catalog
+wav-to-mp3-converter,WAV to MP3 Converter,media,server_processing,freemium,4,4,3,3,3,4,5,2,,candidate,editorial_seed_20260717,Initial opportunity catalog
+webcam-recorder,Webcam Recorder,media,server_processing,freemium,4,4,3,3,3,4,5,2,,candidate,editorial_seed_20260717,Initial opportunity catalog
+character-counter,Character Counter,social_communication,static_client,ads,1,2,5,4,3,1,4,5,1,mvp,editorial_seed_20260717,Initial opportunity catalog
+contact-card-generator,Contact Card Generator,social_communication,static_client,ads,2,3,5,4,3,2,4,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+email-signature-generator,Email Signature Generator,social_communication,static_client,ads,2,3,5,4,3,2,4,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+emoji-picker,Emoji Picker,social_communication,static_client,ads,2,3,5,4,3,2,4,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+facebook-post-generator,Facebook Post Generator,social_communication,static_client,ads,2,3,5,4,3,2,4,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+fancy-text-generator,Fancy Text Generator,social_communication,static_client,ads,2,3,5,4,3,2,4,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+hashtag-generator,Hashtag Generator,social_communication,static_client,ads,2,3,5,4,3,2,4,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+instagram-bio-generator,Instagram Bio Generator,social_communication,static_client,ads,2,3,5,4,3,2,4,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+instagram-caption-generator,Instagram Caption Generator,social_communication,static_client,ads,2,3,5,4,3,2,4,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+link-in-bio-builder,Link in Bio Builder,social_communication,static_client,ads,2,3,5,4,3,2,4,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+random-comment-picker,Random Comment Picker,social_communication,static_client,ads,2,3,5,4,3,2,4,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+short-link-generator,Short Link Generator,social_communication,static_client,ads,2,3,5,4,3,2,4,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+social-media-calendar-generator,Social Media Calendar Generator,social_communication,static_client,ads,2,3,5,4,3,2,4,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+tiktok-caption-generator,TikTok Caption Generator,social_communication,static_client,ads,2,3,5,4,3,2,4,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+tweet-generator,Tweet Generator,social_communication,static_client,ads,2,3,5,4,3,2,4,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+unicode-text-converter,Unicode Text Converter,social_communication,static_client,ads,2,3,5,4,3,2,4,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+whatsapp-link-generator,WhatsApp Link Generator,social_communication,static_client,ads,1,4,5,4,3,2,3,5,1,mvp,editorial_seed_20260717,Initial opportunity catalog
+whatsapp-qr-generator,WhatsApp QR Generator,social_communication,static_client,ads,2,3,5,4,3,2,4,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+youtube-description-generator,YouTube Description Generator,social_communication,static_client,ads,2,3,5,4,3,2,4,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+youtube-title-generator,YouTube Title Generator,social_communication,static_client,ads,2,3,5,4,3,2,4,5,,candidate,editorial_seed_20260717,Initial opportunity catalog
+ai-humanizer,AI Humanizer,writing_ai,ai_api,subscription,3,4,5,4,5,4,5,1,,candidate,editorial_seed_20260717,Initial opportunity catalog
+article-rewriter,Article Rewriter,writing_ai,ai_api,subscription,3,4,5,4,5,4,5,1,,candidate,editorial_seed_20260717,Initial opportunity catalog
+blog-outline-generator,Blog Outline Generator,writing_ai,ai_api,subscription,3,4,5,4,5,4,5,1,,candidate,editorial_seed_20260717,Initial opportunity catalog
+blog-title-generator,Blog Title Generator,writing_ai,ai_api,subscription,3,4,5,4,5,4,5,1,,candidate,editorial_seed_20260717,Initial opportunity catalog
+citation-generator,Citation Generator,writing_ai,ai_api,subscription,3,4,5,4,5,4,5,1,,candidate,editorial_seed_20260717,Initial opportunity catalog
+cold-email-generator,Cold Email Generator,writing_ai,ai_api,subscription,3,4,5,4,5,4,5,1,,candidate,editorial_seed_20260717,Initial opportunity catalog
+email-writer,Email Writer,writing_ai,ai_api,subscription,3,4,5,4,5,4,5,1,,candidate,editorial_seed_20260717,Initial opportunity catalog
+essay-outline-generator,Essay Outline Generator,writing_ai,ai_api,subscription,3,4,5,4,5,4,5,1,,candidate,editorial_seed_20260717,Initial opportunity catalog
+faq-generator,FAQ Generator,writing_ai,ai_api,subscription,3,4,5,4,5,4,5,1,,candidate,editorial_seed_20260717,Initial opportunity catalog
+grammar-checker,Grammar Checker,writing_ai,ai_api,subscription,3,4,5,4,5,4,5,1,,candidate,editorial_seed_20260717,Initial opportunity catalog
+paraphrasing-tool,Paraphrasing Tool,writing_ai,ai_api,subscription,3,4,5,4,5,4,5,1,,candidate,editorial_seed_20260717,Initial opportunity catalog
+plagiarism-checker,Plagiarism Checker,writing_ai,ai_api,subscription,3,4,5,4,5,4,5,1,,candidate,editorial_seed_20260717,Initial opportunity catalog
+poem-generator,Poem Generator,writing_ai,ai_api,subscription,3,4,5,4,5,4,5,1,,candidate,editorial_seed_20260717,Initial opportunity catalog
+sentence-rewriter,Sentence Rewriter,writing_ai,ai_api,subscription,3,4,5,4,5,4,5,1,,candidate,editorial_seed_20260717,Initial opportunity catalog
+spell-checker,Spell Checker,writing_ai,ai_api,subscription,3,4,5,4,5,4,5,1,,candidate,editorial_seed_20260717,Initial opportunity catalog
+story-generator,Story Generator,writing_ai,ai_api,subscription,3,4,5,4,5,4,5,1,,candidate,editorial_seed_20260717,Initial opportunity catalog
+text-expander,Text Expander,writing_ai,ai_api,subscription,3,4,5,4,5,4,5,1,,candidate,editorial_seed_20260717,Initial opportunity catalog
+text-shortener,Text Shortener,writing_ai,ai_api,subscription,3,4,5,4,5,4,5,1,,candidate,editorial_seed_20260717,Initial opportunity catalog
+text-summarizer,Text Summarizer,writing_ai,ai_api,subscription,3,4,5,4,5,4,5,1,,candidate,editorial_seed_20260717,Initial opportunity catalog
+tone-changer,Tone Changer,writing_ai,ai_api,subscription,3,4,5,4,5,4,5,1,,candidate,editorial_seed_20260717,Initial opportunity catalog
