@@ -12,6 +12,7 @@
 - Wave 1（Brazil、Japan、South Korea、Indonesia、Vietnam）的首批关键词候选；
 - SQLite、CSV 和 Excel 决策工作簿；
 - Wave 1 的 50 个核心查询公开 SERP 样本与研究优先级；
+- BR、ID、VN、KR 的 16 个焦点查询公开自动补全观察；
 - 真实指标导入所需的来源、时间和状态字段。
 
 这不是“20,000 个关键词已经完成调研”的声明。只有通过真实指标导入、当地意图与 SERP 复核的关键词，才允许进入页面生产。
@@ -75,6 +76,8 @@ python3 scripts/import_keyword_metrics.py \
 ## 下一阶段 gate
 
 当前 Wave 1 审计结论见 [wave1-serp-audit-2026-07-17.md](./wave1-serp-audit-2026-07-17.md)。
+
+无付费平台时的公开信号验证与 MVP 收敛结论见 [wave1-public-signal-validation-2026-07-17.md](./wave1-public-signal-validation-2026-07-17.md)。
 
 Wave 1 只有在以下条件同时满足后，才进入页面生产：
 

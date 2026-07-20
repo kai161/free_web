@@ -1,8 +1,8 @@
 {
   "name": "Global Tool Opportunities Database v1",
-  "built_at": "2026-07-17T10:01:53Z",
+  "built_at": "2026-07-17T12:37:42Z",
   "database": "global-tool-opportunities-v1.sqlite3",
-  "database_sha256": "6c037275332a2047bd639cde3aa5d0d75bc1e7a529cd11f3c3c473aabd42defb",
+  "database_sha256": "8a07975abf321896e7564385d1ebe5c55679384ebfc265ecb54aed86fa22111c",
   "schema": "data/keyword-factory/schema.sql",
   "validation": {
     "integrity_check": "ok",
@@ -15,7 +15,8 @@
       "keyword_candidates": 1000,
       "keyword_metric_snapshots": 0,
       "competitors": 0,
-      "serp_assessments": 50
+      "serp_assessments": 50,
+      "public_query_signals": 16
     },
     "metric_without_source_violations": 0,
     "keyword_on_pending_localization_violations": 0
@@ -26,8 +27,9 @@
     "localizations.csv": 2000,
     "keywords.csv": 1000,
     "priority-shortlist.csv": 200,
-    "sources.csv": 6,
-    "serp-audit.csv": 50
+    "sources.csv": 7,
+    "serp-audit.csv": 50,
+    "public-query-signals.csv": 16
   },
-  "completion_note": "200 tools and 10 markets are cataloged; 1,000 MVP keyword candidates are generated; 50 core queries have public SERP assessments; real SEO metrics remain uncollected."
+  "completion_note": "200 tools and 10 markets are cataloged; 1,000 MVP keyword candidates are generated; 50 core queries have public SERP assessments; 16 focused queries have public autocomplete observations; real search volume, CPC and SEO difficulty remain uncollected."
 }

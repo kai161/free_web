@@ -19,6 +19,7 @@ from typing import Iterable
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_PATH = ROOT / "data" / "keyword-factory" / "schema.sql"
 SERP_AUDIT_PATH = ROOT / "data" / "keyword-factory" / "wave1-serp-audit.csv"
+PUBLIC_QUERY_SIGNALS_PATH = ROOT / "data" / "keyword-factory" / "wave1-public-query-signals.csv"
 DEFAULT_OUTPUT_DIR = ROOT / "outputs" / "keyword-factory-v1"
 BUILD_TIMESTAMP = datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
@@ -192,6 +193,7 @@ SOURCES = [
     ("google_trends", "Google Trends", "official_tool", "https://support.google.com/trends/answer/4359550", "relative search interest", "Relative index only; not absolute search volume"),
     ("ahrefs_multilingual_seo", "Ahrefs multilingual SEO guide", "methodology", "https://ahrefs.com/blog/multilingual-seo/", "localization methodology", "Region and language must be researched together"),
     ("public_serp_audit_20260717", "Wave 1 public SERP audit", "public_web_research", None, "50 core tool-market queries", "Representative result review; not a substitute for Google Ads volume, CPC, or SEO difficulty"),
+    ("google_autocomplete_20260717", "Wave 1 Google Autocomplete observations", "official_public_endpoint", "https://suggestqueries.google.com/complete/search", "16 seed queries and returned predictions", "Demand and intent proxy only; suggestion counts are not search volume and are not comparable as absolute demand"),
 ]
 
 
@@ -394,6 +396,30 @@ def insert_seed_data(connection: sqlite3.Connection, tools: list[Tool]) -> None:
             for row in audit_rows
         ],
     )
+
+    with PUBLIC_QUERY_SIGNALS_PATH.open(encoding="utf-8-sig", newline="") as handle:
+        public_signal_rows = list(csv.DictReader(handle))
+    if len(public_signal_rows) != 16:
+        raise ValueError(
+            f"Public query signals must contain exactly 16 rows, got {len(public_signal_rows)}"
+        )
+    connection.executemany(
+        """INSERT INTO public_query_signals(
+            market_code, tool_slug, query_text, suggestion_count,
+            exact_query_present, intent_clarity, scenario_signal, decision,
+            suggestions, observation, observed_at, source_id
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+        [
+            (
+                row["market_code"], row["tool_slug"], row["query_text"],
+                int(row["suggestion_count"]), int(row["exact_query_present"]),
+                int(row["intent_clarity"]), row["scenario_signal"], row["decision"],
+                row["suggestions"], row["observation"], row["observed_at"],
+                "google_autocomplete_20260717",
+            )
+            for row in public_signal_rows
+        ],
+    )
     connection.execute(
         """UPDATE tool_market_localizations
            SET localization_status = CASE
@@ -464,6 +490,7 @@ def validate(connection: sqlite3.Connection) -> dict[str, object]:
             "tools", "markets", "tool_market_localizations", "keyword_patterns",
             "keyword_candidates", "keyword_metric_snapshots", "competitors",
             "serp_assessments",
+            "public_query_signals",
         ]
     }
     missing_metric_violations = connection.execute(
@@ -489,6 +516,7 @@ def validate(connection: sqlite3.Connection) -> dict[str, object]:
         "keyword_metric_snapshots": 0,
         "competitors": 0,
         "serp_assessments": 50,
+        "public_query_signals": 16,
     }:
         raise ValueError(f"Unexpected row counts: {counts}")
     if missing_metric_violations or invalid_keyword_status:
@@ -530,6 +558,7 @@ def build(output_dir: Path) -> dict[str, object]:
             "priority-shortlist.csv": export_query(connection, output_dir / "priority-shortlist.csv", "SELECT * FROM v_keyword_opportunities WHERE research_wave = 1 AND heuristic_priority IN ('P0', 'P1') ORDER BY heuristic_score DESC, market_code, tool_slug LIMIT 200"),
             "sources.csv": export_query(connection, output_dir / "sources.csv", "SELECT * FROM sources ORDER BY source_id"),
             "serp-audit.csv": export_query(connection, output_dir / "serp-audit.csv", "SELECT * FROM v_serp_research_priorities ORDER BY serp_research_score DESC, market_code, tool_slug"),
+            "public-query-signals.csv": export_query(connection, output_dir / "public-query-signals.csv", "SELECT * FROM public_query_signals ORDER BY CASE decision WHEN 'PROMOTE' THEN 1 WHEN 'CLUSTER' THEN 2 WHEN 'RECHECK' THEN 3 WHEN 'REWORD' THEN 4 ELSE 5 END, intent_clarity DESC, suggestion_count DESC, market_code, tool_slug"),
         }
     finally:
         connection.close()
@@ -542,7 +571,7 @@ def build(output_dir: Path) -> dict[str, object]:
         "schema": str(SCHEMA_PATH.relative_to(ROOT)),
         "validation": validation,
         "exports": export_counts,
-        "completion_note": "200 tools and 10 markets are cataloged; 1,000 MVP keyword candidates are generated; 50 core queries have public SERP assessments; real SEO metrics remain uncollected.",
+        "completion_note": "200 tools and 10 markets are cataloged; 1,000 MVP keyword candidates are generated; 50 core queries have public SERP assessments; 16 focused queries have public autocomplete observations; real search volume, CPC and SEO difficulty remain uncollected.",
     }
     manifest_path = output_dir / "manifest.json"
     manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

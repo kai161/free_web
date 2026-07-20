@@ -173,6 +173,25 @@ CREATE TABLE serp_assessments (
     )
 );
 
+CREATE TABLE public_query_signals (
+    signal_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    market_code TEXT NOT NULL REFERENCES markets(market_code),
+    tool_slug TEXT NOT NULL REFERENCES tools(tool_slug),
+    query_text TEXT NOT NULL,
+    suggestion_count INTEGER NOT NULL CHECK (suggestion_count BETWEEN 0 AND 10),
+    exact_query_present INTEGER NOT NULL CHECK (exact_query_present IN (0, 1)),
+    intent_clarity INTEGER NOT NULL CHECK (intent_clarity BETWEEN 1 AND 5),
+    scenario_signal TEXT NOT NULL DEFAULT '',
+    decision TEXT NOT NULL CHECK (
+        decision IN ('PROMOTE', 'CLUSTER', 'RECHECK', 'REWORD', 'HOLD')
+    ),
+    suggestions TEXT NOT NULL DEFAULT '',
+    observation TEXT NOT NULL,
+    observed_at TEXT NOT NULL,
+    source_id TEXT NOT NULL REFERENCES sources(source_id),
+    UNIQUE (market_code, query_text, observed_at)
+);
+
 CREATE INDEX idx_keywords_tool_market
     ON keyword_candidates(tool_slug, market_code);
 CREATE INDEX idx_keywords_priority
@@ -183,6 +202,8 @@ CREATE INDEX idx_competitors_keyword
     ON competitors(keyword_id, rank_position);
 CREATE INDEX idx_serp_assessments_priority
     ON serp_assessments(market_code, competition_strength, localization_gap);
+CREATE INDEX idx_public_query_signals_decision
+    ON public_query_signals(decision, intent_clarity DESC, suggestion_count DESC);
 
 CREATE VIEW v_keyword_opportunities AS
 WITH latest_metric AS (

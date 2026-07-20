@@ -209,16 +209,16 @@ calorie-calculator,KR,,,pending,,,Awaiting localized head term
 calorie-calculator,TH,,,pending,,,Awaiting localized head term
 calorie-calculator,TR,,,pending,,,Awaiting localized head term
 calorie-calculator,VN,,,pending,,,Awaiting localized head term
-character-counter,BR,contador de caracteres,contador de caracteres,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
+character-counter,BR,contador de caracteres,contador de caracteres,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
 character-counter,DE,Zeichen zählen,Zeichen zählen,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
 character-counter,ES,contador de caracteres,contador de caracteres,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
 character-counter,FR,compteur de caractères,compteur de caractères,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
-character-counter,ID,penghitung karakter,penghitung karakter,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
-character-counter,JP,文字数 カウント,文字数 カウント,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
-character-counter,KR,글자 수 세기,글자 수 세기,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
+character-counter,ID,penghitung karakter,penghitung karakter,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
+character-counter,JP,文字数 カウント,文字数 カウント,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
+character-counter,KR,글자 수 세기,글자 수 세기,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
 character-counter,TH,นับตัวอักษร,นับตัวอักษร,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
 character-counter,TR,karakter sayacı,karakter sayacı,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
-character-counter,VN,đếm ký tự,đếm ký tự,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
+character-counter,VN,đếm ký tự,đếm ký tự,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
 citation-generator,BR,,,pending,,,Awaiting localized head term
 citation-generator,DE,,,pending,,,Awaiting localized head term
 citation-generator,ES,,,pending,,,Awaiting localized head term
@@ -649,16 +649,16 @@ iban-validator,KR,,,pending,,,Awaiting localized head term
 iban-validator,TH,,,pending,,,Awaiting localized head term
 iban-validator,TR,,,pending,,,Awaiting localized head term
 iban-validator,VN,,,pending,,,Awaiting localized head term
-image-compressor,BR,comprimir imagem,comprimir imagem,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
+image-compressor,BR,comprimir imagem,comprimir imagem,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
 image-compressor,DE,Bild komprimieren,Bild komprimieren,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
 image-compressor,ES,comprimir imagen,comprimir imagen,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
 image-compressor,FR,compresser image,compresser image,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
-image-compressor,ID,kompres gambar,kompres gambar,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
-image-compressor,JP,画像 圧縮,画像 圧縮,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
-image-compressor,KR,이미지 압축,이미지 압축,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
+image-compressor,ID,kompres gambar,kompres gambar,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
+image-compressor,JP,画像 圧縮,画像 圧縮,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
+image-compressor,KR,이미지 압축,이미지 압축,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
 image-compressor,TH,บีบอัดรูปภาพ,บีบอัดรูปภาพ,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
 image-compressor,TR,resim sıkıştırma,resim sıkıştırma,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
-image-compressor,VN,nén ảnh,nén ảnh,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
+image-compressor,VN,nén ảnh,nén ảnh,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
 image-converter,BR,,,pending,,,Awaiting localized head term
 image-converter,DE,,,pending,,,Awaiting localized head term
 image-converter,ES,,,pending,,,Awaiting localized head term
@@ -679,16 +679,16 @@ image-cropper,KR,,,pending,,,Awaiting localized head term
 image-cropper,TH,,,pending,,,Awaiting localized head term
 image-cropper,TR,,,pending,,,Awaiting localized head term
 image-cropper,VN,,,pending,,,Awaiting localized head term
-image-resizer,BR,redimensionar imagem,redimensionar imagem,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
+image-resizer,BR,redimensionar imagem,redimensionar imagem,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
 image-resizer,DE,Bildgröße ändern,Bildgröße ändern,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
 image-resizer,ES,redimensionar imagen,redimensionar imagen,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
 image-resizer,FR,redimensionner image,redimensionner image,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
-image-resizer,ID,ubah ukuran gambar,ubah ukuran gambar,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
-image-resizer,JP,画像 サイズ変更,画像 サイズ変更,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
-image-resizer,KR,이미지 크기 조절,이미지 크기 조절,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
+image-resizer,ID,ubah ukuran gambar,ubah ukuran gambar,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
+image-resizer,JP,画像 サイズ変更,画像 サイズ変更,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
+image-resizer,KR,이미지 크기 조절,이미지 크기 조절,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
 image-resizer,TH,ปรับขนาดรูปภาพ,ปรับขนาดรูปภาพ,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
 image-resizer,TR,resim boyutlandırma,resim boyutlandırma,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
-image-resizer,VN,thay đổi kích thước ảnh,thay đổi kích thước ảnh,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
+image-resizer,VN,thay đổi kích thước ảnh,thay đổi kích thước ảnh,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
 image-to-pdf-converter,BR,,,pending,,,Awaiting localized head term
 image-to-pdf-converter,DE,,,pending,,,Awaiting localized head term
 image-to-pdf-converter,ES,,,pending,,,Awaiting localized head term
@@ -739,16 +739,16 @@ interview-question-generator,KR,,,pending,,,Awaiting localized head term
 interview-question-generator,TH,,,pending,,,Awaiting localized head term
 interview-question-generator,TR,,,pending,,,Awaiting localized head term
 interview-question-generator,VN,,,pending,,,Awaiting localized head term
-invoice-generator,BR,gerador de faturas,gerador de faturas,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
+invoice-generator,BR,gerador de faturas,gerador de faturas,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
 invoice-generator,DE,Rechnung erstellen,Rechnung erstellen,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
 invoice-generator,ES,generador de facturas,generador de facturas,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
 invoice-generator,FR,générateur de facture,générateur de facture,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
-invoice-generator,ID,generator invoice,generator invoice,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
-invoice-generator,JP,請求書 作成,請求書 作成,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
-invoice-generator,KR,인보이스 생성기,인보이스 생성기,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
+invoice-generator,ID,generator invoice,generator invoice,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
+invoice-generator,JP,請求書 作成,請求書 作成,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
+invoice-generator,KR,인보이스 생성기,인보이스 생성기,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
 invoice-generator,TH,สร้างใบแจ้งหนี้,สร้างใบแจ้งหนี้,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
 invoice-generator,TR,fatura oluşturucu,fatura oluşturucu,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
-invoice-generator,VN,tạo hóa đơn,tạo hóa đơn,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
+invoice-generator,VN,tạo hóa đơn,tạo hóa đơn,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
 invoice-template-maker,BR,,,pending,,,Awaiting localized head term
 invoice-template-maker,DE,,,pending,,,Awaiting localized head term
 invoice-template-maker,ES,,,pending,,,Awaiting localized head term
@@ -789,16 +789,16 @@ jpg-to-png-converter,KR,,,pending,,,Awaiting localized head term
 jpg-to-png-converter,TH,,,pending,,,Awaiting localized head term
 jpg-to-png-converter,TR,,,pending,,,Awaiting localized head term
 jpg-to-png-converter,VN,,,pending,,,Awaiting localized head term
-json-formatter,BR,formatador JSON,formatador JSON,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
+json-formatter,BR,formatador JSON,formatador JSON,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
 json-formatter,DE,JSON formatieren,JSON formatieren,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
 json-formatter,ES,formateador JSON,formateador JSON,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
 json-formatter,FR,formateur JSON,formateur JSON,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
-json-formatter,ID,formatter JSON,formatter JSON,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
-json-formatter,JP,JSON 整形,JSON 整形,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
-json-formatter,KR,JSON 포맷터,JSON 포맷터,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
+json-formatter,ID,formatter JSON,formatter JSON,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
+json-formatter,JP,JSON 整形,JSON 整形,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
+json-formatter,KR,JSON 포맷터,JSON 포맷터,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
 json-formatter,TH,จัดรูปแบบ JSON,จัดรูปแบบ JSON,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
 json-formatter,TR,JSON biçimlendirici,JSON biçimlendirici,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
-json-formatter,VN,định dạng JSON,định dạng JSON,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
+json-formatter,VN,định dạng JSON,định dạng JSON,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
 json-validator,BR,,,pending,,,Awaiting localized head term
 json-validator,DE,,,pending,,,Awaiting localized head term
 json-validator,ES,,,pending,,,Awaiting localized head term
@@ -989,16 +989,16 @@ passport-photo-maker,KR,,,pending,,,Awaiting localized head term
 passport-photo-maker,TH,,,pending,,,Awaiting localized head term
 passport-photo-maker,TR,,,pending,,,Awaiting localized head term
 passport-photo-maker,VN,,,pending,,,Awaiting localized head term
-password-generator,BR,gerador de senhas,gerador de senhas,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
+password-generator,BR,gerador de senhas,gerador de senhas,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
 password-generator,DE,Passwort Generator,Passwort Generator,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
 password-generator,ES,generador de contraseñas,generador de contraseñas,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
 password-generator,FR,générateur de mot de passe,générateur de mot de passe,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
-password-generator,ID,generator kata sandi,generator kata sandi,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
-password-generator,JP,パスワード 生成,パスワード 生成,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
-password-generator,KR,비밀번호 생성기,비밀번호 생성기,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
+password-generator,ID,generator kata sandi,generator kata sandi,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
+password-generator,JP,パスワード 生成,パスワード 生成,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
+password-generator,KR,비밀번호 생성기,비밀번호 생성기,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
 password-generator,TH,สร้างรหัสผ่าน,สร้างรหัสผ่าน,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
 password-generator,TR,şifre oluşturucu,şifre oluşturucu,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
-password-generator,VN,tạo mật khẩu,tạo mật khẩu,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
+password-generator,VN,tạo mật khẩu,tạo mật khẩu,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
 paypal-fee-calculator,BR,,,pending,,,Awaiting localized head term
 paypal-fee-calculator,DE,,,pending,,,Awaiting localized head term
 paypal-fee-calculator,ES,,,pending,,,Awaiting localized head term
@@ -1009,16 +1009,16 @@ paypal-fee-calculator,KR,,,pending,,,Awaiting localized head term
 paypal-fee-calculator,TH,,,pending,,,Awaiting localized head term
 paypal-fee-calculator,TR,,,pending,,,Awaiting localized head term
 paypal-fee-calculator,VN,,,pending,,,Awaiting localized head term
-pdf-compressor,BR,comprimir PDF,comprimir PDF,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
+pdf-compressor,BR,comprimir PDF,comprimir PDF,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
 pdf-compressor,DE,PDF komprimieren,PDF komprimieren,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
 pdf-compressor,ES,comprimir PDF,comprimir PDF,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
 pdf-compressor,FR,compresser PDF,compresser PDF,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
-pdf-compressor,ID,kompres PDF,kompres PDF,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
-pdf-compressor,JP,PDF 圧縮,PDF 圧縮,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
-pdf-compressor,KR,PDF 압축,PDF 압축,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
+pdf-compressor,ID,kompres PDF,kompres PDF,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
+pdf-compressor,JP,PDF 圧縮,PDF 圧縮,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
+pdf-compressor,KR,PDF 압축,PDF 압축,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
 pdf-compressor,TH,บีบอัด PDF,บีบอัด PDF,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
 pdf-compressor,TR,PDF sıkıştırma,PDF sıkıştırma,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
-pdf-compressor,VN,nén PDF,nén PDF,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
+pdf-compressor,VN,nén PDF,nén PDF,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
 pdf-form-filler,BR,,,pending,,,Awaiting localized head term
 pdf-form-filler,DE,,,pending,,,Awaiting localized head term
 pdf-form-filler,ES,,,pending,,,Awaiting localized head term
@@ -1259,16 +1259,16 @@ purchase-order-generator,KR,,,pending,,,Awaiting localized head term
 purchase-order-generator,TH,,,pending,,,Awaiting localized head term
 purchase-order-generator,TR,,,pending,,,Awaiting localized head term
 purchase-order-generator,VN,,,pending,,,Awaiting localized head term
-qr-code-generator,BR,gerador de QR Code,gerador de QR Code,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
+qr-code-generator,BR,gerador de QR Code,gerador de QR Code,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
 qr-code-generator,DE,QR-Code erstellen,QR-Code erstellen,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
 qr-code-generator,ES,generador de código QR,generador de código QR,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
 qr-code-generator,FR,générateur de QR code,générateur de QR code,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
-qr-code-generator,ID,generator kode QR,generator kode QR,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
-qr-code-generator,JP,QRコード 作成,QRコード 作成,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
-qr-code-generator,KR,QR 코드 생성기,QR 코드 생성기,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
+qr-code-generator,ID,generator kode QR,generator kode QR,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
+qr-code-generator,JP,QRコード 作成,QRコード 作成,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
+qr-code-generator,KR,QR 코드 생성기,QR 코드 생성기,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
 qr-code-generator,TH,สร้าง QR Code,สร้าง QR Code,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
 qr-code-generator,TR,QR kod oluşturucu,QR kod oluşturucu,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
-qr-code-generator,VN,tạo mã QR,tạo mã QR,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
+qr-code-generator,VN,tạo mã QR,tạo mã QR,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
 quote-generator,BR,,,pending,,,Awaiting localized head term
 quote-generator,DE,,,pending,,,Awaiting localized head term
 quote-generator,ES,,,pending,,,Awaiting localized head term
@@ -1359,16 +1359,16 @@ resignation-letter-generator,KR,,,pending,,,Awaiting localized head term
 resignation-letter-generator,TH,,,pending,,,Awaiting localized head term
 resignation-letter-generator,TR,,,pending,,,Awaiting localized head term
 resignation-letter-generator,VN,,,pending,,,Awaiting localized head term
-resume-builder,BR,criador de currículo,criador de currículo,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
+resume-builder,BR,criador de currículo,criador de currículo,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
 resume-builder,DE,Lebenslauf erstellen,Lebenslauf erstellen,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
 resume-builder,ES,creador de currículum,creador de currículum,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
 resume-builder,FR,créateur de CV,créateur de CV,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
-resume-builder,ID,pembuat CV,pembuat CV,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
-resume-builder,JP,履歴書 作成,履歴書 作成,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
-resume-builder,KR,이력서 작성,이력서 작성,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
+resume-builder,ID,pembuat CV,pembuat CV,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
+resume-builder,JP,履歴書 作成,履歴書 作成,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
+resume-builder,KR,이력서 작성,이력서 작성,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
 resume-builder,TH,สร้างเรซูเม่,สร้างเรซูเม่,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
 resume-builder,TR,CV oluşturucu,CV oluşturucu,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
-resume-builder,VN,tạo CV,tạo CV,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
+resume-builder,VN,tạo CV,tạo CV,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
 resume-bullet-generator,BR,,,pending,,,Awaiting localized head term
 resume-bullet-generator,DE,,,pending,,,Awaiting localized head term
 resume-bullet-generator,ES,,,pending,,,Awaiting localized head term
@@ -1899,16 +1899,16 @@ weight-converter,KR,,,pending,,,Awaiting localized head term
 weight-converter,TH,,,pending,,,Awaiting localized head term
 weight-converter,TR,,,pending,,,Awaiting localized head term
 weight-converter,VN,,,pending,,,Awaiting localized head term
-whatsapp-link-generator,BR,gerador de link WhatsApp,gerador de link WhatsApp,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
+whatsapp-link-generator,BR,gerador de link WhatsApp,gerador de link WhatsApp,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
 whatsapp-link-generator,DE,WhatsApp Link erstellen,WhatsApp Link erstellen,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
 whatsapp-link-generator,ES,generador de enlace WhatsApp,generador de enlace WhatsApp,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
 whatsapp-link-generator,FR,générateur de lien WhatsApp,générateur de lien WhatsApp,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
-whatsapp-link-generator,ID,buat link WhatsApp,buat link WhatsApp,serp_verified,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query reviewed in public SERP sample; native review still pending
-whatsapp-link-generator,JP,WhatsApp リンク 作成,WhatsApp リンク 作成,rejected,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query rejected after public SERP intent review
-whatsapp-link-generator,KR,WhatsApp 링크 생성,WhatsApp 링크 생성,rejected,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query rejected after public SERP intent review
+whatsapp-link-generator,ID,buat link WhatsApp,buat link WhatsApp,serp_verified,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query reviewed in public SERP sample; native review still pending
+whatsapp-link-generator,JP,WhatsApp リンク 作成,WhatsApp リンク 作成,rejected,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query rejected after public SERP intent review
+whatsapp-link-generator,KR,WhatsApp 링크 생성,WhatsApp 링크 생성,rejected,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query rejected after public SERP intent review
 whatsapp-link-generator,TH,สร้างลิงก์ WhatsApp,สร้างลิงก์ WhatsApp,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
 whatsapp-link-generator,TR,WhatsApp link oluşturucu,WhatsApp link oluşturucu,editor_reviewed,editorial_seed_20260717,,Requires native and SERP validation
-whatsapp-link-generator,VN,tạo link WhatsApp,tạo link WhatsApp,rejected,public_serp_audit_20260717,2026-07-17T10:01:53Z,Core query rejected after public SERP intent review
+whatsapp-link-generator,VN,tạo link WhatsApp,tạo link WhatsApp,rejected,public_serp_audit_20260717,2026-07-17T12:37:42Z,Core query rejected after public SERP intent review
 whatsapp-qr-generator,BR,,,pending,,,Awaiting localized head term
 whatsapp-qr-generator,DE,,,pending,,,Awaiting localized head term
 whatsapp-qr-generator,ES,,,pending,,,Awaiting localized head term

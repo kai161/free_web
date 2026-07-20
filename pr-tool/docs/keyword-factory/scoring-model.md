@@ -71,3 +71,14 @@ serp_research_score =
 - SEO 工具的 difficulty 口径并不完全相同，指标必须保留 provider。
 - CPC 与商业价值相关但不是等价关系。
 - SERP 有大站不一定代表不可做；需要结合结果意图、工具质量和本地化缺口。
+
+## 公开查询信号（非评分指标）
+
+当付费关键词平台不可用时，可以记录自动补全的精确词命中、预测场景和措辞宽度，用于改词、聚类和安排落地页实验。但这些字段：
+
+- 不进入 `Evidence Score`；
+- 不转换为搜索量或 SEO difficulty；
+- 不用 suggestion_count 跨市场比较绝对需求；
+- 必须保留查询文本、预测列表、地域/语言、采集时间和来源。
+
+公开信号的决策状态为 `PROMOTE`、`CLUSTER`、`RECHECK`、`REWORD`、`HOLD`，它们只控制下一步验证动作。

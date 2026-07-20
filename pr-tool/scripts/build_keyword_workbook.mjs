@@ -131,7 +131,7 @@ function buildDashboard(workbook, counts) {
     sheet,
     "O",
     "全球工具站机会数据库 v1",
-    "决策快照 · 200 工具 / 10 市场 / 首批 1,000 本地关键词候选 / 50 个公开 SERP 样本。真实搜索量、CPC 与 SEO 难度尚未导入。",
+    "决策快照 · 200 工具 / 10 市场 / 1,000 本地关键词候选 / 50 个公开 SERP 样本 / 16 个自动补全查询观察。真实搜索量、CPC 与 SEO 难度尚未导入。",
   );
   addKpiCard(sheet, "A4:C4", "A5:C6", "候选工具", "=COUNTA(Tools!A5:A204)", theme.mint);
   addKpiCard(sheet, "E4:G4", "E5:G6", "目标市场", "=COUNTA(Markets!A5:A14)", theme.sky);
@@ -139,7 +139,7 @@ function buildDashboard(workbook, counts) {
   addKpiCard(sheet, "M4:O4", "M5:O6", "SERP 核心词审计", "=COUNTA('SERP Audit'!A5:A54)", theme.paleAmber);
 
   sheet.mergeCells("A8:O8");
-  sheet.getRange("A8").values = [["当前判断：50 个核心词已完成公开结果样本审计，其中 5 个进入 R0 指标验证、2 个需改写本地查询、3 个因意图不成立被拒绝。真实搜索量/CPC/SEO 难度仍为 0 条。"]];
+  sheet.getRange("A8").values = [["当前判断：越南图片压缩优先做轻量原型；巴西 Pix/WhatsApp QR 与印尼通用 QR 先做落地页验证；韩国通用发票生成器继续暂缓。公开信号是需求代理，不是搜索量。"]];
   sheet.getRange("A8:O8").format = {
     fill: theme.paleAmber,
     font: { bold: true, color: "#7C4A03", size: 10 },
@@ -215,7 +215,7 @@ function buildDashboard(workbook, counts) {
 
 function buildScoringSheet(workbook) {
   const sheet = workbook.worksheets.add("Scoring");
-  styleTitle(sheet, "H", "评分模型与使用边界", "Heuristic Score 只决定“先研究什么”；真实指标缺失时，不产生 Evidence Score。所有权重都可审计和调整。 ");
+  styleTitle(sheet, "H", "评分模型与使用边界", "Heuristic Score 只决定“先研究什么”；公开自动补全只能验证措辞与意图；真实指标缺失时，不产生 Evidence Score。 ");
   sheet.getRange("A4:D4").values = [["Heuristic 输入", "权重", "方向", "说明"]];
   sheet.getRange("A5:D12").values = [
     ["commercial_intent", 0.22, "越高越好", "购买、付费或业务价值的先验"],
@@ -264,6 +264,13 @@ function buildScoringSheet(workbook) {
     ["RECHECK_INTENT", "intent 2–3", "先改写本地核心词"],
     ["REJECT_INTENT", "intent = 1", "当前核心词不进入开发队列"],
   ];
+  sheet.getRange("F23:H23").values = [["公开信号", "可用于", "不可用于"]];
+  sheet.getRange("F24:H27").values = [
+    ["Autocomplete exact match", "判断措辞是否进入预测", "证明固定搜索量"],
+    ["Suggestion breadth", "发现用户场景和修饰词", "跨国家比较绝对需求"],
+    ["SERP sample", "判断意图和竞争结构", "替代精确排名/KD"],
+    ["PROMOTE / HOLD", "安排原型与落地页测试", "计算 Evidence Score"],
+  ];
   sheet.getRange("A4:D13").format.borders = { color: theme.line, style: "continuous" };
   sheet.getRange("F4:H14").format.borders = { color: theme.line, style: "continuous" };
   sheet.getRange("A4:D4").format = { fill: theme.teal, font: { bold: true, color: theme.white } };
@@ -271,17 +278,19 @@ function buildScoringSheet(workbook) {
   sheet.getRange("F10:H10").format = { fill: theme.navy, font: { bold: true, color: theme.white } };
   sheet.getRange("A16:D22").format.borders = { color: theme.line, style: "continuous" };
   sheet.getRange("F16:H21").format.borders = { color: theme.line, style: "continuous" };
+  sheet.getRange("F23:H27").format.borders = { color: theme.line, style: "continuous" };
   sheet.getRange("A16:D16").format = { fill: theme.teal, font: { bold: true, color: theme.white } };
   sheet.getRange("F16:H16").format = { fill: theme.navy, font: { bold: true, color: theme.white } };
-  sheet.getRange("A1:H22").format.wrapText = true;
-  sheet.getRange("A1:H22").format.verticalAlignment = "center";
-  sheet.getRange("A1:A22").format.columnWidth = 28;
-  sheet.getRange("B1:C22").format.columnWidth = 14;
-  sheet.getRange("D1:D22").format.columnWidth = 38;
-  sheet.getRange("E1:E22").format.columnWidth = 4;
-  sheet.getRange("F1:F22").format.columnWidth = 20;
-  sheet.getRange("G1:G22").format.columnWidth = 18;
-  sheet.getRange("H1:H22").format.columnWidth = 34;
+  sheet.getRange("F23:H23").format = { fill: theme.navy, font: { bold: true, color: theme.white } };
+  sheet.getRange("A1:H27").format.wrapText = true;
+  sheet.getRange("A1:H27").format.verticalAlignment = "center";
+  sheet.getRange("A1:A27").format.columnWidth = 28;
+  sheet.getRange("B1:C27").format.columnWidth = 14;
+  sheet.getRange("D1:D27").format.columnWidth = 38;
+  sheet.getRange("E1:E27").format.columnWidth = 4;
+  sheet.getRange("F1:F27").format.columnWidth = 24;
+  sheet.getRange("G1:G27").format.columnWidth = 22;
+  sheet.getRange("H1:H27").format.columnWidth = 34;
   sheet.showGridLines = false;
   sheet.freezePanes.freezeRows(4);
   return sheet;
@@ -290,13 +299,14 @@ function buildScoringSheet(workbook) {
 async function main() {
   await fs.mkdir(outputDir, { recursive: true });
   await fs.mkdir(previewDir, { recursive: true });
-  const [tools, markets, keywords, localizations, sources, serpAudit] = await Promise.all([
+  const [tools, markets, keywords, localizations, sources, serpAudit, publicSignals] = await Promise.all([
     readCsvValues("tools.csv"),
     readCsvValues("markets.csv"),
     readCsvValues("keywords.csv"),
     readCsvValues("localizations.csv"),
     readCsvValues("sources.csv"),
     readCsvValues("serp-audit.csv"),
+    readCsvValues("public-query-signals.csv"),
   ]);
 
   const workbook = Workbook.create();
@@ -392,6 +402,24 @@ async function main() {
   serpSheet.getRange(`J5:J${serpMeta.lastRow}`).conditionalFormats.addCustom('=J5="REJECT_INTENT"', { fill: theme.paleRed, font: { bold: true, color: theme.red } });
   serpSheet.getRange(`O5:O${serpMeta.lastRow}`).format.numberFormat = "yyyy-mm-dd";
 
+  const publicSignalsSheet = workbook.worksheets.add("Public Signals");
+  const publicSignalsMeta = styleTableSheet(publicSignalsSheet, publicSignals, {
+    title: "Wave 1 · 公开查询信号",
+    subtitle: "16 个焦点查询的自动补全观察，用于验证本地措辞、意图和场景。suggestion_count 不是搜索量，不能用于跨市场绝对需求比较。",
+    tableName: "PublicSignalsTable",
+    widths: { 0: 10, 1: 10, 2: 28, 3: 34, 4: 16, 5: 16, 6: 14, 7: 36, 8: 16, 9: 80, 10: 70, 11: 16, 12: 30 },
+    wrapColumns: [3, 7, 9, 10],
+  });
+  publicSignalsSheet.getRange(`E5:G${publicSignalsMeta.lastRow}`).conditionalFormats.addColorScale({
+    minColor: theme.paleRed,
+    midColor: theme.paleAmber,
+    maxColor: theme.paleGreen,
+  });
+  publicSignalsSheet.getRange(`I5:I${publicSignalsMeta.lastRow}`).conditionalFormats.addCustom('=I5="PROMOTE"', { fill: theme.paleGreen, font: { bold: true, color: theme.green } });
+  publicSignalsSheet.getRange(`I5:I${publicSignalsMeta.lastRow}`).conditionalFormats.addCustom('=I5="HOLD"', { fill: theme.paleRed, font: { bold: true, color: theme.red } });
+  publicSignalsSheet.getRange(`I5:I${publicSignalsMeta.lastRow}`).conditionalFormats.addCustom('=OR(I5="RECHECK",I5="REWORD")', { fill: theme.paleAmber, font: { bold: true, color: "#7C4A03" } });
+  publicSignalsSheet.getRange(`L5:L${publicSignalsMeta.lastRow}`).format.numberFormat = "yyyy-mm-dd";
+
   const localizationSheet = workbook.worksheets.add("Localization Coverage");
   const localizationMeta = styleTableSheet(localizationSheet, localizations, {
     title: "工具 × 市场本地化覆盖",
@@ -443,7 +471,8 @@ async function main() {
     "Localization Coverage": "A1:H24",
     Sources: "A1:G10",
     "SERP Audit": "A1:P24",
-    Scoring: "A1:H22",
+    "Public Signals": "A1:M20",
+    Scoring: "A1:H27",
   };
   const previewPaths = [];
   for (const [sheetName, range] of Object.entries(previewRanges)) {
