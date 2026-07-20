@@ -237,3 +237,12 @@ test("image compressor exposes FAQ structured data for visible questions", () =>
   assert.match(html, /Ảnh có được tải lên máy chủ không\?/);
   assert.match(html, /Nén ảnh có làm giảm chất lượng không\?/);
 });
+
+test("all Vietnamese pages load Vercel Web Analytics like pr-tool", () => {
+  for (const page of ["index.html", "nen-anh.html"]) {
+    const html = readViFile(page);
+    assert.match(html, /window\.va = window\.va \|\| function/);
+    assert.match(html, /script\.src = ['"]\/_vercel\/insights\/script\.js['"]/);
+    assert.match(html, /script\.defer = true/);
+  }
+});
