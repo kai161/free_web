@@ -684,6 +684,199 @@ canvas {
     background: #eef3ef;
 }
 
+.game-shell {
+    overflow: hidden;
+}
+
+.game-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);
+    gap: 1rem;
+    align-items: start;
+}
+
+.game-side {
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+}
+
+.game-message,
+.hint-line {
+    margin: 0.4rem 0 0;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+.score-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.6rem;
+}
+
+.ttt-board {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.55rem;
+    width: min(100%, 31rem);
+    margin: 0 auto;
+}
+
+.ttt-cell {
+    display: grid;
+    aspect-ratio: 1;
+    min-height: 5.7rem;
+    place-items: center;
+    border: 2px solid var(--ink);
+    border-radius: 0.5rem;
+    color: var(--ink);
+    background: #fffdf5;
+    box-shadow: 4px 4px 0 rgba(23, 33, 27, 0.92);
+    font-size: clamp(2.2rem, 10vw, 4.6rem);
+    font-weight: 950;
+    line-height: 1;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.ttt-cell:not(:disabled):active,
+.word-cell:not(:disabled):active,
+.letter-btn:not(:disabled):active {
+    transform: translateY(1px);
+}
+
+.ttt-cell:disabled {
+    cursor: default;
+}
+
+.ttt-cell.win {
+    border-color: var(--green);
+    background: #e9f8ee;
+    color: var(--green-dark);
+}
+
+.hangman-figure {
+    min-height: 12rem;
+    margin: 0 0 1rem;
+    padding: 1rem;
+    border: 1px solid var(--line);
+    border-radius: 0.5rem;
+    color: var(--ink);
+    background: #fbfcfa;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    font-size: clamp(1rem, 4vw, 1.35rem);
+    font-weight: 850;
+    line-height: 1.25;
+    white-space: pre;
+}
+
+.word-display {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-bottom: 0.85rem;
+}
+
+.word-slot {
+    display: grid;
+    width: 2.65rem;
+    height: 3.1rem;
+    place-items: center;
+    border-bottom: 4px solid var(--ink);
+    color: var(--ink);
+    font-size: 1.35rem;
+    font-weight: 950;
+}
+
+.letter-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 0.45rem;
+}
+
+.letter-btn {
+    min-height: 2.6rem;
+    border: 1px solid var(--line);
+    border-radius: 0.5rem;
+    color: var(--ink);
+    background: #fffdf5;
+    font-weight: 950;
+}
+
+.letter-btn:disabled {
+    color: #96a39b;
+    background: #edf2ee;
+    cursor: default;
+}
+
+.word-grid {
+    display: grid;
+    grid-template-columns: repeat(10, minmax(0, 1fr));
+    gap: 0.28rem;
+    width: min(100%, 35rem);
+    margin: 0 auto 0.8rem;
+}
+
+.word-cell {
+    display: grid;
+    aspect-ratio: 1;
+    min-width: 0;
+    place-items: center;
+    border: 1px solid var(--line);
+    border-radius: 0.38rem;
+    color: var(--ink);
+    background: #fffdf5;
+    font-size: clamp(0.78rem, 3.4vw, 1.15rem);
+    font-weight: 950;
+    line-height: 1;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.word-cell.selected {
+    border-color: var(--blue);
+    color: #fff;
+    background: var(--blue);
+}
+
+.word-cell.found {
+    border-color: var(--green);
+    color: var(--green-dark);
+    background: #e9f8ee;
+}
+
+.word-cell.selected.found {
+    color: #fff;
+    background: var(--green);
+}
+
+.word-targets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.target-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.45rem;
+    padding: 0.45rem 0.65rem;
+    border: 1px solid var(--line);
+    border-radius: 0.5rem;
+    color: var(--muted);
+    background: var(--surface);
+    font-size: 0.88rem;
+    font-weight: 900;
+}
+
+.target-chip.done {
+    border-color: var(--green);
+    color: var(--green-dark);
+    background: #e9f8ee;
+    text-decoration: line-through;
+}
+
 .table {
     width: 100%;
     border-collapse: collapse;
@@ -755,7 +948,8 @@ canvas {
     }
 
     .intro,
-    .tool-layout {
+    .tool-layout,
+    .game-layout {
         grid-template-columns: 1fr;
     }
 
@@ -862,6 +1056,52 @@ canvas {
         min-height: 16rem;
     }
 
+    .score-grid {
+        gap: 0.45rem;
+    }
+
+    .ttt-board {
+        gap: 0.42rem;
+    }
+
+    .ttt-cell {
+        min-height: auto;
+        box-shadow: 3px 3px 0 rgba(23, 33, 27, 0.92);
+    }
+
+    .hangman-figure {
+        min-height: 10rem;
+        padding: 0.8rem;
+    }
+
+    .word-slot {
+        width: 2.2rem;
+        height: 2.75rem;
+        font-size: 1.12rem;
+    }
+
+    .letter-grid {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 0.38rem;
+    }
+
+    .letter-btn {
+        min-height: 2.45rem;
+    }
+
+    .word-grid {
+        gap: 0.2rem;
+    }
+
+    .word-cell {
+        border-radius: 0.28rem;
+        font-size: 0.78rem;
+    }
+
+    .target-chip {
+        flex: 1 1 calc(50% - 0.5rem);
+    }
+
     .result-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -911,6 +1151,14 @@ canvas {
 
     .stats {
         gap: 0.45rem;
+    }
+
+    .letter-grid {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .word-cell {
+        font-size: 0.7rem;
     }
 
     .result-grid {

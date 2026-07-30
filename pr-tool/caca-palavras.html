@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caça-Palavras Online Grátis no Celular | Brasil Tools</title>
+    <meta name="description" content="Jogue Caça-Palavras online grátis com temas brasileiros. Encontre palavras no navegador, sem cadastro, sem instalar app e pronto para celular.">
+    <meta name="keywords" content="caça-palavras online, caça palavras grátis, jogo de palavras, caça-palavras celular, passatempo online">
+    <meta name="robots" content="index,follow,max-image-preview:large">
+    <meta name="theme-color" content="#1f8f54">
+    <link rel="canonical" href="https://br.freetools.best/caca-palavras.html">
+    <link rel="alternate" hreflang="pt-BR" href="https://br.freetools.best/caca-palavras.html">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="manifest" href="site.webmanifest">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Brasil Tools">
+    <meta property="og:title" content="Caça-Palavras Online Grátis">
+    <meta property="og:description" content="Encontre palavras em grades rápidas direto no navegador do celular.">
+    <meta property="og:url" content="https://br.freetools.best/caca-palavras.html">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Caça-Palavras Online Grátis">
+    <meta name="twitter:description" content="Jogo de palavras leve, brasileiro e sem cadastro.">
+    <link rel="stylesheet" href="styles.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Caça-Palavras Online",
+        "url": "https://br.freetools.best/caca-palavras.html",
+        "inLanguage": "pt-BR",
+        "applicationCategory": "GameApplication",
+        "operatingSystem": "Any",
+        "description": "Caça-palavras grátis com temas brasileiros para jogar no navegador.",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "BRL"
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Brasil Tools", "item": "https://br.freetools.best/"},
+            {"@type": "ListItem", "position": 2, "name": "Caça-Palavras", "item": "https://br.freetools.best/caca-palavras.html"}
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "O Caça-Palavras online é grátis?",
+                "acceptedAnswer": {"@type": "Answer", "text": "Sim. O jogo é gratuito, roda no navegador e não exige cadastro."}
+            },
+            {
+                "@type": "Question",
+                "name": "O jogo salva minhas informações?",
+                "acceptedAnswer": {"@type": "Answer", "text": "Não. A rodada é gerada localmente na página e não precisa enviar dados pessoais para servidor."}
+            }
+        ]
+    }
+    </script>
+    <script>
+        (function() {
+            // 1. 初始化 va 函数
+            window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+
+            // 2. 动态创建并插入外部 JS 文件
+            const script = document.createElement('script');
+            script.src = '/_vercel/insights/script.js';
+            script.defer = true;
+            document.head.appendChild(script);
+        })();
+    </script>
+</head>
+<body>
+    <header class="site-header">
+        <nav class="nav" aria-label="Navegação principal">
+            <a class="brand" href="index.html"><span class="brand-mark">BR</span><span>Brasil Tools</span></a>
+            <div class="nav-links">
+                <a class="nav-link" href="index.html">Início</a>
+                <a class="nav-link" href="buscar.html">Buscar</a>
+                <a class="nav-link active" href="jogo-da-velha.html">Jogos</a>
+                <a class="nav-link" href="frases.html">Frases</a>
+                <a class="nav-link" href="imagem.html">Fotos</a>
+                <a class="nav-link" href="contador-caracteres.html">Contador</a>
+                <a class="nav-link" href="sorteador.html">Sorteador</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="wrap section">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html">Início</a>
+            <span>/</span>
+            <span>Caça-Palavras</span>
+        </nav>
+
+        <div class="panel-header">
+            <div>
+                <p class="eyebrow">Passatempo de palavras</p>
+                <h1>Caça-Palavras online</h1>
+                <p class="lead">Encontre palavras em grades temáticas feitas para toque no celular, com rodadas rápidas e sem instalar aplicativo.</p>
+            </div>
+            <a class="btn secondary" href="jogo-da-forca.html">Jogo da Forca</a>
+        </div>
+
+        <section class="tool-panel game-shell" aria-labelledby="caca-title">
+            <div class="panel-header">
+                <div>
+                    <h2 id="caca-title">Encontre todas as palavras</h2>
+                    <p class="game-message" id="wordSearchStatus">Toque nas letras em sequência.</p>
+                </div>
+                <span class="chip active" id="foundChip">0/5 palavras</span>
+            </div>
+
+            <div class="game-layout">
+                <div>
+                    <div class="word-grid" id="wordGrid" aria-label="Grade do caça-palavras"></div>
+                    <p class="hint-line"><strong>Seleção:</strong> <span id="selectedWord">nenhuma</span></p>
+                </div>
+
+                <aside class="game-side" aria-label="Tema e palavras">
+                    <div class="field">
+                        <label for="themeSelect">Tema</label>
+                        <select id="themeSelect">
+                            <option value="brasil">Brasil</option>
+                            <option value="internet">Internet</option>
+                            <option value="rotina">Rotina</option>
+                        </select>
+                    </div>
+                    <div class="word-targets" id="targetsList" aria-label="Palavras para encontrar"></div>
+                    <div class="score-grid">
+                        <div class="stat"><strong id="roundCount">1</strong><span>Rodada</span></div>
+                        <div class="stat"><strong id="foundCount">0</strong><span>Achadas</span></div>
+                        <div class="stat"><strong id="triesCount">0</strong><span>Tentativas</span></div>
+                    </div>
+                    <div class="phrase-actions">
+                        <button class="btn" type="button" id="newPuzzleBtn">Nova grade</button>
+                        <button class="btn secondary" type="button" id="clearSelectionBtn">Limpar</button>
+                        <button class="btn secondary" type="button" id="sharePuzzleBtn">Compartilhar</button>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <div class="ad-slot">Espaço para anúncio responsivo</div>
+
+        <article class="seo-content">
+            <h2>Caça-Palavras grátis no navegador</h2>
+            <p>Este caça-palavras foi feito para sessões curtas no celular. A grade é criada na própria página, com temas simples e palavras sem acento para facilitar o toque e a busca.</p>
+            <h3>Precisa de internet durante o jogo?</h3>
+            <p>Depois que a página carrega, a rodada funciona com JavaScript local. Não há consulta a banco externo para montar a grade.</p>
+        </article>
+
+        <section class="seo-content">
+            <h2>Continue jogando</h2>
+            <div class="related-grid">
+                <a class="related-card" href="jogo-da-velha.html"><strong>Jogo da Velha</strong><span>Tabuleiro clássico contra o computador.</span></a>
+                <a class="related-card" href="jogo-da-forca.html"><strong>Jogo da Forca</strong><span>Adivinhe palavras brasileiras com dicas.</span></a>
+                <a class="related-card" href="contador-caracteres.html"><strong>Contador de Caracteres</strong><span>Ferramenta útil para textos e redes sociais.</span></a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="index.html">Brasil Tools</a>
+            <a href="jogo-da-velha.html">Jogo da Velha</a>
+            <a href="jogo-da-forca.html">Forca</a>
+            <a href="buscar.html">Buscar</a>
+            <a href="mapa-do-site.html">Mapa do site</a>
+            <a href="privacidade.html">Privacidade</a>
+            <a href="termos.html">Termos</a>
+        </div>
+        Caça-palavras online grátis para celular.
+    </footer>
+
+    <script>
+        const themes = {
+            brasil: ["PIX", "CAFE", "SAMBA", "PRAIA", "FUTEBOL"],
+            internet: ["LINK", "SENHA", "TEXTO", "FOTO", "STATUS"],
+            rotina: ["MERCADO", "ESCOLA", "TRABALHO", "CONTA", "FAMILIA"]
+        };
+        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const size = 10;
+        const directions = [
+            [0, 1],
+            [1, 0],
+            [1, 1],
+            [-1, 1]
+        ];
+        const wordGrid = document.getElementById("wordGrid");
+        const targetsList = document.getElementById("targetsList");
+        const selectedWord = document.getElementById("selectedWord");
+        const statusEl = document.getElementById("wordSearchStatus");
+        const foundChip = document.getElementById("foundChip");
+        const themeSelect = document.getElementById("themeSelect");
+        const newPuzzleBtn = document.getElementById("newPuzzleBtn");
+        const clearSelectionBtn = document.getElementById("clearSelectionBtn");
+        const sharePuzzleBtn = document.getElementById("sharePuzzleBtn");
+        const roundCount = document.getElementById("roundCount");
+        const foundCount = document.getElementById("foundCount");
+        const triesCount = document.getElementById("triesCount");
+        let grid = [];
+        let placed = {};
+        let found = new Set();
+        let selection = [];
+        let round = 1;
+        let tries = 0;
+
+        function emptyGrid() {
+            return Array.from({ length: size }, () => Array(size).fill(""));
+        }
+
+        function canPlace(word, row, col, deltaRow, deltaCol) {
+            for (let index = 0; index < word.length; index += 1) {
+                const nextRow = row + deltaRow * index;
+                const nextCol = col + deltaCol * index;
+                if (nextRow < 0 || nextRow >= size || nextCol < 0 || nextCol >= size) return false;
+                if (grid[nextRow][nextCol] && grid[nextRow][nextCol] !== word[index]) return false;
+            }
+            return true;
+        }
+
+        function placeWord(word) {
+            for (let attempt = 0; attempt < 180; attempt += 1) {
+                const [deltaRow, deltaCol] = directions[Math.floor(Math.random() * directions.length)];
+                const row = Math.floor(Math.random() * size);
+                const col = Math.floor(Math.random() * size);
+                if (!canPlace(word, row, col, deltaRow, deltaCol)) continue;
+                const cells = [];
+                for (let index = 0; index < word.length; index += 1) {
+                    const nextRow = row + deltaRow * index;
+                    const nextCol = col + deltaCol * index;
+                    grid[nextRow][nextCol] = word[index];
+                    cells.push(`${nextRow}-${nextCol}`);
+                }
+                placed[word] = cells;
+                return true;
+            }
+            return false;
+        }
+
+        function fillGrid() {
+            for (let row = 0; row < size; row += 1) {
+                for (let col = 0; col < size; col += 1) {
+                    if (!grid[row][col]) grid[row][col] = letters[Math.floor(Math.random() * letters.length)];
+                }
+            }
+        }
+
+        function selectedText() {
+            return selection.map(item => grid[item.row][item.col]).join("");
+        }
+
+        function clearSelection() {
+            selection = [];
+            selectedWord.textContent = "nenhuma";
+            renderGrid();
+        }
+
+        function sameLine(next) {
+            if (selection.length < 2) return true;
+            const first = selection[0];
+            const second = selection[1];
+            const rowStep = Math.sign(second.row - first.row);
+            const colStep = Math.sign(second.col - first.col);
+            const previous = selection[selection.length - 1];
+            return next.row - previous.row === rowStep && next.col - previous.col === colStep;
+        }
+
+        function isNeighbor(next) {
+            if (!selection.length) return true;
+            const previous = selection[selection.length - 1];
+            return Math.abs(next.row - previous.row) <= 1 && Math.abs(next.col - previous.col) <= 1 && !(next.row === previous.row && next.col === previous.col);
+        }
+
+        function renderTargets() {
+            const words = themes[themeSelect.value];
+            targetsList.innerHTML = words.map(word => `
+                <span class="target-chip ${found.has(word) ? "done" : ""}">${word}</span>
+            `).join("");
+            foundChip.textContent = `${found.size}/${words.length} palavras`;
+            foundChip.classList.toggle("active", found.size < words.length);
+            foundCount.textContent = found.size;
+            triesCount.textContent = tries;
+            roundCount.textContent = round;
+        }
+
+        function renderGrid() {
+            const selectedIds = new Set(selection.map(item => `${item.row}-${item.col}`));
+            const foundIds = new Set(Array.from(found).flatMap(word => placed[word] || []));
+            wordGrid.innerHTML = grid.map((row, rowIndex) => row.map((letter, colIndex) => {
+                const id = `${rowIndex}-${colIndex}`;
+                const className = [
+                    "word-cell",
+                    selectedIds.has(id) ? "selected" : "",
+                    foundIds.has(id) ? "found" : ""
+                ].join(" ").trim();
+                return `<button class="${className}" type="button" data-row="${rowIndex}" data-col="${colIndex}" aria-label="Letra ${letter}">${letter}</button>`;
+            }).join("")).join("");
+        }
+
+        function renderAll() {
+            renderGrid();
+            renderTargets();
+        }
+
+        function completeWord(word) {
+            found.add(word);
+            statusEl.textContent = `Achou ${word}.`;
+            if (found.size === themes[themeSelect.value].length) {
+                statusEl.textContent = "Você encontrou todas as palavras.";
+                foundChip.classList.remove("active");
+            }
+            clearSelection();
+            renderTargets();
+        }
+
+        function checkSelection() {
+            const text = selectedText();
+            const reversed = text.split("").reverse().join("");
+            const words = themes[themeSelect.value].filter(word => !found.has(word));
+            const match = words.find(word => word === text || word === reversed);
+            if (match) {
+                completeWord(match);
+                return;
+            }
+            selectedWord.textContent = text || "nenhuma";
+        }
+
+        function selectCell(row, col) {
+            const next = { row, col };
+            if (selection.some(item => item.row === row && item.col === col)) return;
+            if (!isNeighbor(next) || !sameLine(next)) {
+                selection = [next];
+                statusEl.textContent = "Nova seleção iniciada.";
+            } else {
+                selection.push(next);
+                statusEl.textContent = "Continue a sequência.";
+            }
+            tries += 1;
+            renderGrid();
+            renderTargets();
+            checkSelection();
+        }
+
+        function buildPuzzle(advanceRound) {
+            if (advanceRound) round += 1;
+            const words = themes[themeSelect.value];
+            let placedAll = false;
+            for (let attempt = 0; attempt < 24 && !placedAll; attempt += 1) {
+                grid = emptyGrid();
+                placed = {};
+                placedAll = words.every(placeWord);
+            }
+            found = new Set();
+            selection = [];
+            tries = 0;
+            fillGrid();
+            selectedWord.textContent = "nenhuma";
+            statusEl.textContent = "Toque nas letras em sequência.";
+            renderAll();
+        }
+
+        function sharePuzzle() {
+            const text = `Joguei Caça-Palavras no Brasil Tools e encontrei ${found.size}/${themes[themeSelect.value].length} palavras. https://br.freetools.best/caca-palavras.html`;
+            window.location.href = `https://wa.me/?text=${encodeURIComponent(text)}`;
+        }
+
+        wordGrid.addEventListener("click", event => {
+            const button = event.target.closest("button[data-row]");
+            if (!button) return;
+            selectCell(Number(button.dataset.row), Number(button.dataset.col));
+        });
+        newPuzzleBtn.addEventListener("click", () => buildPuzzle(true));
+        clearSelectionBtn.addEventListener("click", clearSelection);
+        sharePuzzleBtn.addEventListener("click", sharePuzzle);
+        themeSelect.addEventListener("change", () => buildPuzzle(true));
+        buildPuzzle(false);
+    </script>
+</body>
+</html>

@@ -6,7 +6,7 @@ Base URL: https://br.freetools.best/
 
 ## Principais páginas
 
-- https://br.freetools.best/ - Ferramentas gratuitas para WhatsApp, Pix, CPF, CNPJ, texto, imagens, sorteio, senhas e frases.
+- https://br.freetools.best/ - Ferramentas gratuitas para WhatsApp, Pix, CPF, CNPJ, texto, imagens, sorteio, jogos rápidos, senhas e frases.
 - https://br.freetools.best/buscar.html - Busca interna das ferramentas.
 - https://br.freetools.best/mapa-do-site.html - Mapa HTML com links rastreáveis.
 - https://br.freetools.best/frases.html - Frases para WhatsApp.
@@ -18,6 +18,9 @@ Base URL: https://br.freetools.best/
 - https://br.freetools.best/imagem.html - Compressor e cortador de fotos sociais.
 - https://br.freetools.best/contador-caracteres.html - Contador de caracteres.
 - https://br.freetools.best/conversor-texto.html - Conversor de texto.
+- https://br.freetools.best/jogo-da-velha.html - Jogo da Velha online grátis.
+- https://br.freetools.best/jogo-da-forca.html - Jogo da Forca online em português do Brasil.
+- https://br.freetools.best/caca-palavras.html - Caça-Palavras online grátis.
 
 ## Páginas institucionais
 

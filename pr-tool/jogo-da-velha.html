@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Velha Online Grátis no Celular | Brasil Tools</title>
+    <meta name="description" content="Jogue Jogo da Velha online grátis contra o computador. Leve, rápido, em português do Brasil, sem cadastro e perfeito para celular.">
+    <meta name="keywords" content="jogo da velha online, jogo da velha grátis, jogar jogo da velha, jogo da velha celular, passatempo online grátis">
+    <meta name="robots" content="index,follow,max-image-preview:large">
+    <meta name="theme-color" content="#1f8f54">
+    <link rel="canonical" href="https://br.freetools.best/jogo-da-velha.html">
+    <link rel="alternate" hreflang="pt-BR" href="https://br.freetools.best/jogo-da-velha.html">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="manifest" href="site.webmanifest">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Brasil Tools">
+    <meta property="og:title" content="Jogo da Velha Online Grátis">
+    <meta property="og:description" content="Passatempo rápido para jogar no navegador do celular, sem cadastro e sem instalar nada.">
+    <meta property="og:url" content="https://br.freetools.best/jogo-da-velha.html">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Jogo da Velha Online Grátis">
+    <meta name="twitter:description" content="Jogue contra o computador direto no celular.">
+    <link rel="stylesheet" href="styles.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Jogo da Velha Online",
+        "url": "https://br.freetools.best/jogo-da-velha.html",
+        "inLanguage": "pt-BR",
+        "applicationCategory": "GameApplication",
+        "operatingSystem": "Any",
+        "description": "Jogo da Velha grátis para jogar no navegador contra o computador.",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "BRL"
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Brasil Tools", "item": "https://br.freetools.best/"},
+            {"@type": "ListItem", "position": 2, "name": "Jogo da Velha", "item": "https://br.freetools.best/jogo-da-velha.html"}
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "O Jogo da Velha online é grátis?",
+                "acceptedAnswer": {"@type": "Answer", "text": "Sim. O jogo roda no navegador, sem cadastro, sem instalação e sem cobrança."}
+            },
+            {
+                "@type": "Question",
+                "name": "Funciona no celular?",
+                "acceptedAnswer": {"@type": "Answer", "text": "Sim. O tabuleiro foi feito para toque em celulares Android, iPhone e telas pequenas."}
+            }
+        ]
+    }
+    </script>
+    <script>
+        (function() {
+            // 1. 初始化 va 函数
+            window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+
+            // 2. 动态创建并插入外部 JS 文件
+            const script = document.createElement('script');
+            script.src = '/_vercel/insights/script.js';
+            script.defer = true;
+            document.head.appendChild(script);
+        })();
+    </script>
+</head>
+<body>
+    <header class="site-header">
+        <nav class="nav" aria-label="Navegação principal">
+            <a class="brand" href="index.html"><span class="brand-mark">BR</span><span>Brasil Tools</span></a>
+            <div class="nav-links">
+                <a class="nav-link" href="index.html">Início</a>
+                <a class="nav-link" href="buscar.html">Buscar</a>
+                <a class="nav-link active" href="jogo-da-velha.html">Jogos</a>
+                <a class="nav-link" href="frases.html">Frases</a>
+                <a class="nav-link" href="link-whatsapp.html">WhatsApp</a>
+                <a class="nav-link" href="pix.html">Pix</a>
+                <a class="nav-link" href="sorteador.html">Sorteador</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="wrap section">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html">Início</a>
+            <span>/</span>
+            <span>Jogo da Velha</span>
+        </nav>
+
+        <div class="panel-header">
+            <div>
+                <p class="eyebrow">Jogo rápido grátis</p>
+                <h1>Jogo da Velha online</h1>
+                <p class="lead">Passatempo leve para jogar contra o computador no navegador do celular, sem baixar app e sem criar conta.</p>
+            </div>
+            <a class="btn secondary" href="caca-palavras.html">Caça-palavras</a>
+        </div>
+
+        <section class="tool-panel game-shell" aria-labelledby="velha-title">
+            <div class="panel-header">
+                <div>
+                    <h2 id="velha-title">Você joga com X</h2>
+                    <p class="game-message" id="gameStatus">Sua vez. Escolha uma casa.</p>
+                </div>
+                <span class="chip active" id="turnLabel">Sua vez</span>
+            </div>
+
+            <div class="game-layout">
+                <div>
+                    <div class="ttt-board" id="board" aria-label="Tabuleiro do Jogo da Velha">
+                        <button class="ttt-cell" type="button" aria-label="Casa 1"></button>
+                        <button class="ttt-cell" type="button" aria-label="Casa 2"></button>
+                        <button class="ttt-cell" type="button" aria-label="Casa 3"></button>
+                        <button class="ttt-cell" type="button" aria-label="Casa 4"></button>
+                        <button class="ttt-cell" type="button" aria-label="Casa 5"></button>
+                        <button class="ttt-cell" type="button" aria-label="Casa 6"></button>
+                        <button class="ttt-cell" type="button" aria-label="Casa 7"></button>
+                        <button class="ttt-cell" type="button" aria-label="Casa 8"></button>
+                        <button class="ttt-cell" type="button" aria-label="Casa 9"></button>
+                    </div>
+                </div>
+
+                <aside class="game-side" aria-label="Placar e ações">
+                    <div class="score-grid">
+                        <div class="stat"><strong id="scoreX">0</strong><span>Você</span></div>
+                        <div class="stat"><strong id="scoreO">0</strong><span>Computador</span></div>
+                        <div class="stat"><strong id="scoreDraw">0</strong><span>Empates</span></div>
+                    </div>
+                    <div class="field">
+                        <label for="difficulty">Nível</label>
+                        <select id="difficulty">
+                            <option value="smart">Esperto</option>
+                            <option value="easy">Leve</option>
+                        </select>
+                    </div>
+                    <div class="phrase-actions">
+                        <button class="btn" type="button" id="resetBtn">Nova rodada</button>
+                        <button class="btn secondary" type="button" id="shareBtn">Compartilhar</button>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <div class="ad-slot">Espaço para anúncio responsivo</div>
+
+        <article class="seo-content">
+            <h2>Jogo da Velha grátis para celular</h2>
+            <p>O Jogo da Velha é um clássico para preencher uma pausa rápida no ônibus, na fila ou no intervalo. Esta versão roda inteira no navegador, com tabuleiro grande para toque e placar local.</p>
+            <h3>Precisa instalar aplicativo?</h3>
+            <p>Não. A página é leve, abre direto no navegador e não depende de login, API externa ou download.</p>
+        </article>
+
+        <section class="seo-content">
+            <h2>Mais jogos e ferramentas</h2>
+            <div class="related-grid">
+                <a class="related-card" href="jogo-da-forca.html"><strong>Jogo da Forca</strong><span>Adivinhe palavras brasileiras no navegador.</span></a>
+                <a class="related-card" href="caca-palavras.html"><strong>Caça-Palavras</strong><span>Encontre palavras em grades rápidas no celular.</span></a>
+                <a class="related-card" href="sorteador.html"><strong>Sorteador</strong><span>Sorteie nomes e números para brincadeiras.</span></a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="index.html">Brasil Tools</a>
+            <a href="jogo-da-forca.html">Forca</a>
+            <a href="caca-palavras.html">Caça-palavras</a>
+            <a href="buscar.html">Buscar</a>
+            <a href="mapa-do-site.html">Mapa do site</a>
+            <a href="privacidade.html">Privacidade</a>
+            <a href="termos.html">Termos</a>
+        </div>
+        Jogos e ferramentas grátis para o celular.
+    </footer>
+
+    <script>
+        const cells = Array.from(document.querySelectorAll(".ttt-cell"));
+        const statusEl = document.getElementById("gameStatus");
+        const turnLabel = document.getElementById("turnLabel");
+        const difficulty = document.getElementById("difficulty");
+        const scoreX = document.getElementById("scoreX");
+        const scoreO = document.getElementById("scoreO");
+        const scoreDraw = document.getElementById("scoreDraw");
+        const resetBtn = document.getElementById("resetBtn");
+        const shareBtn = document.getElementById("shareBtn");
+        const wins = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8],
+            [0, 3, 6], [1, 4, 7], [2, 5, 8],
+            [0, 4, 8], [2, 4, 6]
+        ];
+        let board = Array(9).fill("");
+        let active = true;
+        let busy = false;
+        let scores = { x: 0, o: 0, draw: 0 };
+
+        function checkWinner(mark) {
+            return wins.find(combo => combo.every(index => board[index] === mark));
+        }
+
+        function emptyCells() {
+            return board.map((value, index) => value ? null : index).filter(index => index !== null);
+        }
+
+        function updateBoard(winningLine = []) {
+            cells.forEach((cell, index) => {
+                cell.textContent = board[index];
+                cell.disabled = Boolean(board[index]) || !active || busy;
+                cell.classList.toggle("win", winningLine.includes(index));
+                cell.setAttribute("aria-label", board[index] ? `Casa ${index + 1}: ${board[index]}` : `Casa ${index + 1}: vazia`);
+            });
+        }
+
+        function finishRound(message, type, winningLine = []) {
+            active = false;
+            busy = false;
+            statusEl.textContent = message;
+            turnLabel.textContent = type === "x" ? "Vitória" : type === "o" ? "Computador" : "Empate";
+            turnLabel.classList.toggle("active", type === "x");
+            if (type === "x") scores.x += 1;
+            if (type === "o") scores.o += 1;
+            if (type === "draw") scores.draw += 1;
+            scoreX.textContent = scores.x;
+            scoreO.textContent = scores.o;
+            scoreDraw.textContent = scores.draw;
+            updateBoard(winningLine);
+        }
+
+        function chooseWinningMove(mark) {
+            for (const index of emptyCells()) {
+                board[index] = mark;
+                const hasWin = Boolean(checkWinner(mark));
+                board[index] = "";
+                if (hasWin) return index;
+            }
+            return null;
+        }
+
+        function chooseBotMove() {
+            const open = emptyCells();
+            if (!open.length) return null;
+            if (difficulty.value === "smart") {
+                const winMove = chooseWinningMove("O");
+                if (winMove !== null) return winMove;
+                const blockMove = chooseWinningMove("X");
+                if (blockMove !== null) return blockMove;
+                if (board[4] === "") return 4;
+                const corner = [0, 2, 6, 8].find(index => board[index] === "");
+                if (corner !== undefined) return corner;
+            }
+            return open[Math.floor(Math.random() * open.length)];
+        }
+
+        function afterMove(mark) {
+            const line = checkWinner(mark);
+            if (line) {
+                finishRound(mark === "X" ? "Boa! Você fechou a linha." : "O computador fechou a linha.", mark.toLowerCase(), line);
+                return true;
+            }
+            if (!emptyCells().length) {
+                finishRound("Deu empate. Rodada bem travada.", "draw");
+                return true;
+            }
+            return false;
+        }
+
+        function botTurn() {
+            if (!active) return;
+            const move = chooseBotMove();
+            if (move === null) return;
+            board[move] = "O";
+            busy = false;
+            if (!afterMove("O")) {
+                statusEl.textContent = "Sua vez. Escolha uma casa.";
+                turnLabel.textContent = "Sua vez";
+                turnLabel.classList.add("active");
+                updateBoard();
+            }
+        }
+
+        function playerMove(index) {
+            if (!active || busy || board[index]) return;
+            board[index] = "X";
+            if (afterMove("X")) return;
+            busy = true;
+            statusEl.textContent = "Computador pensando...";
+            turnLabel.textContent = "Computador";
+            turnLabel.classList.remove("active");
+            updateBoard();
+            window.setTimeout(botTurn, 260);
+        }
+
+        function resetRound() {
+            board = Array(9).fill("");
+            active = true;
+            busy = false;
+            statusEl.textContent = "Sua vez. Escolha uma casa.";
+            turnLabel.textContent = "Sua vez";
+            turnLabel.classList.add("active");
+            updateBoard();
+        }
+
+        function shareGame() {
+            const text = `Joguei Jogo da Velha no Brasil Tools: ${scores.x} vitórias minhas, ${scores.o} do computador e ${scores.draw} empates. https://br.freetools.best/jogo-da-velha.html`;
+            window.location.href = `https://wa.me/?text=${encodeURIComponent(text)}`;
+        }
+
+        cells.forEach((cell, index) => cell.addEventListener("click", () => playerMove(index)));
+        resetBtn.addEventListener("click", resetRound);
+        difficulty.addEventListener("change", resetRound);
+        shareBtn.addEventListener("click", shareGame);
+        updateBoard();
+    </script>
+</body>
+</html>

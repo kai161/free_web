@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Forca Online Grátis em Português | Brasil Tools</title>
+    <meta name="description" content="Jogue Forca online grátis com palavras em português do Brasil. Passatempo leve, sem cadastro, sem instalar app e pronto para celular.">
+    <meta name="keywords" content="jogo da forca online, forca grátis, jogar forca, palavras em português, jogo de palavras celular">
+    <meta name="robots" content="index,follow,max-image-preview:large">
+    <meta name="theme-color" content="#1f8f54">
+    <link rel="canonical" href="https://br.freetools.best/jogo-da-forca.html">
+    <link rel="alternate" hreflang="pt-BR" href="https://br.freetools.best/jogo-da-forca.html">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="manifest" href="site.webmanifest">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Brasil Tools">
+    <meta property="og:title" content="Jogo da Forca Online Grátis">
+    <meta property="og:description" content="Adivinhe palavras brasileiras direto no navegador do celular.">
+    <meta property="og:url" content="https://br.freetools.best/jogo-da-forca.html">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Jogo da Forca Online Grátis">
+    <meta name="twitter:description" content="Forca em português do Brasil, sem cadastro e sem instalação.">
+    <link rel="stylesheet" href="styles.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Jogo da Forca Online",
+        "url": "https://br.freetools.best/jogo-da-forca.html",
+        "inLanguage": "pt-BR",
+        "applicationCategory": "GameApplication",
+        "operatingSystem": "Any",
+        "description": "Jogo da Forca grátis com palavras em português do Brasil.",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "BRL"
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Brasil Tools", "item": "https://br.freetools.best/"},
+            {"@type": "ListItem", "position": 2, "name": "Jogo da Forca", "item": "https://br.freetools.best/jogo-da-forca.html"}
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "O Jogo da Forca funciona offline depois de abrir?",
+                "acceptedAnswer": {"@type": "Answer", "text": "A lógica e as palavras ficam na própria página. Depois que a página carrega, o jogo não precisa consultar API externa."}
+            },
+            {
+                "@type": "Question",
+                "name": "As palavras são em português do Brasil?",
+                "acceptedAnswer": {"@type": "Answer", "text": "Sim. A lista usa temas comuns do Brasil, redes sociais, rotina e tecnologia."}
+            }
+        ]
+    }
+    </script>
+    <script>
+        (function() {
+            // 1. 初始化 va 函数
+            window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+
+            // 2. 动态创建并插入外部 JS 文件
+            const script = document.createElement('script');
+            script.src = '/_vercel/insights/script.js';
+            script.defer = true;
+            document.head.appendChild(script);
+        })();
+    </script>
+</head>
+<body>
+    <header class="site-header">
+        <nav class="nav" aria-label="Navegação principal">
+            <a class="brand" href="index.html"><span class="brand-mark">BR</span><span>Brasil Tools</span></a>
+            <div class="nav-links">
+                <a class="nav-link" href="index.html">Início</a>
+                <a class="nav-link" href="buscar.html">Buscar</a>
+                <a class="nav-link active" href="jogo-da-velha.html">Jogos</a>
+                <a class="nav-link" href="frases.html">Frases</a>
+                <a class="nav-link" href="contador-caracteres.html">Contador</a>
+                <a class="nav-link" href="conversor-texto.html">Texto</a>
+                <a class="nav-link" href="sorteador.html">Sorteador</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="wrap section">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html">Início</a>
+            <span>/</span>
+            <span>Jogo da Forca</span>
+        </nav>
+
+        <div class="panel-header">
+            <div>
+                <p class="eyebrow">Jogo de palavras</p>
+                <h1>Jogo da Forca online</h1>
+                <p class="lead">Adivinhe palavras brasileiras com teclado grande, dicas curtas e rodadas rápidas para jogar no celular.</p>
+            </div>
+            <a class="btn secondary" href="jogo-da-velha.html">Jogo da Velha</a>
+        </div>
+
+        <section class="tool-panel game-shell" aria-labelledby="forca-title">
+            <div class="panel-header">
+                <div>
+                    <h2 id="forca-title">Descubra a palavra</h2>
+                    <p class="game-message" id="forcaStatus">Escolha uma letra para começar.</p>
+                </div>
+                <span class="chip active" id="mistakeChip">0/6 erros</span>
+            </div>
+
+            <div class="game-layout">
+                <div>
+                    <pre class="hangman-figure" id="hangmanFigure" aria-label="Desenho da forca"></pre>
+                    <div class="word-display" id="wordDisplay" aria-label="Palavra secreta"></div>
+                    <p class="hint-line"><strong>Dica:</strong> <span id="hintText"></span></p>
+                    <p class="hint-line"><strong>Letras erradas:</strong> <span id="wrongLetters">nenhuma</span></p>
+                </div>
+
+                <aside class="game-side" aria-label="Teclado e placar">
+                    <div class="score-grid">
+                        <div class="stat"><strong id="winsCount">0</strong><span>Acertos</span></div>
+                        <div class="stat"><strong id="lossesCount">0</strong><span>Erros finais</span></div>
+                        <div class="stat"><strong id="streakCount">0</strong><span>Sequência</span></div>
+                    </div>
+                    <div class="letter-grid" id="letterGrid" aria-label="Letras disponíveis"></div>
+                    <div class="phrase-actions">
+                        <button class="btn" type="button" id="newWordBtn">Nova palavra</button>
+                        <button class="btn secondary" type="button" id="shareForcaBtn">Compartilhar</button>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <div class="ad-slot">Espaço para anúncio responsivo</div>
+
+        <article class="seo-content">
+            <h2>Forca online em português do Brasil</h2>
+            <p>O Jogo da Forca continua sendo um passatempo simples, rápido e fácil de compartilhar. Esta página usa uma lista local de palavras e roda sem depender de servidor para cada rodada.</p>
+            <h3>Por que é leve?</h3>
+            <p>As letras, dicas, pontuação e validação ficam no JavaScript da página. O celular só precisa carregar HTML, CSS e um script pequeno.</p>
+        </article>
+
+        <section class="seo-content">
+            <h2>Mais jogos rápidos</h2>
+            <div class="related-grid">
+                <a class="related-card" href="jogo-da-velha.html"><strong>Jogo da Velha</strong><span>Desafie o computador em rodadas curtas.</span></a>
+                <a class="related-card" href="caca-palavras.html"><strong>Caça-Palavras</strong><span>Encontre palavras em grades temáticas.</span></a>
+                <a class="related-card" href="frases.html"><strong>Frases para WhatsApp</strong><span>Copie mensagens brasileiras para status e grupos.</span></a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="index.html">Brasil Tools</a>
+            <a href="jogo-da-velha.html">Jogo da Velha</a>
+            <a href="caca-palavras.html">Caça-palavras</a>
+            <a href="buscar.html">Buscar</a>
+            <a href="mapa-do-site.html">Mapa do site</a>
+            <a href="privacidade.html">Privacidade</a>
+            <a href="termos.html">Termos</a>
+        </div>
+        Forca online grátis em português do Brasil.
+    </footer>
+
+    <script>
+        const words = [
+            { word: "BRASIL", hint: "País de muita conversa em grupo." },
+            { word: "CHURRASCO", hint: "Reunião com amigos e comida na brasa." },
+            { word: "FUTEBOL", hint: "Assunto que anima bar, família e grupo." },
+            { word: "CARNAVAL", hint: "Festa famosa no calendário brasileiro." },
+            { word: "PRAIA", hint: "Destino clássico de férias e fim de semana." },
+            { word: "SAMBA", hint: "Ritmo brasileiro conhecido no mundo." },
+            { word: "PIX", hint: "Pagamento rápido usado no Brasil." },
+            { word: "SENHA", hint: "Algo que precisa ser forte em aplicativos." },
+            { word: "STATUS", hint: "Lugar para frase curta no WhatsApp." },
+            { word: "LEGENDAS", hint: "Texto que acompanha foto nas redes." },
+            { word: "MENSAGEM", hint: "Texto enviado para alguém." },
+            { word: "SORTEIO", hint: "Escolha aleatória de um nome ou número." },
+            { word: "DESCONTO", hint: "Quando o preço fica menor." },
+            { word: "ANIVERSARIO", hint: "Dia de parabéns e bolo." },
+            { word: "CAFETERIA", hint: "Lugar para café e conversa." },
+            { word: "MERCADO", hint: "Onde muita gente pesquisa preço." },
+            { word: "CELULAR", hint: "A tela onde este jogo foi pensado para rodar." },
+            { word: "INTERNET", hint: "Conexão que leva mensagens e ferramentas." },
+            { word: "FAMILIA", hint: "Grupo que sempre manda bom dia." },
+            { word: "TRABALHO", hint: "Rotina que pede pausas rápidas." }
+        ];
+        const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+        const drawings = [
+            "  +---+\n      |\n      |\n      |\n     ===",
+            "  +---+\n  O   |\n      |\n      |\n     ===",
+            "  +---+\n  O   |\n  |   |\n      |\n     ===",
+            "  +---+\n  O   |\n /|   |\n      |\n     ===",
+            "  +---+\n  O   |\n /|\\  |\n      |\n     ===",
+            "  +---+\n  O   |\n /|\\  |\n /    |\n     ===",
+            "  +---+\n  O   |\n /|\\  |\n / \\  |\n     ==="
+        ];
+        const wordDisplay = document.getElementById("wordDisplay");
+        const hintText = document.getElementById("hintText");
+        const wrongLetters = document.getElementById("wrongLetters");
+        const statusEl = document.getElementById("forcaStatus");
+        const mistakeChip = document.getElementById("mistakeChip");
+        const letterGrid = document.getElementById("letterGrid");
+        const hangmanFigure = document.getElementById("hangmanFigure");
+        const newWordBtn = document.getElementById("newWordBtn");
+        const shareForcaBtn = document.getElementById("shareForcaBtn");
+        const winsCount = document.getElementById("winsCount");
+        const lossesCount = document.getElementById("lossesCount");
+        const streakCount = document.getElementById("streakCount");
+        let current = words[0];
+        let guessed = new Set();
+        let wrong = [];
+        let ended = false;
+        let stats = { wins: 0, losses: 0, streak: 0 };
+
+        function pickWord() {
+            const next = words[Math.floor(Math.random() * words.length)];
+            if (current && words.length > 1 && next.word === current.word) return pickWord();
+            return next;
+        }
+
+        function renderLetters() {
+            letterGrid.innerHTML = alphabet.map(letter => `
+                <button class="letter-btn" type="button" data-letter="${letter}" ${guessed.has(letter) || ended ? "disabled" : ""}>${letter}</button>
+            `).join("");
+        }
+
+        function renderWord() {
+            wordDisplay.innerHTML = current.word.split("").map(letter => `
+                <span class="word-slot">${guessed.has(letter) ? letter : ""}</span>
+            `).join("");
+        }
+
+        function updateStats() {
+            winsCount.textContent = stats.wins;
+            lossesCount.textContent = stats.losses;
+            streakCount.textContent = stats.streak;
+        }
+
+        function render() {
+            renderWord();
+            renderLetters();
+            hintText.textContent = current.hint;
+            wrongLetters.textContent = wrong.length ? wrong.join(", ") : "nenhuma";
+            mistakeChip.textContent = `${wrong.length}/6 erros`;
+            mistakeChip.classList.toggle("active", wrong.length < 4 && !ended);
+            hangmanFigure.textContent = drawings[wrong.length];
+            updateStats();
+        }
+
+        function hasWon() {
+            return current.word.split("").every(letter => guessed.has(letter));
+        }
+
+        function finish(win) {
+            ended = true;
+            if (win) {
+                stats.wins += 1;
+                stats.streak += 1;
+                statusEl.textContent = `Boa! A palavra era ${current.word}.`;
+            } else {
+                stats.losses += 1;
+                stats.streak = 0;
+                statusEl.textContent = `Fim da rodada. A palavra era ${current.word}.`;
+                current.word.split("").forEach(letter => guessed.add(letter));
+            }
+            render();
+        }
+
+        function guess(letter) {
+            if (ended || guessed.has(letter)) return;
+            guessed.add(letter);
+            if (!current.word.includes(letter)) wrong.push(letter);
+            if (hasWon()) {
+                finish(true);
+                return;
+            }
+            if (wrong.length >= 6) {
+                finish(false);
+                return;
+            }
+            statusEl.textContent = current.word.includes(letter) ? "Letra certa. Continue." : "Não tem essa letra.";
+            render();
+        }
+
+        function newWord() {
+            current = pickWord();
+            guessed = new Set();
+            wrong = [];
+            ended = false;
+            statusEl.textContent = "Escolha uma letra para começar.";
+            render();
+        }
+
+        function shareForca() {
+            const text = `Joguei Forca no Brasil Tools: ${stats.wins} acertos e sequência de ${stats.streak}. https://br.freetools.best/jogo-da-forca.html`;
+            window.location.href = `https://wa.me/?text=${encodeURIComponent(text)}`;
+        }
+
+        letterGrid.addEventListener("click", event => {
+            const button = event.target.closest("button[data-letter]");
+            if (button) guess(button.dataset.letter);
+        });
+        newWordBtn.addEventListener("click", newWord);
+        shareForcaBtn.addEventListener("click", shareForca);
+        current = pickWord();
+        render();
+    </script>
+</body>
+</html>
