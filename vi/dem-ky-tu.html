@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đếm ký tự, đếm từ và xử lý văn bản | FreeTools Việt</title>
+    <meta name="description" content="Đếm ký tự, từ, câu, dòng và dung lượng UTF-8. Chuyển chữ hoa, chữ thường, xóa dòng trống hoặc trùng lặp ngay trong trình duyệt.">
+    <meta name="robots" content="index,follow,max-image-preview:large">
+    <meta name="theme-color" content="#0b6b57">
+    <link rel="canonical" href="https://vi.freetools.best/dem-ky-tu.html">
+    <link rel="alternate" hreflang="vi-VN" href="https://vi.freetools.best/dem-ky-tu.html">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="stylesheet" href="assets/styles.css">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="vi_VN">
+    <meta property="og:site_name" content="FreeTools Việt">
+    <meta property="og:title" content="Đếm ký tự, đếm từ và xử lý văn bản online">
+    <meta property="og:description" content="Thống kê và xử lý văn bản ngay trên thiết bị, không gửi nội dung lên máy chủ.">
+    <meta property="og:url" content="https://vi.freetools.best/dem-ky-tu.html">
+    <meta name="twitter:card" content="summary">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Đếm ký tự và xử lý văn bản — FreeTools Việt",
+        "url": "https://vi.freetools.best/dem-ky-tu.html",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "inLanguage": "vi-VN",
+        "description": "Đếm ký tự, từ, câu, dòng, byte UTF-8 và xử lý văn bản ngay trong trình duyệt.",
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "VND"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "FreeTools Việt", "item": "https://vi.freetools.best/"},
+            {"@type": "ListItem", "position": 2, "name": "Đếm ký tự", "item": "https://vi.freetools.best/dem-ky-tu.html"}
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Văn bản có được gửi lên máy chủ không?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Không. Nội dung được thống kê và xử lý ngay trong trình duyệt, không được tải lên hoặc lưu trên máy chủ."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Công cụ đếm ký tự như thế nào?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Công cụ đếm theo ký tự Unicode để xử lý chính xác hơn chữ tiếng Việt và emoji. Chỉ số không có khoảng trắng loại bỏ mọi ký tự khoảng trắng."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Số từ và thời gian đọc được tính ra sao?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Từ được xác định theo các nhóm nội dung ngăn cách bằng khoảng trắng. Thời gian đọc được ước tính theo tốc độ 200 từ mỗi phút."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Xóa dòng trùng lặp có thay đổi văn bản gốc không?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Không. Mọi thao tác tạo kết quả trong một khu vực riêng, vì vậy văn bản gốc luôn được giữ nguyên."
+                }
+            }
+        ]
+    }
+    </script>
+    <script>
+        (function() {
+            window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+            const script = document.createElement('script');
+            script.src = '/_vercel/insights/script.js';
+            script.defer = true;
+            document.head.appendChild(script);
+        })();
+    </script>
+</head>
+<body>
+    <header class="site-header">
+        <nav class="nav" aria-label="Điều hướng chính">
+            <a class="brand" href="index.html" aria-label="FreeTools Việt — Trang chủ">
+                <span class="brand-mark" aria-hidden="true">VI</span>
+                <span>FreeTools Việt</span>
+            </a>
+            <div class="nav-links">
+                <a class="nav-link" href="index.html">Trang chủ</a>
+                <a class="nav-link" href="nen-anh.html">Nén ảnh</a>
+                <a class="nav-link" href="tao-mat-khau-ngau-nhien.html">Mật khẩu</a>
+                <a class="nav-link active" href="dem-ky-tu.html">Đếm ký tự</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="wrap tool-page">
+        <nav class="breadcrumb" aria-label="Đường dẫn">
+            <a href="index.html">Trang chủ</a><span aria-hidden="true">/</span><span>Đếm ký tự</span>
+        </nav>
+
+        <section class="tool-intro">
+            <div>
+                <p class="eyebrow">Đếm tức thì · Xử lý tại thiết bị</p>
+                <h1>Đếm ký tự, đếm từ và làm sạch văn bản.</h1>
+                <p class="lead">Dán hoặc nhập văn bản để xem số ký tự, từ, câu, dòng và byte. Khi cần chỉnh sửa, kết quả được tạo riêng để nội dung gốc luôn được giữ nguyên.</p>
+            </div>
+            <div class="trust-note">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3 5 6v5c0 4.8 2.9 8.2 7 10 4.1-1.8 7-5.2 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-5"/></svg>
+                <span><strong>Riêng tư:</strong> văn bản không rời khỏi trình duyệt.</span>
+            </div>
+        </section>
+
+        <section class="text-workspace" aria-label="Công cụ đếm ký tự và xử lý văn bản">
+            <div class="text-panel source-panel">
+                <div class="panel-heading">
+                    <div>
+                        <p class="eyebrow">Văn bản gốc</p>
+                        <h2>Nhập nội dung cần kiểm tra</h2>
+                    </div>
+                </div>
+                <label class="visually-hidden" for="sourceText">Văn bản gốc</label>
+                <textarea id="sourceText" rows="14" placeholder="Nhập hoặc dán văn bản tiếng Việt tại đây…" spellcheck="true"></textarea>
+
+                <div class="text-stats" aria-label="Thống kê văn bản">
+                    <div class="metric"><span>Ký tự</span><strong id="charactersWithSpaces">0</strong></div>
+                    <div class="metric"><span>Không khoảng trắng</span><strong id="charactersWithoutSpaces">0</strong></div>
+                    <div class="metric"><span>Từ</span><strong id="wordCount">0</strong></div>
+                    <div class="metric"><span>Câu</span><strong id="sentenceCount">0</strong></div>
+                    <div class="metric"><span>Dòng</span><strong id="lineCount">0</strong></div>
+                    <div class="metric"><span>Byte UTF-8</span><strong id="byteCount">0</strong></div>
+                    <div class="metric"><span>Thời gian đọc</span><strong id="readingTime">0 phút</strong></div>
+                </div>
+            </div>
+
+            <div class="text-panel result-panel">
+                <div class="panel-heading">
+                    <div>
+                        <p class="eyebrow">Kết quả riêng</p>
+                        <h2>Văn bản đã xử lý</h2>
+                    </div>
+                    <button class="text-button subtle" id="clearResultButton" type="button" disabled>Xóa kết quả</button>
+                </div>
+                <label class="visually-hidden" for="resultText">Kết quả xử lý</label>
+                <textarea id="resultText" rows="14" readonly placeholder="Chọn một thao tác bên dưới để tạo kết quả."></textarea>
+                <div class="result-actions">
+                    <button class="button secondary" id="copyResultButton" type="button" disabled>Sao chép kết quả</button>
+                    <button class="button" id="downloadResultButton" type="button" disabled>Tải tệp .txt</button>
+                </div>
+                <div class="status" id="textToolStatus" role="status" aria-live="polite" data-state="idle">
+                    Văn bản gốc sẽ không bị thay đổi.
+                </div>
+            </div>
+        </section>
+
+        <section class="content-card text-actions-card" aria-labelledby="text-actions-title">
+            <div class="section-heading">
+                <p class="eyebrow">Xử lý văn bản</p>
+                <h2 id="text-actions-title">Chọn thao tác bạn cần</h2>
+                <p>Mỗi thao tác tạo một bản kết quả riêng. Bạn có thể so sánh, sao chép hoặc tải xuống mà không làm mất nội dung ban đầu.</p>
+            </div>
+            <div class="text-action-grid">
+                <button class="text-action" id="uppercaseButton" type="button"><strong>CHỮ HOA</strong><span>Chuyển toàn bộ thành chữ hoa</span></button>
+                <button class="text-action" id="lowercaseButton" type="button"><strong>chữ thường</strong><span>Chuyển toàn bộ thành chữ thường</span></button>
+                <button class="text-action" id="titleCaseButton" type="button"><strong>Viết Hoa Tiêu Đề</strong><span>Viết hoa chữ đầu mỗi từ</span></button>
+                <button class="text-action" id="normalizeSpacesButton" type="button"><strong>Chuẩn hóa khoảng trắng</strong><span>Thu gọn khoảng trắng thừa</span></button>
+                <button class="text-action" id="removeBlankLinesButton" type="button"><strong>Xóa dòng trống</strong><span>Loại bỏ dòng chỉ có khoảng trắng</span></button>
+                <button class="text-action" id="removeDuplicateLinesButton" type="button"><strong>Xóa dòng trùng</strong><span>Giữ lần xuất hiện đầu tiên</span></button>
+                <button class="text-action" id="sortLinesButton" type="button"><strong>Sắp xếp dòng</strong><span>Sắp xếp theo tiếng Việt</span></button>
+            </div>
+        </section>
+
+        <article class="content-card">
+            <p class="eyebrow">Một trang, nhiều việc nhỏ</p>
+            <h2>Đếm chữ và xử lý văn bản khi nào hữu ích?</h2>
+            <div class="content-columns">
+                <div><h3>Kiểm tra giới hạn nội dung</h3><p>Biết nhanh số ký tự và từ trước khi đăng bài, gửi biểu mẫu hoặc viết mô tả sản phẩm.</p></div>
+                <div><h3>Làm sạch danh sách</h3><p>Xóa dòng trống, dòng trùng lặp hoặc sắp xếp danh sách mà không cần mở bảng tính.</p></div>
+                <div><h3>Giữ nguyên bản gốc</h3><p>Kết quả luôn nằm ở khu vực riêng để bạn dễ đối chiếu và tránh ghi đè nội dung quan trọng.</p></div>
+            </div>
+        </article>
+
+        <section class="content-card faq" aria-labelledby="faq-title">
+            <h2 id="faq-title">Câu hỏi thường gặp</h2>
+            <details><summary>Văn bản có được gửi lên máy chủ không?</summary><p>Không. Nội dung được thống kê và xử lý ngay trong trình duyệt, không được tải lên hoặc lưu trên máy chủ.</p></details>
+            <details><summary>Công cụ đếm ký tự như thế nào?</summary><p>Công cụ đếm theo ký tự Unicode để xử lý chính xác hơn chữ tiếng Việt và emoji. Chỉ số không có khoảng trắng loại bỏ mọi ký tự khoảng trắng.</p></details>
+            <details><summary>Số từ và thời gian đọc được tính ra sao?</summary><p>Từ được xác định theo các nhóm nội dung ngăn cách bằng khoảng trắng. Thời gian đọc được ước tính theo tốc độ 200 từ mỗi phút.</p></details>
+            <details><summary>Xóa dòng trùng lặp có thay đổi văn bản gốc không?</summary><p>Không. Mọi thao tác tạo kết quả trong một khu vực riêng, vì vậy văn bản gốc luôn được giữ nguyên.</p></details>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="wrap footer-inner">
+            <a class="brand footer-brand" href="index.html"><span class="brand-mark" aria-hidden="true">VI</span><span>FreeTools Việt</span></a>
+            <p>Văn bản được xử lý cục bộ và không được lưu lại.</p>
+        </div>
+    </footer>
+    <script type="module" src="assets/js/text-toolbox-app.mjs"></script>
+</body>
+</html>

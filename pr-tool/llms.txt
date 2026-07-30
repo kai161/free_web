@@ -6,7 +6,7 @@ Base URL: https://br.freetools.best/
 
 ## Principais páginas
 
-- https://br.freetools.best/ - Ferramentas gratuitas para WhatsApp, Pix, CPF, CNPJ, texto, imagens, sorteio, jogos rápidos, senhas e frases.
+- https://br.freetools.best/ - Ferramentas gratuitas para WhatsApp, Pix, CPF, CNPJ, texto, imagens, sorteio, jogos rápidos, senhas, frases e mensagens para datas especiais.
 - https://br.freetools.best/buscar.html - Busca interna das ferramentas.
 - https://br.freetools.best/mapa-do-site.html - Mapa HTML com links rastreáveis.
 - https://br.freetools.best/frases.html - Frases para WhatsApp.
@@ -21,6 +21,14 @@ Base URL: https://br.freetools.best/
 - https://br.freetools.best/jogo-da-velha.html - Jogo da Velha online grátis.
 - https://br.freetools.best/jogo-da-forca.html - Jogo da Forca online em português do Brasil.
 - https://br.freetools.best/caca-palavras.html - Caça-Palavras online grátis.
+- https://br.freetools.best/jogo-da-velha-2-jogadores.html - Jogo da Velha para 2 jogadores no mesmo celular.
+- https://br.freetools.best/jogo-da-forca-animais.html - Jogo da Forca de animais.
+- https://br.freetools.best/caca-palavras-frutas.html - Caça-Palavras de frutas.
+- https://br.freetools.best/mensagens-natal.html - Mensagens de Natal para WhatsApp.
+- https://br.freetools.best/mensagens-ano-novo.html - Mensagens de Ano Novo para WhatsApp.
+- https://br.freetools.best/frases-carnaval.html - Frases de Carnaval para WhatsApp e status.
+- https://br.freetools.best/mensagens-dia-das-maes.html - Mensagens de Dia das Mães.
+- https://br.freetools.best/mensagens-dia-dos-pais.html - Mensagens de Dia dos Pais.
 
 ## Páginas institucionais
 

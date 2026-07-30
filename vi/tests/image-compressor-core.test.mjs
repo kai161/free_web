@@ -22,12 +22,121 @@ import {
   secureRandomIndex,
   strengthFromEntropy,
 } from "../assets/js/password-generator-core.mjs";
+import {
+  analyzeText,
+  normalizeSpaces,
+  removeBlankLines,
+  removeDuplicateLines,
+  sortLines,
+  toLowercase,
+  toTitleCase,
+  toUppercase,
+} from "../assets/js/text-toolbox-core.mjs";
 
 const viRoot = fileURLToPath(new URL("..", import.meta.url));
 
 function readViFile(relativePath) {
   return readFileSync(new URL(relativePath, new URL("../", import.meta.url)), "utf8");
 }
+
+test("analyzeText returns zero metrics for empty text", () => {
+  assert.deepEqual(analyzeText(""), {
+    characters: 0,
+    charactersNoWhitespace: 0,
+    words: 0,
+    sentences: 0,
+    lines: 0,
+    bytes: 0,
+    readingMinutes: 0,
+  });
+});
+
+test("analyzeText counts Vietnamese text, emoji and lines", () => {
+  const text = "Xin chào 👋!\nBạn khỏe không?";
+  const result = analyzeText(text);
+
+  assert.equal(result.characters, 27);
+  assert.equal(result.charactersNoWhitespace, 22);
+  assert.equal(result.words, 6);
+  assert.equal(result.sentences, 2);
+  assert.equal(result.lines, 2);
+  assert.equal(result.bytes, new TextEncoder().encode(text).length);
+  assert.equal(result.readingMinutes, 1);
+});
+
+test("analyzeText treats Unicode whitespace and simple emoji correctly", () => {
+  const whitespace = analyzeText("a\u00a0b\tc");
+  const emoji = analyzeText("👋");
+
+  assert.equal(whitespace.characters, 5);
+  assert.equal(whitespace.charactersNoWhitespace, 3);
+  assert.equal(emoji.characters, 1);
+  assert.equal(emoji.bytes, 4);
+});
+
+test("analyzeText handles whitespace-only and unpunctuated text", () => {
+  const whitespaceOnly = analyzeText(" \t\n");
+  const unpunctuated = analyzeText("Xin chào");
+
+  assert.equal(whitespaceOnly.words, 0);
+  assert.equal(whitespaceOnly.sentences, 0);
+  assert.equal(whitespaceOnly.lines, 2);
+  assert.equal(unpunctuated.words, 2);
+  assert.equal(unpunctuated.sentences, 1);
+});
+
+test("analyzeText calculates reading-time and line boundaries", () => {
+  const twoHundredWords = Array(200).fill("từ").join(" ");
+  const twoHundredOneWords = `${twoHundredWords} từ`;
+
+  assert.equal(analyzeText(twoHundredWords).readingMinutes, 1);
+  assert.equal(analyzeText(twoHundredOneWords).readingMinutes, 2);
+  assert.equal(analyzeText("a\r\nb\nc").lines, 3);
+});
+
+test("Vietnamese casing uses the vi locale", () => {
+  assert.equal(toUppercase("tiếng việt"), "TIẾNG VIỆT");
+  assert.equal(toLowercase("TIẾNG VIỆT"), "tiếng việt");
+  assert.equal(toTitleCase("công cụ TRỰC TUYẾN"), "Công Cụ Trực Tuyến");
+});
+
+test("normalizeSpaces preserves line structure", () => {
+  assert.equal(normalizeSpaces("  xin   chào  \n  việt nam "), "xin chào\nviệt nam");
+  assert.equal(normalizeSpaces(" a\t\tb\r\n c  d "), "a b\nc d");
+});
+
+test("line helpers preserve deterministic results", () => {
+  assert.equal(removeBlankLines("a\n \nb"), "a\nb");
+  assert.equal(removeBlankLines("a\r\n\r\nb"), "a\nb");
+  assert.equal(removeDuplicateLines("b\na\nb"), "b\na");
+  assert.equal(sortLines("b\na\nb"), "a\nb\nb");
+});
+
+test("text transformations handle empty input without mutating source text", () => {
+  const source = " b\n a\n b";
+
+  for (const transform of [
+    toUppercase,
+    toLowercase,
+    toTitleCase,
+    normalizeSpaces,
+    removeBlankLines,
+    removeDuplicateLines,
+    sortLines,
+  ]) {
+    assert.equal(transform(""), "");
+    transform(source);
+    assert.equal(source, " b\n a\n b");
+  }
+});
+
+test("removeDuplicateLines keeps the first complete line occurrence", () => {
+  assert.equal(removeDuplicateLines("xin chào\nviệt nam\nxin chào\nXin chào"), [
+    "xin chào",
+    "việt nam",
+    "Xin chào",
+  ].join("\n"));
+});
 
 test("buildCharacterSets returns only enabled character groups", () => {
   assert.deepEqual(
@@ -285,6 +394,7 @@ test("Vietnamese home page is self-contained and localized", () => {
   assert.match(html, /href="assets\/styles\.css"/);
   assert.match(html, /href="nen-anh\.html"/);
   assert.match(html, /href="tao-mat-khau-ngau-nhien\.html"/);
+  assert.match(html, /href="dem-ky-tu\.html"/);
   assert.doesNotMatch(html, /(?:href|src)="\.\.\//);
 });
 
@@ -401,19 +511,120 @@ test("password generator application binds local-only browser interactions", () 
   );
 });
 
-test("Vietnamese navigation and home cards expose both live tools", () => {
+test("text toolbox page contains the approved Vietnamese controls", () => {
+  const html = readViFile("dem-ky-tu.html");
+
+  assert.match(html, /<html lang="vi">/);
+  assert.match(
+    html,
+    /<link rel="canonical" href="https:\/\/vi\.freetools\.best\/dem-ky-tu\.html">/,
+  );
+
+  for (const id of [
+    "sourceText",
+    "charactersWithSpaces",
+    "charactersWithoutSpaces",
+    "wordCount",
+    "sentenceCount",
+    "lineCount",
+    "byteCount",
+    "readingTime",
+    "uppercaseButton",
+    "lowercaseButton",
+    "titleCaseButton",
+    "normalizeSpacesButton",
+    "removeBlankLinesButton",
+    "removeDuplicateLinesButton",
+    "sortLinesButton",
+    "resultText",
+    "copyResultButton",
+    "downloadResultButton",
+    "clearResultButton",
+    "textToolStatus",
+  ]) {
+    assert.match(html, new RegExp(`id="${id}"`), `missing #${id}`);
+  }
+
+  assert.match(html, /Đếm ký tự/);
+  assert.match(html, /href="assets\/styles\.css"/);
+  assert.doesNotMatch(html, /(?:href|src)="\.\.\//);
+});
+
+test("text toolbox page exposes matching SEO and FAQ schemas", () => {
+  const html = readViFile("dem-ky-tu.html");
+
+  assert.match(html, /"@type": "WebApplication"/);
+  assert.match(html, /"@type": "BreadcrumbList"/);
+  assert.match(html, /"@type": "FAQPage"/);
+  assert.match(html, /Văn bản có được gửi lên máy chủ không\?/);
+  assert.match(html, /Công cụ đếm ký tự như thế nào\?/);
+  assert.match(
+    html,
+    /<script type="module" src="assets\/js\/text-toolbox-app\.mjs"><\/script>/,
+  );
+  assert.match(html, /window\.va = window\.va \|\| function/);
+  assert.match(html, /script\.src = ['"]\/_vercel\/insights\/script\.js['"]/);
+  assert.doesNotMatch(html, /fetch\(|XMLHttpRequest|localStorage|sessionStorage/);
+});
+
+test("text toolbox application binds local-only browser interactions", () => {
+  const app = readViFile("assets/js/text-toolbox-app.mjs");
+
+  for (const importedFunction of [
+    "analyzeText",
+    "normalizeSpaces",
+    "removeBlankLines",
+    "removeDuplicateLines",
+    "sortLines",
+    "toLowercase",
+    "toTitleCase",
+    "toUppercase",
+  ]) {
+    assert.match(app, new RegExp(importedFunction));
+  }
+
+  assert.match(app, /getElementById\("sourceText"\)/);
+  assert.match(app, /addEventListener\("input"/);
+  assert.match(app, /addEventListener\("click"/);
+  assert.match(app, /navigator\.clipboard\.writeText/);
+  assert.match(app, /document\.createElement\("textarea"\)/);
+  assert.match(app, /new Blob\(/);
+  assert.match(app, /URL\.createObjectURL/);
+  assert.match(app, /URL\.revokeObjectURL/);
+  assert.doesNotMatch(
+    app,
+    /fetch\(|XMLHttpRequest|FormData|localStorage|sessionStorage|console\.|window\.va\s*\(\s*["']event/,
+  );
+});
+
+test("Vietnamese navigation and home cards expose all live tools", () => {
   const home = readViFile("index.html");
   const compressor = readViFile("nen-anh.html");
   const passwordGenerator = readViFile("tao-mat-khau-ngau-nhien.html");
+  const textToolbox = readViFile("dem-ky-tu.html");
 
   assert.match(home, /<h3>Tạo mật khẩu ngẫu nhiên<\/h3>/);
+  assert.match(home, /<h3>Đếm ký tự và từ<\/h3>/);
   assert.ok(
     (home.match(/href="tao-mat-khau-ngau-nhien\.html"/g) || []).length >= 2,
     "home should link the password page from navigation and a tool card",
   );
+  assert.ok(
+    (home.match(/href="dem-ky-tu\.html"/g) || []).length >= 2,
+    "home should link the text toolbox from navigation and a tool card",
+  );
   assert.match(compressor, /href="tao-mat-khau-ngau-nhien\.html"/);
+  assert.match(compressor, /href="dem-ky-tu\.html"/);
   assert.match(passwordGenerator, /href="nen-anh\.html"/);
+  assert.match(passwordGenerator, /href="dem-ky-tu\.html"/);
   assert.match(passwordGenerator, /href="assets\/styles\.css"/);
+  assert.match(textToolbox, /href="nen-anh\.html"/);
+  assert.match(textToolbox, /href="tao-mat-khau-ngau-nhien\.html"/);
+  assert.match(textToolbox, /href="assets\/styles\.css"/);
+
+  const styles = readViFile("assets/styles.css");
+  assert.match(styles, /\.text-workspace/);
+  assert.match(styles, /\.text-action-grid/);
 });
 
 test("robots and sitemap describe only the Vietnamese site", () => {
@@ -429,7 +640,8 @@ test("robots and sitemap describe only the Vietnamese site", () => {
     sitemap,
     /https:\/\/vi\.freetools\.best\/tao-mat-khau-ngau-nhien\.html<\/loc>/,
   );
-  assert.equal((sitemap.match(/<url>/g) || []).length, 3);
+  assert.match(sitemap, /https:\/\/vi\.freetools\.best\/dem-ky-tu\.html<\/loc>/);
+  assert.equal((sitemap.match(/<url>/g) || []).length, 4);
   assert.doesNotMatch(sitemap, /br\.freetools\.best/);
 });
 
@@ -438,6 +650,7 @@ test("all Vietnamese pages expose complete indexable metadata", () => {
     "index.html",
     "nen-anh.html",
     "tao-mat-khau-ngau-nhien.html",
+    "dem-ky-tu.html",
   ]) {
     const html = readViFile(page);
     assert.match(html, /<meta name="description" content="[^"]+">/);
@@ -461,6 +674,7 @@ test("all Vietnamese pages load Vercel Web Analytics like pr-tool", () => {
     "index.html",
     "nen-anh.html",
     "tao-mat-khau-ngau-nhien.html",
+    "dem-ky-tu.html",
   ]) {
     const html = readViFile(page);
     assert.match(html, /window\.va = window\.va \|\| function/);

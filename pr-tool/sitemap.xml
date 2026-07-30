@@ -133,6 +133,24 @@
     <priority>0.78</priority>
   </url>
   <url>
+    <loc>https://br.freetools.best/jogo-da-velha-2-jogadores.html</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://br.freetools.best/jogo-da-forca-animais.html</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://br.freetools.best/caca-palavras-frutas.html</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
     <loc>https://br.freetools.best/calcular-10-porcento.html</loc>
     <lastmod>2026-07-20</lastmod>
     <changefreq>monthly</changefreq>
@@ -323,5 +341,35 @@
     <lastmod>2026-07-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.86</priority>
+  </url>
+  <url>
+    <loc>https://br.freetools.best/mensagens-natal.html</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://br.freetools.best/mensagens-ano-novo.html</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://br.freetools.best/frases-carnaval.html</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.78</priority>
+  </url>
+  <url>
+    <loc>https://br.freetools.best/mensagens-dia-das-maes.html</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.78</priority>
+  </url>
+  <url>
+    <loc>https://br.freetools.best/mensagens-dia-dos-pais.html</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>

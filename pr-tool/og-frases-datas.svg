@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Mensagens para datas especiais</title>
+  <desc id="desc">Frases para Natal, Ano Novo, Carnaval, Dia das Mães e Dia dos Pais.</desc>
+  <rect width="1200" height="630" fill="#f6f7f2"/>
+  <circle cx="180" cy="118" r="170" fill="#f7c948" opacity=".55"/>
+  <circle cx="1040" cy="498" r="210" fill="#e85d4f" opacity=".16"/>
+  <rect x="82" y="78" width="1036" height="474" rx="24" fill="#ffffff" stroke="#17211b" stroke-width="6"/>
+  <rect x="130" y="130" width="290" height="330" rx="22" fill="#e9f8ee" stroke="#1f8f54" stroke-width="5"/>
+  <rect x="166" y="178" width="218" height="42" rx="14" fill="#ffffff"/>
+  <rect x="166" y="246" width="168" height="42" rx="14" fill="#ffffff"/>
+  <rect x="166" y="314" width="200" height="42" rx="14" fill="#ffffff"/>
+  <path d="M364 426c-64-28-104-66-120-112-10-30 28-48 48-23 20-25 58-7 48 23-10 32-34 58-72 82" fill="#e85d4f"/>
+  <text x="470" y="158" fill="#136b3d" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="900">Frases para WhatsApp</text>
+  <text x="470" y="260" fill="#17211b" font-family="Arial, Helvetica, sans-serif" font-size="76" font-weight="900">Datas especiais</text>
+  <text x="474" y="334" fill="#5f6d65" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700">Mensagens prontas para copiar e compartilhar</text>
+  <g transform="translate(474 416)">
+    <rect width="98" height="52" rx="14" fill="#e9f8ee" stroke="#1f8f54" stroke-width="3"/>
+    <text x="49" y="35" fill="#136b3d" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="900" text-anchor="middle">Natal</text>
+    <rect x="116" width="130" height="52" rx="14" fill="#fff2bf" stroke="#d9a800" stroke-width="3"/>
+    <text x="181" y="35" fill="#6b5200" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="900" text-anchor="middle">Ano Novo</text>
+    <rect x="264" width="138" height="52" rx="14" fill="#fce9e7" stroke="#e85d4f" stroke-width="3"/>
+    <text x="333" y="35" fill="#b6372e" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="900" text-anchor="middle">Família</text>
+  </g>
+</svg>
