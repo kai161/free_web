@@ -15,12 +15,138 @@ import {
   supportsQualitySearch,
   validateFileMetadata,
 } from "../assets/js/image-compressor-core.mjs";
+import {
+  buildCharacterSets,
+  estimateEntropy,
+  generatePassword,
+  secureRandomIndex,
+  strengthFromEntropy,
+} from "../assets/js/password-generator-core.mjs";
 
 const viRoot = fileURLToPath(new URL("..", import.meta.url));
 
 function readViFile(relativePath) {
   return readFileSync(new URL(relativePath, new URL("../", import.meta.url)), "utf8");
 }
+
+test("buildCharacterSets returns only enabled character groups", () => {
+  assert.deepEqual(
+    buildCharacterSets({
+      upper: true,
+      lower: false,
+      numbers: true,
+      symbols: false,
+      excludeAmbiguous: false,
+    }),
+    ["ABCDEFGHIJKLMNOPQRSTUVWXYZ", "0123456789"],
+  );
+});
+
+test("buildCharacterSets removes ambiguous characters when requested", () => {
+  const groups = buildCharacterSets({
+    upper: true,
+    lower: true,
+    numbers: true,
+    symbols: true,
+    excludeAmbiguous: true,
+  });
+
+  assert.equal(groups.length, 4);
+  assert.equal(groups.join("").match(/[0O1lI]/), null);
+});
+
+test("secureRandomIndex rejects biased values before applying modulo", () => {
+  const values = [0xffff_ffff, 7];
+  const fillRandom = target => {
+    target[0] = values.shift();
+  };
+
+  assert.equal(secureRandomIndex(10, fillRandom), 7);
+  assert.equal(values.length, 0);
+});
+
+test("secureRandomIndex rejects invalid ranges", () => {
+  assert.throws(() => secureRandomIndex(0), RangeError);
+  assert.throws(() => secureRandomIndex(-1), RangeError);
+  assert.throws(() => secureRandomIndex(1.5), RangeError);
+});
+
+test("generatePassword guarantees every selected character group", () => {
+  const password = generatePassword(
+    {
+      length: 20,
+      upper: true,
+      lower: true,
+      numbers: true,
+      symbols: true,
+      excludeAmbiguous: false,
+    },
+    () => 0,
+  );
+
+  assert.equal(password.length, 20);
+  assert.match(password, /[A-Z]/);
+  assert.match(password, /[a-z]/);
+  assert.match(password, /[0-9]/);
+  assert.match(password, /[!@#$%&*?+\-_=\.]/);
+});
+
+test("generatePassword honors ambiguous-character exclusion", () => {
+  const password = generatePassword(
+    {
+      length: 64,
+      upper: true,
+      lower: true,
+      numbers: true,
+      symbols: true,
+      excludeAmbiguous: true,
+    },
+    () => 0,
+  );
+
+  assert.equal(password.match(/[0O1lI]/), null);
+});
+
+test("generatePassword validates length and selected groups", () => {
+  const baseOptions = {
+    upper: true,
+    lower: true,
+    numbers: true,
+    symbols: true,
+    excludeAmbiguous: true,
+  };
+
+  assert.throws(() => generatePassword({ ...baseOptions, length: 7 }), RangeError);
+  assert.throws(() => generatePassword({ ...baseOptions, length: 65 }), RangeError);
+  assert.throws(
+    () =>
+      generatePassword({
+        length: 20,
+        upper: false,
+        lower: false,
+        numbers: false,
+        symbols: false,
+      }),
+    /character_group_required/,
+  );
+});
+
+test("estimateEntropy returns rounded bits for the effective pool", () => {
+  assert.equal(estimateEntropy(20, 62), 119);
+  assert.equal(estimateEntropy(8, 10), 27);
+  assert.throws(() => estimateEntropy(0, 62), RangeError);
+  assert.throws(() => estimateEntropy(20, 1), RangeError);
+});
+
+test("strengthFromEntropy maps stable Vietnamese strength labels", () => {
+  assert.deepEqual(strengthFromEntropy(39), { level: "weak", label: "Yếu" });
+  assert.deepEqual(strengthFromEntropy(40), { level: "medium", label: "Trung bình" });
+  assert.deepEqual(strengthFromEntropy(60), { level: "strong", label: "Mạnh" });
+  assert.deepEqual(strengthFromEntropy(80), {
+    level: "very-strong",
+    label: "Rất mạnh",
+  });
+});
 
 test("parseTargetBytes converts KB and MB using binary units", () => {
   assert.equal(parseTargetBytes(500, "KB"), 512_000);
@@ -158,6 +284,7 @@ test("Vietnamese home page is self-contained and localized", () => {
   assert.match(html, /https:\/\/vi\.freetools\.best\//);
   assert.match(html, /href="assets\/styles\.css"/);
   assert.match(html, /href="nen-anh\.html"/);
+  assert.match(html, /href="tao-mat-khau-ngau-nhien\.html"/);
   assert.doesNotMatch(html, /(?:href|src)="\.\.\//);
 });
 
@@ -206,6 +333,89 @@ test("browser application keeps image processing local and releases object URLs"
   assert.doesNotMatch(app, /fetch\(|XMLHttpRequest|FormData/);
 });
 
+test("password generator page contains the approved Vietnamese controls", () => {
+  const html = readViFile("tao-mat-khau-ngau-nhien.html");
+
+  assert.match(html, /<html lang="vi">/);
+  assert.match(
+    html,
+    /<link rel="canonical" href="https:\/\/vi\.freetools\.best\/tao-mat-khau-ngau-nhien\.html">/,
+  );
+
+  for (const id of [
+    "passwordOutput",
+    "passwordLength",
+    "passwordLengthValue",
+    "includeUpper",
+    "includeLower",
+    "includeNumbers",
+    "includeSymbols",
+    "excludeAmbiguous",
+    "generateButton",
+    "copyButton",
+    "generateBatchButton",
+    "batchResults",
+    "strengthLabel",
+    "entropyValue",
+    "passwordStatus",
+  ]) {
+    assert.match(html, new RegExp(`id="${id}"`), `missing #${id}`);
+  }
+
+  assert.match(html, /id="passwordLength"[^>]+min="8"[^>]+max="64"[^>]+value="20"/);
+  assert.match(html, /Tạo mật khẩu ngẫu nhiên/);
+  assert.doesNotMatch(html, /(?:href|src)="\.\.\//);
+});
+
+test("password generator page exposes matching SEO and FAQ schemas", () => {
+  const html = readViFile("tao-mat-khau-ngau-nhien.html");
+
+  assert.match(html, /"@type": "WebApplication"/);
+  assert.match(html, /"@type": "BreadcrumbList"/);
+  assert.match(html, /"@type": "FAQPage"/);
+  assert.match(html, /Mật khẩu có được gửi lên máy chủ không\?/);
+  assert.match(html, /Mật khẩu dài bao nhiêu là an toàn\?/);
+  assert.match(
+    html,
+    /<script type="module" src="assets\/js\/password-generator-app\.mjs"><\/script>/,
+  );
+  assert.match(html, /window\.va = window\.va \|\| function/);
+  assert.match(html, /script\.src = ['"]\/_vercel\/insights\/script\.js['"]/);
+});
+
+test("password generator application binds local-only browser interactions", () => {
+  const app = readViFile("assets/js/password-generator-app.mjs");
+
+  assert.match(app, /generatePassword/);
+  assert.match(app, /estimateEntropy/);
+  assert.match(app, /strengthFromEntropy/);
+  assert.match(app, /getElementById\("generateButton"\)/);
+  assert.match(app, /getElementById\("copyButton"\)/);
+  assert.match(app, /getElementById\("generateBatchButton"\)/);
+  assert.match(app, /addEventListener\("click"/);
+  assert.match(app, /navigator\.clipboard\.writeText/);
+  assert.match(app, /document\.createElement\("textarea"\)/);
+  assert.doesNotMatch(
+    app,
+    /fetch\(|XMLHttpRequest|FormData|localStorage|sessionStorage|window\.va\s*\(\s*["']event/,
+  );
+});
+
+test("Vietnamese navigation and home cards expose both live tools", () => {
+  const home = readViFile("index.html");
+  const compressor = readViFile("nen-anh.html");
+  const passwordGenerator = readViFile("tao-mat-khau-ngau-nhien.html");
+
+  assert.match(home, /<h3>Tạo mật khẩu ngẫu nhiên<\/h3>/);
+  assert.ok(
+    (home.match(/href="tao-mat-khau-ngau-nhien\.html"/g) || []).length >= 2,
+    "home should link the password page from navigation and a tool card",
+  );
+  assert.match(compressor, /href="tao-mat-khau-ngau-nhien\.html"/);
+  assert.match(passwordGenerator, /href="nen-anh\.html"/);
+  assert.match(passwordGenerator, /href="assets\/styles\.css"/);
+});
+
 test("robots and sitemap describe only the Vietnamese site", () => {
   const robots = readViFile("robots.txt");
   const sitemap = readViFile("sitemap.xml");
@@ -215,12 +425,20 @@ test("robots and sitemap describe only the Vietnamese site", () => {
   assert.match(robots, /Sitemap: https:\/\/vi\.freetools\.best\/sitemap\.xml/);
   assert.match(sitemap, /https:\/\/vi\.freetools\.best\/<\/loc>/);
   assert.match(sitemap, /https:\/\/vi\.freetools\.best\/nen-anh\.html<\/loc>/);
-  assert.equal((sitemap.match(/<url>/g) || []).length, 2);
+  assert.match(
+    sitemap,
+    /https:\/\/vi\.freetools\.best\/tao-mat-khau-ngau-nhien\.html<\/loc>/,
+  );
+  assert.equal((sitemap.match(/<url>/g) || []).length, 3);
   assert.doesNotMatch(sitemap, /br\.freetools\.best/);
 });
 
-test("both Vietnamese pages expose complete indexable metadata", () => {
-  for (const page of ["index.html", "nen-anh.html"]) {
+test("all Vietnamese pages expose complete indexable metadata", () => {
+  for (const page of [
+    "index.html",
+    "nen-anh.html",
+    "tao-mat-khau-ngau-nhien.html",
+  ]) {
     const html = readViFile(page);
     assert.match(html, /<meta name="description" content="[^"]+">/);
     assert.match(html, /<meta name="robots" content="index,follow,max-image-preview:large">/);
@@ -239,7 +457,11 @@ test("image compressor exposes FAQ structured data for visible questions", () =>
 });
 
 test("all Vietnamese pages load Vercel Web Analytics like pr-tool", () => {
-  for (const page of ["index.html", "nen-anh.html"]) {
+  for (const page of [
+    "index.html",
+    "nen-anh.html",
+    "tao-mat-khau-ngau-nhien.html",
+  ]) {
     const html = readViFile(page);
     assert.match(html, /window\.va = window\.va \|\| function/);
     assert.match(html, /script\.src = ['"]\/_vercel\/insights\/script\.js['"]/);
