@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://br.freetools.best/</loc>
-    <lastmod>2026-07-20</lastmod>
+    <lastmod>2026-07-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -56,9 +56,39 @@
   </url>
   <url>
     <loc>https://br.freetools.best/mapa-do-site.html</loc>
-    <lastmod>2026-07-20</lastmod>
+    <lastmod>2026-07-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.72</priority>
+  </url>
+  <url>
+    <loc>https://br.freetools.best/buscar.html</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.78</priority>
+  </url>
+  <url>
+    <loc>https://br.freetools.best/sobre.html</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.42</priority>
+  </url>
+  <url>
+    <loc>https://br.freetools.best/privacidade.html</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://br.freetools.best/termos.html</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://br.freetools.best/contato.html</loc>
+    <lastmod>2026-07-28</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.38</priority>
   </url>
   <url>
     <loc>https://br.freetools.best/calculadora-porcentagem.html</loc>

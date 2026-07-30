@@ -1,0 +1,27 @@
+# Brasil Tools
+
+Brasil Tools é um site estático em português do Brasil com ferramentas gratuitas para tarefas rápidas no celular.
+
+Base URL: https://br.freetools.best/
+
+## Principais páginas
+
+- https://br.freetools.best/ - Ferramentas gratuitas para WhatsApp, Pix, CPF, CNPJ, texto, imagens, sorteio, senhas e frases.
+- https://br.freetools.best/buscar.html - Busca interna das ferramentas.
+- https://br.freetools.best/mapa-do-site.html - Mapa HTML com links rastreáveis.
+- https://br.freetools.best/frases.html - Frases para WhatsApp.
+- https://br.freetools.best/link-whatsapp.html - Gerador de link WhatsApp.
+- https://br.freetools.best/pix-copia-e-cola.html - Gerador Pix Copia e Cola.
+- https://br.freetools.best/pix.html - Racha conta Pix.
+- https://br.freetools.best/cpf.html - Validador de CPF.
+- https://br.freetools.best/cnpj.html - Validador de CNPJ.
+- https://br.freetools.best/imagem.html - Compressor e cortador de fotos sociais.
+- https://br.freetools.best/contador-caracteres.html - Contador de caracteres.
+- https://br.freetools.best/conversor-texto.html - Conversor de texto.
+
+## Páginas institucionais
+
+- https://br.freetools.best/sobre.html
+- https://br.freetools.best/privacidade.html
+- https://br.freetools.best/termos.html
+- https://br.freetools.best/contato.html
