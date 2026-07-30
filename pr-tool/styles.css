@@ -67,7 +67,7 @@ button {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1rem;
+    gap: 1.25rem;
     width: min(1120px, calc(100% - 2rem));
     height: 4.25rem;
     margin: 0 auto;
@@ -97,9 +97,13 @@ button {
 
 .nav-links {
     display: flex;
-    gap: 0.35rem;
+    flex: 1 1 auto;
+    justify-content: flex-end;
+    min-width: 0;
+    gap: 0.3rem;
     overflow-x: auto;
     padding: 0.4rem 0;
+    -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
 }
 
@@ -110,12 +114,13 @@ button {
 .nav-link {
     display: inline-flex;
     align-items: center;
-    min-height: 2.75rem;
-    padding: 0.5rem 0.85rem;
+    justify-content: center;
+    min-height: 2.55rem;
+    padding: 0.45rem 0.68rem;
     border: 1px solid transparent;
     border-radius: 0.5rem;
     color: var(--muted);
-    font-size: 0.94rem;
+    font-size: 0.9rem;
     font-weight: 800;
     white-space: nowrap;
 }
@@ -125,6 +130,12 @@ button {
     border-color: var(--line);
     color: var(--ink);
     background: var(--surface);
+}
+
+.nav-search {
+    border-color: rgba(31, 143, 84, 0.22);
+    color: var(--green-dark);
+    background: rgba(233, 248, 238, 0.72);
 }
 
 .wrap {
@@ -939,6 +950,7 @@ canvas {
 
     .nav-links {
         width: 100%;
+        justify-content: flex-start;
         scroll-snap-type: x proximity;
         -webkit-overflow-scrolling: touch;
     }
@@ -994,6 +1006,21 @@ canvas {
 
     .lead {
         font-size: 1rem;
+    }
+
+    .brand span:last-child {
+        font-size: 0.98rem;
+    }
+
+    .nav-links {
+        margin-inline: -0.25rem;
+        padding-inline: 0.25rem;
+    }
+
+    .nav-link {
+        min-height: 2.45rem;
+        padding: 0.42rem 0.62rem;
+        font-size: 0.86rem;
     }
 
     .tool-panel {
@@ -1140,9 +1167,9 @@ canvas {
     }
 
     .nav-link {
-        min-height: 2.65rem;
-        padding: 0.45rem 0.7rem;
-        font-size: 0.88rem;
+        min-height: 2.38rem;
+        padding: 0.4rem 0.55rem;
+        font-size: 0.82rem;
     }
 
     .tool-panel {
