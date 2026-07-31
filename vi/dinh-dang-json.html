@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Định dạng JSON online và kiểm tra lỗi | FreeTools Việt</title>
+    <meta name="description" content="Định dạng JSON online, kiểm tra lỗi theo dòng và cột, thu gọn hoặc tải tệp JSON. Dữ liệu được xử lý riêng tư ngay trong trình duyệt.">
+    <meta name="robots" content="index,follow,max-image-preview:large">
+    <meta name="theme-color" content="#0b6b57">
+    <link rel="canonical" href="https://vi.freetools.best/dinh-dang-json.html">
+    <link rel="alternate" hreflang="vi-VN" href="https://vi.freetools.best/dinh-dang-json.html">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="stylesheet" href="assets/styles.css">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="vi_VN">
+    <meta property="og:site_name" content="FreeTools Việt">
+    <meta property="og:title" content="Định dạng JSON online và kiểm tra lỗi">
+    <meta property="og:description" content="Làm đẹp, thu gọn và kiểm tra JSON ngay trên thiết bị, không gửi dữ liệu lên máy chủ.">
+    <meta property="og:url" content="https://vi.freetools.best/dinh-dang-json.html">
+    <meta name="twitter:card" content="summary">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Định dạng JSON online — FreeTools Việt",
+        "url": "https://vi.freetools.best/dinh-dang-json.html",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any",
+        "inLanguage": "vi-VN",
+        "description": "Định dạng, thu gọn và kiểm tra lỗi JSON ngay trong trình duyệt.",
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "VND"}
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "FreeTools Việt", "item": "https://vi.freetools.best/"},
+            {"@type": "ListItem", "position": 2, "name": "Định dạng JSON", "item": "https://vi.freetools.best/dinh-dang-json.html"}
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "JSON có được gửi lên máy chủ không?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Không. JSON được đọc, kiểm tra và định dạng ngay trong trình duyệt. Nội dung không được tải lên hoặc lưu trên máy chủ."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Công cụ có thể tìm lỗi JSON không?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Có. Khi trình duyệt cung cấp vị trí lỗi, công cụ sẽ hiển thị dòng và cột để bạn kiểm tra dấu phẩy, dấu ngoặc hoặc dấu ngoặc kép gần đó."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Định dạng 2 khoảng trắng và 4 khoảng trắng khác nhau thế nào?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Cả hai đều giữ nguyên dữ liệu. Hai khoảng trắng tạo kết quả gọn hơn, còn bốn khoảng trắng tạo độ thụt lề rộng và dễ quan sát hơn."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Thu gọn JSON có làm thay đổi dữ liệu không?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Không. Thu gọn chỉ loại bỏ khoảng trắng không cần thiết. Giá trị JSON vẫn được giữ nguyên và nội dung gốc không bị ghi đè."
+                }
+            }
+        ]
+    }
+    </script>
+    <script>
+        (function() {
+            window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+            const script = document.createElement('script');
+            script.src = '/_vercel/insights/script.js';
+            script.defer = true;
+            document.head.appendChild(script);
+        })();
+    </script>
+</head>
+<body>
+    <header class="site-header">
+        <nav class="nav" aria-label="Điều hướng chính">
+            <a class="brand" href="index.html" aria-label="FreeTools Việt — Trang chủ">
+                <span class="brand-mark" aria-hidden="true">VI</span>
+                <span>FreeTools Việt</span>
+            </a>
+            <div class="nav-links">
+                <a class="nav-link" href="index.html">Trang chủ</a>
+                <a class="nav-link" href="nen-anh.html">Nén ảnh</a>
+                <a class="nav-link" href="tao-mat-khau-ngau-nhien.html">Mật khẩu</a>
+                <a class="nav-link" href="dem-ky-tu.html">Đếm ký tự</a>
+                <a class="nav-link active" href="dinh-dang-json.html">JSON</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="wrap tool-page">
+        <nav class="breadcrumb" aria-label="Đường dẫn">
+            <a href="index.html">Trang chủ</a>
+            <span aria-hidden="true">/</span>
+            <span>Định dạng JSON</span>
+        </nav>
+
+        <section class="tool-intro json-intro">
+            <div>
+                <p class="eyebrow">Định dạng JSON online · Kiểm tra tại thiết bị</p>
+                <h1>Định dạng JSON và tìm lỗi dễ đọc hơn.</h1>
+                <p class="lead">Dán hoặc tải tệp JSON để kiểm tra cú pháp, xác định lỗi theo dòng và cột, sau đó làm đẹp hoặc thu gọn trong một khu vực kết quả riêng.</p>
+            </div>
+            <p class="privacy-note">
+                <span aria-hidden="true">◇</span>
+                <span><strong>Riêng tư:</strong> JSON không rời khỏi trình duyệt.</span>
+            </p>
+        </section>
+
+        <section class="json-workspace" aria-label="Công cụ định dạng và kiểm tra JSON">
+            <article class="json-panel">
+                <div class="panel-heading">
+                    <div>
+                        <p class="eyebrow">JSON gốc</p>
+                        <h2>Nhập dữ liệu cần kiểm tra</h2>
+                    </div>
+                    <label class="text-button file-button" for="jsonFileInput">Tải tệp .json</label>
+                    <input id="jsonFileInput" class="visually-hidden" type="file" accept=".json,application/json">
+                </div>
+
+                <label class="field-label" for="sourceJson">Nội dung JSON gốc</label>
+                <textarea id="sourceJson" class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder='Ví dụ: {"ten":"Việt Nam","hopLe":true}'></textarea>
+
+                <div class="json-validation" id="jsonValidationStatus" role="status" aria-live="polite">
+                    Hãy nhập hoặc tải một nội dung JSON.
+                </div>
+                <div class="json-metrics" aria-label="Thông tin JSON">
+                    <div class="metric">
+                        <span>Kiểu gốc</span>
+                        <strong id="jsonRootType">—</strong>
+                    </div>
+                    <div class="metric">
+                        <span>Số nút</span>
+                        <strong id="jsonNodeCount">0</strong>
+                    </div>
+                </div>
+            </article>
+
+            <article class="json-panel">
+                <div class="panel-heading">
+                    <div>
+                        <p class="eyebrow">Kết quả riêng</p>
+                        <h2>JSON đã xử lý</h2>
+                    </div>
+                    <button id="clearJsonResultButton" class="text-button" type="button" disabled>Xóa kết quả</button>
+                </div>
+
+                <label class="field-label" for="resultJson">Kết quả định dạng</label>
+                <textarea id="resultJson" class="code-editor" readonly spellcheck="false" placeholder="Chọn một thao tác bên dưới để tạo kết quả."></textarea>
+
+                <div class="result-actions">
+                    <button id="copyJsonButton" class="button secondary" type="button" disabled>Sao chép kết quả</button>
+                    <button id="downloadJsonButton" class="button" type="button" disabled>Tải tệp .json</button>
+                </div>
+                <p id="jsonToolStatus" class="status-line" role="status" aria-live="polite">JSON gốc sẽ không bị thay đổi.</p>
+            </article>
+        </section>
+
+        <section class="tool-card-large json-actions-card" aria-labelledby="json-actions-title">
+            <div class="section-heading">
+                <p class="eyebrow">Xử lý JSON</p>
+                <h2 id="json-actions-title">Chọn cách hiển thị kết quả</h2>
+                <p>Ba thao tác đều kiểm tra cú pháp trước và chỉ ghi vào khu vực kết quả.</p>
+            </div>
+            <div class="json-action-grid">
+                <button id="formatTwoButton" class="text-action" type="button">
+                    <strong>Định dạng 2 khoảng trắng</strong>
+                    <span>Gọn và dễ dùng trong dự án</span>
+                </button>
+                <button id="formatFourButton" class="text-action" type="button">
+                    <strong>Định dạng 4 khoảng trắng</strong>
+                    <span>Thụt lề rộng, dễ quan sát</span>
+                </button>
+                <button id="minifyJsonButton" class="text-action" type="button">
+                    <strong>Thu gọn JSON</strong>
+                    <span>Loại bỏ khoảng trắng không cần thiết</span>
+                </button>
+            </div>
+        </section>
+
+        <article class="content-card">
+            <p class="eyebrow">Dành cho dữ liệu và API</p>
+            <h2>Định dạng JSON online giúp ích khi nào?</h2>
+            <div class="content-columns">
+                <section>
+                    <h3>Đọc phản hồi API nhanh hơn</h3>
+                    <p>JSON được thụt lề giúp cấu trúc đối tượng, mảng và giá trị lồng nhau rõ ràng hơn khi kiểm tra API hoặc tệp cấu hình.</p>
+                </section>
+                <section>
+                    <h3>Tìm lỗi cú pháp</h3>
+                    <p>Công cụ kiểm tra JSON trước khi định dạng và hiển thị vị trí lỗi nếu trình duyệt có thể xác định dòng và cột.</p>
+                </section>
+                <section>
+                    <h3>Giữ nguyên dữ liệu gốc</h3>
+                    <p>Kết quả luôn được tạo ở khu vực riêng. Bạn có thể so sánh với nội dung ban đầu trước khi sao chép hoặc tải xuống.</p>
+                </section>
+                <section>
+                    <h3>Xử lý dữ liệu nhạy cảm cục bộ</h3>
+                    <p>Không có yêu cầu định dạng nào được gửi lên máy chủ, phù hợp hơn khi JSON chứa cấu hình hoặc dữ liệu nội bộ.</p>
+                </section>
+            </div>
+        </article>
+
+        <section class="faq" aria-labelledby="faq-title">
+            <h2 id="faq-title">Câu hỏi thường gặp</h2>
+            <details>
+                <summary>JSON có được gửi lên máy chủ không?</summary>
+                <p>Không. Nội dung được xử lý ngay trong trình duyệt và không được tải lên hoặc lưu trên máy chủ.</p>
+            </details>
+            <details>
+                <summary>Công cụ có thể tìm lỗi JSON không?</summary>
+                <p>Có. Khi vị trí lỗi có sẵn, công cụ sẽ hiển thị dòng và cột để bạn kiểm tra khu vực gần đó.</p>
+            </details>
+            <details>
+                <summary>Định dạng 2 khoảng trắng và 4 khoảng trắng khác nhau thế nào?</summary>
+                <p>Hai chế độ chỉ thay đổi độ rộng thụt lề, không thay đổi giá trị dữ liệu.</p>
+            </details>
+            <details>
+                <summary>Thu gọn JSON có làm thay đổi dữ liệu không?</summary>
+                <p>Không. Chế độ này chỉ loại bỏ khoảng trắng không cần thiết và vẫn giữ nguyên JSON gốc ở bên trái.</p>
+            </details>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <a class="brand" href="index.html">
+                <span class="brand-mark" aria-hidden="true">VI</span>
+                <span>FreeTools Việt</span>
+            </a>
+            <p>JSON được xử lý cục bộ và không được lưu lại.</p>
+        </div>
+    </footer>
+
+    <script type="module" src="assets/js/json-formatter-app.mjs"></script>
+</body>
+</html>

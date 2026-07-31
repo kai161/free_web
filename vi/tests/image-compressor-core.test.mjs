@@ -32,12 +32,157 @@ import {
   toTitleCase,
   toUppercase,
 } from "../assets/js/text-toolbox-core.mjs";
+import {
+  MAX_JSON_FILE_BYTES,
+  countJsonNodes,
+  describeJsonType,
+  describeParseError,
+  formatJson,
+  inspectJson,
+  minifyJson,
+  parseJson,
+  positionToLineColumn,
+  validateJsonFileMetadata,
+} from "../assets/js/json-formatter-core.mjs";
 
 const viRoot = fileURLToPath(new URL("..", import.meta.url));
 
 function readViFile(relativePath) {
   return readFileSync(new URL(relativePath, new URL("../", import.meta.url)), "utf8");
 }
+
+test("JSON formatter parses, formats and minifies Vietnamese data", () => {
+  const source = '{"name":"Việt Nam","active":true}';
+
+  assert.deepEqual(parseJson(source), {
+    name: "Việt Nam",
+    active: true,
+  });
+  assert.equal(
+    formatJson(source, 2),
+    '{\n  "name": "Việt Nam",\n  "active": true\n}',
+  );
+  assert.equal(
+    formatJson(source, 4),
+    '{\n    "name": "Việt Nam",\n    "active": true\n}',
+  );
+  assert.equal(minifyJson('{ "name": "Việt Nam", "active": true }'), source);
+});
+
+test("JSON formatter reports root types and nested node counts", () => {
+  const objectSource = '{"user":{"name":"Lan","tags":["dev",null]},"active":true}';
+
+  assert.equal(describeJsonType({}), "object");
+  assert.equal(describeJsonType([]), "array");
+  assert.equal(describeJsonType(null), "null");
+  assert.equal(describeJsonType("text"), "string");
+  assert.equal(describeJsonType(1), "number");
+  assert.equal(describeJsonType(false), "boolean");
+  assert.equal(countJsonNodes(parseJson(objectSource)), 7);
+  assert.deepEqual(inspectJson(objectSource), {
+    valid: true,
+    rootType: "object",
+    nodeCount: 7,
+    error: null,
+  });
+});
+
+test("JSON formatter validates empty input and indentation", () => {
+  assert.throws(() => parseJson("   "), /json_empty/);
+  assert.throws(() => formatJson("{}", 3), /json_indentation_invalid/);
+  assert.throws(() => formatJson("{]"), SyntaxError);
+  assert.throws(() => minifyJson("{]"), SyntaxError);
+});
+
+test("JSON formatter returns stable inspection errors", () => {
+  const result = inspectJson('{\n  "name": "Lan",\n}');
+
+  assert.equal(result.valid, false);
+  assert.equal(result.rootType, null);
+  assert.equal(result.nodeCount, 0);
+  assert.equal(result.error.code, "json_invalid");
+  assert.equal(result.error.line, 3);
+  assert.equal(result.error.column, 1);
+});
+
+test("JSON formatter calculates line and column from character offsets", () => {
+  const source = '{\n  "a": 1,\n}';
+
+  assert.deepEqual(positionToLineColumn(source, 12), { line: 3, column: 1 });
+  assert.deepEqual(positionToLineColumn(source, 0), { line: 1, column: 1 });
+  assert.deepEqual(positionToLineColumn(source, 999), { line: 3, column: 2 });
+});
+
+test("JSON formatter normalizes parse errors across browser messages", () => {
+  const source = '{\n  "a": 1,\n}';
+
+  assert.deepEqual(
+    describeParseError(source, new SyntaxError("Unexpected token } in JSON at position 12")),
+    {
+      code: "json_invalid",
+      line: 3,
+      column: 1,
+      message: "JSON không hợp lệ tại dòng 3, cột 1.",
+    },
+  );
+  assert.deepEqual(
+    describeParseError(source, new SyntaxError("Expected property name at line 3 column 1")),
+    {
+      code: "json_invalid",
+      line: 3,
+      column: 1,
+      message: "JSON không hợp lệ tại dòng 3, cột 1.",
+    },
+  );
+  assert.deepEqual(describeParseError(source, new SyntaxError("Invalid JSON")), {
+    code: "json_invalid",
+    line: null,
+    column: null,
+    message: "JSON không hợp lệ. Hãy kiểm tra dấu ngoặc, dấu phẩy và dấu ngoặc kép.",
+  });
+});
+
+test("JSON formatter accepts local JSON files up to 5 MB", () => {
+  assert.deepEqual(
+    validateJsonFileMetadata({
+      name: "du-lieu.JSON",
+      type: "application/json",
+      size: MAX_JSON_FILE_BYTES,
+    }),
+    { valid: true, code: "ok" },
+  );
+  assert.deepEqual(
+    validateJsonFileMetadata({
+      name: "api.json",
+      type: "",
+      size: 128,
+    }),
+    { valid: true, code: "ok" },
+  );
+});
+
+test("JSON formatter rejects missing, invalid, empty and oversized files", () => {
+  assert.deepEqual(validateJsonFileMetadata(null), {
+    valid: false,
+    code: "missing_file",
+  });
+  assert.deepEqual(
+    validateJsonFileMetadata({ name: "api.txt", type: "text/plain", size: 128 }),
+    { valid: false, code: "unsupported_type" },
+  );
+  assert.deepEqual(
+    validateJsonFileMetadata({ name: "api.json", type: "application/json", size: 0 }),
+    { valid: false, code: "empty_file" },
+  );
+  assert.deepEqual(
+    validateJsonFileMetadata({
+      name: "api.json",
+      type: "application/json",
+      size: MAX_JSON_FILE_BYTES + 1,
+    }),
+    { valid: false, code: "file_too_large" },
+  );
+});
 
 test("analyzeText returns zero metrics for empty text", () => {
   assert.deepEqual(analyzeText(""), {
@@ -597,14 +742,96 @@ test("text toolbox application binds local-only browser interactions", () => {
   );
 });
 
+test("JSON formatter page contains the approved Vietnamese controls", () => {
+  const html = readViFile("dinh-dang-json.html");
+
+  assert.match(html, /<html lang="vi">/);
+  assert.match(
+    html,
+    /<link rel="canonical" href="https:\/\/vi\.freetools\.best\/dinh-dang-json\.html">/,
+  );
+
+  for (const id of [
+    "sourceJson",
+    "jsonFileInput",
+    "jsonValidationStatus",
+    "jsonRootType",
+    "jsonNodeCount",
+    "formatTwoButton",
+    "formatFourButton",
+    "minifyJsonButton",
+    "resultJson",
+    "copyJsonButton",
+    "downloadJsonButton",
+    "clearJsonResultButton",
+    "jsonToolStatus",
+  ]) {
+    assert.match(html, new RegExp(`id="${id}"`), `missing #${id}`);
+  }
+
+  assert.match(html, /Định dạng JSON/);
+  assert.match(html, /kiểm tra JSON/i);
+  assert.match(html, /href="assets\/styles\.css"/);
+  assert.doesNotMatch(html, /(?:href|src)="\.\.\//);
+});
+
+test("JSON formatter page exposes matching SEO and FAQ schemas", () => {
+  const html = readViFile("dinh-dang-json.html");
+
+  assert.match(html, /"@type": "WebApplication"/);
+  assert.match(html, /"@type": "BreadcrumbList"/);
+  assert.match(html, /"@type": "FAQPage"/);
+  assert.match(html, /JSON có được gửi lên máy chủ không\?/);
+  assert.match(html, /Công cụ có thể tìm lỗi JSON không\?/);
+  assert.match(
+    html,
+    /<script type="module" src="assets\/js\/json-formatter-app\.mjs"><\/script>/,
+  );
+  assert.match(html, /window\.va = window\.va \|\| function/);
+  assert.match(html, /script\.src = ['"]\/_vercel\/insights\/script\.js['"]/);
+  assert.doesNotMatch(html, /fetch\(|XMLHttpRequest|localStorage|sessionStorage/);
+});
+
+test("JSON formatter application binds local-only browser interactions", () => {
+  const app = readViFile("assets/js/json-formatter-app.mjs");
+
+  for (const importedFunction of [
+    "formatJson",
+    "inspectJson",
+    "minifyJson",
+    "validateJsonFileMetadata",
+  ]) {
+    assert.match(app, new RegExp(importedFunction));
+  }
+
+  assert.match(app, /getElementById\("sourceJson"\)/);
+  assert.match(app, /getElementById\("jsonFileInput"\)/);
+  assert.match(app, /addEventListener\("input"/);
+  assert.match(app, /addEventListener\("change"/);
+  assert.match(app, /addEventListener\("click"/);
+  assert.match(app, /new FileReader\(\)/);
+  assert.match(app, /navigator\.clipboard\.writeText/);
+  assert.match(app, /document\.createElement\("textarea"\)/);
+  assert.match(app, /new Blob\(/);
+  assert.match(app, /URL\.createObjectURL/);
+  assert.match(app, /URL\.revokeObjectURL/);
+  assert.match(app, /ket-qua-json\.json/);
+  assert.doesNotMatch(
+    app,
+    /fetch\(|XMLHttpRequest|FormData|localStorage|sessionStorage|console\.|window\.va\s*\(\s*["']event/,
+  );
+});
+
 test("Vietnamese navigation and home cards expose all live tools", () => {
   const home = readViFile("index.html");
   const compressor = readViFile("nen-anh.html");
   const passwordGenerator = readViFile("tao-mat-khau-ngau-nhien.html");
   const textToolbox = readViFile("dem-ky-tu.html");
+  const jsonFormatter = readViFile("dinh-dang-json.html");
 
   assert.match(home, /<h3>Tạo mật khẩu ngẫu nhiên<\/h3>/);
   assert.match(home, /<h3>Đếm ký tự và từ<\/h3>/);
+  assert.match(home, /<h3>Định dạng JSON<\/h3>/);
   assert.ok(
     (home.match(/href="tao-mat-khau-ngau-nhien\.html"/g) || []).length >= 2,
     "home should link the password page from navigation and a tool card",
@@ -613,18 +840,32 @@ test("Vietnamese navigation and home cards expose all live tools", () => {
     (home.match(/href="dem-ky-tu\.html"/g) || []).length >= 2,
     "home should link the text toolbox from navigation and a tool card",
   );
+  assert.ok(
+    (home.match(/href="dinh-dang-json\.html"/g) || []).length >= 2,
+    "home should link the JSON formatter from navigation and a tool card",
+  );
   assert.match(compressor, /href="tao-mat-khau-ngau-nhien\.html"/);
   assert.match(compressor, /href="dem-ky-tu\.html"/);
+  assert.match(compressor, /href="dinh-dang-json\.html"/);
   assert.match(passwordGenerator, /href="nen-anh\.html"/);
   assert.match(passwordGenerator, /href="dem-ky-tu\.html"/);
+  assert.match(passwordGenerator, /href="dinh-dang-json\.html"/);
   assert.match(passwordGenerator, /href="assets\/styles\.css"/);
   assert.match(textToolbox, /href="nen-anh\.html"/);
   assert.match(textToolbox, /href="tao-mat-khau-ngau-nhien\.html"/);
+  assert.match(textToolbox, /href="dinh-dang-json\.html"/);
   assert.match(textToolbox, /href="assets\/styles\.css"/);
+  assert.match(jsonFormatter, /href="nen-anh\.html"/);
+  assert.match(jsonFormatter, /href="tao-mat-khau-ngau-nhien\.html"/);
+  assert.match(jsonFormatter, /href="dem-ky-tu\.html"/);
+  assert.match(jsonFormatter, /href="assets\/styles\.css"/);
 
   const styles = readViFile("assets/styles.css");
   assert.match(styles, /\.text-workspace/);
   assert.match(styles, /\.text-action-grid/);
+  assert.match(styles, /\.json-workspace/);
+  assert.match(styles, /\.json-action-grid/);
+  assert.match(styles, /\.code-editor/);
 });
 
 test("robots and sitemap describe only the Vietnamese site", () => {
@@ -641,7 +882,8 @@ test("robots and sitemap describe only the Vietnamese site", () => {
     /https:\/\/vi\.freetools\.best\/tao-mat-khau-ngau-nhien\.html<\/loc>/,
   );
   assert.match(sitemap, /https:\/\/vi\.freetools\.best\/dem-ky-tu\.html<\/loc>/);
-  assert.equal((sitemap.match(/<url>/g) || []).length, 4);
+  assert.match(sitemap, /https:\/\/vi\.freetools\.best\/dinh-dang-json\.html<\/loc>/);
+  assert.equal((sitemap.match(/<url>/g) || []).length, 5);
   assert.doesNotMatch(sitemap, /br\.freetools\.best/);
 });
 
@@ -651,6 +893,7 @@ test("all Vietnamese pages expose complete indexable metadata", () => {
     "nen-anh.html",
     "tao-mat-khau-ngau-nhien.html",
     "dem-ky-tu.html",
+    "dinh-dang-json.html",
   ]) {
     const html = readViFile(page);
     assert.match(html, /<meta name="description" content="[^"]+">/);
@@ -675,6 +918,7 @@ test("all Vietnamese pages load Vercel Web Analytics like pr-tool", () => {
     "nen-anh.html",
     "tao-mat-khau-ngau-nhien.html",
     "dem-ky-tu.html",
+    "dinh-dang-json.html",
   ]) {
     const html = readViFile(page);
     assert.match(html, /window\.va = window\.va \|\| function/);

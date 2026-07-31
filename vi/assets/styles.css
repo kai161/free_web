@@ -337,7 +337,7 @@ p {
 
 .tool-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1rem;
     margin-top: 2rem;
 }
@@ -912,14 +912,16 @@ select {
     font-size: 0.9rem;
 }
 
-.text-workspace {
+.text-workspace,
+.json-workspace {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1rem;
     align-items: start;
 }
 
-.text-panel {
+.text-panel,
+.json-panel {
     min-width: 0;
     padding: clamp(1rem, 3vw, 1.5rem);
     border: 1px solid var(--line);
@@ -946,7 +948,8 @@ select {
 }
 
 #sourceText,
-#resultText {
+#resultText,
+.code-editor {
     display: block;
     width: 100%;
     min-height: 22rem;
@@ -960,8 +963,56 @@ select {
     overflow-wrap: anywhere;
 }
 
-#resultText {
+#resultText,
+#resultJson {
     background: #fbfcfb;
+}
+
+.code-editor {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.9rem;
+    tab-size: 2;
+    white-space: pre;
+    overflow: auto;
+}
+
+.file-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.json-validation {
+    min-height: 2.8rem;
+    margin-top: 0.75rem;
+    padding: 0.7rem 0.85rem;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    color: var(--muted);
+    background: #f8fbf9;
+    font-size: 0.86rem;
+    font-weight: 750;
+}
+
+.json-validation[data-state="success"] {
+    border-color: #9ac8b7;
+    color: #17664f;
+    background: #edf9f4;
+}
+
+.json-validation[data-state="error"] {
+    border-color: #e4aaa3;
+    color: #9e3327;
+    background: #fff3f1;
+}
+
+.json-metrics {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.55rem;
+    margin-top: 0.75rem;
 }
 
 .text-stats {
@@ -1004,6 +1055,17 @@ select {
 .text-action-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.7rem;
+    margin-top: 1.5rem;
+}
+
+.json-actions-card .section-heading {
+    max-width: 46rem;
+}
+
+.json-action-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 0.7rem;
     margin-top: 1.5rem;
 }
@@ -1053,7 +1115,8 @@ select {
     margin-top: 2rem;
 }
 
-.content-columns > div {
+.content-columns > div,
+.content-columns > section {
     padding: 1.2rem;
     border: 1px solid var(--line);
     border-radius: 14px;
@@ -1115,7 +1178,8 @@ select {
     .tool-intro,
     .compressor,
     .password-generator,
-    .text-workspace {
+    .text-workspace,
+    .json-workspace {
         grid-template-columns: 1fr;
     }
 
@@ -1134,7 +1198,8 @@ select {
     }
 
     .tool-grid,
-    .text-action-grid {
+    .text-action-grid,
+    .json-action-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
@@ -1176,7 +1241,8 @@ select {
     .values,
     .metrics,
     .content-columns,
-    .text-action-grid {
+    .text-action-grid,
+    .json-action-grid {
         grid-template-columns: 1fr;
     }
 
@@ -1219,7 +1285,8 @@ select {
     }
 
     #sourceText,
-    #resultText {
+    #resultText,
+    .code-editor {
         min-height: 17rem;
     }
 
