@@ -1,0 +1,61 @@
+(async function(){
+'use strict';
+const R=DocxRepair,D=RepairDemo,W=R.W,decode=new TextDecoder(),encode=new TextEncoder();
+const eq=(a,b)=>{if(a!==b)throw Error(JSON.stringify(a)+' != '+JSON.stringify(b));};
+const ok=(b,why)=>{if(!b)throw Error(why||'assertion failed');};
+const same=(a,b)=>a.length===b.length&&a.every((n,i)=>n===b[i]);
+async function documentOf(bytes){const z=await R.readZip(bytes);return R.xml(decode.decode(await R.unpack(z.entries.get('word/document.xml'))));}
+function plain(doc){return [...doc.getElementsByTagNameNS(W,'p')].map(p=>[...p.getElementsByTagNameNS(W,'r')].map(r=>[...r.children].map(n=>n.localName==='t'?n.textContent:n.localName==='softHyphen'?'\u00ad':'').join('')).join('')).join('\n');}
+async function repaired(body,styles){const bytes=R.makeZip(D.files(body,styles)),m=await R.analyze(bytes,'fixture.docx');const out=await R.exportDocx(m,m.proposals.map(p=>p.id));return {bytes,m,out,doc:await documentOf(out)};}
+async function rejects(bytes,code,name='fixture.docx'){let found=false;try{await R.analyze(bytes,name);}catch(e){eq(e.message,code);found=true;}ok(found,'must reject '+code);}
+let original,output,running=false;
+function save(data,name){const url=URL.createObjectURL(new Blob([data],{type:'application/vnd.openxmlformats-officedocument.wordprocessingml.document'})),a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);}
+async function run(){
+ if(running)return;running=true;document.getElementById('rerun').disabled=true;document.getElementById('log').replaceChildren();document.getElementById('summary').textContent='Running…';let passed=0,failed=0;
+ async function test(name,fn){const li=document.createElement('li');try{await fn();li.textContent='PASS — '+name;passed++;}catch(e){li.textContent='FAIL — '+name+'\n'+e.message;li.className='fail';failed++;}document.getElementById('log').append(li);}
+ for(const f of RepairAnswers)await test('independent answer: '+f.id+' ['+f.source+']',async()=>{const x=await repaired(D.p(D.r(f.before,f.font)));eq(plain(x.doc),f.after);});
+ await test('general mapping, outside original answer words',async()=>{const x=await repaired(D.p(D.r('mµ b¹n c¸c tr\u00adêng ®\u00adîc','.VnTime')));eq(plain(x.doc),'mà bạn các trường được');ok(x.m.proposals.length===5);});
+ await test('Unicode and foreign controls: zero proposals, including stale legacy font',async()=>{const controls='Việt Nam Đúng à á ả ã ạ â ă đ ê ô ơ ư ý Tù má phóc ® © café Señor Straße déjà vu über naïve Ångström 中文 Ω 🚀';for(const font of ['Times New Roman','.VnTime','.VnTimeH']){const x=await repaired(D.p(D.r(controls,font)));eq(x.m.proposals.length,0);eq(plain(x.doc),controls);ok(same(x.bytes,x.out),'no selection must preserve byte-identical package');}});
+ // Independently authored Unicode controls, not generated from MAP.
+ await test('mixed-case Unicode and registered symbols: zero modifications',async()=>{const controls='TâM tâM TÂm cÔNG mÁ ® © ACME® Tù®';for(const font of ['.VnTime','.VnTimeH','Arial']){const x=await repaired(D.p(D.r(controls,font)));eq(x.m.proposals.length,0);eq(plain(x.doc),controls);ok(same(x.bytes,x.out),'mixed-case Unicode package changed');}});
+ await test('mixed Unicode inside one old-font run and cancel one word: font/text retained',async()=>{const before='chµo Việt Nam ® Tù café c¶',x=await repaired(D.p(D.r(before,'.VnTime')));eq(x.m.proposals.length,2);eq(plain(x.doc),'chào Việt Nam ® Tù café cả');const cancel=await R.exportDocx(x.m,[x.m.proposals[1].id]),doc=await documentOf(cancel);eq(plain(doc),'chµo Việt Nam ® Tù café cả');const runs=[...doc.getElementsByTagNameNS(W,'r')];const old=runs.find(r=>r.textContent.includes('chµo'));eq(old.getElementsByTagNameNS(W,'rFonts')[0].getAttributeNS(W,'hAnsi'),'.VnTime');});
+ await test('paragraph basedOn, character basedOn, and document defaults',async()=>{
+ const styles='<w:style w:type="paragraph" w:styleId="Derived"><w:basedOn w:val="Legacy"/></w:style><w:style w:type="character" w:styleId="OldChar"><w:rPr><w:rFonts w:ascii=".VnTimeH" w:hAnsi=".VnTimeH"/></w:rPr></w:style><w:style w:type="character" w:styleId="ChildChar"><w:basedOn w:val="OldChar"/></w:style>';
+ const x=await repaired(D.p(D.r('chµo'),'Derived')+D.p('<w:r><w:rPr><w:rStyle w:val="ChildChar"/></w:rPr><w:t>VIÖT</w:t></w:r>'),styles);eq(plain(x.doc),'chào\nVIỆT');
+ const f=D.files(D.p(D.r('c¶')));f['word/styles.xml']=f['word/styles.xml'].replaceAll('Times New Roman','.VnTime');const m=await R.analyze(R.makeZip(f),'default.docx');eq(m.proposals[0].after,'cả');
+ });
+ await test('direct modern font / theme / conflicting slots override old inheritance',async()=>{const body=D.p(D.r('chµo','Arial')+'<w:r><w:rPr><w:rFonts w:asciiTheme="minorHAnsi" w:hAnsiTheme="minorHAnsi"/></w:rPr><w:t>c¶</w:t></w:r><w:r><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi=".VnTime"/></w:rPr><w:t>chµo</w:t></w:r>','Legacy');const x=await repaired(body);eq(x.m.proposals.length,0);eq(plain(x.doc),'chµoc¶chµo');ok(x.m.warnings.some(w=>w.reason==='inheritance'));});
+ await test('cross-run word, bold style and special w:softHyphen retained/restored',async()=>{const body=D.p(D.r('ng','.VnTime')+'<w:r><w:rPr><w:rFonts w:ascii=".VnTime" w:hAnsi=".VnTime"/><w:b/></w:rPr><w:softHyphen/><w:t>êi</w:t></w:r>');const x=await repaired(body);eq(plain(x.doc),'người');eq(x.m.proposals.length,1);ok(x.doc.getElementsByTagNameNS(W,'b').length>=1);eq(x.doc.getElementsByTagNameNS(W,'softHyphen').length,0);const untouched=await R.exportDocx(x.m,[]);ok(same(untouched,x.bytes));});
+ await test('cross-font fragments do not join; ordinary soft hyphen is retained',async()=>{const body=D.p(D.r('ng','.VnTime')+D.r('\u00adêi','Arial'))+D.p('<w:r><w:t>co</w:t><w:softHyphen/><w:t>operate</w:t></w:r>');const x=await repaired(body);eq(x.m.proposals.length,0);ok(same(x.out,x.bytes));});
+ await test('table explicit font repaired, unknown table cascade marked',async()=>{const body='<w:tbl><w:tr><w:tc>'+D.p(D.r('chµo','.VnTime'))+D.p(D.r('c¶'),'Legacy')+'</w:tc></w:tr></w:tbl>';const x=await repaired(body);eq(plain(x.doc),'chào\nc¶');ok(x.m.warnings.some(w=>w.reason==='inheritance'));eq(x.doc.getElementsByTagNameNS(W,'tbl').length,1);});
+ await test('VNI cross-run multichar is recognized and never converted',async()=>{const x=await repaired(D.p(D.r('Vie','VNI-Times')+D.r('ät Nam','VNI-Times')));eq(plain(x.doc),'Vieät Nam');eq(x.m.proposals.length,0);ok(x.m.warnings.some(w=>w.reason==='vni'&&w.text==='Vieät'));ok(same(x.bytes,x.out));});
+ await test('unknown mapping mixed into word is marked, never partially converted',async()=>{const x=await repaired(D.p(D.r('chµoЖ chµo\u0301 ® .VnUnknown','.VnTime')));eq(x.m.proposals.length,0);eq(plain(x.doc),'chµoЖ chµo\u0301 ® .VnUnknown');});
+ await test('headers / footers / footnotes / endnotes and unchanged resources',async()=>{
+ const f=D.files(D.p(D.r('chµo','.VnTime')));for(const part of ['header1','footer1','footnotes','endnotes'])f['word/'+part+'.xml']='<w:'+({header1:'hdr',footer1:'ftr',footnotes:'footnotes',endnotes:'endnotes'}[part])+' xmlns:w="'+W+'">'+D.p(D.r('c¶','.VnTime'))+'</w:'+({header1:'hdr',footer1:'ftr',footnotes:'footnotes',endnotes:'endnotes'}[part])+'>';
+ f['word/media/opaque.bin']=new Uint8Array([0,1,2,255]);const bytes=R.makeZip(f),m=await R.analyze(bytes,'parts.docx');eq(m.proposals.length,5);const out=await R.exportDocx(m,m.proposals.map(p=>p.id)),z=await R.readZip(out);for(const [name,e]of m.zip.entries)if(!m.proposals.some(p=>p.part===name)){const other=z.entries.get(name);ok(same(await R.unpack(e),await R.unpack(other)),name+' content differs');ok(same(e.raw,other.raw),name+' compressed/local record differs');}
+ });
+ await test('real DEFLATE archive from Python zipfile + CRC / XML validity',async()=>{
+ const bytes=Uint8Array.from(atob(RepairDeflatedFixture),c=>c.charCodeAt(0)),m=await R.analyze(bytes,'compressed.docx');ok([...m.zip.entries.values()].some(e=>e.method===8));const out=await R.exportDocx(m,m.proposals.map(p=>p.id));eq(plain(await documentOf(out)),'Xin chào các bạn');const z=await R.readZip(out);for(const [name,e]of z.entries){await R.unpack(e);if(/\.xml$|\.rels$/.test(name))R.xml(decode.decode(await R.unpack(e)));}const old=m.zip.entries.get('word/media/unchanged.bin');ok(same(old.raw,z.entries.get(old.name).raw));
+ });
+ await test('sample resources, images, table, styles survive; repeat exports deterministic',async()=>{
+ original=D.sample();const m=await R.analyze(original,'sample.docx');output=await R.exportDocx(m,m.proposals.map(p=>p.id));const second=await R.exportDocx(m,m.proposals.map(p=>p.id));ok(same(output,second));const z=await R.readZip(output);for(const [name,e]of m.zip.entries)if(name!=='word/document.xml')ok(same(e.raw,z.entries.get(name).raw),name+' changed');const doc=await documentOf(output);eq(doc.getElementsByTagNameNS(W,'tbl').length,1);eq(doc.getElementsByTagNameNS(W,'drawing').length,1);ok(plain(doc).includes('Việt Nam · café · Señor · Straße · ® ©'));await R.analyze(output,'already-repaired.docx');
+ });
+ await test('reject DOC / PDF / encrypted ZIP / corrupted CRC',async()=>{const x=D.sample();await rejects(x,'notDocx','old.doc');await rejects(x,'notDocx','old.pdf');const encrypted=x.slice();new DataView(encrypted.buffer).setUint16(6,0x801,true);for(let i=0;i<encrypted.length-46;i++)if(new DataView(encrypted.buffer).getUint32(i,true)===0x02014b50){new DataView(encrypted.buffer).setUint16(i+8,0x801,true);break;}await rejects(encrypted,'encrypted');const corrupt=x.slice();corrupt[100]^=1;await rejects(corrupt,'badZip');});
+ await test('reject revisions, fields, bound content, signatures, macros, malformed XML',async()=>{
+ for(const fragment of ['<w:ins/>','<w:del/>','<w:fldSimple/>','<w:sdt/>','<w:r><w:sym/></w:r>','<w:rPrChange/>'])await rejects(R.makeZip(D.files(D.p(fragment))),'complex');
+ for(const part of ['word/vbaProject.bin','_xmlsignatures/sig1.xml']){const f=D.files(D.p(D.r('chµo','.VnTime')));f[part]=new Uint8Array([1]);await rejects(R.makeZip(f),'complex');}
+ const f=D.files(D.p(D.r('chµo','.VnTime')));f['word/document.xml']='<unclosed>';await rejects(R.makeZip(f),'badXml');
+ });
+ await test('reject style cycles, missing styles, ZIP traversal and unknown complex text',async()=>{const f=D.files(D.p(D.r('c¶'),'Legacy'));f['word/styles.xml']=f['word/styles.xml'].replace('w:basedOn w:val="Normal"','w:basedOn w:val="Legacy"');await rejects(R.makeZip(f),'badStyles');const missing=D.files(D.p(D.r('c¶'),'Missing'));await rejects(R.makeZip(missing),'badStyles');const traversal=D.files(D.p(''));traversal['../bad.txt']='bad';await rejects(R.makeZip(traversal),'badZip');const unknown=D.files(D.p(''));unknown['word/unknown.xml']='<w:other xmlns:w="'+W+'"><w:t>chµo</w:t></w:other>';await rejects(R.makeZip(unknown),'complex');});
+ for(const f of RepairAcceptance)await test('independent DOCX: '+f.name,async()=>{
+  const bytes=Uint8Array.from(atob(f.base64),c=>c.charCodeAt(0)),m=await R.analyze(bytes,f.name+'.docx');
+  eq(!!m.proposals.length,f.modified);if(f.vni)ok(m.warnings.some(w=>w.reason==='vni'),'missing VNI warning');
+  const ids=m.proposals.map(p=>p.id),out=await R.exportDocx(m,ids),doc=await documentOf(out);eq(plain(doc),f.expected.join('\n'));
+  ok(same(await R.exportDocx(m,[]),bytes),'cancel must preserve entire file');ok(same(await R.exportDocx(m,ids),out),'repeat export differs');
+  if(!f.modified)ok(same(bytes,out),'control DOCX changed');const z=await R.readZip(out);
+  for(const [name,e]of m.zip.entries)if(name!=='word/document.xml')ok(same(e.raw,z.entries.get(name).raw),name+' local record changed');
+ });
+ document.getElementById('summary').textContent=`${passed} passed · ${failed} failed`;document.getElementById('summary').className=failed?'fail':'';document.getElementById('original').disabled=!original;document.getElementById('output').disabled=!output;document.getElementById('rerun').disabled=false;running=false;
+}
+document.getElementById('rerun').addEventListener('click',run);document.getElementById('original').addEventListener('click',()=>save(original,'repair-evidence-original.docx'));document.getElementById('output').addEventListener('click',()=>save(output,'repair-evidence-output.docx'));await run();
+})();
