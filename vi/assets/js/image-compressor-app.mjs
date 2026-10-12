@@ -29,6 +29,10 @@ const elements = {
   statusRegion: document.getElementById("statusRegion"),
   previewImage: document.getElementById("previewImage"),
   previewPlaceholder: document.getElementById("previewPlaceholder"),
+  previewOriginal: document.getElementById("previewOriginal"),
+  previewOutput: document.getElementById("previewOutput"),
+  openPreview: document.getElementById("openPreview"),
+  resultDetails: document.getElementById("resultDetails"),
   originalSize: document.getElementById("originalSize"),
   compressedSize: document.getElementById("compressedSize"),
   savedPercent: document.getElementById("savedPercent"),
@@ -66,6 +70,9 @@ function releaseObjectUrl(key) {
 
 function resetResult(message = "Ảnh đã sẵn sàng. Chọn dung lượng và bắt đầu nén.") {
   releaseObjectUrl("outputUrl");
+  elements.previewOriginal.disabled = !state.sourceUrl;
+  elements.previewOutput.disabled = true;
+  elements.resultDetails.textContent = "";
   if (state.sourceUrl) setPreview(state.sourceUrl, `Xem trước ${state.file?.name || "ảnh"}`);
   elements.downloadButton.classList.add("hidden");
   elements.downloadButton.removeAttribute("href");
@@ -92,12 +99,14 @@ function syncTargetControls() {
   elements.customTargetGroup.classList.toggle("is-visible", custom);
   elements.customTarget.disabled = state.busy || !custom;
   elements.targetUnit.disabled = state.busy || !custom;
+  elements.customTarget.min = elements.targetUnit.value === "MB" ? String(10 / 1024) : "10";
+  elements.customTarget.max = elements.targetUnit.value === "MB" ? "30" : "30720";
 }
 
 function syncFormatHint() {
   const hints = {
     "image/webp": "WebP thường cho tệp nhỏ với chất lượng tốt.",
-    "image/jpeg": "JPG tương thích rộng nhưng không giữ vùng trong suốt.",
+    "image/jpeg": "JPG tương thích rộng; vùng trong suốt được thay bằng nền trắng.",
     "image/png": "PNG giữ vùng trong suốt; công cụ có thể phải giảm kích thước để đạt mục tiêu.",
   };
   elements.formatHint.textContent = hints[elements.outputFormat.value];
@@ -105,7 +114,11 @@ function syncFormatHint() {
 
 function getTargetBytes() {
   let target;
-  if (elements.targetPreset.value === "1mb") {
+  if (elements.targetPreset.value === "100kb") {
+    target = parseTargetBytes(100, "KB");
+  } else if (elements.targetPreset.value === "200kb") {
+    target = parseTargetBytes(200, "KB");
+  } else if (elements.targetPreset.value === "1mb") {
     target = parseTargetBytes(1, "MB");
   } else if (elements.targetPreset.value === "2mb") {
     target = parseTargetBytes(2, "MB");
@@ -181,7 +194,11 @@ function drawToCanvas(decoded, width, height, mime) {
 function canvasToBlob(canvas, mime, quality) {
   return new Promise((resolve, reject) => {
     canvas.toBlob(
-      blob => blob ? resolve(blob) : reject(new Error("image_encode_failed")),
+      blob => {
+        if (!blob || blob.size === 0) reject(new Error("image_encode_failed"));
+        else if (blob.type !== mime) reject(new Error("output_format_unsupported"));
+        else resolve(blob);
+      },
       mime,
       quality,
     );
@@ -255,6 +272,16 @@ function setPreview(url, alt) {
   elements.previewImage.alt = alt;
   elements.previewImage.classList.remove("hidden");
   elements.previewPlaceholder.classList.add("hidden");
+  const original = url === state.sourceUrl;
+  elements.previewOriginal.setAttribute("aria-pressed", String(original));
+  elements.previewOutput.setAttribute("aria-pressed", String(!original));
+  elements.openPreview.href = url;
+  elements.openPreview.textContent = original ? "Mở ảnh gốc để phóng to ↗" : "Mở ảnh sau nén để phóng to ↗";
+  elements.openPreview.classList.remove("hidden");
+}
+
+function exactBytes(bytes) {
+  return `${formatBytes(bytes)} (${bytes.toLocaleString("vi-VN")} byte)`;
 }
 
 function showSelectedFile(file) {
@@ -262,7 +289,7 @@ function showSelectedFile(file) {
   state.sourceUrl = URL.createObjectURL(file);
   setPreview(state.sourceUrl, `Xem trước ${file.name}`);
   elements.fileName.textContent = file.name;
-  elements.originalSize.textContent = formatBytes(file.size);
+  elements.originalSize.textContent = exactBytes(file.size);
 }
 
 function handleSelectedFile(file) {
@@ -278,6 +305,8 @@ function handleSelectedFile(file) {
     elements.previewImage.removeAttribute("src");
     elements.previewImage.classList.add("hidden");
     elements.previewPlaceholder.classList.remove("hidden");
+    elements.openPreview.classList.add("hidden");
+    elements.openPreview.removeAttribute("href");
     elements.compressButton.disabled = true;
     setStatus(errorMessages[validation.code] || "Không thể đọc tệp ảnh.", "error");
     return;
@@ -289,25 +318,36 @@ function handleSelectedFile(file) {
   setBusy(false);
 }
 
-function setOutput(result, targetBytes, mime) {
+function setOutput(result, targetBytes, mime, decoded) {
   releaseObjectUrl("outputUrl");
   state.outputUrl = URL.createObjectURL(result.blob);
   setPreview(state.outputUrl, "Ảnh sau khi nén");
-  elements.compressedSize.textContent = formatBytes(result.blob.size);
+  elements.previewOutput.disabled = false;
+  elements.compressedSize.textContent = exactBytes(result.blob.size);
   elements.savedPercent.textContent = `${savingsPercent(state.file.size, result.blob.size)}%`;
   elements.outputDimensions.textContent = `${result.width} × ${result.height}`;
   elements.downloadButton.href = state.outputUrl;
   elements.downloadButton.download = safeDownloadName(state.file.name, mime);
   elements.downloadButton.classList.remove("hidden");
+  elements.downloadButton.textContent = result.metTarget ? "Tải ảnh kết quả" : "Tải ảnh kết quả (chưa đạt mục tiêu)";
+  const notes = [`Ảnh gốc: ${decoded.width} × ${decoded.height} px. Kết quả: ${result.width} × ${result.height} px.`];
+  if (result.width !== decoded.width || result.height !== decoded.height) {
+    notes.push("Đã giảm kích thước để tiết kiệm bộ nhớ hoặc tiến gần mục tiêu; chữ và chi tiết nhỏ có thể kém rõ. Hãy so sánh trước khi dùng.");
+  }
+  if (result.blob === state.file) notes.push("Ảnh gốc đã đạt mục tiêu và đúng định dạng; giữ nguyên tệp, không mã hóa lại.");
+  if (result.blob.size > state.file.size) notes.push("Tệp kết quả lớn hơn ảnh gốc. Hãy thử JPG/WebP hoặc giữ bản gốc nếu phù hợp.");
+  if (mime === "image/jpeg" && result.blob !== state.file) notes.push("JPG dùng nền trắng ở vùng trong suốt.");
+  notes.push("Bản gốc trên thiết bị không bị thay đổi.");
+  elements.resultDetails.textContent = notes.join(" ");
 
   if (result.metTarget) {
     setStatus(
-      `Đã nén xuống ${formatBytes(result.blob.size)}, dưới mục tiêu ${formatBytes(targetBytes)}.`,
+      `Đạt mục tiêu: ${exactBytes(result.blob.size)} ≤ ${exactBytes(targetBytes)}.`,
       "success",
     );
   } else {
     setStatus(
-      `Không thể đạt ${formatBytes(targetBytes)} mà không giảm ảnh quá nhỏ. Kết quả nhỏ nhất là ${formatBytes(result.blob.size)}.`,
+      `Chưa đạt mục tiêu ${exactBytes(targetBytes)}. Kết quả nhỏ nhất đã thử: ${exactBytes(result.blob.size)}. Hãy tăng mục tiêu hoặc thử JPG/WebP nếu nơi nhận cho phép.`,
       "error",
     );
   }
@@ -352,12 +392,14 @@ async function runCompression() {
     }
 
     if (jobRevision !== state.revision) return;
-    setOutput(result, targetBytes, mime);
+    setOutput(result, targetBytes, mime, decoded);
   } catch (error) {
     if (jobRevision !== state.revision) return;
     const message = error?.message === "image_dimensions_too_large"
       ? "Ảnh có độ phân giải quá lớn. Vui lòng chọn ảnh dưới 60 megapixel."
-      : "Không thể nén ảnh này. Hãy thử một tệp JPG, PNG hoặc WebP khác.";
+      : error?.message === "output_format_unsupported"
+        ? "Trình duyệt này không hỗ trợ xuất định dạng đã chọn. Hãy thử JPG hoặc PNG."
+        : "Không thể đọc hoặc nén ảnh này. Tệp có thể bị hỏng. Hãy thử một tệp JPG, PNG hoặc WebP khác.";
     setStatus(message, "error");
   } finally {
     decoded?.close?.();
@@ -366,7 +408,9 @@ async function runCompression() {
 }
 
 elements.fileInput.addEventListener("change", event => {
-  handleSelectedFile(event.target.files?.[0]);
+  const file = event.target.files?.[0];
+  if (file) handleSelectedFile(file);
+  event.target.value = "";
 });
 
 for (const eventName of ["dragenter", "dragover"]) {
@@ -396,6 +440,7 @@ elements.targetPreset.addEventListener("change", () => {
 for (const element of [elements.customTarget, elements.targetUnit]) {
   element.addEventListener("input", () => {
     state.revision += 1;
+    syncTargetControls();
     resetResult("Mục tiêu đã thay đổi. Nhấn “Nén ảnh” để tạo kết quả mới.");
   });
 }
@@ -408,7 +453,15 @@ elements.outputFormat.addEventListener("change", () => {
 
 elements.compressButton.addEventListener("click", runCompression);
 
-window.addEventListener("pagehide", () => {
+elements.previewOriginal.addEventListener("click", () => {
+  if (state.sourceUrl) setPreview(state.sourceUrl, "Ảnh gốc — không thay đổi");
+});
+elements.previewOutput.addEventListener("click", () => {
+  if (state.outputUrl) setPreview(state.outputUrl, "Ảnh sau khi nén");
+});
+
+window.addEventListener("pagehide", event => {
+  if (event.persisted) return;
   releaseObjectUrl("sourceUrl");
   releaseObjectUrl("outputUrl");
 });

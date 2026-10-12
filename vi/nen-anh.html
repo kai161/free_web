@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nén ảnh online xuống 1MB, 2MB miễn phí | FreeTools Việt</title>
-    <meta name="description" content="Nén ảnh JPG, PNG, WebP xuống 1MB, 2MB hoặc dung lượng tùy chọn. Xử lý ngay trên thiết bị, không tải ảnh lên máy chủ.">
+    <title>Nén ảnh 100KB, 200KB, 1MB, 2MB online miễn phí | FreeTools Việt</title>
+    <meta name="description" content="Nén ảnh JPG, PNG, WebP theo mục tiêu 100KB, 200KB, 1MB, 2MB hoặc tùy chọn. Xem trước và kiểm tra số byte thực tế. Xử lý ngay trên thiết bị, không tải ảnh lên máy chủ.">
     <meta name="robots" content="index,follow,max-image-preview:large">
     <meta name="theme-color" content="#0b6b57">
     <link rel="canonical" href="https://vi.freetools.best/nen-anh.html">
@@ -15,7 +15,7 @@
     <meta property="og:type" content="website">
     <meta property="og:locale" content="vi_VN">
     <meta property="og:site_name" content="FreeTools Việt">
-    <meta property="og:title" content="Nén ảnh online xuống 1MB, 2MB miễn phí">
+    <meta property="og:title" content="Nén ảnh 100KB, 200KB, 1MB, 2MB online miễn phí">
     <meta property="og:description" content="Nén ảnh ngay trong trình duyệt. Không cần tải ảnh lên máy chủ.">
     <meta property="og:url" content="https://vi.freetools.best/nen-anh.html">
     <meta name="twitter:card" content="summary">
@@ -50,7 +50,7 @@
                 "name": "Tại sao PNG có thể không đạt đúng dung lượng?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "PNG là định dạng nén không mất dữ liệu và không hỗ trợ điều chỉnh chất lượng giống JPG hoặc WebP. Công cụ có thể cần giảm kích thước ảnh để tiến gần mục tiêu."
+                    "text": "PNG là định dạng nén không mất dữ liệu và không hỗ trợ điều chỉnh chất lượng giống JPG hoặc WebP. Công cụ có thể cần giảm kích thước ảnh để tiến gần mục tiêu; việc này vẫn làm mất chi tiết."
                 }
             },
             {
@@ -58,7 +58,7 @@
                 "name": "Nén ảnh có làm giảm chất lượng không?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Có thể. Công cụ ưu tiên mức chất lượng cao nhất nằm dưới dung lượng mục tiêu, sau đó mới giảm kích thước khi cần."
+                    "text": "Có thể. Ảnh lớn có thể được thu nhỏ trước để tiết kiệm bộ nhớ. Công cụ thử các mức chất lượng JPG/WebP và có thể giảm kích thước thêm. Hãy so sánh ảnh gốc với kết quả; bản gốc trên thiết bị không bị thay đổi."
                 }
             }
         ]
@@ -110,8 +110,8 @@
         <section class="tool-intro">
             <div>
                 <p class="eyebrow">Không tải ảnh lên máy chủ</p>
-                <h1>Nén ảnh online xuống 1MB, 2MB hoặc dung lượng bạn cần.</h1>
-                <p class="lead">Giảm ảnh xuống 1MB, 2MB hoặc dung lượng tùy chọn. JPG, PNG và WebP được xử lý ngay trên thiết bị của bạn.</p>
+                <h1>Nén ảnh theo dung lượng bạn cần.</h1>
+                <p class="lead">Chọn mục tiêu 100KB, 200KB, 1MB, 2MB hoặc tùy chọn. Xem trước ảnh JPG, PNG, WebP và kiểm tra dung lượng thực tế trước khi tải xuống.</p>
             </div>
             <div class="trust-note">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3 5 6v5c0 4.8 2.9 8.2 7 10 4.1-1.8 7-5.2 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-5"/></svg>
@@ -127,23 +127,25 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 16V4"/><path d="m7 9 5-5 5 5"/><path d="M5 15v4h14v-4"/></svg>
                     </span>
                     <strong>Chọn hoặc kéo ảnh vào đây</strong>
-                    <span>JPG, PNG, WebP · tối đa 30MB</span>
+                    <span>JPG, PNG, WebP · tối đa 30MB, 60 megapixel · mỗi lần một ảnh</span>
                     <span class="file-name" id="fileName">Chưa chọn ảnh</span>
                 </label>
 
                 <div class="form-grid">
                     <div class="field">
                         <label for="targetPreset">Dung lượng mục tiêu</label>
-                        <select id="targetPreset">
-                            <option value="1mb">Dưới 1MB</option>
-                            <option value="2mb" selected>Dưới 2MB</option>
+                        <select id="targetPreset" aria-describedby="targetHelp">
+                            <option value="100kb">Tối đa 100KB</option>
+                            <option value="200kb">Tối đa 200KB</option>
+                            <option value="1mb">Tối đa 1MB</option>
+                            <option value="2mb" selected>Tối đa 2MB</option>
                             <option value="custom">Tùy chọn</option>
                         </select>
                     </div>
                     <div class="field custom-target" id="customTargetGroup">
                         <label for="customTarget">Dung lượng tùy chọn</label>
                         <div class="input-group">
-                            <input id="customTarget" type="number" min="10" max="30720" step="10" value="500" inputmode="decimal">
+                            <input id="customTarget" type="number" min="10" max="30720" step="any" value="500" inputmode="decimal" aria-describedby="targetHelp">
                             <select id="targetUnit" aria-label="Đơn vị kích thước">
                                 <option value="KB" selected>KB</option>
                                 <option value="MB">MB</option>
@@ -161,6 +163,7 @@
                     </div>
                 </div>
 
+                <p class="compressor-note" id="targetHelp">Tùy chọn: 10KB–30MB, hỗ trợ số thập phân. 1KB = 1.024 byte; 1MB = 1.048.576 byte. Nếu nơi nhận tính 100KB = 100.000 byte, hãy chọn mục tiêu thấp hơn, ví dụ 97KB.</p>
                 <button class="button full-width" id="compressButton" type="button" disabled>Nén ảnh</button>
                 <div class="status" id="statusRegion" role="status" aria-live="polite" data-state="idle">
                     Chọn một ảnh để bắt đầu.
@@ -168,6 +171,10 @@
             </div>
 
             <div class="preview-panel">
+                <div class="preview-controls" role="group" aria-label="So sánh ảnh">
+                    <button class="button secondary" id="previewOriginal" type="button" aria-pressed="true" disabled>Ảnh gốc</button>
+                    <button class="button secondary" id="previewOutput" type="button" aria-pressed="false" disabled>Sau nén</button>
+                </div>
                 <div class="preview-stage">
                     <div class="preview-placeholder" id="previewPlaceholder">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="8.5" cy="9" r="1.5"/><path d="m5 18 5-5 3 3 2-2 4 4"/></svg>
@@ -175,32 +182,52 @@
                     </div>
                     <img id="previewImage" class="preview-image hidden" alt="Bản xem trước ảnh đã chọn">
                 </div>
+                <a class="compressor-note hidden" id="openPreview" target="_blank" rel="noopener">Mở ảnh để phóng to ↗</a>
+                <p class="compressor-note">Bản xem trước vừa khung. Mở ảnh trong thẻ mới để phóng to và kiểm tra chữ, đường nét trước khi tải.</p>
                 <div class="metrics" aria-label="Kết quả nén">
                     <div class="metric"><span>Ban đầu</span><strong id="originalSize">—</strong></div>
                     <div class="metric"><span>Sau nén</span><strong id="compressedSize">—</strong></div>
                     <div class="metric"><span>Tiết kiệm</span><strong id="savedPercent">—</strong></div>
                     <div class="metric"><span>Kích thước</span><strong id="outputDimensions">—</strong></div>
                 </div>
-                <a class="button secondary full-width hidden" id="downloadButton" href="#" download>Tải ảnh đã nén</a>
+                <p class="compressor-note" id="resultDetails"></p>
+                <a class="button secondary full-width hidden" id="downloadButton" href="#" download>Tải ảnh kết quả</a>
             </div>
         </section>
 
         <article class="content-card">
             <p class="eyebrow">Nén ảnh theo nhu cầu thật</p>
-            <h2>Nén ảnh dưới 1MB hoặc 2MB để làm gì?</h2>
-            <p>Nhiều biểu mẫu, hồ sơ trực tuyến và dịch vụ email giới hạn dung lượng ảnh. Thay vì thử giảm chất lượng nhiều lần, bạn có thể chọn dung lượng mục tiêu và để công cụ tìm mức phù hợp.</p>
+            <h2>Cách nén ảnh xuống 100KB, 200KB, 1MB hoặc 2MB</h2>
+            <ol>
+                <li>Chọn một ảnh JPG, PNG hoặc WebP. Bản gốc trên thiết bị được giữ nguyên.</li>
+                <li>Chọn mục tiêu và định dạng nơi nhận hỗ trợ, rồi nhấn <strong>Nén ảnh</strong>. Dùng <strong>Tùy chọn</strong> để nhập KB hoặc MB.</li>
+                <li>Kiểm tra trạng thái đạt mục tiêu, số byte và kích thước. Chuyển giữa <strong>Ảnh gốc</strong> và <strong>Sau nén</strong> để so sánh độ rõ.</li>
+                <li>Nhấn <strong>Tải ảnh kết quả</strong>. Trên điện thoại, nếu ảnh mở ra thay vì tải, hãy dùng menu chia sẻ hoặc lưu ảnh của trình duyệt.</li>
+            </ol>
             <div class="content-columns">
-                <div><h3>Ưu tiên chất lượng</h3><p>Với JPG và WebP, công cụ thử nhiều mức chất lượng trước khi giảm kích thước ảnh.</p></div>
-                <div><h3>Không cần tải lên</h3><p>Canvas của trình duyệt xử lý ảnh ngay trên thiết bị. Không có máy chủ nhận tệp của bạn.</p></div>
-                <div><h3>Phù hợp điện thoại</h3><p>Ảnh rất lớn được giới hạn kích thước làm việc để giảm nguy cơ trình duyệt bị treo.</p></div>
+                <div><h3>Chọn đúng định dạng</h3><p>JPG tương thích rộng nhưng thay vùng trong suốt bằng nền trắng. WebP thường nhỏ hơn; PNG giữ vùng trong suốt nhưng có thể cần giảm kích thước.</p></div>
+                <div><h3>Chất lượng và kích thước</h3><p>Ảnh lớn được giới hạn cạnh dài khi xử lý: 2.800 px trên màn hình hẹp hoặc thiết bị ít bộ nhớ, 4.096 px trên thiết bị khác. Sau đó, công cụ thử chất lượng JPG/WebP rồi giảm kích thước thêm nếu cần. Ảnh đã đạt mục tiêu và đúng định dạng được giữ nguyên.</p></div>
+                <div><h3>Nếu vẫn vượt giới hạn</h3><p>Thử JPG/WebP nếu nơi nhận cho phép, tăng mục tiêu hoặc cắt bỏ phần không cần thiết bằng trình sửa ảnh rồi chọn lại. Công cụ giới hạn số lần thử và không giảm cạnh dài xuống dưới 320 px (ảnh gốc nhỏ hơn vẫn giữ kích thước). Không bảo đảm mọi ảnh đều đạt mục tiêu.</p></div>
             </div>
+            <p>Đổi định dạng có thể tạo tệp lớn hơn bản gốc. Ảnh động chỉ được xuất thành ảnh tĩnh khi mã hóa lại; siêu dữ liệu có thể bị loại bỏ. Hãy giữ bản gốc và đọc yêu cầu về định dạng, số byte, kích thước của nơi nhận.</p>
+        </article>
+
+        <article class="content-card" aria-labelledby="example-title">
+            <h2 id="example-title">Ví dụ nén ảnh thực tế</h2>
+            <p>Đo bằng Chrome 155 trên macOS với ảnh thử tự tạo có chữ và nền nhiều chi tiết (1.600 × 1.000 px):</p>
+            <ul>
+                <li><strong>JPG → JPG, mục tiêu 100KB:</strong> 1.183.413 → 101.102 byte; kết quả 800 × 500 px, đạt mục tiêu 102.400 byte.</li>
+                <li><strong>PNG → WebP, mục tiêu 200KB:</strong> 3.762.323 → 199.854 byte; kết quả 866 × 541 px, đạt mục tiêu 204.800 byte.</li>
+                <li><strong>PNG → PNG, mục tiêu 100KB:</strong> còn 143.141 byte ở 320 × 200 px, vẫn vượt mục tiêu. Cần chọn định dạng khác hoặc mục tiêu lớn hơn.</li>
+            </ul>
+            <p>Kết quả thay đổi theo nội dung ảnh, định dạng, trình duyệt và thiết bị. Ảnh có nhiều chi tiết hoặc chữ nhỏ cần kiểm tra kỹ; không có cam kết nén không giảm chất lượng.</p>
         </article>
 
         <section class="content-card faq" aria-labelledby="faq-title">
             <h2 id="faq-title">Câu hỏi thường gặp</h2>
             <details><summary>Ảnh có được tải lên máy chủ không?</summary><p>Không. Ảnh được đọc, nén và tạo tệp tải xuống ngay trong trình duyệt của bạn.</p></details>
-            <details><summary>Tại sao PNG có thể không đạt đúng dung lượng?</summary><p>PNG là định dạng nén không mất dữ liệu và không hỗ trợ điều chỉnh chất lượng giống JPG hoặc WebP. Công cụ có thể cần giảm kích thước ảnh để tiến gần mục tiêu.</p></details>
-            <details><summary>Nén ảnh có làm giảm chất lượng không?</summary><p>Có thể. Công cụ ưu tiên mức chất lượng cao nhất nằm dưới dung lượng mục tiêu, sau đó mới giảm kích thước khi cần.</p></details>
+            <details><summary>Tại sao PNG có thể không đạt đúng dung lượng?</summary><p>PNG là định dạng nén không mất dữ liệu và không hỗ trợ điều chỉnh chất lượng giống JPG hoặc WebP. Công cụ có thể cần giảm kích thước ảnh để tiến gần mục tiêu; việc này vẫn làm mất chi tiết.</p></details>
+            <details><summary>Nén ảnh có làm giảm chất lượng không?</summary><p>Có thể. Ảnh lớn có thể được thu nhỏ trước để tiết kiệm bộ nhớ. Công cụ thử các mức chất lượng JPG/WebP và có thể giảm kích thước thêm. Hãy so sánh ảnh gốc với kết quả; bản gốc trên thiết bị không bị thay đổi.</p></details>
         </section>
     </main>
 
