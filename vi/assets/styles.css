@@ -1362,3 +1362,6 @@ select {
     color: var(--muted);
     overflow-wrap: anywhere;
 }
+
+.footer-links { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; }
+.footer-links a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; }

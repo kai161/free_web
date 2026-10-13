@@ -1,3 +1,5 @@
+import { createCompressionRun } from "./analytics-core.mjs";
+import { emitCompressorEvent } from "./analytics.mjs";
 import {
   constrainDimensions,
   extensionForMime,
@@ -46,6 +48,7 @@ const state = {
   outputUrl: null,
   revision: 0,
   busy: false,
+  analyticsRun: null,
 };
 
 const errorMessages = {
@@ -69,6 +72,8 @@ function releaseObjectUrl(key) {
 }
 
 function resetResult(message = "Ảnh đã sẵn sàng. Chọn dung lượng và bắt đầu nén.") {
+  state.analyticsRun?.cancel();
+  state.analyticsRun = null;
   releaseObjectUrl("outputUrl");
   elements.previewOriginal.disabled = !state.sourceUrl;
   elements.previewOutput.disabled = true;
@@ -369,6 +374,8 @@ async function runCompression() {
   setBusy(true);
   resetResult("Đang chuẩn bị ảnh…");
   setStatus("Đang đọc và nén ảnh trên thiết bị của bạn…", "working");
+  const analyticsRun = createCompressionRun(emitCompressorEvent, { target: elements.targetPreset.value, format: mime });
+  state.analyticsRun = analyticsRun;
   let decoded;
 
   try {
@@ -393,8 +400,11 @@ async function runCompression() {
 
     if (jobRevision !== state.revision) return;
     setOutput(result, targetBytes, mime, decoded);
+    analyticsRun.complete(result.metTarget);
   } catch (error) {
     if (jobRevision !== state.revision) return;
+    analyticsRun.fail(error?.message === "image_dimensions_too_large" ? "dimensions"
+      : error?.message === "output_format_unsupported" ? "unsupported_output" : "processing");
     const message = error?.message === "image_dimensions_too_large"
       ? "Ảnh có độ phân giải quá lớn. Vui lòng chọn ảnh dưới 60 megapixel."
       : error?.message === "output_format_unsupported"
@@ -453,6 +463,11 @@ elements.outputFormat.addEventListener("change", () => {
 
 elements.compressButton.addEventListener("click", runCompression);
 
+// One request per generated result, not proof that the browser saved a file.
+elements.downloadButton.addEventListener("click", () => {
+  if (!state.busy && state.outputUrl) state.analyticsRun?.download();
+});
+
 elements.previewOriginal.addEventListener("click", () => {
   if (state.sourceUrl) setPreview(state.sourceUrl, "Ảnh gốc — không thay đổi");
 });
@@ -462,6 +477,8 @@ elements.previewOutput.addEventListener("click", () => {
 
 window.addEventListener("pagehide", event => {
   if (event.persisted) return;
+  state.revision += 1;
+  state.analyticsRun?.cancel();
   releaseObjectUrl("sourceUrl");
   releaseObjectUrl("outputUrl");
 });

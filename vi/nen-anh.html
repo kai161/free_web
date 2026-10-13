@@ -2,6 +2,7 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
+    <meta name="referrer" content="no-referrer">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nén ảnh 100KB, 200KB, 1MB, 2MB online miễn phí | FreeTools Việt</title>
     <meta name="description" content="Nén ảnh JPG, PNG, WebP theo mục tiêu 100KB, 200KB, 1MB, 2MB hoặc tùy chọn. Xem trước và kiểm tra số byte thực tế. Xử lý ngay trên thiết bị, không tải ảnh lên máy chủ.">
@@ -74,15 +75,7 @@
         ]
     }
     </script>
-    <script>
-        (function() {
-            window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-            const script = document.createElement('script');
-            script.src = '/_vercel/insights/script.js';
-            script.defer = true;
-            document.head.appendChild(script);
-        })();
-    </script>
+    <script type="module" src="assets/js/analytics.mjs"></script>
 </head>
 <body>
     <header class="site-header">
@@ -235,6 +228,10 @@
         <div class="wrap footer-inner">
             <a class="brand footer-brand" href="index.html"><span class="brand-mark" aria-hidden="true">VI</span><span>FreeTools Việt</span></a>
             <p>Ảnh của bạn được xử lý ngay trên thiết bị.</p>
+            <nav class="footer-links" aria-label="Thông tin trang web">
+                <a href="quyen-rieng-tu.html">Quyền riêng tư</a>
+                <a href="gioi-thieu.html">Giới thiệu</a>
+            </nav>
         </div>
     </footer>
     <script type="module" src="assets/js/image-compressor-app.mjs"></script>

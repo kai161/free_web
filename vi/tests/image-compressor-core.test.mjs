@@ -634,8 +634,8 @@ test("password generator page exposes matching SEO and FAQ schemas", () => {
     html,
     /<script type="module" src="assets\/js\/password-generator-app\.mjs"><\/script>/,
   );
-  assert.match(html, /window\.va = window\.va \|\| function/);
-  assert.match(html, /script\.src = ['"]\/_vercel\/insights\/script\.js['"]/);
+  assert.match(readViFile("assets/js/analytics.mjs"), /window\.va = window\.va \|\| function/);
+  assert.match(html, /src="assets\/js\/analytics\.mjs"/);
 });
 
 test("password generator application binds local-only browser interactions", () => {
@@ -707,8 +707,8 @@ test("text toolbox page exposes matching SEO and FAQ schemas", () => {
     html,
     /<script type="module" src="assets\/js\/text-toolbox-app\.mjs"><\/script>/,
   );
-  assert.match(html, /window\.va = window\.va \|\| function/);
-  assert.match(html, /script\.src = ['"]\/_vercel\/insights\/script\.js['"]/);
+  assert.match(readViFile("assets/js/analytics.mjs"), /window\.va = window\.va \|\| function/);
+  assert.match(html, /src="assets\/js\/analytics\.mjs"/);
   assert.doesNotMatch(html, /fetch\(|XMLHttpRequest|localStorage|sessionStorage/);
 });
 
@@ -787,8 +787,8 @@ test("JSON formatter page exposes matching SEO and FAQ schemas", () => {
     html,
     /<script type="module" src="assets\/js\/json-formatter-app\.mjs"><\/script>/,
   );
-  assert.match(html, /window\.va = window\.va \|\| function/);
-  assert.match(html, /script\.src = ['"]\/_vercel\/insights\/script\.js['"]/);
+  assert.match(readViFile("assets/js/analytics.mjs"), /window\.va = window\.va \|\| function/);
+  assert.match(html, /src="assets\/js\/analytics\.mjs"/);
   assert.doesNotMatch(html, /fetch\(|XMLHttpRequest|localStorage|sessionStorage/);
 });
 
@@ -921,8 +921,8 @@ test("all Vietnamese pages load Vercel Web Analytics like pr-tool", () => {
     "dinh-dang-json.html",
   ]) {
     const html = readViFile(page);
-    assert.match(html, /window\.va = window\.va \|\| function/);
-    assert.match(html, /script\.src = ['"]\/_vercel\/insights\/script\.js['"]/);
-    assert.match(html, /script\.defer = true/);
+    assert.match(readViFile("assets/js/analytics.mjs"), /window\.va = window\.va \|\| function/);
+    assert.match(html, /src="assets\/js\/analytics\.mjs"/);
+    assert.match(readViFile("assets/js/analytics.mjs"), /script\.defer = true/);
   }
 });
